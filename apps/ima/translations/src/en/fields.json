@@ -6,15 +6,15 @@
     "legend": "Who are you?",
     "options": {
       "person-named": {
-        "label": "The person named on the Illegal Migration Act notice"
+        "label": "The person named on the  Afghan Citizens Resettlement Scheme"
       },
       "has-legal-representative": {
         "label": "An immigration advisor representing the claimant",
-        "hint": "Such as a solicitor or legal representative. You must have already sent a letter of authority to the Home Office to confirm that you can represent the person named on the Illegal Migration Act notice."
+        "hint": "Such as a solicitor or legal representative. You must have already sent a letter of authority to the Home Office to confirm that you can represent the person named on the  Afghan Citizens Resettlement Scheme notice."
       },
       "helper": {
-        "label": "Someone helping the person named on the Illegal Migration Act notice",
-        "hint": "You cannot give immigration advice. You must answer all the questions as if you are the person named on the Illegal Migration Act notice."
+        "label": "Someone helping the person named on the  Afghan Citizens Resettlement Scheme",
+        "hint": "You cannot give immigration advice. You must answer all the questions as if you are the person named on the  Afghan Citizens Resettlement Scheme notice."
       }
     }
   },
@@ -115,7 +115,7 @@
     "label": "Full name"
   },
   "helper-relationship": {
-    "label": "What is your relationship to the person on the Illegal Migration Act notice?"
+    "label": "What is your relationship to the person on the  Afghan Citizens Resettlement Scheme?"
   },
   "helper-organisation": {
     "label": "Organisation name (optional)",
@@ -177,7 +177,7 @@
     "label": "Explain why"
   },
   "how-removal-condition-1-applies": {
-    "legend": "Why does your Illegal Migration Act notice say removal condition 1 applies to you?",
+    "legend": "Why does your  Afghan Citizens Resettlement Scheme notice say removal condition 1 applies to you?",
     "options": {
       "entered-without-permission": {
         "label": "You needed permission to enter the UK and you entered without permission"

@@ -13,7 +13,7 @@
   },
   "helper-details": {
     "header": "Helper details",
-    "paragraph": "Answer all the following questions as if you are the person on the Illegal Migration Act notice."
+    "paragraph": "Answer all the following questions as if you are the person on the  Afghan Citizens Resettlement Scheme."
   },
   "full-name": {
     "header": "What is your full name?"
@@ -47,7 +47,7 @@
     "header": "Does an exception to the duty to remove apply to you?"
   },
   "removal-condition": {
-    "header": "Why does your Illegal Migration Act notice say removal condition 1 applies to you?",
+    "header": "Why does your  Afghan Citizens Resettlement Scheme notice say removal condition 1 applies to you?",
     "hint": "Select all that apply"
   },
   "without-permission": {

@@ -54,7 +54,7 @@ describe('Server.js app file', () => {
   describe('Setup HOF Configuration', () => {
     it('calls hof with behaviours and routes', () => {
       hofStub.should.have.been.calledOnce.calledWithExactly({
-        appName: 'Illegal Migration Act',
+        appName: ' Afghan Citizens Resettlement Scheme',
         theme: 'govUK',
         behaviours: [
           behavioursClearSessionStub

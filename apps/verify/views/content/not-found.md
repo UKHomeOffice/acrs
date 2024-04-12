@@ -1,4 +1,4 @@
-The CEPR and date of birth must exactly match what is on your Illegal Migration Act notice.
+The CEPR and date of birth must exactly match what is on your Afghan Citizens Resettlement Scheme.
 
 Check your CEPR and date of birth, and try again.
 
