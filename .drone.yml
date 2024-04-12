@@ -13,7 +13,7 @@ environment:
   IMAGE_URL: quay.io/ukhomeofficedigital
   IMAGE_REPO: acrs
   GIT_REPO: UKHomeOffice/acrs
-  HOF_CONFIG: hof-services-config/Illegal_Migration_Act
+  HOF_CONFIG: hof-services-config/Afghan_Citizens_Resettlement_Scheme
   NON_PROD_AVAILABILITY: Mon-Sun 00:00-23:59 Europe/London
   READY_FOR_TEST_DELAY: 20s
   NOTIFY_STUB: stub
@@ -185,7 +185,7 @@ steps:
       SEVERITY: MEDIUM,HIGH,CRITICAL
       FAIL_ON_DETECTION: false
       IGNORE_UNFIXED: true
-      ALLOW_CVE_LIST_FILE: hof-services-config/Illegal_Migration_Act/trivy-cve-exceptions.txt
+      ALLOW_CVE_LIST_FILE: hof-services-config/Afghan_Citizens_Resettlement_Scheme/trivy-cve-exceptions.txt
     when:
       event:
       - pull_request
@@ -479,7 +479,7 @@ steps:
       SEVERITY: MEDIUM,HIGH,CRITICAL
       FAIL_ON_DETECTION: false
       IGNORE_UNFIXED: true
-      ALLOW_CVE_LIST_FILE: hof-services-config/Illegal_Migration_Act/trivy-cve-exceptions.txt
+      ALLOW_CVE_LIST_FILE: hof-services-config/Afghan_Citizens_Resettlement_Scheme/trivy-cve-exceptions.txt
     when:
       cron: security_scans
       event: cron
