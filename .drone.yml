@@ -401,7 +401,7 @@ steps:
       target: PROD
       event: promote
 
-  # Deploy to Production environment
+  ## Deploy to Production environment
   - name: deploy_to_prod
     pull: if-not-exists
     image: quay.io/ukhomeofficedigital/kd:v1.14.0
