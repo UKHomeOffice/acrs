@@ -1,0 +1,14 @@
+{
+  "your-details": {
+    "header": "Enter your details"
+  },
+  "details-not-found": {
+    "header": "Details not found"
+  },
+  "enter-email": {
+    "header": "Enter an email address"
+  },
+  "check-email": {
+    "header": "Check your email"
+  }
+}
