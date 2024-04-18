@@ -1,0 +1,18 @@
+{
+  "start": {
+    "header": "Afghan Citizens Resettlement Scheme"
+  },
+  "confirm": {
+    "header": "Check your answers",
+    "sections": {
+      "name": {
+        "header": "Details"
+      }
+    },
+    "fields": {
+      "name": {
+        "label": "Project Name"
+      }
+    }
+  }
+}

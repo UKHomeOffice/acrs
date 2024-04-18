@@ -1,0 +1,14 @@
+{
+  "appName": "Afghan Citizens Resettlement Scheme",
+  "theme": "govUK",
+  "behaviours": [
+    "hof/components/clear-session"
+  ],
+  "routes": [
+    "./apps/acrs"
+  ],
+  "session": {
+    "name": "acrs.hof.sid"
+  },
+  "getAccessibility": true
+}
