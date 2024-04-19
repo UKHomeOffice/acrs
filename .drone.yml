@@ -26,8 +26,6 @@ trigger:
 linting: &linting
   pull: if-not-exists
   image: node:lts
-  environment:
-    NOTIFY_STUB: true
   commands:
     - yarn run test:lint
 
@@ -251,8 +249,8 @@ steps:
           - master
           - feature/*
       event: pull_request
-  #
-  # - name: ui_integration_tests_branch
+  ###
+  ## - name: ui_integration_tests_branch
   #   <<: *ui_integration_tests
   #   when:
   #     branch:
