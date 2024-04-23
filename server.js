@@ -127,5 +127,5 @@ if (config.casesIds.cronEnabled) {
     logger.log('info', 'updating local cases sheet...');
     updateCases();
   });
-}
+
 module.exports = app;
