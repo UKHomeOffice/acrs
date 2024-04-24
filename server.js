@@ -122,7 +122,7 @@ async function updateCases() {
   }
 }
 
-updateCases();
+//updateCases();
 
 if (config.casesIds.cronEnabled) {
   cron.schedule('0 0 * * *', async () => {
