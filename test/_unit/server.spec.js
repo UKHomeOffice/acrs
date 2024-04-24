@@ -39,57 +39,57 @@ describe('Server.js app file', () => {
     });
   });
 
-  // describe('Setup HOF Configuration', () => {
-  //   it('calls hof with behaviours and routes', () => {
-  //     hofStub.should.have.been.calledOnce.calledWithExactly({
-  //       appName: 'Afghan Citizens Resettlement Scheme',
-  //       theme: 'govUK',
-  //       build: {
-  //         watch: {
-  //           ignore: [
-  //             'data'
-  //           ]
-  //         }
-  //       },
-  //       translations: './apps/acrs/translations',
-  //       routes: [
-  //         appsAcrsStub
-  //       ],
-  //       session: { name: 'acrs.hof.sid' },
-  //       getAccessibility: true,
-  //       emailerFallback: true,
-  //       csp: { imgSrc: [ 'data:' ] }
-  //     });
-  //   });
+  describe('Setup HOF Configuration', () => {
+    it('calls hof with behaviours and routes', () => {
+      hofStub.should.have.been.calledOnce.calledWithExactly({
+        appName: 'Afghan Citizens Resettlement Scheme',
+        theme: 'govUK',
+        build: {
+          watch: {
+            ignore: [
+              'data'
+            ]
+          }
+        },
+        translations: './apps/acrs/translations',
+        routes: [
+          appsAcrsStub
+        ],
+        session: { name: 'acrs.hof.sid' },
+        getAccessibility: true,
+        emailerFallback: true,
+        csp: { imgSrc: [ 'data:' ] }
+      });
+    });
 
-  //   it('should call the app use method three times if env set to test', () => {
-  //     useStub.callCount.should.equal(3);
-  //   });
+    it('should call the app use method three times if env set to test', () => {
+      useStub.callCount.should.equal(3);
+    });
 
-  //   it('should call the app use method three times if env set to development', () => {
-  //     const use = sinon.stub();
-  //     const hof = () => ({ use });
+    it('should call the app use method three times if env set to development', () => {
+      const use = sinon.stub();
+      const hof = () => ({ use });
 
-  //     proxyquire('../server', {
-  //       hof: hof,
-  //       './config': { env: 'development' }
-  //     });
+      proxyquire('../server', {
+        hof: hof,
+        './config': { env: 'development' }
+      });
 
-  //     useStub.callCount.should.equal(3);
-  //   });
+      useStub.callCount.should.equal(3);
+    });
 
-  //   it('should call the app use method two times if env set to anything else', () => {
-  //     const use = sinon.stub();
-  //     const hof = () => ({ use });
+    it('should call the app use method two times if env set to anything else', () => {
+      const use = sinon.stub();
+      const hof = () => ({ use });
 
-  //     proxyquire('../server', {
-  //       hof: hof,
-  //       './config': { env: 'production' }
-  //     });
+      proxyquire('../server', {
+        hof: hof,
+        './config': { env: 'production' }
+      });
 
-  //     use.should.have.been.calledTwice;
-  //   });
-  // });
+      use.should.have.been.calledTwice;
+    });
+  });
 
   describe('Use Locals', () => {
     it('should set locals on the response', () => {

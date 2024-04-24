@@ -47,6 +47,13 @@ module.exports = {
     submissionTemplateId: process.env.SUBMISSION_TEMPLATE_ID,
     caseworkerSubmissionTemplateId: process.env.CASEWORKER_SUBMISSION_TEMPLATE_ID
   },
+  login: {
+    tokenExpiry: 1800,
+    appPath: '/acrs/start',
+    invalidTokenPath: '/acrs/token-invalid',
+    allowSkip: String(process.env.ALLOW_SKIP) === 'true',
+    skipEmail: process.env.SKIP_EMAIL
+  },
   redis: {
     port: process.env.REDIS_PORT || '6379',
     host: process.env.REDIS_HOST || '127.0.0.1'

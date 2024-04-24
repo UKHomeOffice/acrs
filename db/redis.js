@@ -6,7 +6,7 @@ const config = require('../config');
 const redis = new Redis({
   port: config.redis.port,
   host: config.redis.host,
-  connectionName: 'ima-app'
+  connectionName: 'acrs-app'
 });
 
 module.exports = redis;

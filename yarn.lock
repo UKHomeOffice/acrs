@@ -3252,10 +3252,10 @@ hmac-drbg@^1.0.1:
     minimalistic-assert "^1.0.0"
     minimalistic-crypto-utils "^1.0.1"
 
-hof@~20.4.0:
-  version "20.4.5"
-  resolved "https://registry.yarnpkg.com/hof/-/hof-20.4.5.tgz#244124780e81d6fe19afe906161128147bbdc373"
-  integrity sha512-mbbeUV+6eLC0A4175MWiYuwFk66sxb/S8wXGpEB65CWW0wQltG0Amic1HIFyOvKusgugelnPjOtdQuaFgDVljA==
+hof@~20.5.0:
+  version "20.5.1"
+  resolved "https://registry.yarnpkg.com/hof/-/hof-20.5.1.tgz#8f10e42791a38671b8fe6df43cd7ccf840fefa58"
+  integrity sha512-n1AJgzdYcMzyEJmdmEb6YOQvGg2i+GOxUuvqtKGBZenWhBcBaOUGjY1b9XDw+02HXccuM7XJLkChhp+CSQcIaA==
   dependencies:
     aliasify "^2.1.0"
     bluebird "^3.7.2"
@@ -4549,10 +4549,10 @@ notifications-node-client@^6.0.0:
     axios "^0.25.0"
     jsonwebtoken "^9.0.0"
 
-notifications-node-client@^7.0.0:
-  version "7.0.6"
-  resolved "https://registry.yarnpkg.com/notifications-node-client/-/notifications-node-client-7.0.6.tgz#5c23e9add5a9af7625f6f9d328e8f95c2debe705"
-  integrity sha512-qo6eZMGdyaQnj/bkOnPb/d0a0sHIjiBzXlmICLPXYSD4pB3LYa537OhuZGuaFcSnkrM4NzbQhbQHAYX1NnbQgw==
+notifications-node-client@^8.0.0:
+  version "8.0.0"
+  resolved "https://registry.yarnpkg.com/notifications-node-client/-/notifications-node-client-8.0.0.tgz#474dd69c60a91a41f629be145bb6d361ccee63b6"
+  integrity sha512-65BxorFYVFOpJ9c2lud/4Ju+Bfn3L/vkih+FuzMhBw1wcOPjwgu4doVH6xO91fHYiAi/0uIx0Mc+NorXeANMHw==
   dependencies:
     axios "^1.6.1"
     jsonwebtoken "^9.0.0"

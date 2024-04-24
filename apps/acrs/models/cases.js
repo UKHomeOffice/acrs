@@ -26,7 +26,7 @@ module.exports = class Cases {
       };
       const dataFile = path.join(__dirname + `../../../../data/${this.s3Id}.xlsx`);
       this.#createOrResetFile(dataFile);
-      
+
       const fileStream = s3.getObject(params).createReadStream();
       const writeStream = fs.createWriteStream(dataFile);
 

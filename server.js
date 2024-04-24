@@ -1,4 +1,4 @@
-'use strict';
+/* eslint-disable consistent-return, max-len */
 
 const hof = require('hof');
 const config = require('./config.js');
@@ -14,8 +14,9 @@ const s3Id = config.casesIds.S3Id;
 let settings = require('./hof.settings');
 
 settings = Object.assign({}, settings, {
+  behaviours: settings.behaviours.map(require),
   routes: settings.routes.map(require),
-  behaviours: settings.behaviours.map(require)
+  csp: config.csp
 });
 
 const app = hof(settings);
@@ -23,6 +24,7 @@ const app = hof(settings);
 app.use((req, res, next) => {
   const host = config.serviceUrl || req.get('host');
   const protocol = host.includes('localhost') ? 'http' : 'https';
+
   res.locals.formUrl = `${protocol}://${host}`;
   res.locals.htmlLang = 'en';
   res.locals.feedbackUrl = '/https://eforms.homeoffice.gov.uk/outreach/feedback.ofml';
@@ -127,5 +129,8 @@ if (config.casesIds.cronEnabled) {
     logger.log('info', 'updating local cases sheet...');
     updateCases();
   });
+}
+
+console.log('*******WARNING: The data folder SHOULD NOT be deployed to production. Please ensure the data folder has not been pushed to Github and is added to the .gitignore file before deployment to production.******* \n');
 
 module.exports = app;
