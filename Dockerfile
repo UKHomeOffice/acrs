@@ -1,4 +1,5 @@
-FROM node:lts-alpine@sha256:19eaf41f3b8c2ac2f609ac8103f9246a6a6d46716cdbe49103fdb116e55ff0cc
+# FROM node:lts-alpine@sha256:19eaf41f3b8c2ac2f609ac8103f9246a6a6d46716cdbe49103fdb116e55ff0cc
+FROM node:lts-alpine@sha256:98218110d09c63b72376137860d1f30a4f61ce029d7de4caf2e8c00f3bcf0db7
 
 USER root
 
