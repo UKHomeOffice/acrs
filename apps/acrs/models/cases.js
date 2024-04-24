@@ -26,7 +26,7 @@ module.exports = class Cases {
       };
       const dataFile = path.join(__dirname + `../../../../data/${this.s3Id}.xlsx`);
       this.#createOrResetFile(dataFile);
-      
+
       const fileStream = s3.getObject(params).createReadStream();
       const writeStream = fs.createWriteStream(dataFile);
 
@@ -35,7 +35,7 @@ module.exports = class Cases {
       writeStream.on('error', reject);
     });
   }
-  
+
   processToJsonFile() {
     let json = XLSXProcessor(this.s3Id);
 
@@ -45,7 +45,7 @@ module.exports = class Cases {
     const jsonFile = path.join(__dirname + `../../../../data/${this.s3Id}.json`);
     return fs.writeFile(jsonFile, JSON.stringify(json), console.log);
   }
-  
+
   #createOrResetFile(file) {
     return fs.closeSync(fs.openSync(file, 'w'));
   }

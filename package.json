@@ -51,7 +51,8 @@
     "proxyquire": "^2.1.3",
     "reqres": "^3.0.1",
     "sinon": "^15.1.0",
-    "sinon-chai": "^3.7.0"
+    "sinon-chai": "^3.7.0",
+    "snyk": "^1.1126.0"
   },
   "repository": {
     "type": "git",
