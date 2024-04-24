@@ -4,6 +4,7 @@
   "behaviours": [
     "hof/components/clear-session"
   ],
+  "translations": "./apps/acrs/translations",
   "routes": [
     "./apps/acrs"
   ],
