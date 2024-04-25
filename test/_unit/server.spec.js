@@ -3,7 +3,10 @@ describe('Server.js app file', () => {
   let hofStub;
   let useStub;
   let sendStub;
+  let appsVerifyStub;
   let appsAcrsStub;
+  let behavioursClearSessionStub;
+  let casesStub;
   let req;
   let res;
   let next;
@@ -25,7 +28,10 @@ describe('Server.js app file', () => {
     next = sinon.stub();
     hofStub = sinon.stub();
     useStub = sinon.stub();
+    appsVerifyStub = sinon.stub();
     appsAcrsStub = sinon.stub();
+    behavioursClearSessionStub = sinon.stub();
+    casesStub = sinon.stub();
     req.get.withArgs('host').returns('localhost');
 
     useStub.onCall(0).yields(req, res, next);
@@ -35,15 +41,21 @@ describe('Server.js app file', () => {
     proxyquire('../server', {
       hof: hofStub,
       './apps/acrs': appsAcrsStub,
-      './config': { env: 'test' }
+      './config': { env: 'test' },
+      'hof/components/clear-session': behavioursClearSessionStub,
+      './config': { env: 'test' },
+      './apps/acrs/models/cases': casesStub
     });
   });
-
+  
   describe('Setup HOF Configuration', () => {
     it('calls hof with behaviours and routes', () => {
       hofStub.should.have.been.calledOnce.calledWithExactly({
         appName: 'Afghan Citizens Resettlement Scheme',
         theme: 'govUK',
+        behaviours: [
+          behavioursClearSessionStub
+        ],
         build: {
           watch: {
             ignore: [
@@ -57,8 +69,7 @@ describe('Server.js app file', () => {
         ],
         session: { name: 'acrs.hof.sid' },
         getAccessibility: true,
-        emailerFallback: true,
-        csp: { imgSrc: [ 'data:' ] }
+        emailerFallback: true
       });
     });
 
@@ -90,7 +101,7 @@ describe('Server.js app file', () => {
       use.should.have.been.calledTwice;
     });
   });
-
+  
   describe('Use Locals', () => {
     it('should set locals on the response', () => {
       res.locals.should.eql({

@@ -22,7 +22,7 @@ module.exports = class Cases {
     return new Promise((resolve, reject) => {
       const params = {
         Bucket: config.aws.bucket,
-        Key: `uans/${this.s3Id}`
+        Key: `cases/${this.s3Id}`
       };
       const dataFile = path.join(__dirname + `../../../../data/${this.s3Id}.xlsx`);
       this.#createOrResetFile(dataFile);
