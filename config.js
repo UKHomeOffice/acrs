@@ -14,23 +14,23 @@ module.exports = {
   casesIds: {
     uanValidLength: 19,
     cronEnabled: process.env.CRON_ENABLED,
-    S3Id: process.env.CASES_S3_ID || 'uans-data-2023-04-23',
+    S3Id: process.env.CASES_S3_ID || 'cases-data-2023-04-23',
     testCases: [{
-      uan: '0000-0000-0000-0000', cepr: '000000000', brp: 'RJ0000000', 'date-of-birth': '2000-01-01'
+      uan: '0000-0000-0000-0000', brp: '', 'date-of-birth': '2000-01-01'
     }, {
-      uan: '0000-0000-0000-0001', cepr: '0000000001', brp: 'RJ0000001', 'date-of-birth': '2000-01-01'
+      uan: '', brp: 'RJ0000000', 'date-of-birth': '2000-01-01'
     }, {
-      uan: '0000-0000-0000-0002', cepr: '0000000003', brp: 'RJ0000003', 'date-of-birth': '2000-01-01'
+      uan: '0000-0000-0000-0001', brp: '', 'date-of-birth': '2000-01-01'
     }, {
-      uan: '0000-0000-0000-0003', cepr: '0000000004', brp: 'RJ0000004', 'date-of-birth': '2000-01-01'
+      uan: '', brp: 'RJ0000001', 'date-of-birth': '2000-01-01'
     }, {
-      uan: '0000-0000-0000-0004', cepr: '0000000005', brp: 'RJ0000005', 'date-of-birth': '2000-01-01'
+      uan: '0000-0000-0000-0002', brp: '', 'date-of-birth': '2000-01-01'
     }, {
-      uan: '0000-0000-0000-0005', cepr: '0000000006', brp: 'RJ0000006', 'date-of-birth': '2000-01-01'
+      uan: '', brp: 'RJ0000002', 'date-of-birth': '2000-01-01'
     }, {
-      uan: '0000-0000-0000-0006', cepr: '0000000007', brp: 'RJ0000007', 'date-of-birth': '2000-01-01'
+      uan: '0000-0000-0000-0003', brp: '', 'date-of-birth': '2000-01-01'
     }, {
-      uan: '0000-0000-0000-0007', cepr: '0000000008', brp: 'RJ0000008', 'date-of-birth': '2000-01-01'
+      uan: '', brp: 'RJ0000003', 'date-of-birth': '2000-01-01'
     }]
   },
   dataDirectory: './data',
