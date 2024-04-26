@@ -10,7 +10,6 @@ module.exports = {
     redis.set(`token:${token}`, token);
     redis.set(`${token}:email`, email);
     redis.set(`${token}:brp`, req.sessionModel.get('brp'));
-    redis.set(`${token}:cepr`, req.sessionModel.get('cepr'));
     redis.set(`${token}:uan`, req.sessionModel.get('uan'));
     redis.set(`${token}:date-of-birth`, req.sessionModel.get('date-of-birth'));
     redis.expire(`token:${token}`, tokenExpiry);
