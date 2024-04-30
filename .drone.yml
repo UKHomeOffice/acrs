@@ -10,8 +10,9 @@ environment:
   UAT_ENV: sas-acrs-uat
   BRANCH_ENV: sas-acrs-branch
   # PRODUCTION_URL: TO BE UPDATED ONCE URL IS PROVIDED
-  IMAGE_URL: quay.io/ukhomeofficedigital
-  IMAGE_REPO: acrs
+  #IMAGE_URL: quay.io/ukhomeofficedigital
+  IMAGE_REGISTRY: 340268328991.dkr.ecr.eu-west-2.amazonaws.com
+  IMAGE_REPO: sas/acrs
   GIT_REPO: UKHomeOffice/acrs
   HOF_CONFIG: hof-services-config/Afghan_Citizens_Resettlement_Scheme
   NON_PROD_AVAILABILITY: Mon-Sun 00:00-23:59 Europe/London
@@ -153,6 +154,23 @@ steps:
           - feature/*
       event: [push, pull_request]
 
+  - name: image_to_ecr
+    image: plugins/ecr
+    settings:
+      access_key:
+        from_secret: aws_access_key_id
+      secret_key:
+        from_secret: aws_secret_access_key
+      region: eu-west-2
+      repo: $${IMAGE_REPO}
+      registry: $${IMAGE_REGISTRY}
+      tags:
+        - latest_${DRONE_BRANCH}
+        - ${DRONE_COMMIT_SHA}
+    when:
+      branch: master
+      event: [push, pull_request]
+
   - name: image_to_quay
     pull: if-not-exists
     image: 340268328991.dkr.ecr.eu-west-2.amazonaws.com/acp/dind
@@ -161,8 +179,8 @@ steps:
         from_secret: DOCKER_PASSWORD
     commands:
     - docker login -u="ukhomeofficedigital+acrs" -p=$${DOCKER_PASSWORD} quay.io
-    - docker tag $${IMAGE_REPO}:$${DRONE_COMMIT_SHA} $${IMAGE_URL}/$${IMAGE_REPO}:$${DRONE_COMMIT_SHA}
-    - docker push $${IMAGE_URL}/$${IMAGE_REPO}:$${DRONE_COMMIT_SHA}
+    - docker tag $${IMAGE_REPO}:$${DRONE_COMMIT_SHA} $${IMAGE_REGISTRY}/$${IMAGE_REPO}:$${DRONE_COMMIT_SHA}
+    - docker push $${IMAGE_REGISTRY}/$${IMAGE_REPO}:$${DRONE_COMMIT_SHA}
     when:
       branch:
         include:

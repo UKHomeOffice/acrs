@@ -22,7 +22,7 @@ spec:
         spec:
           containers:
           - name: generate-csv-reports
-            image: {{ .IMAGE_URL }}/{{ .IMAGE_REPO }}:{{.DRONE_COMMIT_SHA}}
+            image: {{ .IMAGE_REGISTRY }}/{{ .IMAGE_REPO }}:{{.DRONE_COMMIT_SHA}}
             imagePullPolicy: Always
             securityContext:
               runAsNonRoot: true
