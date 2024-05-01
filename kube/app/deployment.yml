@@ -125,7 +125,7 @@ spec:
               valueFrom:
                 secretKeyRef:
                   {{ if or (eq .KUBE_NAMESPACE .BRANCH_ENV) (eq .KUBE_NAMESPACE .UAT_ENV) }}
-                  name: acrs-s3-bucket-secret
+                  name: acrs-s3-bucket
                   {{ else }}
                   name: acrs-s3-prod
                   {{ end }}
@@ -134,7 +134,7 @@ spec:
               valueFrom:
                 secretKeyRef:
                   {{ if or (eq .KUBE_NAMESPACE .BRANCH_ENV) (eq .KUBE_NAMESPACE .UAT_ENV) }}
-                  name: acrs-s3-bucket-secret
+                  name: acrs-s3-bucket
                   {{ else }}
                   name: acrs-s3-prod
                   {{ end }}
@@ -143,7 +143,7 @@ spec:
               valueFrom:
                 secretKeyRef:
                   {{ if or (eq .KUBE_NAMESPACE .BRANCH_ENV) (eq .KUBE_NAMESPACE .UAT_ENV) }}
-                  name: acrs-s3-bucket-secret
+                  name: acrs-s3-bucket
                   {{ else }}
                   name: acrs-s3-prod
                   {{ end }}
@@ -152,7 +152,7 @@ spec:
               valueFrom:
                 secretKeyRef:
                   {{ if or (eq .KUBE_NAMESPACE .BRANCH_ENV) (eq .KUBE_NAMESPACE .UAT_ENV) }}
-                  name: acrs-s3-bucket-secret
+                  name: acrs-s3-bucket
                   {{ else }}
                   name: acrs-s3-prod
                   {{ end }}
