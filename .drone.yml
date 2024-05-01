@@ -162,8 +162,9 @@ steps:
       secret_key:
         from_secret: aws_secret_access_key
       region: eu-west-2
-      repo: $${IMAGE_REPO}
-      registry: 340268328991.dkr.ecr.eu-west-2.amazonaws.com
+      repo: ${IMAGE_REPO}
+      registry: ${IMAGE_REGISTRY}
+      #registry: 340268328991.dkr.ecr.eu-west-2.amazonaws.com
       tags:
         - latest_${DRONE_BRANCH}
         - ${DRONE_COMMIT_SHA}
