@@ -5,7 +5,8 @@
     "hof/components/clear-session"
   ],
   "routes": [
-    "./apps/acrs"
+    "./apps/acrs",
+    "./apps/verify"
   ],
   "session": {
     "name": "acrs.hof.sid"

@@ -1,0 +1,25 @@
+{
+  "sign-in": {
+    "header": "How do you want to sign in?"
+  },
+  "sign-in-brp": {
+    "header": "Sign in",
+    "detail-summary": "Where to find your biometric residence permit number",
+    "detail-text": "BRP numbers are on the top right hand corner of the card, on the same side as the personal information."
+  },
+  "incorrect-details-brp": {
+    "header": "Details not found"
+  },
+  "sign-in-uan": {
+    "header": "Sign in"
+  },
+  "incorrect-details-uan": {
+    "header": "Details not found"
+  },
+  "sign-in-email": {
+    "header": "Enter an email address"
+  },
+  "check-email": {
+    "header": "Check your email"
+  }
+}
