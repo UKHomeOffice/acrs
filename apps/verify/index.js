@@ -1,6 +1,6 @@
 'use strict';
 const ValidateCaseDetails = require('./behaviours/validate-case-details');
-// const SendVerificationEmail = require('./behaviours/send-verification-email');
+const SendVerificationEmail = require('./behaviours/send-verification-email');
 
 module.exports = {
   name: 'verify',
@@ -39,11 +39,11 @@ module.exports = {
     },
     '/sign-in-email': {
       fields: ['user-email'],
-      // behaviours: [SendVerificationEmail],
+      behaviours: [SendVerificationEmail],
       next: '/check-email'
     },
     '/check-email': {
-      // behaviours: SendVerificationEmail
+      behaviours: SendVerificationEmail
     }
   }
 };

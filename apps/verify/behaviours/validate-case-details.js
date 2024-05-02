@@ -1,3 +1,4 @@
+/* eslint-disable dot-notation */
 const config = require('../../../config');
 const axios = require('axios');
 const logger = require('hof/lib/logger')({ env: config.env });
@@ -33,8 +34,8 @@ module.exports = superclass => class extends superclass {
       const response = await axios.get(`${baseUrl}/${queryColumn}/${queryValue}`);
       const validCases = response.data;
 
-      const foundCase = validCases.find(user => {
-        return user[queryColumn] === req.form.values[queryColumn] && user.dob === dob;
+      const foundCase = validCases.find(record => {
+        return record[queryColumn] === req.form.values[queryColumn] && record['date_of_birth'] === dob;
       });
 
       req.sessionModel.set('service', 'acrs');
