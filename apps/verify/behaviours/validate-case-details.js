@@ -1,5 +1,4 @@
 const config = require('../../../config');
-const _ = require('lodash');
 const axios = require('axios');
 const logger = require('hof/lib/logger')({ env: config.env });
 
@@ -16,7 +15,7 @@ module.exports = superclass => class extends superclass {
         queryColumn = 'uan';
         break;
       default:
-        return res.redirect(`/incorrect-details-brp`);
+        return res.redirect('/incorrect-details-brp');
     }
     const queryValue = req.form.values[queryColumn];
 
