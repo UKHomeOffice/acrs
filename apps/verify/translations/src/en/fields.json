@@ -16,7 +16,6 @@
     "label": "Biometric residence permit (BRP) number",
     "hint": "This must match what is on your BRP card. For example, RZ1234567"
   },
-
   "uan": {
     "label": "Unique application number (UAN)",
     "hint": "Your UAN is on the Home Office invitation to complete this form. For example, 1111-2222-3333-4444"
