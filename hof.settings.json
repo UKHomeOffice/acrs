@@ -4,6 +4,14 @@
   "behaviours": [
     "hof/components/clear-session"
   ],
+  "build": {
+    "watch": {
+      "ignore": [
+        "data"
+      ]
+    }
+  },
+  "translations": "./apps/acrs/translations",
   "routes": [
     "./apps/acrs",
     "./apps/verify"
@@ -11,5 +19,6 @@
   "session": {
     "name": "acrs.hof.sid"
   },
-  "getAccessibility": true
+  "getAccessibility": true,
+  "emailerFallback": true
 }
