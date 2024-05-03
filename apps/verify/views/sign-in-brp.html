@@ -1,0 +1,20 @@
+{{<partials-page}}
+  {{$page-content}}
+    {{#renderField}}brp{{/renderField}}
+    <details class="govuk-details" data-module="govuk-details">
+      <summary class="govuk-details__summary">
+        <span class="govuk-details__summary-text">
+          {{#t}}pages.sign-in-brp.detail-summary{{/t}}
+        </span>
+      </summary>
+      <div class="govuk-details__text">
+        <p class="govuk-body">{{#t}}pages.sign-in-brp.detail-text{{/t}}</p>
+        <div class="image-wrapper">
+          <img src="/public/images/brp-example.svg" width="60%" alt="" />
+        </div>
+      </div>
+    </details>
+    {{#renderField}}date-of-birth{{/renderField}}
+    {{#input-submit}}continue{{/input-submit}}
+  {{/page-content}}
+{{/partials-page}}

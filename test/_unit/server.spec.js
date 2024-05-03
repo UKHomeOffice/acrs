@@ -2,6 +2,7 @@ describe('Server.js app file', () => {
   let hofStub;
   let useStub;
   let sendStub;
+  let appsVerifyStub;
   let appsAcrsStub;
   let behavioursClearSessionStub;
   let req;
@@ -25,6 +26,7 @@ describe('Server.js app file', () => {
     next = sinon.stub();
     hofStub = sinon.stub();
     useStub = sinon.stub();
+    appsVerifyStub = sinon.stub();
     appsAcrsStub = sinon.stub();
     behavioursClearSessionStub = sinon.stub();
     req.get.withArgs('host').returns('localhost');
@@ -36,6 +38,7 @@ describe('Server.js app file', () => {
     proxyquire('../server', {
       hof: hofStub,
       './apps/acrs': appsAcrsStub,
+      './apps/verify': appsVerifyStub,
       'hof/components/clear-session': behavioursClearSessionStub,
       './config': { env: 'test' }
     });
@@ -58,7 +61,8 @@ describe('Server.js app file', () => {
         },
         translations: './apps/acrs/translations',
         routes: [
-          appsAcrsStub
+          appsAcrsStub,
+          appsVerifyStub
         ],
         session: { name: 'acrs.hof.sid' },
         getAccessibility: true,

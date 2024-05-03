@@ -1,1 +1,30 @@
-{}
+{
+  "sign-in-method": {
+    "legend": "You can use a biometric residence permit (BRP) number or a unique application number (UAN) to sign in to this form.",
+    "options": {
+      "brp": {
+        "label": "Using a BRP number",
+        "hint": "For example, RZ1234567"
+      },
+      "uan": {
+        "label": "Using a UAN",
+        "hint": "For example, 1111-2222-3333-4444"
+      }
+    }
+  },
+  "brp": {
+    "label": "Biometric residence permit (BRP) number",
+    "hint": "This must match what is on your BRP card. For example, RZ1234567"
+  },
+  "uan": {
+    "label": "Unique application number (UAN)",
+    "hint": "Your UAN is on the Home Office invitation to complete this form. For example, 1111-2222-3333-4444"
+  },
+  "date-of-birth": {
+    "legend": "Date of birth",
+    "hint": "For example, 27 3 1985"
+  },
+  "user-email": {
+    "hint": "We will email you a secure link, so you can save your information and return later."
+  }
+}
