@@ -17,7 +17,7 @@
     "generate:local:reports": "node -r dotenv/config ./services/reports/generate_reports.js",
     "test:unit": "nyc _mocha \"test/_unit/**/*.spec.js\"",
     "test:snyk": "snyk config set api=SNYK_TOKEN && snyk test",
-    "postinstall": "hof-build"
+    "postinstall": "yarn run build"
   },
   "dependencies": {
     "accessible-autocomplete": "^2.0.4",
