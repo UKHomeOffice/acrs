@@ -14,6 +14,12 @@ module.exports = {
     submissionTemplateId: process.env.SUBMISSION_TEMPLATE_ID,
     caseworkerSubmissionTemplateId: process.env.CASEWORKER_SUBMISSION_TEMPLATE_ID
   },
+  saveService: {
+    postgresDateFormat: 'YYYY-MM-DD HH:mm:ss',
+    port: process.env.DATASERVICE_SERVICE_PORT_HTTPS,
+    host: process.env.DATASERVICE_SERVICE_HOST &&
+      `https://${process.env.DATASERVICE_SERVICE_HOST}` || 'http://127.0.0.1'
+  },
   redis: {
     port: process.env.REDIS_PORT || '6379',
     host: process.env.REDIS_HOST || '127.0.0.1'
@@ -27,7 +33,7 @@ module.exports = {
   },
   sessionDefaults: {
     steps: ['/start', '/confirm', '/confirmation'],
-    fields: ['uan', 'date-of-birth', 'csrf-secret', 'errorValues', 'errors']
+    fields: ['brp', 'uan', 'date-of-birth', 'csrf-secret', 'errorValues', 'errors']
   },
   hosts: {
     acceptanceTests: process.env.ACCEPTANCE_HOST_NAME || `http://localhost:${process.env.PORT || 8080}`
