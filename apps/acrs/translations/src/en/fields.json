@@ -1,2 +1,14 @@
 {
+    "sign-in-choice": {
+        "label": "You can use a biometric residence permit(BRP) number or a unique application number",
+        "options": {
+          "brp": {
+            "label": "Using a BRP number",
+            "hint":"For example, RZ123456"
+          },
+          "uan": {
+            "label": "Using a UAN"
+          }
+        }
+    }
 }
