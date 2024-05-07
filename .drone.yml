@@ -12,7 +12,7 @@ environment:
   # PRODUCTION_URL: TO BE UPDATED ONCE URL IS PROVIDED
   #IMAGE_URL: quay.io/ukhomeofficedigital
   #IMAGE_REPO: acrs
-  IMAGE_URL: 340268328991.dkr.ecr.eu-west-2.amazonaws.com
+  #IMAGE_URL: 340268328991.dkr.ecr.eu-west-2.amazonaws.com
   IMAGE_REPO: sas/acrs  
   GIT_REPO: UKHomeOffice/acrs
   HOF_CONFIG: hof-services-config/Afghan_Citizens_Resettlement_Scheme
@@ -197,7 +197,7 @@ steps:
         from_secret: aws_secret_access_key
       region: eu-west-2
       repo: $${IMAGE_REPO}
-      registry: $${IMAGE_URL}
+      registry: 340268328991.dkr.ecr.eu-west-2.amazonaws.com
       tags:
         - latest_${DRONE_BRANCH}
         - ${DRONE_COMMIT_SHA}
