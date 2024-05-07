@@ -180,7 +180,7 @@ steps:
         from_secret: DOCKER_PASSWORD
     commands:
       - n=0; while [ "$n" -lt 60 ] && [ ! docker stats --no-stream ]; do n=$(( n + 1 )); sleep 1; done
-      - docker build --no-cache -t $${IMAGE_REPO,,}:$${DRONE_COMMIT_SHA} .
+      - docker build --no-cache -t ${IMAGE_REPO}:${DRONE_COMMIT_SHA} .
     volumes:
       - name: dockersock
         path: /var/run
@@ -196,7 +196,7 @@ steps:
       secret_key:
         from_secret: aws_secret_access_key
       region: eu-west-2
-      repo: $${IMAGE_REPO}
+      repo: ${IMAGE_REPO}
       registry: 340268328991.dkr.ecr.eu-west-2.amazonaws.com
       tags:
         - latest_${DRONE_BRANCH}
