@@ -33,7 +33,7 @@ spec:
       containers:
         - name: data-service
           # release v2.0.1
-          image: quay.io/ukhomeofficedigital/hof-rds-api:a42b5453fb9e0a4c158206e3e7b18753a228b5d0
+          image: quay.io/ukhomeofficedigital/hof-rds-api:bb5616719f0918afac470ad5a40c7b2505619b07
           imagePullPolicy: Always
           envFrom:
             - configMapRef:
@@ -46,7 +46,7 @@ spec:
             - name: SERVICE_NAME
               value: "acrs"
             - name: LATEST_MIGRATION
-              value: "20240419213237_acrs"
+              value: "20240502155941_add_verify_lookup_table"
             - name: MAX_PAYLOAD_SIZE
               value: "30mb"
             - name: REQUEST_TIMEOUT
