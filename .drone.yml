@@ -9,7 +9,7 @@ environment:
   STG_ENV: sas-acrs-stg
   UAT_ENV: sas-acrs-uat
   BRANCH_ENV: sas-acrs-branch
-  # PRODUCTION_URL: TO BE UPDATED ONCE URL IS PROVIDED
+  PRODUCTION_URL: www.refer-afghan-family-to-come-to-the-uk.homeoffice.gov.uk
   IMAGE_URL: quay.io/ukhomeofficedigital
   IMAGE_REPO: acrs
   GIT_REPO: UKHomeOffice/acrs
