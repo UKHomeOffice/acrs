@@ -1,6 +1,9 @@
 'use strict';
 
-const SummaryPageBehaviour = require('hof').components.summary;
+const Summary = require('hof').components.summary;
+const CheckEmailToken = require('./behaviours/check-email-token');
+const ResumeSession = require('./behaviours/resume-form-session');
+const ContinueReferral = require('./behaviours/continue-referral');
 
 module.exports = {
   name: 'acrs',
@@ -11,40 +14,21 @@ module.exports = {
     '/cookies': 'cookies'
   },
   steps: {
-    '/sign-in': {
-      fields: ['sign-in-choice'],
-      forks: [{
-        target: '/sign-in-brp',
-        condition: {
-          field: 'sign-in-choice',
-          value: 'brp'
-        }
-      }],
-      next: '/sign-in-uan'
+    '/start': {
+      behaviours: [CheckEmailToken],
+      next: '/continue-form'
     },
-    'sign-in-brp': {
-      fields: [],
-      next: '/sign-in-email'
-    },
-    '/sign-in-uan': {
-      fields: [],
-      next: '/sign-in-email'
-    },
-    '/sign-in-email': {
-      fields: [],
-      next: '/check-email'
-    },
-    '/check-email': {
-      fields: [],
-      next: '/select-form'
-    },
-    '/select-form': {
-      fields: [],
-      next: '/who-is-completing-form'
+    '/continue-form': {
+      behaviours: [ResumeSession],
+      next: '/information-you-have-given-us',
+      backLink: false
     },
     '/information-you-have-given-us': {
-      fields: [],
-      next: '/who-is-completing-form'
+      behaviours: [ContinueReferral, Summary],
+      sections: require('./sections/summary-data-sections'),
+      backLink: false,
+      locals: { showSaveAndExit: true },
+      journeyStart: '/who-is-completing-form',
     },
     '/who-is-completing-form': {
       fields: [],
@@ -67,7 +51,7 @@ module.exports = {
       next: '/confirm'
     },
     '/confirm': {
-      behaviours: [SummaryPageBehaviour],
+      behaviours: [Summary],
       sections: require('./sections/summary-data-sections'),
       next: '/confirmation'
     },

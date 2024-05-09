@@ -1,18 +1,9 @@
 {
-  "sign-in": {
-    "header": "How do you want to sign in?"
+  "start": {
+    "header": "Continue to your form",
+    "paragraph": "This completes your secure access to this service."
   },
-  "confirm": {
-    "header": "Check your answers",
-    "sections": {
-      "name": {
-        "header": "Details"
-      }
-    },
-    "fields": {
-      "name": {
-        "label": "Project Name"
-      }
-    }
+  "link-expired": {
+    "header": "Your link has expired"
   }
 }

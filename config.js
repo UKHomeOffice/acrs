@@ -27,13 +27,13 @@ module.exports = {
   login: {
     tokenExpiry: 1800,
     appPath: '/acrs/start',
-    invalidTokenPath: '/acrs/token-invalid',
+    invalidTokenPath: '/acrs/link-expired',
     allowSkip: String(process.env.ALLOW_SKIP) === 'true',
     skipEmail: process.env.SKIP_EMAIL
   },
   sessionDefaults: {
-    steps: ['/start', '/confirm', '/confirmation'],
-    fields: ['brp', 'uan', 'date-of-birth', 'csrf-secret', 'errorValues', 'errors']
+    steps: ['/start', '/continue-form', '/information-you-have-given-us', '/who-is-completing-form'],
+    fields: ['brp', 'uan', 'date-of-birth', 'user-email', 'login-method', 'csrf-secret', 'errorValues', 'errors']
   },
   hosts: {
     acceptanceTests: process.env.ACCEPTANCE_HOST_NAME || `http://localhost:${process.env.PORT || 8080}`
