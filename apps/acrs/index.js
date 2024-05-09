@@ -16,9 +16,9 @@ module.exports = {
   steps: {
     '/start': {
       behaviours: [CheckEmailToken],
-      next: '/continue-form'
+      next: '/select-form'
     },
-    '/continue-form': {
+    '/select-form': {
       behaviours: [ResumeSession],
       next: '/information-you-have-given-us',
       backLink: false
