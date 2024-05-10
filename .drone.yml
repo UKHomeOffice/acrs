@@ -9,7 +9,7 @@ environment:
   STG_ENV: sas-acrs-stg
   UAT_ENV: sas-acrs-uat
   BRANCH_ENV: sas-acrs-branch
-  # PRODUCTION_URL: TO BE UPDATED ONCE URL IS PROVIDED
+  PRODUCTION_URL: www.refer-afghan-family-to-come-to-the-uk.homeoffice.gov.uk
   #IMAGE_URL: quay.io/ukhomeofficedigital
   #IMAGE_REPO: acrs
   IMAGE_URL: 340268328991.dkr.ecr.eu-west-2.amazonaws.com
@@ -226,7 +226,7 @@ steps:
       - push
       - tag
 
-  ## Deploy to pull request UAT environment
+  ## Deploy to pull request Branch environment
   - name: deploy_to_branch
     pull: if-not-exists
     image: quay.io/ukhomeofficedigital/kd:v1.14.0
