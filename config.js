@@ -26,13 +26,13 @@ module.exports = {
   },
   login: {
     tokenExpiry: 1800,
-    appPath: '/acrs/start',
+    appPath: '/acrs/select-form',
     invalidTokenPath: '/acrs/link-expired',
     allowSkip: String(process.env.ALLOW_SKIP) === 'true',
     skipEmail: process.env.SKIP_EMAIL
   },
   sessionDefaults: {
-    steps: ['/start', '/select-form', '/information-you-have-given-us', '/who-is-completing-form'],
+    steps: ['/select-form', '/information-you-have-given-us', '/who-is-completing-form'],
     fields: ['brp', 'uan', 'date-of-birth', 'user-email', 'login-method', 'csrf-secret', 'errorValues', 'errors']
   },
   hosts: {

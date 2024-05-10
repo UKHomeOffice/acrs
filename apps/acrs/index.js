@@ -2,7 +2,7 @@
 
 const Summary = require('hof').components.summary;
 const CheckEmailToken = require('./behaviours/check-email-token');
-const ResumeSession = require('./behaviours/resume-form-session');
+// const ResumeSession = require('./behaviours/resume-form-session');
 const ContinueReferral = require('./behaviours/continue-referral');
 
 module.exports = {
@@ -14,12 +14,8 @@ module.exports = {
     '/cookies': 'cookies'
   },
   steps: {
-    '/start': {
-      behaviours: [CheckEmailToken],
-      next: '/select-form'
-    },
     '/select-form': {
-      behaviours: [ResumeSession],
+      behaviours: [CheckEmailToken],
       next: '/information-you-have-given-us',
       backLink: false
     },
