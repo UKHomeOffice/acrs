@@ -1,7 +1,4 @@
 {
-  "sign-in": {
-    "header": "How do you want to sign in?"
-  },
   "confirm": {
     "header": "Check your answers",
     "sections": {

@@ -1,6 +1,7 @@
 {
     "start": "Start Now",
     "edit": "Change",
-    "continue": "Continue",
-    "confirm-submission": "Submit"
+    "continue": "Save and Continue",
+    "confirm-submission": "Submit",
+    "save-and-exit": "Save and exit"
 }
