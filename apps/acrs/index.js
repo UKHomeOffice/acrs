@@ -1,9 +1,8 @@
 'use strict';
 
-const Summary = require('hof').components.summary;
+const SummaryPageBehaviour = require('hof').components.summary;
+const SaveFormSession = require('./behaviours/save-form-session');
 const CheckEmailToken = require('./behaviours/check-email-token');
-// const ResumeSession = require('./behaviours/resume-form-session');
-const ContinueReferral = require('./behaviours/continue-referral');
 
 module.exports = {
   name: 'acrs',
@@ -20,13 +19,50 @@ module.exports = {
       backLink: false
     },
     '/information-you-have-given-us': {
-      behaviours: [ContinueReferral, Summary],
+      behaviours: [ContinueReferral, SummaryPageBehaviour],
       sections: require('./sections/summary-data-sections'),
       backLink: false,
       locals: { showSaveAndExit: true },
       journeyStart: '/who-is-completing-form',
     },
     '/who-is-completing-form': {
+      behaviours: SaveFormSession,
+      forks: [
+        {
+          target: '/full-name',
+          condition: {
+            field: 'who-is-completing-form',
+            value: 'the-referrer'
+          }
+        },
+        {
+          target: '/helper-details',
+          condition: {
+            field: 'who-is-completing-form',
+            value: 'someone-helping'
+          }
+        },
+        {
+          target: '/immigration-adviser-details',
+          condition: {
+            field: 'who-is-completing-form',
+            value: 'immigration-advisor'
+          }
+        }
+      ],
+      fields: ['who-is-completing-form'],
+      locals: { showSaveAndExit: true },
+      next: '/helper-details'
+    },
+    '/helper-details': {
+      fields: [],
+      next: '/full-name'
+    },
+    '/immigration-adviser-details': {
+      fields: [],
+      next: '/complete-as-referrer'
+    },
+    '/complete-as-referrer': {
       fields: [],
       next: '/full-name'
     },
@@ -47,7 +83,7 @@ module.exports = {
       next: '/confirm'
     },
     '/confirm': {
-      behaviours: [Summary],
+      behaviours: [SummaryPageBehaviour],
       sections: require('./sections/summary-data-sections'),
       next: '/confirmation'
     },
