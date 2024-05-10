@@ -1,7 +1,11 @@
 {
-    "start": "Start Now",
+    "start": "Start",
+    "upload-file": "Upload",
+    "save-and-exit": "Save and exit",
+    "delete": "Delete",
+    "cancel": "Cancel",
     "edit": "Change",
-    "continue": "Save and Continue",
-    "confirm-submission": "Submit",
-    "save-and-exit": "Save and exit"
-}
+    "continue-only": "Continue",
+    "save-and-continue": "Continue",
+    "confirm-submission": "Submit"
+  }
