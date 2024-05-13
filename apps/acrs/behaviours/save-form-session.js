@@ -59,6 +59,10 @@ module.exports = superclass => class extends superclass {
           return res.redirect('/acrs/information-saved');
         }
 
+        if(req.body.exit) {
+          return res.redirect('/sign-in');
+        }
+
         const isContinueOnEdit = req.form.options.continueOnEdit &&
           _.get(req.form.options.forks, '[0].continueOnEdit');
 
