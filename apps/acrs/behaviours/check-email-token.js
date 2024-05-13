@@ -1,4 +1,3 @@
-/* eslint no-process-env: 0*/
 'use strict';
 const getToken = require('../../../db/get-token');
 const config = require('../../../config');
