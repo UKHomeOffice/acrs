@@ -1,5 +1,8 @@
 {
     "who-is-completing-form": {
         "required": "You must select an option"
+      },
+    "id-type": {
+        "required": "You must select an option"
       }
 }

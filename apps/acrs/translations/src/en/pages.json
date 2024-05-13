@@ -1,4 +1,8 @@
 {
+  "start": {
+    "header": "Continue to your referral form",
+    "paragraph": "Use this form to refer family to come to the UK under the Afghan Citizens Resettlement Scheme."
+  },
   "confirm": {
     "header": "Check your answers",
     "sections": {

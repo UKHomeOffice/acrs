@@ -1,7 +1,7 @@
 'use strict';
 
 const SummaryPageBehaviour = require('hof').components.summary;
-const SaveFormSession = require('./behaviours/save-form-session');
+const ResumeSession = require('./behaviours/resume-form-session');
 const CheckEmailToken = require('./behaviours/check-email-token');
 
 module.exports = {
@@ -13,38 +13,18 @@ module.exports = {
     '/cookies': 'cookies'
   },
   steps: {
-    '/select-form': {
+    '/start': {
       behaviours: [CheckEmailToken],
-      next: '/who-is-completing-form'
+      next: '/select-form'
+    },
+    '/select-form': {
+      behaviours: [ResumeSession],
+      next: '/information-you-have-given-us',
+      backLink: false
+    },
+    '/information-you-have-given-us': {
     },
     '/who-is-completing-form': {
-      behaviours: SaveFormSession,
-      forks: [
-        {
-          target: '/full-name',
-          condition: {
-            field: 'who-is-completing-form',
-            value: 'the-referrer'
-          }
-        },
-        {
-          target: '/helper-details',
-          condition: {
-            field: 'who-is-completing-form',
-            value: 'someone-helping'
-          }
-        },
-        {
-          target: '/immigration-adviser-details',
-          condition: {
-            field: 'who-is-completing-form',
-            value: 'immigration-advisor'
-          }
-        }
-      ],
-      fields: ['who-is-completing-form'],
-      locals: { showSaveAndExit: true },
-      next: '/helper-details'
     },
     '/helper-details': {
       fields: [],
