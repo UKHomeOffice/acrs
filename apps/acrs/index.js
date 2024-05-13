@@ -13,13 +13,16 @@ module.exports = {
     '/cookies': 'cookies'
   },
   steps: {
-    '/select-form': {
+    '/start': {
       behaviours: [CheckEmailToken],
+      next: '/select-form'
+    },
+    '/select-form': {
       next: '/information-you-have-given-us',
       backLink: false
     },
     '/information-you-have-given-us': {
-      behaviours: [ContinueReferral, SummaryPageBehaviour],
+      behaviours: [SummaryPageBehaviour],
       sections: require('./sections/summary-data-sections'),
       backLink: false,
       locals: { showSaveAndExit: true },
