@@ -1,8 +1,10 @@
 'use strict';
 
 const SummaryPageBehaviour = require('hof').components.summary;
-const SaveFormSession = require('./behaviours/save-form-session');
+const CheckInformationGivenBehaviour = require('./behaviours/continue-report');
+const ResumeSession = require('./behaviours/resume-form-session');
 const CheckEmailToken = require('./behaviours/check-email-token');
+const SaveFormSession = require('./behaviours/save-form-session');
 
 module.exports = {
   name: 'acrs',
@@ -13,9 +15,20 @@ module.exports = {
     '/cookies': 'cookies'
   },
   steps: {
-    '/select-form': {
+    '/start': {
       behaviours: [CheckEmailToken],
-      next: '/who-is-completing-form'
+      next: '/select-form'
+    },
+    '/select-form': {
+      behaviours: [ResumeSession],
+      next: '/information-you-have-given-us',
+      backLink: false
+    },
+    '/information-you-have-given-us': {
+      behaviours: [SummaryPageBehaviour, CheckInformationGivenBehaviour],
+      sections: require('./sections/summary-data-sections'),
+      backLink: false,
+      journeyStart: '/who-is-completing-form'
     },
     '/who-is-completing-form': {
       behaviours: SaveFormSession,

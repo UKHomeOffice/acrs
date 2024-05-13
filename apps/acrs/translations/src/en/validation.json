@@ -2,6 +2,9 @@
     "who-is-completing-form": {
         "required": "You must select an option"
     },
+    "referral": {
+        "required": "You must select an option"
+    },
     "full-name": {
         "required": "You must select an option"
     },
@@ -30,6 +33,9 @@
       "required": "You must select an option"
     },
     "/how-send-decision": {
+      "required": "You must select an option"
+    },
+    "id-type": {
       "required": "You must select an option"
     }
 }
