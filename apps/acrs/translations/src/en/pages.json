@@ -1,9 +1,11 @@
 {
   "start": {
-    "header": "Continue to your form",
-    "paragraph": "This completes your secure access to this service."
+    "header": "Continue to your referral form",
+    "paragraph": "Use this form to refer family to come to the UK under the Afghan Citizens Resettlement Scheme."
   },
   "link-expired": {
-    "header": "Your link has expired"
+    "header": "Your link has expired",
+    "paragraph": "To keep your information safe, we need to check some of your details and email you a new link.",
+    "link-text": "Get a new link"
   }
 }
