@@ -12,20 +12,11 @@
       }
     }
   },
-  "sign-in-brp": {
-    "header": "SKELETON: Sign In BRP"
-  },
-  "sign-in-uan": {
-    "header": "SKELETON: Sign In UAN"
-  },
   "select-form": {
     "header": "SKELETON: /select-form"
   },
   "information-you-have-given-us": {
     "header": "SKELETON: /information-you-have-given-us"
-  },
-  "who-is-completing-form": {
-    "header": "SKELETON: /who-is-completing-form"
   },
   "immigration-adviser-details": {
     "header": "SKELETON: /immigration-adviser-details"

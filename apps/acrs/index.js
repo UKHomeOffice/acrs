@@ -51,6 +51,10 @@ module.exports = {
       fields: [],
       next: '/complete-as-referrer'
     },
+    '/immigration-adviser-details': {
+      fields: [],
+      next: '/complete-as-referrer'
+    },
     '/complete-as-referrer': {
       fields: [],
       next: '/full-name'
