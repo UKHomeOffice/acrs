@@ -15,5 +15,116 @@
         "hint": "You must be authorised to act on behalf of the referrer"
       }
     }
+  },
+  "full-name": {
+      "label": "SKELETON: full-name",
+      "options": {
+        "under-18": {
+          "label": "SKELETON: Referrer DOB < 28-09-2023 (under 18)"
+        },
+        "over-18": {
+          "label": "SKELETON: Referrer DOB >= 28-09-2023 (over 18)"
+        }
+      }
+  },
+  "confirm-referrer-email": {
+      "label": "SKELETON: confirm-referrer-email",
+      "options": {
+        "yes": {
+          "label": "SKELETON: Yes"
+        },
+        "no": {
+          "label": "SKELETON: No"
+        }
+      }
+  },
+  "partner": {
+      "label": "SKELETON: partner",
+      "options": {
+        "yes": {
+          "label": "SKELETON: Yes"
+        },
+        "no": {
+          "label": "SKELETON: No"
+        }
+      }
+  },
+  "children": {
+      "label": "SKELETON: children",
+      "options": {
+        "yes": {
+          "label": "SKELETON: Yes"
+        },
+        "no": {
+          "label": "SKELETON: No"
+        }
+      }
+  },
+  "parent": {
+      "label": "SKELETON: parent",
+      "options": {
+        "yes": {
+          "label": "SKELETON: Yes"
+        },
+        "no": {
+          "label": "SKELETON: No"
+        }
+      }
+  },
+  "brother-or-sister": {
+      "label": "SKELETON: brother-or-sister",
+      "options": {
+        "yes": {
+          "label": "SKELETON: Yes"
+        },
+        "no": {
+          "label": "SKELETON: No"
+        }
+      }
+  },
+  "additional-family": {
+      "label": "SKELETON: additional-family",
+      "options": {
+        "yes": {
+          "label": "SKELETON: Yes"
+        },
+        "no": {
+          "label": "SKELETON: No"
+        }
+      }
+  },
+  "no-family-referred": {
+    "label": "SKELETON: no-family-referred",
+    "options": {
+      "under-18": {
+        "label": "SKELETON: Referrer DOB < 28-09-2023 (under 18)"
+      },
+      "over-18": {
+        "label": "SKELETON: Referrer DOB >= 28-09-2023 (over 18)"
+      }
+    }
+  },
+  "family-in-uk": {
+    "label": "SKELETON: family-in-uk",
+    "options": {
+      "yes": {
+        "label": "SKELETON: Yes"
+      },
+      "no": {
+        "label": "SKELETON: No"
+      }
+    }
+  },
+  "how-send-decision": {
+    "label": "SKELETON: how-send-decision",
+    "options": {
+      "email": {
+        "label": "SKELETON: Email"
+      },
+      "post": {
+        "label": "SKELETON: Post"
+      }
+    }
   }
+
 }
