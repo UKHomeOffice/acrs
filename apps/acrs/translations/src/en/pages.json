@@ -11,5 +11,143 @@
         "label": "Project Name"
       }
     }
+  },
+  "select-form": {
+    "header": "SKELETON: /select-form"
+  },
+  "information-you-have-given-us": {
+    "header": "SKELETON: /information-you-have-given-us"
+  },
+  "immigration-adviser-details": {
+    "header": "SKELETON: /immigration-adviser-details"
+  },
+  "helper-details": {
+    "header": "SKELETON: /helper-details"
+  },
+  "complete-as-referrer": {
+    "header": "SKELETON: /complete-as-referrer"
+  },
+  "full-name": {
+    "header": "SKELETON: /full-name"
+  },
+  "confirm-referrer-email": {
+    "header": "SKELETON: /confirm-referrer-email"
+  },
+  "referrer-email": {
+    "header": "SKELETON: /referrer-email"
+  },
+  "provide-telephone-number": {
+    "header": "SKELETON: /provide-telephone-number"
+  },
+  "your-address": {
+    "header": "SKELETON: /your-address"
+  },
+  "parent": {
+    "header": "SKELETON: /parent"
+  },
+  "parent-details": {
+    "header": "SKELETON: /parent-details"
+  },
+  "parent-summary": {
+    "header": "SKELETON: /parent-summary"
+  },
+  "brother-or-sister": {
+    "header": "SKELETON: /brother-or-sister"
+  },
+  "brother-or-sister-details": {
+    "header": "SKELETON: /brother-or-sister-details"
+  },
+  "brother-or-sister-summary": {
+    "header": "SKELETON: /brother-or-sister-summary"
+  },
+  "partner": {
+    "header": "SKELETON: /partner"
+  },
+  "partner-details": {
+    "header": "SKELETON: /partner-details"
+  },
+  "partner-summary": {
+    "header": "SKELETON: /partner-summary"
+  },
+  "children": {
+    "header": "SKELETON: /children"
+  },
+  "child-details": {
+    "header": "SKELETON: /child-details"
+  },
+  "children-summary": {
+    "header": "SKELETON: /children-summary"
+  },
+  "child-details-2": {
+    "header": "SKELETON: /child-details-2"
+  },
+  "additional-family": {
+    "header": "SKELETON: /additional-family"
+  },
+  "additional-family-details": {
+    "header": "SKELETON: /additional-family-details"
+  },
+  "no-family-referred": {
+    "header": "SKELETON: /no-family-referred"
+  },
+  "who-is-responsible": {
+    "header": "SKELETON: /who-is-responsible"
+  },
+  "guardian-details": {
+    "header": "SKELETON: /guardian-details"
+  },
+  "guardian-details-2": {
+    "header": "SKELETON: /guardian-details-2"
+  },
+  "additional-family-summary": {
+    "header": "SKELETON: /additional-family-summary"
+  },
+  "family-in-uk": {
+    "header": "SKELETON: /family-in-uk"
+  },
+  "family-in-uk-details": {
+    "header": "SKELETON: /family-in-uk-details"
+  },
+  "family-in-uk-summary": {
+    "header": "SKELETON: /family-in-uk-summary"
+  },
+  "family-in-uk-details-2": {
+    "header": "SKELETON: /family-in-uk-details-2"
+  },
+  "family-in-uk-details-3": {
+    "header": "SKELETON: /family-in-uk-details-3"
+  },
+  "upload-evidence": {
+    "header": "SKELETON: /upload-evidence"
+  },
+  "evidence-notes": {
+    "header": "SKELETON: /evidence-notes"
+  },
+  "how-send-decision": {
+    "header": "SKELETON: /how-send-decision"
+  },
+  "email-decision": {
+    "header": "SKELETON: /email-decision"
+  },
+  "your-postal-address": {
+    "header": "SKELETON: /your-postal-address"
+  },
+  "declaration": {
+    "header": "SKELETON: /declaration"
+  },
+  "referral-submitted": {
+    "header": "SKELETON: /referral-submitted"
+  },
+  "confirmation": {
+    "header": "SKELETON: /confirmation"
+  },
+  "session-expired": {
+    "header": "SKELETON: /session-expired"
+  },
+  "link-expired": {
+    "header": "SKELETON: /link-expired"
+  },
+  "information-saved": {
+    "header": "SKELETON: /information-saved"
   }
 }
