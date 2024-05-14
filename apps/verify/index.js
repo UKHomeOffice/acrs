@@ -1,6 +1,7 @@
 'use strict';
 const ValidateCaseDetails = require('./behaviours/validate-case-details');
 const SendVerificationEmail = require('./behaviours/send-verification-email');
+const GetDobFieldHint = require('./behaviours/get-dob-field-hint');
 
 module.exports = {
   name: 'verify',
@@ -20,7 +21,7 @@ module.exports = {
       next: '/sign-in-brp'
     },
     '/sign-in-brp': {
-      behaviours: [ValidateCaseDetails],
+      behaviours: [GetDobFieldHint, ValidateCaseDetails],
       fields: ['brp', 'date-of-birth'],
       backLink: 'sign-in',
       next: '/sign-in-email'
@@ -29,7 +30,7 @@ module.exports = {
       backLink: 'sign-in-brp'
     },
     '/sign-in-uan': {
-      behaviours: [ValidateCaseDetails],
+      behaviours: [GetDobFieldHint, ValidateCaseDetails],
       fields: ['uan', 'date-of-birth'],
       backLink: 'sign-in',
       next: '/sign-in-email'
