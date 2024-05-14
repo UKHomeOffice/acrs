@@ -15,34 +15,34 @@ module.exports = {
   steps: {
     '/select-form': {
       behaviours: [CheckEmailToken],
-      next: '/who-is-completing-form'
+      next: '/who-completing-form'
     },
-    '/who-is-completing-form': {
+    '/who-completing-form': {
       behaviours: SaveFormSession,
       forks: [
         {
           target: '/full-name',
           condition: {
-            field: 'who-is-completing-form',
+            field: 'who-completing-form',
             value: 'the-referrer'
           }
         },
         {
           target: '/helper-details',
           condition: {
-            field: 'who-is-completing-form',
+            field: 'who-completing-form',
             value: 'someone-helping'
           }
         },
         {
           target: '/immigration-adviser-details',
           condition: {
-            field: 'who-is-completing-form',
+            field: 'who-completing-form',
             value: 'immigration-advisor'
           }
         }
       ],
-      fields: ['who-is-completing-form'],
+      fields: ['who-completing-form'],
       locals: { showSaveAndExit: true },
       next: '/helper-details'
     },
