@@ -3,6 +3,7 @@
 const SummaryPageBehaviour = require('hof').components.summary;
 const ResumeSession = require('./behaviours/resume-form-session');
 const CheckEmailToken = require('./behaviours/check-email-token');
+const SaveFormSession = require('./behaviours/save-form-session');
 
 module.exports = {
   name: 'acrs',
@@ -25,6 +26,33 @@ module.exports = {
     '/information-you-have-given-us': {
     },
     '/who-is-completing-form': {
+      behaviours: SaveFormSession,
+      forks: [
+        {
+          target: '/full-name',
+          condition: {
+            field: 'who-is-completing-form',
+            value: 'the-referrer'
+          }
+        },
+        {
+          target: '/helper-details',
+          condition: {
+            field: 'who-is-completing-form',
+            value: 'someone-helping'
+          }
+        },
+        {
+          target: '/immigration-adviser-details',
+          condition: {
+            field: 'who-is-completing-form',
+            value: 'immigration-advisor'
+          }
+        }
+      ],
+      fields: ['who-is-completing-form'],
+      locals: { showSaveAndExit: true },
+      next: '/helper-details'
     },
 
     '/helper-details': {

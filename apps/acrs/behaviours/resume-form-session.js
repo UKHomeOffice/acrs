@@ -38,12 +38,9 @@ module.exports = superclass => class extends superclass {
     return axios.get(baseUrl + encodeEmail(email))
       .then(response => {
         const sessionCases = req.sessionModel.get('user-cases') || [];
-        const unsubmittedCases = _.filter(response.data, record => !record.submitted_at &&
-                                                                    record.session['id-type'] === idType);
+        const unsubmittedCases = _.filter(response.data, record => !record.submitted_at );
         const parsedBody = this.parseCasesSessions(unsubmittedCases);
-        const filteredSessionCases = sessionCases.filter(record => record['id-type'] === idType);
-        const cases = _.unionBy(parsedBody, filteredSessionCases, 'id');
-
+        const cases = _.unionBy(parsedBody, sessionCases, 'id');
         const uan = req.sessionModel.get('uan');
         const brp = req.sessionModel.get('brp');
         let isSameCase = '';
@@ -149,7 +146,7 @@ module.exports = superclass => class extends superclass {
     let dob = '';
     let idNumber = '';
     let idLabel = '';
-    const idType = req.sessionModel.get('id-type');
+    let objType = '';
 
     req.form.options.fields.referral = {
       mixin: 'radio-group',
@@ -157,11 +154,14 @@ module.exports = superclass => class extends superclass {
       validate: ['required'],
       options: cases.map(obj => {
         dob = obj.session['date-of-birth'];
+        objType = obj.session['id-type'];
 
-        if (idType === 'brp') {
+        if (objType === 'brp') {
           idNumber = obj.session.brp;
           idLabel = 'Biometric residence permit number:';
-        }else{
+        }
+
+        if (objType === 'uan') {
           idNumber = obj.session.uan;
           idLabel = 'Unique Application Number:';
         }
@@ -170,7 +170,7 @@ module.exports = superclass => class extends superclass {
           label: `${idLabel} ${idNumber}`,
           value: idNumber,
           useHintText: true,
-          hint: `Date of birth ${moment(dob, 'YYYY-MMMM-DD').format('DD/MMMM/YYYY')}`
+          hint: `Date of birth: ${moment(dob, 'YYYY-MMMM-DD').format('DD MMMM YYYY')}`
         };
       })
 

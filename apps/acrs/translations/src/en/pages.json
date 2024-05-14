@@ -16,9 +16,6 @@
       }
     }
   },
-  "select-form": {
-    "header": "SKELETON: /select-form"
-  },
   "information-you-have-given-us": {
     "header": "SKELETON: /information-you-have-given-us"
   },
