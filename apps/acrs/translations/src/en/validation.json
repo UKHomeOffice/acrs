@@ -1,8 +1,38 @@
 {
     "who-is-completing-form": {
         "required": "You must select an option"
-      },
+    },
     "id-type": {
         "required": "You must select an option"
-      }
+    },
+    "full-name": {
+        "required": "You must select an option"
+    },
+    "confirm-referrer-email": {
+        "required": "You must select an option"
+    },
+    "parent": {
+        "required": "You must select an option"
+    },
+    "brother-or-sister": {
+        "required": "You must select an option"
+    },
+    "partner": {
+      "required": "You must select an option"
+    },
+    "children": {
+      "required": "You must select an option"
+    },
+    "additional-family": {
+      "required": "You must select an option"
+    },
+    "no-family-referred": {
+      "required": "You must select an option"
+    },
+    "family-in-uk": {
+      "required": "You must select an option"
+    },
+    "/how-send-decision": {
+      "required": "You must select an option"
+    }
 }
