@@ -63,7 +63,7 @@ module.exports = superclass => class extends superclass {
       idRoute = '/uan/';
     }else{
       id = brp;
-      idType = 'brp'
+      idType = 'brp';
       idRoute = '/brp/';
     }
 
