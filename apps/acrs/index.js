@@ -26,7 +26,7 @@ module.exports = {
       sections: require('./sections/summary-data-sections'),
       backLink: false,
       locals: { showSaveAndExit: true },
-      journeyStart: '/who-is-completing-form'
+      next: '/who-is-completing-form'
     },
     '/who-is-completing-form': {
       behaviours: SaveFormSession,
