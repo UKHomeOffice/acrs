@@ -34,8 +34,5 @@
     },
     "/how-send-decision": {
       "required": "You must select an option"
-    },
-    "id-type": {
-      "required": "You must select an option"
     }
 }

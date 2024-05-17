@@ -51,7 +51,7 @@ module.exports = superclass => class extends superclass {
 
       return super.getValues(req, res, next);
     }
-    return res.redirect('/ima/cases');
+    return res.redirect('/acrs/select-form');
   }
 
   // locals(req, res) {
