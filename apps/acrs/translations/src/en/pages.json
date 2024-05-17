@@ -40,7 +40,8 @@
     "header": "SKELETON: /provide-telephone-number"
   },
   "your-address": {
-    "header": "SKELETON: /your-address"
+    "header": "What is your address?",
+    "paragraph": "If you have no fixed address, enter an address we can use to contact you."
   },
   "parent": {
     "header": "SKELETON: /parent"

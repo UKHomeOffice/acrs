@@ -38,6 +38,18 @@
         }
       }
   },
+  "your-address-line-1": {
+    "label": "Address line 1"
+  },
+  "your-address-line-2": {
+    "label": "Address line 2 (optional)"
+  },
+  "your-address-town-or-city": {
+    "label": "Town or city"
+  },
+  "your-address-postcode": {
+    "label": "Postcode"
+  },
   "partner": {
       "label": "SKELETON: partner",
       "options": {
