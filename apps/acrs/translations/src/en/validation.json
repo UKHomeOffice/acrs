@@ -1,5 +1,8 @@
 {
-    "who-is-completing-form": {
+    "who-completing-form": {
+        "required": "You must select an option"
+    },
+    "referral": {
         "required": "You must select an option"
     },
     "full-name": {
