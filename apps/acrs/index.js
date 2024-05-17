@@ -30,6 +30,17 @@ module.exports = {
       backLink: false,
       journeyStart: '/who-is-completing-form'
     },
+    '/select-form': {
+      behaviours: [ResumeSession],
+      next: '/information-you-have-given-us',
+      backLink: false
+    },
+    '/information-you-have-given-us': {
+      behaviours: [SummaryPageBehaviour, CheckInformationGivenBehaviour],
+      sections: require('./sections/summary-data-sections'),
+      backLink: false,
+      journeyStart: '/who-is-completing-form'
+    },
     '/who-completing-form': {
       behaviours: SaveFormSession,
       forks: [
