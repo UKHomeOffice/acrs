@@ -61,13 +61,14 @@
       }
   },
   "parent": {
-      "label": "SKELETON: parent",
+      "legend": "Are you referring a parent to come to the UK?",
+      "hint": "You can only refer your own parents. You can refer a maximum of 2 parents",
       "options": {
         "yes": {
-          "label": "SKELETON: Yes"
+          "label": "Yes"
         },
         "no": {
-          "label": "SKELETON: No"
+          "label": "No"
         }
       }
   },

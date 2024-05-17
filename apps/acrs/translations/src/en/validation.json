@@ -1,15 +1,15 @@
 {
     "who-is-completing-form": {
-        "required": "You must select an option"
+      "required": "You must select an option"
     },
     "full-name": {
-        "required": "You must select an option"
+      "required": "You must select an option"
     },
     "confirm-referrer-email": {
-        "required": "You must select an option"
+      "required": "You must select an option"
     },
     "parent": {
-        "required": "You must select an option"
+      "required": "You must select an option"
     },
     "brother-or-sister": {
         "required": "You must select an option"
