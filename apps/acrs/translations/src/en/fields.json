@@ -20,15 +20,8 @@
     }
   },
   "full-name": {
-      "label": "SKELETON: full-name",
-      "options": {
-        "under-18": {
-          "label": "SKELETON: Referrer DOB < 28-09-2023 (under 18)"
-        },
-        "over-18": {
-          "label": "SKELETON: Referrer DOB >= 28-09-2023 (over 18)"
-        }
-      }
+    "label": " ",
+    "hint": "You can copy this from your biometric residence permit card or any letters from the Home Office"
   },
   "confirm-referrer-email": {
       "label": "SKELETON: confirm-referrer-email",

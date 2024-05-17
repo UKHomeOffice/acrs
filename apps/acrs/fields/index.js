@@ -8,13 +8,8 @@ module.exports = {
     validate: 'required'
   },
   'full-name': {
-    // SKELETON: for the purposes of the Skeleton this page is used to determine under/over 18
-    mixin: 'radio-group',
-    options: ['under-18', 'over-18'],
-    validate: 'required',
-    legend: {
-      className: 'visuallyhidden'
-    }
+    mixin: 'input-text',
+    validate: ['required', { type: 'maxlength', arguments: 250 }]
   },
   'confirm-referrer-email': {
     mixin: 'radio-group',

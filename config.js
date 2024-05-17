@@ -39,5 +39,7 @@ module.exports = {
     acceptanceTests: process.env.ACCEPTANCE_HOST_NAME || `http://localhost:${process.env.PORT || 8080}`
   },
   PRETTY_DATE_FORMAT: 'Do MMMM YYYY',
-  dateTimeFormat: 'DD MMM YYYY HH:mm:ss'
+  dateTimeFormat: 'DD MMM YYYY HH:mm:ss',
+  dobFormat: 'YYYY-MM-DD',
+  dobCutoff: '2003-08-23'
 };
