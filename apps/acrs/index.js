@@ -93,7 +93,12 @@ module.exports = {
       next: '/your-address'
     },
     '/your-address': {
-      fields: [],
+      fields: [
+        'your-address-line-1',
+        'your-address-line-2',
+        'your-address-town-or-city',
+        'your-address-postcode'
+      ],
       next: '/partner'
     },
 
