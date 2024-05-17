@@ -128,8 +128,8 @@ module.exports = superclass => class extends superclass {
   // POST lifecycle
   saveValues(req, res, next) {
     const cases = req.sessionModel.get('user-cases') || [];
-    const caseObj = cases.find(obj => obj.session['id-type']);
-
+    const idType = req.sessionModel.get('id-type');
+    const caseObj = cases.find(obj => obj.session[idType]);
 
     if (caseObj) {
       req.sessionModel.set('id', caseObj.id);
