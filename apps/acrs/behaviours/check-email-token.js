@@ -23,6 +23,7 @@ module.exports = superclass => class extends superclass {
       id = brpId;
       req.sessionModel.set('id-type', 'brp');
     }
+
     if (skipEmailAuth && id) {
       req.sessionModel.set('valid-token', true);
       req.sessionModel.set('user-email', skipEmail);
