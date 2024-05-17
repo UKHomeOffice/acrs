@@ -64,7 +64,8 @@
     "header": "SKELETON: /complete-as-referrer"
   },
   "confirm-referrer-email": {
-    "header": "SKELETON: /confirm-referrer-email"
+    "header": "Is this {{values.full-name}}’s email address?",
+    "paragraph": "We may use this email address to contact them for more information about the referral."
   },
   "referrer-email": {
     "header": "SKELETON: /referrer-email"

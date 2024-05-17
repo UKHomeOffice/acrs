@@ -96,7 +96,9 @@ module.exports = {
           value: 'no'
         }
       }],
-      next: '/provide-telephone-number'
+      next: '/provide-telephone-number',
+      behaviours: SaveFormSession,
+      locals: { showSaveAndExit: true }
     },
 
     '/referrer-email': {
