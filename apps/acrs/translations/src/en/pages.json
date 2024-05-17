@@ -1,4 +1,8 @@
 {
+  "start": {
+    "header": "Continue to your referral form",
+    "paragraph": "Use this form to refer family to come to the UK under the Afghan Citizens Resettlement Scheme."
+  },
   "confirm": {
     "header": "Check your answers",
     "sections": {
@@ -11,9 +15,6 @@
         "label": "Project Name"
       }
     }
-  },
-  "select-form": {
-    "header": "SKELETON: /select-form"
   },
   "information-you-have-given-us": {
     "header": "SKELETON: /information-you-have-given-us"
