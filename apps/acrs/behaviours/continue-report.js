@@ -53,7 +53,6 @@ module.exports = superclass => class extends superclass {
     }
     return res.redirect('/acrs/select-form');
   }
-
   // locals(req, res) {
   //   return Object.assign({}, super.locals(req, res), {
   //     visitedImagesPage: req.sessionModel.get('steps').includes('/evidence-upload')
