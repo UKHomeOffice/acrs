@@ -1,8 +1,9 @@
 'use strict';
 
 const SummaryPageBehaviour = require('hof').components.summary;
-const SaveFormSession = require('./behaviours/save-form-session');
+const ResumeSession = require('./behaviours/resume-form-session');
 const CheckEmailToken = require('./behaviours/check-email-token');
+const SaveFormSession = require('./behaviours/save-form-session');
 
 module.exports = {
   name: 'acrs',
@@ -18,6 +19,7 @@ module.exports = {
       next: '/select-form'
     },
     '/select-form': {
+      behaviours: [ResumeSession],
       next: '/information-you-have-given-us',
       backLink: false
     },
