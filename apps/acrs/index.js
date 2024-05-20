@@ -25,36 +25,35 @@ module.exports = {
     },
     '/information-you-have-given-us': {
     },
-    '/who-is-completing-form': {
+    '/who-completing-form': {
       behaviours: SaveFormSession,
       forks: [
         {
           target: '/full-name',
           condition: {
-            field: 'who-is-completing-form',
+            field: 'who-completing-form',
             value: 'the-referrer'
           }
         },
         {
           target: '/helper-details',
           condition: {
-            field: 'who-is-completing-form',
+            field: 'who-completing-form',
             value: 'someone-helping'
           }
         },
         {
           target: '/immigration-adviser-details',
           condition: {
-            field: 'who-is-completing-form',
+            field: 'who-completing-form',
             value: 'immigration-advisor'
           }
         }
       ],
-      fields: ['who-is-completing-form'],
+      fields: ['who-completing-form'],
       locals: { showSaveAndExit: true },
       next: '/helper-details'
     },
-
     '/helper-details': {
       fields: [],
       next: '/complete-as-referrer'

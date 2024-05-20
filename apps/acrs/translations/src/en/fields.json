@@ -2,7 +2,7 @@
   "referral": {
     "legend": "Which form are you continuing?"
   },
-  "who-is-completing-form": {
+  "who-completing-form": {
     "legend": "Who is completing this form?",
     "options": {
       "the-referrer": {
