@@ -1,7 +1,6 @@
 'use strict';
 
 const SummaryPageBehaviour = require('hof').components.summary;
-const CheckInformationGivenBehaviour = require('./behaviours/continue-report');
 const ResumeSession = require('./behaviours/resume-form-session');
 const CheckEmailToken = require('./behaviours/check-email-token');
 const SaveFormSession = require('./behaviours/save-form-session');
@@ -25,10 +24,6 @@ module.exports = {
       backLink: false
     },
     '/information-you-have-given-us': {
-      behaviours: [SummaryPageBehaviour, CheckInformationGivenBehaviour],
-      sections: require('./sections/summary-data-sections'),
-      backLink: false,
-      journeyStart: '/who-is-completing-form'
     },
     '/who-completing-form': {
       behaviours: SaveFormSession,

@@ -78,6 +78,7 @@ module.exports = superclass => class extends superclass {
 
   addCasesToSession(req, cases, idNumber) {
     const idType = req.sessionModel.get('id-type');
+
     const caseAlreadyInSession = cases.find(obj => obj.session[idType] === idNumber);
 
     if (!caseAlreadyInSession) {

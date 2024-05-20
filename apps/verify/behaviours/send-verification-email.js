@@ -62,6 +62,7 @@ module.exports = superclass => class extends superclass {
       idType = brp;
       idRoute = '/brp/';
     }
+
     const response = await axios.get(baseUrl + idRoute + idType);
     const claimantRecords = response.data;
     const recordEmail = claimantRecords.map(f => { return f.email; });
