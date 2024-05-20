@@ -5,6 +5,7 @@ const CheckInformationGivenBehaviour = require('./behaviours/continue-report');
 const ResumeSession = require('./behaviours/resume-form-session');
 const CheckEmailToken = require('./behaviours/check-email-token');
 const SaveFormSession = require('./behaviours/save-form-session');
+const SaveAndExit = require('./behaviours/save-and-exit');
 
 module.exports = {
   name: 'acrs',
@@ -28,7 +29,7 @@ module.exports = {
       behaviours: [SummaryPageBehaviour, CheckInformationGivenBehaviour],
       sections: require('./sections/summary-data-sections'),
       backLink: false,
-      journeyStart: '/who-is-completing-form'
+      journeyStart: '/who-completing-form'
     },
     '/who-completing-form': {
       behaviours: SaveFormSession,
@@ -326,8 +327,8 @@ module.exports = {
       next: '/confirm'
     },
     '/information-saved': {
-      fields: [],
-      next: '/confirm'
+      behaviours: SaveAndExit,
+      backLink: false
     }
   }
 };

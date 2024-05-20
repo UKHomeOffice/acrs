@@ -19,8 +19,8 @@ module.exports = {
         omitChangeLink: true
       },
       {
-        steps: '/who-is-completing-form',
-        field: 'who-is-completing-form'
+        steps: '/who-completing-form',
+        field: 'who-completing-form'
       },
       {
         steps: '/full-name',

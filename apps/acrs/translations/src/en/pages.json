@@ -30,7 +30,7 @@
       "date-of-birth": {
         "label": "Date of birth"
       },
-      "who-is-completing-form": {
+      "who-completing-form": {
         "label": "Person completing form"
       },
       "full-name": {
