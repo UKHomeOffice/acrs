@@ -1,6 +1,7 @@
 'use strict';
 
 const SummaryPageBehaviour = require('hof').components.summary;
+const CheckInformationGivenBehaviour = require('./behaviours/continue-report');
 const ResumeSession = require('./behaviours/resume-form-session');
 const CheckEmailToken = require('./behaviours/check-email-token');
 const SaveFormSession = require('./behaviours/save-form-session');
@@ -24,42 +25,40 @@ module.exports = {
       backLink: false
     },
     '/information-you-have-given-us': {
-      behaviours: [SummaryPageBehaviour],
+      behaviours: [SummaryPageBehaviour, CheckInformationGivenBehaviour],
       sections: require('./sections/summary-data-sections'),
       backLink: false,
-      locals: { showSaveAndExit: true },
-      next: '/who-is-completing-form'
+      journeyStart: '/who-completing-form'
     },
-    '/who-is-completing-form': {
+    '/who-completing-form': {
       behaviours: SaveFormSession,
       forks: [
         {
           target: '/full-name',
           condition: {
-            field: 'who-is-completing-form',
+            field: 'who-completing-form',
             value: 'the-referrer'
           }
         },
         {
           target: '/helper-details',
           condition: {
-            field: 'who-is-completing-form',
+            field: 'who-completing-form',
             value: 'someone-helping'
           }
         },
         {
           target: '/immigration-adviser-details',
           condition: {
-            field: 'who-is-completing-form',
+            field: 'who-completing-form',
             value: 'immigration-advisor'
           }
         }
       ],
-      fields: ['who-is-completing-form'],
+      fields: ['who-completing-form'],
       locals: { showSaveAndExit: true },
       next: '/helper-details'
     },
-
     '/helper-details': {
       fields: [],
       next: '/complete-as-referrer'

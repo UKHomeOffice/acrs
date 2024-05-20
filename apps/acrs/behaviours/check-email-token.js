@@ -11,7 +11,6 @@ module.exports = superclass => class extends superclass {
     const skipEmail = config.login.skipEmail;
     const skipEmailAuth = token === 'skip' && config.login.allowSkip && skipEmail;
     const validEmailToken = req.sessionModel.get('valid-token') === true;
-
     const brpId = _.get(req.session['hof-wizard-verify'], 'brp');
     const uanId = _.get(req.session['hof-wizard-verify'], 'uan');
 
