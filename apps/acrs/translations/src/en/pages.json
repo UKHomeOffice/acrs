@@ -50,8 +50,19 @@
       },
       "current-email": {
         "label": "Email"
+      },
+      "your-address-line-1": {
+        "label": "Your address line 1"
+      },
+      "your-address-line-2": {
+        "label": "Your address line 2 (optional)"
+      },
+      "your-address-town-or-city": {
+        "label": "Your town or city"
+      },
+      "your-address-postcode": {
+        "label": "Your postcode"
       }
-    
     }
   },
   "immigration-adviser-details": {

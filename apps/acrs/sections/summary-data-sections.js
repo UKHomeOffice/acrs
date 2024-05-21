@@ -29,6 +29,22 @@ module.exports = {
       {
         steps: '/confirm-referrer-email',
         field: ''
+      },
+      {
+        steps: '/your-address',
+        field: 'your-address-line-1'
+      },
+      {
+        steps: '/your-address',
+        field: 'your-address-line-2'
+      },
+      {
+        steps: '/your-address',
+        field: 'your-address-town-or-city'
+      },
+      {
+        steps: '/your-address',
+        field: 'your-address-postcode'
       }
     ]
   },
