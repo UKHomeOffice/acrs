@@ -68,7 +68,8 @@
     "paragraph": "We may use this email address to contact them for more information about the referral."
   },
   "referrer-email": {
-    "header": "SKELETON: /referrer-email"
+    "header": "Does {{values.full-name}} have an email address?",
+    "paragraph": "We may use this email address to contact them for more information about the referral."
   },
   "provide-telephone-number": {
     "header": "SKELETON: /provide-telephone-number"

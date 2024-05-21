@@ -102,7 +102,12 @@ module.exports = {
     },
 
     '/referrer-email': {
-      fields: [],
+      fields: [
+        'referrer-email-options',
+        'referrer-email-address',
+      ],
+      behaviours: SaveFormSession,
+      locals: { showSaveAndExit: true },
       next: '/provide-telephone-number'
     },
     '/provide-telephone-number': {

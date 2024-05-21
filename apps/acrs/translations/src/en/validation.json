@@ -15,6 +15,14 @@
     "confirm-referrer-email": {
         "required": "You must select an option"
     },
+    "referrer-email-options": {
+        "required": "Tell us if the referrer has an email address"
+    },
+    "referrer-email-address": {
+      "maxlength": "Email address must be between 6 and 254 characters",
+      "email": "Enter a real email address",
+      "required": "Enter the referrer's email address"
+    },
     "parent": {
         "required": "You must select an option"
     },
