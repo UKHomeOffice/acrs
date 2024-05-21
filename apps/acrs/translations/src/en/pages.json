@@ -18,6 +18,9 @@
       },
       "immigration-adviser-details": {
         "header": "Immigration adviser details"
+      },
+      "helper-details": {
+        "header": "Helper details"
       }
     },
     "fields": {
@@ -47,6 +50,15 @@
       },
       "legal-representative-address": {
         "label": "Address"
+      },
+      "helper-full-name": {
+        "label": "Full name"
+      },
+      "helper-relationship": {
+        "label": "Relationship to referrer"
+      },
+      "helper-organisation": {
+        "label": "Organisation name"
       },
       "current-email": {
         "label": "Email"

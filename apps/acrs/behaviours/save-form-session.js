@@ -69,7 +69,7 @@ module.exports = superclass => class extends superclass {
 
         if (req.sessionModel.get('redirect-to-current-progress') &&
           !isContinueOnEdit && !loopedFieldMatchesForkCondition) {
-          return res.redirect('/acrs/current-progress');
+          return res.redirect('/acrs/information-you-have-given-us');
         }
 
         return next();

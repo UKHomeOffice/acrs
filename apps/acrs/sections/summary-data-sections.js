@@ -78,5 +78,22 @@ module.exports = {
         omitChangeLink: true
       }
     ]
+  },
+  'helper-details': {
+    steps: [
+      {
+        steps: '/helper-details',
+        field: 'helper-full-name'
+      },
+      {
+        steps: '/helper-details',
+        field: 'helper-relationship'
+      },
+      {
+        steps: '/helper-details',
+        field: 'helper-organisation'
+      }
+    ]
   }
+
 };
