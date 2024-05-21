@@ -1,22 +1,58 @@
 {
+  "start": {
+    "header": "Continue to your referral form",
+    "paragraph": "Use this form to refer family to come to the UK under the Afghan Citizens Resettlement Scheme."
+  },
+  "information-you-have-given-us": {
+    "header": "Information you have given us"
+  },
+  "information-saved": {
+    "header": "Your information has been saved",
+    "paragraph1": "if you need to continue the form"
+  },
   "confirm": {
     "header": "Check your answers",
     "sections": {
-      "name": {
-        "header": "Details"
+      "referral-details": {
+        "header": "Referral details"
+      },
+      "immigration-adviser-details": {
+        "header": "Immigration adviser details"
       }
     },
     "fields": {
-      "name": {
-        "label": "Project Name"
+      "brp": {
+       "label": "BRP"
+      },
+      "uan": {
+        "label": "UAN"
+      },
+      "date-of-birth": {
+        "label": "Date of birth"
+      },
+      "who-is-completing-form": {
+        "label": "Person completing form"
+      },
+      "full-name": {
+        "label": "Full name"
+      },
+      "confirm-referrer-email": {
+        "": "Email"
+      },
+      "legal-representative-email": {
+        "label": "Email"
+      },
+      "legal-representative-phone-number": {
+        "label": "Phone number"
+      },
+      "legal-representative-address": {
+        "label": "Address"
+      },
+      "current-email": {
+        "label": "Email"
       }
+    
     }
-  },
-  "select-form": {
-    "header": "SKELETON: /select-form"
-  },
-  "information-you-have-given-us": {
-    "header": "SKELETON: /information-you-have-given-us"
   },
   "immigration-adviser-details": {
     "header": "SKELETON: /immigration-adviser-details"
@@ -138,13 +174,9 @@
   "confirmation": {
     "header": "SKELETON: /confirmation"
   },
-  "session-expired": {
-    "header": "SKELETON: /session-expired"
-  },
   "link-expired": {
-    "header": "SKELETON: /link-expired"
-  },
-  "information-saved": {
-    "header": "SKELETON: /information-saved"
+    "header": "Your link has expired",
+    "paragraph": "To keep your information safe, we need to check some of your details and email you a new link.",
+    "link-text": "Get a new link"
   }
 }

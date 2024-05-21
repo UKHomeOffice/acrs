@@ -11,13 +11,14 @@ const baseUrl = `${config.saveService.host}:${config.saveService.port}/saved_app
 const tokenGenerator = require('../../../db/save-token');
 const _ = require('lodash');
 
-const getPersonalisation = (host, token) => {
+const getPersonalisation = (host, token, idType) => {
   const protocol = host.includes('localhost') ? 'http' : 'https';
   return {
     // pass in `&` at the end in case there is another
     // query e.g. ?hof-cookie-check
     link: `${protocol}://${host + config.login.appPath}?token=${token}&`,
-    host: `${protocol}://${host}`
+    host: `${protocol}://${host}`,
+    idType: idType === 'brp' ? 'BRP number' : 'UAN'
   };
 };
 
@@ -54,16 +55,19 @@ module.exports = superclass => class extends superclass {
 
     let idRoute = '';
     let idType = '';
+    let id = '';
 
     if (!brp) {
-      idType = uan;
+      id = uan;
+      idType = 'uan';
       idRoute = '/uan/';
     }else{
-      idType = brp;
+      id = brp;
+      idType = 'brp';
       idRoute = '/brp/';
     }
 
-    const response = await axios.get(baseUrl + idRoute + idType);
+    const response = await axios.get(baseUrl + idRoute + id);
     const claimantRecords = response.data;
     const recordEmail = claimantRecords.map(f => { return f.email; });
     const unSubmittedCase = _.filter(response.data, record => !record.submitted_at);
@@ -85,7 +89,7 @@ module.exports = superclass => class extends superclass {
 
     try {
       await notifyClient.sendEmail(templateId, email, {
-        personalisation: getPersonalisation(host, token, req, req)
+        personalisation: getPersonalisation(host, token, idType)
       });
     } catch (e) {
       return next(e);
