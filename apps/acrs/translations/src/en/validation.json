@@ -8,10 +8,10 @@
     },
     "helper-relationship": {
       "required": "Enter the helper's relationship to the referrer",
-      "alphanum": "The helper's relationship must be alphanumeric"
+      "notUrl": "Please do not enter a link/url into your answers"
     },
     "helper-organisation": {
-      "alphanum": "The helper's organisation name must be alphanumeric"
+      "notUrl": "Please do not enter a link/url into your answers"
     },
     "referral": {
         "required": "You must select an option"

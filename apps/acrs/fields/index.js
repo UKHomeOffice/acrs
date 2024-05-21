@@ -13,11 +13,11 @@ module.exports = {
   },
   'helper-relationship': {
     labelClassName: 'bold',
-    validate: ['required', 'alphanum', 'notUrl', { type: 'maxlength', arguments: 250 }]
+    validate: ['required', 'notUrl', { type: 'maxlength', arguments: 250 }]
   },
   'helper-organisation': {
     labelClassName: 'bold',
-    validate: ['alphanum', { type: 'maxlength', arguments: 250 }]
+    validate: ['notUrl', { type: 'maxlength', arguments: 250 }]
   },
   'full-name': {
     // SKELETON: for the purposes of the Skeleton this page is used to determine under/over 18
