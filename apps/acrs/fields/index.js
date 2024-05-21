@@ -7,6 +7,18 @@ module.exports = {
     options: ['the-referrer', 'someone-helping', 'immigration-advisor'],
     validate: 'required'
   },
+  'helper-full-name': {
+    labelClassName: 'bold',
+    validate: ['required', 'notUrl', { type: 'maxlength', arguments: 250 }],
+  },
+  'helper-relationship': {
+    labelClassName: 'bold',
+    validate: ['required', 'alphanum', 'notUrl', { type: 'maxlength', arguments: 250 }],
+  },
+  'helper-organisation': {
+    labelClassName: 'bold',
+    validate: ['alphanum', { type: 'maxlength', arguments: 250 }],
+  },
   'full-name': {
     // SKELETON: for the purposes of the Skeleton this page is used to determine under/over 18
     mixin: 'radio-group',

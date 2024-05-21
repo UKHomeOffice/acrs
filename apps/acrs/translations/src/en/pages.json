@@ -58,10 +58,11 @@
     "header": "SKELETON: /immigration-adviser-details"
   },
   "helper-details": {
-    "header": "SKELETON: /helper-details"
+    "header": "Helper details"
   },
   "complete-as-referrer": {
-    "header": "SKELETON: /complete-as-referrer"
+    "header": "Complete this form as if you are the referrer",
+    "paragraph": "Answer all remaining questions as if you are the person referring family to come the UK."
   },
   "full-name": {
     "header": "SKELETON: /full-name"

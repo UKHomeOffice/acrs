@@ -19,6 +19,15 @@
       }
     }
   },
+  "helper-full-name": {
+    "label": "Full name"
+  },
+  "helper-relationship": {
+    "label": "Your relationship to the referrer"
+  },
+  "helper-organisation": {
+    "label": "Organisation name (optional)"
+  },
   "full-name": {
       "label": "SKELETON: full-name",
       "options": {
