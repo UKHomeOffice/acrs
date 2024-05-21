@@ -34,5 +34,39 @@
     },
     "/how-send-decision": {
       "required": "You must select an option"
+    },
+    "is-legal-representative-email": {
+      "required": "You must select an option"
+    },
+    "legal-representative-name": {
+      "required": "Enter your name",
+      "notUrl": "Please do not enter a link/url into your answers"
+    },
+    "legal-representative-phone-number": {
+      "required": "Enter your phone number",
+      "internationalPhoneNumber": "Enter a valid phone number"
+    },
+    "legal-representative-email": {
+      "required": "Enter your email address",
+      "email": "Enter a valid email address"
+    },
+    "legal-representative-house-number": {
+      "required": "Enter your house number/name, and street name",
+      "notUrl": "Please do not enter a link/url into your answers"
+    },
+    "legal-representative-street": {
+      "notUrl": "Enter a valid street name"
+    },
+    "legal-representative-townOrCity": {
+      "required": "Enter your town or city",
+      "notUrl": "Please do not enter a link/url into your answers"
+    },
+    "legal-representative-county": {
+      "notUrl": "Please do not enter a link/url into your answers"
+    },
+    "legal-representative-postcode": {
+      "required": "Enter your postcode",
+      "postcode": "Enter a valid UK postcode",
+      "notUrl": "Please do not enter a link/url into your answers"
     }
 }

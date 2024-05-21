@@ -19,6 +19,48 @@
       }
     }
   },
+  "legal-representative-address": {
+    "label": "Postal address"
+  },
+  "legal-representative-house-number": {
+    "label": "Address line 1"
+  },
+  "legal-representative-postcode": {
+    "label": "Postcode"
+  },
+  "legal-representative-street": {
+    "label": "Address line 2 (optional)"
+  },
+  "legal-representative-townOrCity": {
+    "label": "Town or city"
+  },
+  "legal-representative-county": {
+    "label": "County (optional)"
+  },
+  "legal-representative-fullname": {
+    "label": "Full name"
+  },
+  "legal-representative-organisation": {
+    "label": "Organisation or law firm"
+  },
+  "legal-representative-phone-number": {
+    "label": "Telephone number",
+    "hint": "For international numbers, include the country code."
+  },
+  "is-legal-representative-email": {
+    "legend": "Is {{values.user-email}} your email address?",
+    "options": {
+      "yes": {
+        "label": "Yes"
+      },
+      "no": {
+        "label": "No"
+      }
+    }
+  },
+  "legal-representative-email": {
+    "label": "Enter your email address"
+  },
   "full-name": {
       "label": "SKELETON: full-name",
       "options": {

@@ -28,7 +28,7 @@ module.exports = {
       behaviours: [SummaryPageBehaviour, CheckInformationGivenBehaviour],
       sections: require('./sections/summary-data-sections'),
       backLink: false,
-      journeyStart: '/who-is-completing-form'
+      journeyStart: '/who-completing-form'
     },
     '/who-completing-form': {
       behaviours: SaveFormSession,
@@ -64,7 +64,21 @@ module.exports = {
       next: '/complete-as-referrer'
     },
     '/immigration-adviser-details': {
-      fields: [],
+      behaviours: SaveFormSession,
+      fields: [
+        'legal-representative-fullname',
+        'legal-representative-organisation',
+        'legal-representative-house-number',
+        'legal-representative-street',
+        'legal-representative-townOrCity',
+        'legal-representative-county',
+        'legal-representative-postcode',
+        'legal-representative-phone-number',
+        'is-legal-representative-email',
+        'legal-representative-email'
+      ],
+      continueOnEdit: true,
+      locals: { showSaveAndExit: true },
       next: '/complete-as-referrer'
     },
     '/complete-as-referrer': {
