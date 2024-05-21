@@ -59,7 +59,6 @@ module.exports = {
       locals: { showSaveAndExit: true },
       next: '/helper-details'
     },
-
     '/helper-details': {
       fields: [],
       next: '/complete-as-referrer'

@@ -6,6 +6,10 @@
   "information-you-have-given-us": {
     "header": "Information you have given us"
   },
+  "information-saved": {
+    "header": "Your information has been saved",
+    "paragraph1": "if you need to continue the form"
+  },
   "confirm": {
     "header": "Check your answers",
     "sections": {
@@ -181,8 +185,5 @@
   },
   "link-expired": {
     "header": "SKELETON: /link-expired"
-  },
-  "information-saved": {
-    "header": "SKELETON: /information-saved"
   }
 }
