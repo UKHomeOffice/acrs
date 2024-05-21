@@ -27,7 +27,7 @@ module.exports = {
   login: {
     tokenExpiry: 1800,
     appPath: '/acrs/start',
-    invalidTokenPath: '/acrs/token-invalid',
+    invalidTokenPath: '/acrs/link-expired',
     allowSkip: String(process.env.ALLOW_SKIP) === 'true',
     skipEmail: process.env.SKIP_EMAIL
   },

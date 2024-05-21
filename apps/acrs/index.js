@@ -28,7 +28,7 @@ module.exports = {
       behaviours: [SummaryPageBehaviour, CheckInformationGivenBehaviour],
       sections: require('./sections/summary-data-sections'),
       backLink: false,
-      journeyStart: '/who-is-completing-form'
+      journeyStart: '/who-completing-form'
     },
     '/who-completing-form': {
       behaviours: SaveFormSession,
