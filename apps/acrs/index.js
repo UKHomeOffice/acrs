@@ -21,7 +21,7 @@ module.exports = {
       next: '/select-form'
     },
     '/select-form': {
-      behaviours: [ResumeSession],
+      behaviours: [ResumeSession, SaveFormSession],
       next: '/information-you-have-given-us',
       backLink: false
     },
