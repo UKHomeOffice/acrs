@@ -8,6 +8,7 @@ module.exports = {
     validate: 'required'
   },
   'full-name': {
+    isPageHeading: true,
     mixin: 'input-text',
     validate: ['required', { type: 'maxlength', arguments: 250 }]
   },

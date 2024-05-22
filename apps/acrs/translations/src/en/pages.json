@@ -63,9 +63,6 @@
   "complete-as-referrer": {
     "header": "SKELETON: /complete-as-referrer"
   },
-  "full-name": {
-    "header": "What is your full name?"
-  },
   "confirm-referrer-email": {
     "header": "SKELETON: /confirm-referrer-email"
   },
