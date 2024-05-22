@@ -135,5 +135,6 @@ module.exports = {
     legend: {
       className: 'visuallyhidden'
     }
-  }
+  },
+  isInCountriesList
 };

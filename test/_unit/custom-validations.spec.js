@@ -1,5 +1,4 @@
-const countries = require('hof').utils.countries().concat([{ value: 'Unknown', label: 'Unknown' }]);
-const isInCountriesList = value => countries.some(country => country.value === value);
+const { isInCountriesList } = require('../../apps/acrs/fields/index')
 
 describe('Validation', () => {
   describe('isInCountriesList', () => {
