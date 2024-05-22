@@ -10,7 +10,6 @@ const templateId = config.govukNotify.userAuthTemplateId;
 const baseUrl = `${config.saveService.host}:${config.saveService.port}/saved_applications`;
 const tokenGenerator = require('../../../db/save-token');
 const _ = require('lodash');
-const { error } = require('jquery');
 
 const getPersonalisation = (host, token, idType) => {
   const protocol = host.includes('localhost') ? 'http' : 'https';
@@ -89,13 +88,10 @@ module.exports = superclass => class extends superclass {
     const token = tokenGenerator.save(req, email);
 
     try {
-      const response = await notifyClient.sendEmail(templateId, email, {
+      await notifyClient.sendEmail(templateId, email, {
         personalisation: getPersonalisation(host, token, idType)
       });
-      console.log('RESPONSE: ', response.status);
     } catch (e) {
-      console.log('ERROR: ', e.status);
-      console.log('E MESSAGE: ', e.message);
       return next(e);
     }
 
