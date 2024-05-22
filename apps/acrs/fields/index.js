@@ -61,7 +61,7 @@ module.exports = {
   'parent-phone-number': {
     labelClassName: 'bold',
     validate: ['internationalPhoneNumber', { type: 'maxlength', arguments: [250] }],
-    className: ['govuk-input', 'govuk-!-width-two-thirds']
+    className: ['govuk-input', 'govuk-!-width-one-half']
   },
   'parent-email': {
     labelClassName: 'bold',
@@ -75,7 +75,7 @@ module.exports = {
     labelClassName: 'bold',
     mixin: 'select',
     validate: ['required', isInCountriesList],
-    className: ['typeahead', 'js-hidden'],
+    className: ['js-hidden'],
     options: [
       {
         value: '',
