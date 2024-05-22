@@ -1,7 +1,7 @@
 'use strict';
 
 module.exports = {
-  'who-is-completing-form': {
+  'who-completing-form': {
     isPageHeading: true,
     mixin: 'radio-group',
     options: ['the-referrer', 'someone-helping', 'immigration-advisor'],

@@ -8,7 +8,7 @@
       },
       "uan": {
         "label": "Using a UAN",
-        "hint": "For example, 1111-2222-3333-4444"
+        "hint": "For example, 1234-1234-1234-1234"
       }
     }
   },
@@ -22,7 +22,7 @@
   },
   "date-of-birth": {
     "legend": "Date of birth",
-    "hint": "For example, 27 3 1985"
+    "hint": "{{values.brp-hint}}For example, 27 3 1985"
   },
   "user-email": {
     "hint": "We will email you a secure link, so you can save your information and return later."
