@@ -134,7 +134,7 @@ module.exports = {
         'parent-evacuated-without-reason'
       ],
       next: '/parent-summary',
-      locals: { showSaveAndExit: true },
+      locals: { showSaveAndExit: true }
     },
     '/parent-summary': {
       fields: [],

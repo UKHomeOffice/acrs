@@ -14,6 +14,5 @@ describe('Validation', () => {
     it('Returns false for an incorrect type of value', () => {
       expect(isInCountriesList(undefined)).to.equal(false);
     });
-
   });
 });
