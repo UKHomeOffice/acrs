@@ -37,7 +37,7 @@
         "label": "Full name"
       },
       "confirm-referrer-email": {
-        "": "Email"
+        "label": "Email"
       },
       "legal-representative-email": {
         "label": "Email"
@@ -51,7 +51,6 @@
       "current-email": {
         "label": "Email"
       }
-    
     }
   },
   "immigration-adviser-details": {
@@ -82,7 +81,8 @@
     "header": "SKELETON: /parent"
   },
   "parent-details": {
-    "header": "SKELETON: /parent-details"
+    "header": "Parent {{values.parentCount}} details",
+    "paragraph": "Add your parents one at a time."
   },
   "parent-summary": {
     "header": "SKELETON: /parent-summary"

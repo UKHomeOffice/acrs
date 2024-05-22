@@ -14,6 +14,31 @@
     "parent": {
         "required": "You must select an option"
     },
+    "parent-full-name": {
+      "required": "Enter this parent's full name",
+      "notUrl": "Please do not enter a link/url into your answers"
+    },
+    "parent-phone-number": {
+      "internationalPhoneNumber": "Enter a valid phone number"
+    },
+    "parent-email": {
+      "email": "Enter a valid email address"
+    },
+    "parent-date-of-birth": {
+      "required": "Enter this parent's date of birth",
+      "date": "Please enter a valid date",
+      "after": "Enter a date after 01 01 1900",
+      "before": "Please enter a date in the past"
+    },
+    "parent-country": {
+      "required": "Enter the country this parent lives in",
+      "isInCountriesList": "You must choose a country from the provided list"
+    },
+    "parent-evacuated-without-reason": {
+      "required": "Enter the reason you were evacuated without this parent",
+      "regex": "Explanation must be 15,000 characters or less and must not include [ ] < > / |",
+      "notUrl": "Please do not enter a link/url into your answers"
+    },
     "brother-or-sister": {
         "required": "You must select an option"
     },

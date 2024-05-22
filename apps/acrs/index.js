@@ -124,8 +124,17 @@ module.exports = {
     },
 
     '/parent-details': {
-      fields: [],
-      next: '/parent-summary'
+      behaviours: SaveFormSession,
+      fields: [
+        'parent-full-name',
+        'parent-phone-number',
+        'parent-email',
+        'parent-date-of-birth',
+        'parent-country',
+        'parent-evacuated-without-reason'
+      ],
+      next: '/parent-summary',
+      locals: { showSaveAndExit: true },
     },
     '/parent-summary': {
       fields: [],
