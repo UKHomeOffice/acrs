@@ -32,7 +32,7 @@ module.exports = {
     skipEmail: process.env.SKIP_EMAIL
   },
   sessionDefaults: {
-    steps: ['/start', '/select-form', '/information-you-have-given-us', '/who-is-completing-form'],
+    steps: ['/start', '/select-form', '/information-you-have-given-us', '/who-completing-form'],
     fields: ['user-email', 'id-type', 'brp', 'uan', 'date-of-birth', 'csrf-secret', 'errorValues', 'errors']
   },
   hosts: {

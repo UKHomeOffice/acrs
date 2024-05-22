@@ -30,14 +30,14 @@
       "date-of-birth": {
         "label": "Date of birth"
       },
-      "who-is-completing-form": {
+      "who-completing-form": {
         "label": "Person completing form"
       },
       "full-name": {
         "label": "Full name"
       },
       "confirm-referrer-email": {
-        "": "Email"
+        "label": "Email"
       },
       "legal-representative-email": {
         "label": "Email"
