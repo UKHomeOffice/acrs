@@ -5,6 +5,7 @@ const CheckInformationGivenBehaviour = require('./behaviours/continue-report');
 const ResumeSession = require('./behaviours/resume-form-session');
 const CheckEmailToken = require('./behaviours/check-email-token');
 const SaveFormSession = require('./behaviours/save-form-session');
+const SaveAndExit = require('./behaviours/save-and-exit');
 const Utilities = require('../../lib/utilities');
 
 module.exports = {
@@ -21,7 +22,7 @@ module.exports = {
       next: '/select-form'
     },
     '/select-form': {
-      behaviours: [ResumeSession],
+      behaviours: [ResumeSession, SaveFormSession],
       next: '/information-you-have-given-us',
       backLink: false
     },
@@ -326,8 +327,8 @@ module.exports = {
       next: '/confirm'
     },
     '/information-saved': {
-      fields: [],
-      next: '/confirm'
+      behaviours: SaveAndExit,
+      backLink: false
     }
   }
 };
