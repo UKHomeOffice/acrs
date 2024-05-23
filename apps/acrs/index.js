@@ -5,6 +5,8 @@ const CheckInformationGivenBehaviour = require('./behaviours/continue-report');
 const ResumeSession = require('./behaviours/resume-form-session');
 const CheckEmailToken = require('./behaviours/check-email-token');
 const SaveFormSession = require('./behaviours/save-form-session');
+const SaveAndExit = require('./behaviours/save-and-exit');
+const Utilities = require('../../lib/utilities');
 
 module.exports = {
   name: 'acrs',
@@ -20,7 +22,7 @@ module.exports = {
       next: '/select-form'
     },
     '/select-form': {
-      behaviours: [ResumeSession],
+      behaviours: [ResumeSession, SaveFormSession],
       next: '/information-you-have-given-us',
       backLink: false
     },
@@ -90,12 +92,13 @@ module.exports = {
       fields: ['full-name'],
       forks: [{
         target: '/parent',
-        condition: {
-          field: 'full-name',
-          value: 'under-18'
+        condition: req => {
+          return ! Utilities.isOver18(req.sessionModel.get('date-of-birth'));
         }
       }],
-      next: '/confirm-referrer-email'
+      next: '/confirm-referrer-email',
+      behaviours: SaveFormSession,
+      locals: { showSaveAndExit: true }
     },
 
     '/confirm-referrer-email': {
@@ -239,12 +242,10 @@ module.exports = {
     },
 
     '/no-family-referred': {
-      fields: ['no-family-referred'],
       forks: [{
         target: '/parent',
-        condition: {
-          field: 'full-name',
-          value: 'under-18'
+        condition: req => {
+          return ! Utilities.isOver18(req.sessionModel.get('date-of-birth'));
         }
       }],
       next: '/partner'
@@ -340,8 +341,8 @@ module.exports = {
       next: '/confirm'
     },
     '/information-saved': {
-      fields: [],
-      next: '/confirm'
+      behaviours: SaveAndExit,
+      backLink: false
     }
   }
 };
