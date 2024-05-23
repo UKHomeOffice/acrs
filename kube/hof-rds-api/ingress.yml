@@ -24,7 +24,7 @@ spec:
       {{ end }}
       {{ if eq .KUBE_NAMESPACE .BRANCH_ENV }}
       secretName: branch-tls-internal
-      {{ else }} 
+      {{ else }}
       secretName: data-service-cert-cmio
       {{ end }}
   rules:

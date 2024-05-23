@@ -407,7 +407,7 @@ steps:
       branch: master
       event: push
 
-  # Checks a build being promoted has passed, is on master which effectively means a healthy build on Staging
+  ## Checks a build being promoted has passed, is on master which effectively means a healthy build on Staging
   - name: sanity_check_build_prod
     pull: if-not-exists
     image: drone/cli:alpine@sha256:14409f7f7247befb9dd2effdb2f61ac40d1f5fbfb1a80566cf6f2f8d21f3be11
