@@ -3,6 +3,7 @@
 const SummaryPageBehaviour = require('hof').components.summary;
 const SaveFormSession = require('./behaviours/save-form-session');
 const CheckEmailToken = require('./behaviours/check-email-token');
+const Submit = require('./behaviours/submit');
 
 module.exports = {
   name: 'acrs',
@@ -14,11 +15,11 @@ module.exports = {
   },
   steps: {
     '/select-form': {
-      behaviours: [CheckEmailToken],
+     // behaviours: [CheckEmailToken],
       next: '/who-is-completing-form'
     },
     '/who-is-completing-form': {
-      behaviours: SaveFormSession,
+     // behaviours: SaveFormSession,
       forks: [
         {
           target: '/full-name',
@@ -43,7 +44,7 @@ module.exports = {
         }
       ],
       fields: ['who-is-completing-form'],
-      locals: { showSaveAndExit: true },
+     // locals: { showSaveAndExit: true },
       next: '/helper-details'
     },
     '/helper-details': {
@@ -75,7 +76,7 @@ module.exports = {
       next: '/confirm'
     },
     '/confirm': {
-      behaviours: [SummaryPageBehaviour],
+      behaviours: [SummaryPageBehaviour, Submit],
       sections: require('./sections/summary-data-sections'),
       next: '/confirmation'
     },
