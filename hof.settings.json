@@ -13,8 +13,7 @@
   },
   "translations": "./apps/acrs/translations",
   "routes": [
-    "./apps/acrs",
-    "./apps/verify"
+    "./apps/acrs"
   ],
   "session": {
     "name": "acrs.hof.sid"

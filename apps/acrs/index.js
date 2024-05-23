@@ -7,6 +7,7 @@ const CheckEmailToken = require('./behaviours/check-email-token');
 const SaveFormSession = require('./behaviours/save-form-session');
 const SaveAndExit = require('./behaviours/save-and-exit');
 const Utilities = require('../../lib/utilities');
+const Submit = require('./behaviours/submit');
 
 module.exports = {
   name: 'acrs',
@@ -302,7 +303,7 @@ module.exports = {
       next: '/confirm'
     },
     '/confirm': {
-      behaviours: [SummaryPageBehaviour],
+      behaviours: [SummaryPageBehaviour, Submit],
       sections: require('./sections/summary-data-sections'),
       next: '/declaration'
     },
