@@ -66,9 +66,6 @@
   "complete-as-referrer": {
     "header": "SKELETON: /complete-as-referrer"
   },
-  "full-name": {
-    "header": "SKELETON: /full-name"
-  },
   "confirm-referrer-email": {
     "header": "SKELETON: /confirm-referrer-email"
   },
@@ -180,10 +177,9 @@
   "confirmation": {
     "header": "SKELETON: /confirmation"
   },
-  "session-expired": {
-    "header": "SKELETON: /session-expired"
-  },
   "link-expired": {
-    "header": "SKELETON: /link-expired"
+    "header": "Your link has expired",
+    "paragraph": "To keep your information safe, we need to check some of your details and email you a new link.",
+    "link-text": "Get a new link"
   }
 }
