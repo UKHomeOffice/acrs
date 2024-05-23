@@ -1,4 +1,4 @@
-const { isInCountriesList } = require('../../apps/acrs/fields/index')
+const { isInCountriesList } = require('../../apps/acrs/fields/index');
 
 describe('Validation', () => {
   describe('isInCountriesList', () => {
