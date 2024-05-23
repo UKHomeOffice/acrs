@@ -104,7 +104,7 @@ module.exports = {
     '/referrer-email': {
       fields: [
         'referrer-email-options',
-        'referrer-email-address',
+        'referrer-email-address'
       ],
       behaviours: SaveFormSession,
       locals: { showSaveAndExit: true },

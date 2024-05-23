@@ -27,9 +27,9 @@ module.exports = {
         value: 'yes',
         toggle: 'referrer-email-address',
         child: 'input-text'
-      }, 
-      { 
-        value: 'no' 
+      },
+      {
+        value: 'no'
       }
     ],
     validate: 'required',
