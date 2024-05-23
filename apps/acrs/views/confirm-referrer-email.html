@@ -1,0 +1,8 @@
+{{<partials-page}}
+  {{$page-content}}
+    <p class="bold">{{#t}}{{values.user-email}}{{/t}}</p>
+    <p class="govuk-hint">{{#t}}pages.confirm-referrer-email.paragraph{{/t}}</p>
+    {{#radio-group}}confirm-referrer-email{{/radio-group}}
+    {{#input-submit}}continue{{/input-submit}}
+  {{/page-content}}
+{{/partials-page}}

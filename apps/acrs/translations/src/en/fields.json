@@ -24,13 +24,12 @@
     "hint": "You can copy this from your biometric residence permit card or any letters from the Home Office"
   },
   "confirm-referrer-email": {
-      "label": "SKELETON: confirm-referrer-email",
       "options": {
         "yes": {
-          "label": "SKELETON: Yes"
+          "label": "Yes"
         },
         "no": {
-          "label": "SKELETON: No"
+          "label": "No"
         }
       }
   },
