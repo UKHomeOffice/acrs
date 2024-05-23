@@ -78,7 +78,16 @@
       "regex": "Explanation must be 15,000 characters or less and must not include [ ] < > / |",
       "notUrl": "Please do not enter a link/url into your answers"
     },
-    "brother-or-sister": {
+    "provide-telephone-number-options": {
+      "required": "Tell us if you can provide a telephone number"
+    },
+    "provide-telephone-number-number": {
+      "required": "Enter a telephone number",
+      "maxlength": "Telephone number must be between 8 and 16 characters",
+      "internationalPhoneNumber": "Telephone number must be between 8 and 16 characters",
+      "email": "Enter a real email address"
+    },  
+      "brother-or-sister": {
         "required": "You must select an option"
     },
     "partner": {

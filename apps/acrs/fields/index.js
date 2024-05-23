@@ -88,6 +88,30 @@ module.exports = {
       className: 'visuallyhidden'
     }
   },
+  'provide-telephone-number-options': {
+    mixin: 'radio-group',
+    options: [
+      {
+        value: 'yes',
+        toggle: 'provide-telephone-number-number',
+        child: 'input-text'
+      },
+      {
+        value: 'no'
+      }
+    ],
+    validate: 'required',
+    legend: {
+      className: 'visuallyhidden'
+    }
+  },
+  'provide-telephone-number-number': {
+    dependent: {
+      field: 'provide-telephone-number-options',
+      value: 'yes'
+    },
+    validate: ['required', 'internationalPhoneNumber', { type: 'maxlength', arguments: 20 }]
+  },
   children: {
     mixin: 'radio-group',
     options: ['yes', 'no'],

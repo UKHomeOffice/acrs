@@ -128,7 +128,10 @@ module.exports = {
       next: '/provide-telephone-number'
     },
     '/provide-telephone-number': {
-      fields: [],
+      fields: [
+        'provide-telephone-number-options',
+        'provide-telephone-number-number'
+      ],
       next: '/your-address'
     },
     '/your-address': {
