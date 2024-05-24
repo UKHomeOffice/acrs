@@ -20,6 +20,30 @@ module.exports = {
       className: 'visuallyhidden'
     }
   },
+  'referrer-email-options': {
+    mixin: 'radio-group',
+    options: [
+      {
+        value: 'yes',
+        toggle: 'referrer-email-address',
+        child: 'input-text'
+      },
+      {
+        value: 'no'
+      }
+    ],
+    validate: 'required',
+    legend: {
+      className: 'visuallyhidden'
+    }
+  },
+  'referrer-email-address': {
+    dependent: {
+      field: 'referrer-email-options',
+      value: 'yes'
+    },
+    validate: ['required', 'email', { type: 'maxlength', arguments: 254 }]
+  },
   partner: {
     mixin: 'radio-group',
     options: ['yes', 'no'],

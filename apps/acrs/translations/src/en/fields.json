@@ -75,6 +75,19 @@
         }
       }
   },
+  "referrer-email-options": {
+    "options": {
+        "yes": {
+          "label": "Yes"
+        },
+        "no": {
+          "label": "No"
+        }
+      }
+  },
+  "referrer-email-address": {
+    "label": "{{values.full-name}}'s email address"
+  },
   "partner": {
       "label": "SKELETON: partner",
       "options": {
