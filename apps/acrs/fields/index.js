@@ -43,7 +43,6 @@ module.exports = {
       value: 'yes'
     },
     validate: ['required', 'email', { type: 'maxlength', arguments: 254 }]
-    // validate: ['email', { type: 'maxlength', arguments: 254 }, { type: 'minlength', arguments: 6 }]
   },
   partner: {
     mixin: 'radio-group',
