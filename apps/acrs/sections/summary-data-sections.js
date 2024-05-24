@@ -19,8 +19,8 @@ module.exports = {
         omitChangeLink: true
       },
       {
-        steps: '/who-is-completing-form',
-        field: 'who-is-completing-form'
+        steps: '/who-completing-form',
+        field: 'who-completing-form'
       },
       {
         steps: '/full-name',
@@ -28,7 +28,15 @@ module.exports = {
       },
       {
         steps: '/confirm-referrer-email',
-        field: ''
+        field: '',
+        parse: (list, req) => {
+          if (!req.sessionModel.get('steps').includes('/confirm-referrer-email')) {
+            return null;
+          }
+          return req.sessionModel.get('confirm-referrer-email') === 'yes' ?
+            `${req.sessionModel.get('user-email')}` :
+            `${req.sessionModel.get('referral-email')}`;
+        }
       }
     ]
   },
@@ -41,8 +49,7 @@ module.exports = {
             return null;
           }
           return list;
-        },
-        omitChangeLink: true
+        }
       },
       {
         step: '/immigration-adviser-details',
@@ -54,13 +61,11 @@ module.exports = {
           return req.sessionModel.get('is-legal-representative-email') === 'yes' ?
             `${req.sessionModel.get('user-email')}` :
             `${req.sessionModel.get('legal-representative-email')}`;
-        },
-        omitChangeLink: true
+        }
       },
       {
         step: '/immigration-adviser-details',
-        field: 'legal-representative-phone-number',
-        omitChangeLink: true
+        field: 'legal-representative-phone-number'
       },
       {
         step: '/immigration-adviser-details',
@@ -74,8 +79,7 @@ module.exports = {
             `${req.sessionModel.get('legal-representative-townOrCity')}\n` +
             `${req.sessionModel.get('legal-representative-county')}\n` +
             `${req.sessionModel.get('legal-representative-postcode')}`;
-        },
-        omitChangeLink: true
+        }
       }
     ]
   },

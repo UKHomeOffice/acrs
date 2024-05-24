@@ -28,25 +28,59 @@
   "helper-organisation": {
     "label": "Organisation name (optional)"
   },
-  "full-name": {
-      "label": "SKELETON: full-name",
-      "options": {
-        "under-18": {
-          "label": "SKELETON: Referrer DOB < 28-09-2023 (under 18)"
-        },
-        "over-18": {
-          "label": "SKELETON: Referrer DOB >= 28-09-2023 (over 18)"
-        }
+  "legal-representative-address": {
+    "label": "Postal address"
+  },
+  "legal-representative-house-number": {
+    "label": "Address line 1"
+  },
+  "legal-representative-postcode": {
+    "label": "Postcode"
+  },
+  "legal-representative-street": {
+    "label": "Address line 2 (optional)"
+  },
+  "legal-representative-townOrCity": {
+    "label": "Town or city"
+  },
+  "legal-representative-county": {
+    "label": "County (optional)"
+  },
+  "legal-representative-fullname": {
+    "label": "Full name"
+  },
+  "legal-representative-organisation": {
+    "label": "Organisation or law firm"
+  },
+  "legal-representative-phone-number": {
+    "label": "Telephone number",
+    "hint": "For international numbers, include the country code."
+  },
+  "is-legal-representative-email": {
+    "legend": "Is {{values.user-email}} your email address?",
+    "options": {
+      "yes": {
+        "label": "Yes"
+      },
+      "no": {
+        "label": "No"
       }
+    }
+  },
+  "legal-representative-email": {
+    "label": "Enter your email address"
+  },
+  "full-name": {
+    "label": "What is your full name?",
+    "hint": "You can copy this from your biometric residence permit card or any letters from the Home Office"
   },
   "confirm-referrer-email": {
-      "label": "SKELETON: confirm-referrer-email",
       "options": {
         "yes": {
-          "label": "SKELETON: Yes"
+          "label": "Yes"
         },
         "no": {
-          "label": "SKELETON: No"
+          "label": "No"
         }
       }
   },

@@ -6,6 +6,13 @@
   "information-you-have-given-us": {
     "header": "Information you have given us"
   },
+  "immigration-adviser-details": {
+    "header": "Immigration adviser details",
+    "address": "Postal address"
+  },
+  "is-legal-representative-email": {
+    "header": "Is {{values.user-email}} your email address?"
+  },
   "information-saved": {
     "header": "Your information has been saved",
     "paragraph1": "if you need to continue the form"
@@ -33,14 +40,17 @@
       "date-of-birth": {
         "label": "Date of birth"
       },
-      "who-is-completing-form": {
+      "who-completing-form": {
         "label": "Person completing form"
       },
       "full-name": {
         "label": "Full name"
       },
       "confirm-referrer-email": {
-        "": "Email"
+        "label": "Email"
+      },
+      "legal-representative-fullname": {
+        "label": "Full name"
       },
       "legal-representative-email": {
         "label": "Email"
@@ -66,9 +76,6 @@
     
     }
   },
-  "immigration-adviser-details": {
-    "header": "SKELETON: /immigration-adviser-details"
-  },
   "helper-details": {
     "header": "Helper details"
   },
@@ -76,11 +83,9 @@
     "header": "Complete this form as if you are the referrer",
     "paragraph": "Answer all remaining questions as if you are the person referring family to come the UK."
   },
-  "full-name": {
-    "header": "SKELETON: /full-name"
-  },
   "confirm-referrer-email": {
-    "header": "SKELETON: /confirm-referrer-email"
+    "header": "Is this {{values.full-name}}’s email address?",
+    "paragraph": "We may use this email address to contact them for more information about the referral."
   },
   "referrer-email": {
     "header": "SKELETON: /referrer-email"
