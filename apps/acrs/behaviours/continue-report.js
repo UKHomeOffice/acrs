@@ -17,7 +17,7 @@ module.exports = superclass => class extends superclass {
     const brpId = req.sessionModel.get('brp');
 
     if (uanId || brpId) {
-      req.sessionModel.set('redirect-to-current-progress', true);
+      req.sessionModel.set('redirect-to-information-you-have-given-us', true);
 
       // steps in the session fall out of sync when changed from the current progress report page
       // this reorders them to ensure the user jumps to the last step they filled out
@@ -51,9 +51,8 @@ module.exports = superclass => class extends superclass {
 
       return super.getValues(req, res, next);
     }
-    return res.redirect('/acrs/select-form');
+    return res.redirect('/acrs/information-you-have-given-us');
   }
-
   // locals(req, res) {
   //   return Object.assign({}, super.locals(req, res), {
   //     visitedImagesPage: req.sessionModel.get('steps').includes('/evidence-upload')
@@ -65,7 +64,7 @@ module.exports = superclass => class extends superclass {
       if (err) {
         next(err);
       }
-      req.sessionModel.set('redirect-to-current-progress', false);
+      req.sessionModel.set('redirect-to-information-you-have-given-us', false);
 
       return res.redirect(`/acrs${req.sessionModel.get('save-return-next-step')}`);
     });
