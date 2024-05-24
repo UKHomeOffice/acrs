@@ -25,6 +25,9 @@
       },
       "immigration-adviser-details": {
         "header": "Immigration adviser details"
+      },
+      "helper-details": {
+        "header": "Helper details"
       }
     },
     "fields": {
@@ -58,6 +61,15 @@
       "legal-representative-address": {
         "label": "Address"
       },
+      "helper-full-name": {
+        "label": "Full name"
+      },
+      "helper-relationship": {
+        "label": "Relationship to referrer"
+      },
+      "helper-organisation": {
+        "label": "Organisation name"
+      },
       "current-email": {
         "label": "Email"
       },
@@ -76,17 +88,19 @@
     }
   },
   "helper-details": {
-    "header": "SKELETON: /helper-details"
+    "header": "Helper details"
   },
   "complete-as-referrer": {
-    "header": "SKELETON: /complete-as-referrer"
+    "header": "Complete this form as if you are the referrer",
+    "paragraph": "Answer all remaining questions as if you are the person referring family to come the UK."
   },
   "confirm-referrer-email": {
     "header": "Is this {{values.full-name}}’s email address?",
     "paragraph": "We may use this email address to contact them for more information about the referral."
   },
   "referrer-email": {
-    "header": "SKELETON: /referrer-email"
+    "header": "Does {{values.full-name}} have an email address?",
+    "paragraph": "We may use this email address to contact them for more information about the referral."
   },
   "provide-telephone-number": {
     "header": "SKELETON: /provide-telephone-number"
@@ -94,9 +108,6 @@
   "your-address": {
     "header": "What is your address?",
     "paragraph": "If you have no fixed address, enter an address we can use to contact you."
-  },
-  "parent": {
-    "header": "SKELETON: /parent"
   },
   "parent-details": {
     "header": "SKELETON: /parent-details"

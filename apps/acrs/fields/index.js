@@ -7,6 +7,18 @@ module.exports = {
     options: ['the-referrer', 'someone-helping', 'immigration-advisor'],
     validate: 'required'
   },
+  'helper-full-name': {
+    labelClassName: 'bold',
+    validate: ['required', 'notUrl', { type: 'maxlength', arguments: 250 }]
+  },
+  'helper-relationship': {
+    labelClassName: 'bold',
+    validate: ['required', 'notUrl', { type: 'maxlength', arguments: 250 }]
+  },
+  'helper-organisation': {
+    labelClassName: 'bold',
+    validate: ['notUrl', { type: 'maxlength', arguments: 250 }]
+  },
   'full-name': {
     isPageHeading: true,
     mixin: 'input-text',
@@ -19,6 +31,30 @@ module.exports = {
     legend: {
       className: 'visuallyhidden'
     }
+  },
+  'referrer-email-options': {
+    mixin: 'radio-group',
+    options: [
+      {
+        value: 'yes',
+        toggle: 'referrer-email-address',
+        child: 'input-text'
+      },
+      {
+        value: 'no'
+      }
+    ],
+    validate: 'required',
+    legend: {
+      className: 'visuallyhidden'
+    }
+  },
+  'referrer-email-address': {
+    dependent: {
+      field: 'referrer-email-options',
+      value: 'yes'
+    },
+    validate: ['required', 'email', { type: 'maxlength', arguments: 254 }]
   },
   'your-address-line-1': {
     validate: ['required', 'notUrl', { type: 'maxlength', arguments: [250] }],
@@ -57,9 +93,7 @@ module.exports = {
     mixin: 'radio-group',
     options: ['yes', 'no'],
     validate: 'required',
-    legend: {
-      className: 'visuallyhidden'
-    }
+    isPageHeading: true
   },
   'brother-or-sister': {
     mixin: 'radio-group',

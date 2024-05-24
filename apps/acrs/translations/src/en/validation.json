@@ -2,8 +2,16 @@
     "who-completing-form": {
         "required": "You must select an option"
     },
-    "referral": {
-        "required": "You must select an option"
+    "helper-full-name": {
+      "required": "Enter the helper's full name",
+      "notUrl": "Please do not enter a link/url into your answers"
+    },
+    "helper-relationship": {
+      "required": "Enter the helper's relationship to the referrer",
+      "notUrl": "Please do not enter a link/url into your answers"
+    },
+    "helper-organisation": {
+      "notUrl": "Please do not enter a link/url into your answers"
     },
     "referral": {
         "required": "You must select an option"
@@ -13,7 +21,15 @@
       "maxlength": "You can't use more than {{maxlength}} characters for your answer"
     },
     "confirm-referrer-email": {
-        "required": "You must select an option"
+      "required": "You must select an option"
+    },
+    "referrer-email-options": {
+        "required": "Tell us if the referrer has an email address"
+    },
+    "referrer-email-address": {
+      "maxlength": "Email address must be between 6 and 254 characters",
+      "email": "Enter a real email address",
+      "required": "Enter the referrer's email address"
     },
     "your-address-line-1": {
       "required": "Enter your house number or name",
@@ -35,7 +51,7 @@
       "postcode": "Enter a valid UK postcode"
     },
     "parent": {
-        "required": "You must select an option"
+      "required": "You must select an option"
     },
     "brother-or-sister": {
         "required": "You must select an option"
