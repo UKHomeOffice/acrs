@@ -5,15 +5,12 @@
     "referral": {
         "required": "You must select an option"
     },
-    "referral": {
-        "required": "You must select an option"
-    },
     "full-name": {
       "required": "You must enter your full name",
       "maxlength": "You can't use more than {{maxlength}} characters for your answer"
     },
     "confirm-referrer-email": {
-        "required": "You must select an option"
+      "required": "You must select an option"
     },
     "referrer-email-options": {
         "required": "Tell us if the referrer has an email address"
@@ -24,7 +21,7 @@
       "required": "Enter the referrer's email address"
     },
     "parent": {
-        "required": "You must select an option"
+      "required": "You must select an option"
     },
     "brother-or-sister": {
         "required": "You must select an option"

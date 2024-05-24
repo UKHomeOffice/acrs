@@ -84,9 +84,6 @@
   "your-address": {
     "header": "SKELETON: /your-address"
   },
-  "parent": {
-    "header": "SKELETON: /parent"
-  },
   "parent-details": {
     "header": "SKELETON: /parent-details"
   },

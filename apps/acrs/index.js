@@ -136,6 +136,7 @@ module.exports = {
     // Figma Section: "Who are you applying to bring to the UK? Sponsor under 18" (who-bringing-parent)
 
     '/parent': {
+      behaviours: SaveFormSession,
       fields: ['parent'],
       forks: [{
         target: '/brother-or-sister',
@@ -144,7 +145,9 @@ module.exports = {
           value: 'no'
         }
       }],
-      next: '/parent-details'
+      next: '/parent-details',
+      locals: { showSaveAndExit: true },
+      continueOnEdit: true
     },
 
     '/parent-details': {
