@@ -110,7 +110,8 @@
     "paragraph": "If you have no fixed address, enter an address we can use to contact you."
   },
   "parent-details": {
-    "header": "SKELETON: /parent-details"
+    "header": "Parent {{values.parentCount}} details",
+    "paragraph": "Add your parents one at a time."
   },
   "parent-summary": {
     "header": "SKELETON: /parent-summary"

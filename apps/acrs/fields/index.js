@@ -1,6 +1,13 @@
 'use strict';
 
+const _ = require('lodash');
+const dateComponent = require('hof').components.date;
+const after1900Validator = { type: 'after', arguments: ['1900'] };
+const countries = require('hof').utils.countries().concat([{ value: 'Unknown', label: 'Unknown' }]);
+const isInCountriesList = value => countries.some(country => country.value === value);
+
 module.exports = {
+  isInCountriesList,
   'who-completing-form': {
     isPageHeading: true,
     mixin: 'radio-group',
@@ -94,6 +101,46 @@ module.exports = {
     options: ['yes', 'no'],
     validate: 'required',
     isPageHeading: true
+  },
+  'parent-full-name': {
+    validate: ['required', 'notUrl', { type: 'maxlength', arguments: [250] }],
+    labelClassName: 'bold'
+  },
+  'parent-phone-number': {
+    labelClassName: 'bold',
+    validate: ['internationalPhoneNumber', { type: 'maxlength', arguments: [250] }],
+    className: ['govuk-input', 'govuk-!-width-one-half']
+  },
+  'parent-email': {
+    labelClassName: 'bold',
+    validate: ['email']
+  },
+  'parent-date-of-birth': dateComponent('parent-date-of-birth', {
+    legend: { className: 'bold' },
+    validate: ['required', 'before', after1900Validator]
+  }),
+  'parent-country': {
+    labelClassName: 'bold',
+    mixin: 'select',
+    validate: ['required', isInCountriesList],
+    className: ['js-hidden'],
+    options: [
+      {
+        value: '',
+        label: 'fields.parent-country.options.null'
+      }
+    ].concat(_.sortBy(countries, o => o.label))
+  },
+  'parent-evacuated-without-reason': {
+    labelClassName: 'bold',
+    mixin: 'textarea',
+    attributes: [{ attribute: 'rows', value: 5 }],
+    validate: [
+      'required',
+      'notUrl',
+      { type: 'regex', arguments: /^[^\[\]\|<>]*$/ },
+      { type: 'maxlength', arguments: 15000 }
+    ]
   },
   'brother-or-sister': {
     mixin: 'radio-group',
