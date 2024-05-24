@@ -1,0 +1,23 @@
+{{<partials-page}}
+  {{$page-content}}
+    {{#input-text}}legal-representative-fullname{{/input-text}}
+
+    {{#input-text}}legal-representative-organisation{{/input-text}}
+
+    <span class="govuk-label">
+      <strong>{{#t}}pages.immigration-adviser-details.address{{/t}}</strong>
+    </span>
+    {{#input-text}}legal-representative-house-number{{/input-text}}
+    {{#input-text}}legal-representative-street{{/input-text}}
+    {{#input-text}}legal-representative-townOrCity{{/input-text}}
+    {{#input-text}}legal-representative-county{{/input-text}}
+    {{#input-text}}legal-representative-postcode{{/input-text}}<br>
+    {{#input-text}}legal-representative-phone-number{{/input-text}}
+    <span class="govuk-label">
+      <strong>{{#t}}pages.is-legal-representative-email{{/t}}</strong>
+    </span>
+    {{#renderField}}is-legal-representative-email{{/renderField}}
+   
+    {{#input-submit}}continue{{/input-submit}}
+  {{/page-content}}
+{{/partials-page}}
