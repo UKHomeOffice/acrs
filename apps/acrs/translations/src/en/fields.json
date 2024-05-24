@@ -19,6 +19,15 @@
       }
     }
   },
+  "helper-full-name": {
+    "label": "Full name"
+  },
+  "helper-relationship": {
+    "label": "Your relationship to the referrer"
+  },
+  "helper-organisation": {
+    "label": "Organisation name (optional)"
+  },
   "legal-representative-address": {
     "label": "Postal address"
   },

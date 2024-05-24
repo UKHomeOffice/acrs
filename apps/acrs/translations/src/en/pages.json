@@ -25,6 +25,9 @@
       },
       "immigration-adviser-details": {
         "header": "Immigration adviser details"
+      },
+      "helper-details": {
+        "header": "Helper details"
       }
     },
     "fields": {
@@ -58,6 +61,15 @@
       "legal-representative-address": {
         "label": "Address"
       },
+      "helper-full-name": {
+        "label": "Full name"
+      },
+      "helper-relationship": {
+        "label": "Relationship to referrer"
+      },
+      "helper-organisation": {
+        "label": "Organisation name"
+      },
       "current-email": {
         "label": "Email"
       }
@@ -65,10 +77,11 @@
     }
   },
   "helper-details": {
-    "header": "SKELETON: /helper-details"
+    "header": "Helper details"
   },
   "complete-as-referrer": {
-    "header": "SKELETON: /complete-as-referrer"
+    "header": "Complete this form as if you are the referrer",
+    "paragraph": "Answer all remaining questions as if you are the person referring family to come the UK."
   },
   "confirm-referrer-email": {
     "header": "Is this {{values.full-name}}’s email address?",

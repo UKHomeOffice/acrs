@@ -62,7 +62,9 @@ module.exports = {
       next: '/helper-details'
     },
     '/helper-details': {
-      fields: [],
+      behaviours: SaveFormSession,
+      fields: ['helper-full-name', 'helper-relationship', 'helper-organisation'],
+      locals: { showSaveAndExit: true },
       next: '/complete-as-referrer'
     },
     '/immigration-adviser-details': {
@@ -84,8 +86,9 @@ module.exports = {
       next: '/complete-as-referrer'
     },
     '/complete-as-referrer': {
-      fields: [],
-      next: '/full-name'
+      behaviours: SaveFormSession,
+      next: '/full-name',
+      locals: { showSaveAndExit: true }
     },
 
     '/full-name': {

@@ -7,6 +7,18 @@ module.exports = {
     options: ['the-referrer', 'someone-helping', 'immigration-advisor'],
     validate: 'required'
   },
+  'helper-full-name': {
+    labelClassName: 'bold',
+    validate: ['required', 'notUrl', { type: 'maxlength', arguments: 250 }]
+  },
+  'helper-relationship': {
+    labelClassName: 'bold',
+    validate: ['required', 'notUrl', { type: 'maxlength', arguments: 250 }]
+  },
+  'helper-organisation': {
+    labelClassName: 'bold',
+    validate: ['notUrl', { type: 'maxlength', arguments: 250 }]
+  },
   'full-name': {
     isPageHeading: true,
     mixin: 'input-text',
