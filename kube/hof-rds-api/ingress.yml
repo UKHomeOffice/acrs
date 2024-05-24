@@ -30,6 +30,7 @@ spec:
   rules:
     {{ if eq .KUBE_NAMESPACE .PROD_ENV }}
     - host: acrs-data-service.internal.sas.homeoffice.gov.uk
+    - acrs-data-service.internal.sas.homeoffice.gov.uk
     {{ else if eq .KUBE_NAMESPACE .STG_ENV }}
     - host: acrs-data-service.internal.stg.sas.homeoffice.gov.uk
     {{ else if eq .KUBE_NAMESPACE .UAT_ENV }}
