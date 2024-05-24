@@ -217,7 +217,17 @@ module.exports = {
     },
 
     '/partner-details': {
-      fields: [],
+      fields: [
+        'partner-full-name',
+        'partner-phone-number',
+        'partner-email',
+        'partner-date-of-birth',
+        'partner-country',
+        'partner-living-situation',
+        'partner-why-without-partner'
+      ],
+      behaviours: SaveFormSession,
+      locals: { showSaveAndExit: true },
       next: '/partner-summary'
     },
     '/partner-summary': {
