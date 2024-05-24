@@ -6,6 +6,13 @@
   "information-you-have-given-us": {
     "header": "Information you have given us"
   },
+  "immigration-adviser-details": {
+    "header": "Immigration adviser details",
+    "address": "Postal address"
+  },
+  "is-legal-representative-email": {
+    "header": "Is {{values.user-email}} your email address?"
+  },
   "information-saved": {
     "header": "Your information has been saved",
     "paragraph1": "if you need to continue the form"
@@ -57,9 +64,6 @@
     
     }
   },
-  "immigration-adviser-details": {
-    "header": "SKELETON: /immigration-adviser-details"
-  },
   "helper-details": {
     "header": "SKELETON: /helper-details"
   },
@@ -67,7 +71,8 @@
     "header": "SKELETON: /complete-as-referrer"
   },
   "confirm-referrer-email": {
-    "header": "SKELETON: /confirm-referrer-email"
+    "header": "Is this {{values.full-name}}’s email address?",
+    "paragraph": "We may use this email address to contact them for more information about the referral."
   },
   "referrer-email": {
     "header": "SKELETON: /referrer-email"
