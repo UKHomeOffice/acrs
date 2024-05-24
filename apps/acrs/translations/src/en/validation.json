@@ -84,8 +84,7 @@
     "provide-telephone-number-number": {
       "required": "Enter a telephone number",
       "maxlength": "Telephone number must be between 8 and 16 characters",
-      "internationalPhoneNumber": "Telephone number must be between 8 and 16 characters",
-      "email": "Enter a real email address"
+      "internationalPhoneNumber": "Enter a telephone number, like 01632 960 001, 07700 900 982 or +44 808 157 0192"
     },  
       "brother-or-sister": {
         "required": "You must select an option"
