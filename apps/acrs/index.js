@@ -86,7 +86,9 @@ module.exports = {
       next: '/complete-as-referrer'
     },
     '/complete-as-referrer': {
-      next: '/full-name'
+      behaviours: saveFormSession,
+      next: '/full-name',
+      locals: { showSaveAndExit: true },
     },
 
     '/full-name': {
