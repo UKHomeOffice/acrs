@@ -32,12 +32,14 @@ module.exports = {
     skipEmail: process.env.SKIP_EMAIL
   },
   sessionDefaults: {
-    steps: ['/start', '/select-form', '/information-you-have-given-us', '/who-is-completing-form'],
+    steps: ['/start', '/select-form', '/information-you-have-given-us', '/who-completing-form'],
     fields: ['user-email', 'id-type', 'brp', 'uan', 'date-of-birth', 'csrf-secret', 'errorValues', 'errors']
   },
   hosts: {
     acceptanceTests: process.env.ACCEPTANCE_HOST_NAME || `http://localhost:${process.env.PORT || 8080}`
   },
   PRETTY_DATE_FORMAT: 'Do MMMM YYYY',
-  dateTimeFormat: 'DD MMM YYYY HH:mm:ss'
+  dateTimeFormat: 'DD MMM YYYY HH:mm:ss',
+  dobFormat: 'YYYY-MM-DD',
+  dobCutoff: '2003-08-23'
 };

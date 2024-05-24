@@ -5,6 +5,8 @@ const CheckInformationGivenBehaviour = require('./behaviours/continue-report');
 const ResumeSession = require('./behaviours/resume-form-session');
 const CheckEmailToken = require('./behaviours/check-email-token');
 const SaveFormSession = require('./behaviours/save-form-session');
+const SaveAndExit = require('./behaviours/save-and-exit');
+const Utilities = require('../../lib/utilities');
 
 module.exports = {
   name: 'acrs',
@@ -20,7 +22,7 @@ module.exports = {
       next: '/select-form'
     },
     '/select-form': {
-      behaviours: [ResumeSession],
+      behaviours: [ResumeSession, SaveFormSession],
       next: '/information-you-have-given-us',
       backLink: false
     },
@@ -60,28 +62,46 @@ module.exports = {
       next: '/helper-details'
     },
     '/helper-details': {
-      fields: [],
+      behaviours: SaveFormSession,
+      fields: ['helper-full-name', 'helper-relationship', 'helper-organisation'],
+      locals: { showSaveAndExit: true },
       next: '/complete-as-referrer'
     },
     '/immigration-adviser-details': {
-      fields: [],
+      behaviours: SaveFormSession,
+      fields: [
+        'legal-representative-fullname',
+        'legal-representative-organisation',
+        'legal-representative-house-number',
+        'legal-representative-street',
+        'legal-representative-townOrCity',
+        'legal-representative-county',
+        'legal-representative-postcode',
+        'legal-representative-phone-number',
+        'is-legal-representative-email',
+        'legal-representative-email'
+      ],
+      continueOnEdit: true,
+      locals: { showSaveAndExit: true },
       next: '/complete-as-referrer'
     },
     '/complete-as-referrer': {
-      fields: [],
-      next: '/full-name'
+      behaviours: SaveFormSession,
+      next: '/full-name',
+      locals: { showSaveAndExit: true }
     },
 
     '/full-name': {
       fields: ['full-name'],
       forks: [{
         target: '/parent',
-        condition: {
-          field: 'full-name',
-          value: 'under-18'
+        condition: req => {
+          return ! Utilities.isOver18(req.sessionModel.get('date-of-birth'));
         }
       }],
-      next: '/confirm-referrer-email'
+      next: '/confirm-referrer-email',
+      behaviours: SaveFormSession,
+      locals: { showSaveAndExit: true }
     },
 
     '/confirm-referrer-email': {
@@ -93,11 +113,18 @@ module.exports = {
           value: 'no'
         }
       }],
-      next: '/provide-telephone-number'
+      next: '/provide-telephone-number',
+      behaviours: SaveFormSession,
+      locals: { showSaveAndExit: true }
     },
 
     '/referrer-email': {
-      fields: [],
+      fields: [
+        'referrer-email-options',
+        'referrer-email-address'
+      ],
+      behaviours: SaveFormSession,
+      locals: { showSaveAndExit: true },
       next: '/provide-telephone-number'
     },
     '/provide-telephone-number': {
@@ -105,13 +132,21 @@ module.exports = {
       next: '/your-address'
     },
     '/your-address': {
-      fields: [],
-      next: '/partner'
+      behaviours: SaveFormSession,
+      fields: [
+        'your-address-line-1',
+        'your-address-line-2',
+        'your-address-town-or-city',
+        'your-address-postcode'
+      ],
+      next: '/partner',
+      locals: { showSaveAndExit: true }
     },
 
     // Figma Section: "Who are you applying to bring to the UK? Sponsor under 18" (who-bringing-parent)
 
     '/parent': {
+      behaviours: SaveFormSession,
       fields: ['parent'],
       forks: [{
         target: '/brother-or-sister',
@@ -120,7 +155,9 @@ module.exports = {
           value: 'no'
         }
       }],
-      next: '/parent-details'
+      next: '/parent-details',
+      locals: { showSaveAndExit: true },
+      continueOnEdit: true
     },
 
     '/parent-details': {
@@ -234,12 +271,10 @@ module.exports = {
     },
 
     '/no-family-referred': {
-      fields: ['no-family-referred'],
       forks: [{
         target: '/parent',
-        condition: {
-          field: 'full-name',
-          value: 'under-18'
+        condition: req => {
+          return ! Utilities.isOver18(req.sessionModel.get('date-of-birth'));
         }
       }],
       next: '/partner'
@@ -335,8 +370,8 @@ module.exports = {
       next: '/confirm'
     },
     '/information-saved': {
-      fields: [],
-      next: '/confirm'
+      behaviours: SaveAndExit,
+      backLink: false
     }
   }
 };

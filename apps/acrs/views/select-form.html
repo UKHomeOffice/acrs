@@ -1,6 +1,9 @@
 {{<partials-page}}
   {{$page-content}}
   {{#renderField}}referral{{/renderField}}
-    {{#input-submit}}continue-only{{/input-submit}}
+    {{#input-submit}}continue-only{{/input-submit}} 
+    <button class="govuk-button govuk-button--secondary" name="exit" value="exit">
+      {{#t}}buttons.exit{{/t}}
+    </button> 
   {{/page-content}}
 {{/partials-page}}
