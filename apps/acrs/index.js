@@ -132,8 +132,15 @@ module.exports = {
       next: '/your-address'
     },
     '/your-address': {
-      fields: [],
-      next: '/partner'
+      behaviours: SaveFormSession,
+      fields: [
+        'your-address-line-1',
+        'your-address-line-2',
+        'your-address-town-or-city',
+        'your-address-postcode'
+      ],
+      next: '/partner',
+      locals: { showSaveAndExit: true }
     },
 
     // Figma Section: "Who are you applying to bring to the UK? Sponsor under 18" (who-bringing-parent)

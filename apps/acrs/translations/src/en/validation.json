@@ -31,6 +31,25 @@
       "email": "Enter a real email address",
       "required": "Enter the referrer's email address"
     },
+    "your-address-line-1": {
+      "required": "Enter your house number or name",
+      "notUrl": "Your answer must not contain URLs or links",
+      "maxlength": "Address line 1 must be 250 characters or less"
+    },
+    "your-address-line-2": {
+      "notUrl": "Your answer must not contain URLs or links",
+      "maxlength": "Address line 2 must be 250 characters or less"
+    },
+    "your-address-town-or-city": {
+      "required": "Enter your town or city",
+      "notUrl": "Your answer must not contain URLs or links",
+      "maxlength": "Town/City must be 250 characters or less"
+    },
+    "your-address-postcode": {
+      "required": "Enter your UK postcode",
+      "notUrl": "Your answer must not contain URLs or links",
+      "postcode": "Enter a valid UK postcode"
+    },
     "parent": {
       "required": "You must select an option"
     },

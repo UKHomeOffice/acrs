@@ -72,8 +72,19 @@
       },
       "current-email": {
         "label": "Email"
+      },
+      "your-address-line-1": {
+        "label": "Contact address line 1"
+      },
+      "your-address-line-2": {
+        "label": "Contact address line 2 (optional)"
+      },
+      "your-address-town-or-city": {
+        "label": "Contact town or city"
+      },
+      "your-address-postcode": {
+        "label": "Contact postcode"
       }
-    
     }
   },
   "helper-details": {
@@ -95,7 +106,8 @@
     "header": "SKELETON: /provide-telephone-number"
   },
   "your-address": {
-    "header": "SKELETON: /your-address"
+    "header": "What is your address?",
+    "paragraph": "If you have no fixed address, enter an address we can use to contact you."
   },
   "parent-details": {
     "header": "SKELETON: /parent-details"

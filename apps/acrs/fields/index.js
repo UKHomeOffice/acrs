@@ -56,6 +56,23 @@ module.exports = {
     },
     validate: ['required', 'email', { type: 'maxlength', arguments: 254 }]
   },
+  'your-address-line-1': {
+    validate: ['required', 'notUrl', { type: 'maxlength', arguments: [250] }],
+    labelClassName: 'bold'
+  },
+  'your-address-line-2': {
+    validate: ['notUrl', { type: 'maxlength', arguments: [250] }],
+    labelClassName: 'bold'
+  },
+  'your-address-town-or-city': {
+    validate: ['required', 'notUrl', { type: 'maxlength', arguments: [250] }],
+    labelClassName: 'bold'
+  },
+  'your-address-postcode': {
+    validate: ['required', 'notUrl', 'postcode'],
+    labelClassName: 'bold',
+    className: ['govuk-input', 'govuk-input--width-10']
+  },
   partner: {
     mixin: 'radio-group',
     options: ['yes', 'no'],
