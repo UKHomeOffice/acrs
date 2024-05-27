@@ -79,8 +79,10 @@ spec:
                     key: endpoint
                     {{ if or (eq .KUBE_NAMESPACE .BRANCH_ENV) (eq .KUBE_NAMESPACE .UAT_ENV) }}
                     name: acrs-notprod-rds
+                    {{ else if eq .KUBE_NAMESPACE .STG_ENV }}
+                  name: acrs-rds-stg
                     {{ else }}
-                    name: acrs-prod
+                    name: acrs-rds-prod
                     {{ end }}
               - name: DB_NAME
                 valueFrom:
@@ -88,8 +90,10 @@ spec:
                     key: db_name
                     {{ if or (eq .KUBE_NAMESPACE .BRANCH_ENV) (eq .KUBE_NAMESPACE .UAT_ENV) }}
                     name: acrs-notprod-rds
+                    {{ else if eq .KUBE_NAMESPACE .STG_ENV }}
+                  name: acrs-rds-stg
                     {{ else }}
-                    name: acrs-prod
+                    name: acrs-rds-prod
                     {{ end }}
               - name: DB_USER
                 valueFrom:
@@ -97,8 +101,10 @@ spec:
                     key: username
                     {{ if or (eq .KUBE_NAMESPACE .BRANCH_ENV) (eq .KUBE_NAMESPACE .UAT_ENV) }}
                     name: acrs-notprod-rds
+                    {{ else if eq .KUBE_NAMESPACE .STG_ENV }}
+                  name: acrs-rds-stg
                     {{ else }}
-                    name: acrs-prod
+                    name: acrs-rds-prod
                     {{ end }}
               - name: DB_PASS
                 valueFrom:
@@ -106,8 +112,10 @@ spec:
                     key: password
                     {{ if or (eq .KUBE_NAMESPACE .BRANCH_ENV) (eq .KUBE_NAMESPACE .UAT_ENV) }}
                     name: acrs-notprod-rds
+                    {{ else if eq .KUBE_NAMESPACE .STG_ENV }}
+                  name: acrs-rds-stg
                     {{ else }}
-                    name: acrs-prod
+                    name: acrs-rds-prod
                     {{ end }}
               - name: DB_PORT
                 value: "5432"
