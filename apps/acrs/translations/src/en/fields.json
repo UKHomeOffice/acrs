@@ -202,7 +202,6 @@
   },
   "has-family-in-uk": {
     "legend": "Do you have family that live in the UK?",
-    "label": "Do you have family that live in the UK?",
     "options": {
       "yes": {
         "label": "Yes"

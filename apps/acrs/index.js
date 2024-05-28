@@ -269,7 +269,6 @@ module.exports = {
       fields: [],
       next: '/family-in-uk'
     },
-
     '/no-family-referred': {
       forks: [{
         target: '/parent',
@@ -280,7 +279,6 @@ module.exports = {
       next: '/partner'
     },
     '/family-in-uk': {
-      fields: ['has-family-in-uk'],
       forks: [
         {
           target: '/family-in-uk-details',

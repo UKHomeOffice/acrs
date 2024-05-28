@@ -173,7 +173,7 @@ module.exports = {
     options: ['yes', 'no'],
     validate: 'required',
     legend: {
-      className: 'visuallyhidden'
+      className: 'bold'
     }
   },
   'how-send-decision': {
