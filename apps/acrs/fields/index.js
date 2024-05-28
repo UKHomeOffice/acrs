@@ -1,11 +1,30 @@
 'use strict';
 
+const _ = require('lodash');
+const dateComponent = require('hof').components.date;
+const after1900Validator = { type: 'after', arguments: ['1900'] };
+const countries = require('hof').utils.countries().concat([{ value: 'Unknown', label: 'Unknown' }]);
+const isInCountriesList = value => countries.some(country => country.value === value);
+
 module.exports = {
+  isInCountriesList,
   'who-completing-form': {
     isPageHeading: true,
     mixin: 'radio-group',
     options: ['the-referrer', 'someone-helping', 'immigration-advisor'],
     validate: 'required'
+  },
+  'helper-full-name': {
+    labelClassName: 'bold',
+    validate: ['required', 'notUrl', { type: 'maxlength', arguments: 250 }]
+  },
+  'helper-relationship': {
+    labelClassName: 'bold',
+    validate: ['required', 'notUrl', { type: 'maxlength', arguments: 250 }]
+  },
+  'helper-organisation': {
+    labelClassName: 'bold',
+    validate: ['notUrl', { type: 'maxlength', arguments: 250 }]
   },
   'full-name': {
     isPageHeading: true,
@@ -19,6 +38,47 @@ module.exports = {
     legend: {
       className: 'visuallyhidden'
     }
+  },
+  'referrer-email-options': {
+    mixin: 'radio-group',
+    options: [
+      {
+        value: 'yes',
+        toggle: 'referrer-email-address',
+        child: 'input-text'
+      },
+      {
+        value: 'no'
+      }
+    ],
+    validate: 'required',
+    legend: {
+      className: 'visuallyhidden'
+    }
+  },
+  'referrer-email-address': {
+    dependent: {
+      field: 'referrer-email-options',
+      value: 'yes'
+    },
+    validate: ['required', 'email', { type: 'maxlength', arguments: 254 }]
+  },
+  'your-address-line-1': {
+    validate: ['required', 'notUrl', { type: 'maxlength', arguments: [250] }],
+    labelClassName: 'bold'
+  },
+  'your-address-line-2': {
+    validate: ['notUrl', { type: 'maxlength', arguments: [250] }],
+    labelClassName: 'bold'
+  },
+  'your-address-town-or-city': {
+    validate: ['required', 'notUrl', { type: 'maxlength', arguments: [250] }],
+    labelClassName: 'bold'
+  },
+  'your-address-postcode': {
+    validate: ['required', 'notUrl', 'postcode'],
+    labelClassName: 'bold',
+    className: ['govuk-input', 'govuk-input--width-10']
   },
   partner: {
     mixin: 'radio-group',
@@ -40,9 +100,47 @@ module.exports = {
     mixin: 'radio-group',
     options: ['yes', 'no'],
     validate: 'required',
-    legend: {
-      className: 'visuallyhidden'
-    }
+    isPageHeading: true
+  },
+  'parent-full-name': {
+    validate: ['required', 'notUrl', { type: 'maxlength', arguments: [250] }],
+    labelClassName: 'bold'
+  },
+  'parent-phone-number': {
+    labelClassName: 'bold',
+    validate: ['internationalPhoneNumber', { type: 'maxlength', arguments: [250] }],
+    className: ['govuk-input', 'govuk-!-width-one-half']
+  },
+  'parent-email': {
+    labelClassName: 'bold',
+    validate: ['email']
+  },
+  'parent-date-of-birth': dateComponent('parent-date-of-birth', {
+    legend: { className: 'bold' },
+    validate: ['required', 'before', after1900Validator]
+  }),
+  'parent-country': {
+    labelClassName: 'bold',
+    mixin: 'select',
+    validate: ['required', isInCountriesList],
+    className: ['js-hidden'],
+    options: [
+      {
+        value: '',
+        label: 'fields.parent-country.options.null'
+      }
+    ].concat(_.sortBy(countries, o => o.label))
+  },
+  'parent-evacuated-without-reason': {
+    labelClassName: 'bold',
+    mixin: 'textarea',
+    attributes: [{ attribute: 'rows', value: 5 }],
+    validate: [
+      'required',
+      'notUrl',
+      { type: 'regex', arguments: /^[^\[\]\|<>]*$/ },
+      { type: 'maxlength', arguments: 15000 }
+    ]
   },
   'brother-or-sister': {
     mixin: 'radio-group',
@@ -163,5 +261,5 @@ module.exports = {
       field: 'is-legal-representative-email',
       value: 'no'
     }
-  },
+  }
 };

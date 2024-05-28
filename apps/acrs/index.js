@@ -62,7 +62,9 @@ module.exports = {
       next: '/helper-details'
     },
     '/helper-details': {
-      fields: [],
+      behaviours: SaveFormSession,
+      fields: ['helper-full-name', 'helper-relationship', 'helper-organisation'],
+      locals: { showSaveAndExit: true },
       next: '/complete-as-referrer'
     },
     '/immigration-adviser-details': {
@@ -84,8 +86,9 @@ module.exports = {
       next: '/complete-as-referrer'
     },
     '/complete-as-referrer': {
-      fields: [],
-      next: '/full-name'
+      behaviours: SaveFormSession,
+      next: '/full-name',
+      locals: { showSaveAndExit: true }
     },
 
     '/full-name': {
@@ -110,11 +113,18 @@ module.exports = {
           value: 'no'
         }
       }],
-      next: '/provide-telephone-number'
+      next: '/provide-telephone-number',
+      behaviours: SaveFormSession,
+      locals: { showSaveAndExit: true }
     },
 
     '/referrer-email': {
-      fields: [],
+      fields: [
+        'referrer-email-options',
+        'referrer-email-address'
+      ],
+      behaviours: SaveFormSession,
+      locals: { showSaveAndExit: true },
       next: '/provide-telephone-number'
     },
     '/provide-telephone-number': {
@@ -122,13 +132,21 @@ module.exports = {
       next: '/your-address'
     },
     '/your-address': {
-      fields: [],
-      next: '/partner'
+      behaviours: SaveFormSession,
+      fields: [
+        'your-address-line-1',
+        'your-address-line-2',
+        'your-address-town-or-city',
+        'your-address-postcode'
+      ],
+      next: '/partner',
+      locals: { showSaveAndExit: true }
     },
 
     // Figma Section: "Who are you applying to bring to the UK? Sponsor under 18" (who-bringing-parent)
 
     '/parent': {
+      behaviours: SaveFormSession,
       fields: ['parent'],
       forks: [{
         target: '/brother-or-sister',
@@ -137,12 +155,23 @@ module.exports = {
           value: 'no'
         }
       }],
-      next: '/parent-details'
+      next: '/parent-details',
+      locals: { showSaveAndExit: true },
+      continueOnEdit: true
     },
 
     '/parent-details': {
-      fields: [],
-      next: '/parent-summary'
+      behaviours: SaveFormSession,
+      fields: [
+        'parent-full-name',
+        'parent-phone-number',
+        'parent-email',
+        'parent-date-of-birth',
+        'parent-country',
+        'parent-evacuated-without-reason'
+      ],
+      next: '/parent-summary',
+      locals: { showSaveAndExit: true }
     },
     '/parent-summary': {
       fields: [],
