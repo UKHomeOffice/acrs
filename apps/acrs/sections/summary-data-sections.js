@@ -37,6 +37,22 @@ module.exports = {
             `${req.sessionModel.get('user-email')}` :
             `${req.sessionModel.get('referral-email')}`;
         }
+      },
+      {
+        steps: '/your-address',
+        field: 'your-address-line-1'
+      },
+      {
+        steps: '/your-address',
+        field: 'your-address-line-2'
+      },
+      {
+        steps: '/your-address',
+        field: 'your-address-town-or-city'
+      },
+      {
+        steps: '/your-address',
+        field: 'your-address-postcode'
       }
     ]
   },
@@ -82,5 +98,22 @@ module.exports = {
         }
       }
     ]
+  },
+  'helper-details': {
+    steps: [
+      {
+        steps: '/helper-details',
+        field: 'helper-full-name'
+      },
+      {
+        steps: '/helper-details',
+        field: 'helper-relationship'
+      },
+      {
+        steps: '/helper-details',
+        field: 'helper-organisation'
+      }
+    ]
   }
+
 };

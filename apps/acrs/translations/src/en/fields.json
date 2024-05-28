@@ -19,6 +19,15 @@
       }
     }
   },
+  "helper-full-name": {
+    "label": "Full name"
+  },
+  "helper-relationship": {
+    "label": "Your relationship to the referrer"
+  },
+  "helper-organisation": {
+    "label": "Organisation name (optional)"
+  },
   "legal-representative-address": {
     "label": "Postal address"
   },
@@ -75,6 +84,31 @@
         }
       }
   },
+  "referrer-email-options": {
+    "options": {
+        "yes": {
+          "label": "Yes"
+        },
+        "no": {
+          "label": "No"
+        }
+      }
+  },
+  "referrer-email-address": {
+    "label": "{{values.full-name}}'s email address"
+  },
+  "your-address-line-1": {
+    "label": "Address line 1"
+  },
+  "your-address-line-2": {
+    "label": "Address line 2 (optional)"
+  },
+  "your-address-town-or-city": {
+    "label": "Town or city"
+  },
+  "your-address-postcode": {
+    "label": "Postcode"
+  },
   "partner": {
       "label": "SKELETON: partner",
       "options": {
@@ -98,15 +132,40 @@
       }
   },
   "parent": {
-      "label": "SKELETON: parent",
+      "legend": "Are you referring a parent to come to the UK?",
+      "hint": "You can only refer your own parents. You can refer a maximum of 2 parents",
       "options": {
         "yes": {
-          "label": "SKELETON: Yes"
+          "label": "Yes"
         },
         "no": {
-          "label": "SKELETON: No"
+          "label": "No"
         }
       }
+  },
+  "parent-full-name": {
+    "label": "Parent's full name"
+  },
+  "parent-phone-number": {
+    "label": "Parent's telephone number (optional)",
+    "hint": "For international numbers include the country code"
+  },
+  "parent-email": {
+    "label": "Parent's email address (optional)"
+  },
+  "parent-date-of-birth": {
+    "legend": "Parent's date of birth",
+    "hint": "For example, 27 3 1988. If they do not have a date of birth, enter a date that matches any evidence"
+  },
+  "parent-country": {
+    "label": "What country do they live in?",
+    "hint": "Start to type the country and options will appear. Select 'Unknown' if you do not know",
+    "options": {
+      "null": "Select a country"
+    }
+  },
+  "parent-evacuated-without-reason": {
+    "label": "Why were you evacuated without this parent?"
   },
   "brother-or-sister": {
       "label": "SKELETON: brother-or-sister",
