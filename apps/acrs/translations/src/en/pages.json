@@ -17,53 +17,6 @@
     "header": "Your information has been saved",
     "paragraph1": "if you need to continue the form"
   },
-  "confirm": {
-    "header": "Check your answers",
-    "sections": {
-      "referral-details": {
-        "header": "Referral details"
-      },
-      "immigration-adviser-details": {
-        "header": "Immigration adviser details"
-      }
-    },
-    "fields": {
-      "brp": {
-       "label": "BRP"
-      },
-      "uan": {
-        "label": "UAN"
-      },
-      "date-of-birth": {
-        "label": "Date of birth"
-      },
-      "who-completing-form": {
-        "label": "Person completing form"
-      },
-      "full-name": {
-        "label": "Full name"
-      },
-      "confirm-referrer-email": {
-        "label": "Email"
-      },
-      "legal-representative-fullname": {
-        "label": "Full name"
-      },
-      "legal-representative-email": {
-        "label": "Email"
-      },
-      "legal-representative-phone-number": {
-        "label": "Phone number"
-      },
-      "legal-representative-address": {
-        "label": "Address"
-      },
-      "current-email": {
-        "label": "Email"
-      }
-    
-    }
-  },
   "helper-details": {
     "header": "SKELETON: /helper-details"
   },
@@ -144,7 +97,7 @@
     "header": "SKELETON: /additional-family-summary"
   },
   "family-in-uk": {
-    "header": "SKELETON: /family-in-uk"
+    "header": "Family that live in the UK"
   },
   "family-in-uk-details": {
     "header": "SKELETON: /family-in-uk-details"
@@ -186,5 +139,52 @@
     "header": "Your link has expired",
     "paragraph": "To keep your information safe, we need to check some of your details and email you a new link.",
     "link-text": "Get a new link"
+  },
+  "confirm": {
+    "header": "Check your answers",
+    "sections": {
+      "referral-details": {
+        "header": "Referral details"
+      },
+      "immigration-adviser-details": {
+        "header": "Immigration adviser details"
+      }
+    },
+    "fields": {
+      "brp": {
+       "label": "BRP"
+      },
+      "uan": {
+        "label": "UAN"
+      },
+      "date-of-birth": {
+        "label": "Date of birth"
+      },
+      "who-completing-form": {
+        "label": "Person completing form"
+      },
+      "full-name": {
+        "label": "Full name"
+      },
+      "confirm-referrer-email": {
+        "label": "Email"
+      },
+      "legal-representative-fullname": {
+        "label": "Full name"
+      },
+      "legal-representative-email": {
+        "label": "Email"
+      },
+      "legal-representative-phone-number": {
+        "label": "Phone number"
+      },
+      "legal-representative-address": {
+        "label": "Address"
+      },
+      "current-email": {
+        "label": "Email"
+      }
+    
+    }
   }
 }

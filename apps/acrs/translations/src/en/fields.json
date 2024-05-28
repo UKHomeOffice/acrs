@@ -141,14 +141,15 @@
       }
     }
   },
-  "family-in-uk": {
-    "label": "SKELETON: family-in-uk",
+  "has-family-in-uk": {
+    "legend": "Do you have family that live in the UK?",
+    "label": "Do you have family that live in the UK?",
     "options": {
       "yes": {
-        "label": "SKELETON: Yes"
+        "label": "Yes"
       },
       "no": {
-        "label": "SKELETON: No"
+        "label": "No"
       }
     }
   },
