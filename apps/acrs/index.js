@@ -7,6 +7,8 @@ const CheckEmailToken = require('./behaviours/check-email-token');
 const SaveFormSession = require('./behaviours/save-form-session');
 const SaveAndExit = require('./behaviours/save-and-exit');
 const Utilities = require('../../lib/utilities');
+const FamilyMemberBahaviour = require('./behaviours/family-member');
+const FamilyDetailBahaviour = require('./behaviours/get-family-detail');
 
 module.exports = {
   name: 'acrs',
@@ -279,6 +281,7 @@ module.exports = {
       next: '/partner'
     },
     '/family-in-uk': {
+      behaviours: [SaveFormSession, FamilyMemberBahaviour],
       forks: [
         {
           target: '/family-in-uk-details',
@@ -300,24 +303,22 @@ module.exports = {
       next: '/family-in-uk-details'
     },
     '/family-in-uk-details': {
-      fields: [],
-      next: '/family-in-uk-summary'
+      behaviours: [SaveFormSession, FamilyDetailBahaviour],
+      fields: [
+        'family-member-fullname',
+        'family-member-date-of-birth',
+        'family-member-relationship',
+        'has-family-member-been-evacuated',
+        'memberNumber'
+      ],
+      backLink: 'family-in-uk',
+      next: '/family-in-uk-summary',
+      locals: { showSaveAndExit: true },
+      titleField: 'countryAddNumber'
     },
     '/family-in-uk-summary': {
-      fields: [],
-      next: '/family-in-uk-details-2'
+      fields: []
     },
-    '/family-in-uk-details-2': {
-      fields: [],
-      next: '/family-in-uk-details-3'
-    },
-    '/family-in-uk-details-3': {
-      fields: [],
-      next: '/upload-evidence'
-    },
-
-    // Figma Section: "Upload evidence / check details / submit" (upload-evidence)
-
     '/upload-evidence': {
       fields: [],
       next: '/evidence-notes'

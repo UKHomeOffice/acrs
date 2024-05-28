@@ -101,16 +101,11 @@
     "header": "Family that live in the UK"
   },
   "family-in-uk-details": {
-    "header": "SKELETON: /family-in-uk-details"
+    "header": "Family member {{values.memberNumber}} living in the UK",
+    "hint": "Enter the details of a family member that lives in the UK."
   },
   "family-in-uk-summary": {
     "header": "SKELETON: /family-in-uk-summary"
-  },
-  "family-in-uk-details-2": {
-    "header": "SKELETON: /family-in-uk-details-2"
-  },
-  "family-in-uk-details-3": {
-    "header": "SKELETON: /family-in-uk-details-3"
   },
   "upload-evidence": {
     "header": "SKELETON: /upload-evidence"
