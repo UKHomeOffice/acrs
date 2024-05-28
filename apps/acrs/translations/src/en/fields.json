@@ -202,7 +202,6 @@
   },
   "has-family-in-uk": {
     "legend": "Do you have family that live in the UK?",
-    "label": "Do you have family that live in the UK?",
     "options": {
       "yes": {
         "label": "Yes"
@@ -211,6 +210,31 @@
         "label": "No"
       }
     }
+  },
+  "family-member-fullname": {
+    "label": "Family member's full name",
+    "summary-heading": "Full name"
+  },
+  "family-member-date-of-birth": {
+    "legend": "Family member's date of birth",
+    "hint": "For example, 27 3 1985. If they do not have a date of birth,enter a date that matches any evidence",
+    "summary-heading": "Date of birth"
+  },
+  "family-member-relationship": {
+    "label": "Family member's relationship to you",
+    "summary-heading": "Relationship to you"
+  },
+  "has-family-member-been-evacuated": {
+    "legend": "Was this family member evacuated with you?",
+    "options": {
+      "yes": {
+        "label": "Yes"
+      },
+      "no": {
+        "label": "No"
+      }
+    },
+    "summary-heading": "Were they evacuated with you?"
   },
   "how-send-decision": {
     "label": "SKELETON: how-send-decision",

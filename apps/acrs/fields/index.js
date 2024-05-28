@@ -173,8 +173,36 @@ module.exports = {
     options: ['yes', 'no'],
     validate: 'required',
     legend: {
-      className: 'visuallyhidden'
+      className: 'bold'
     }
+  },
+  'family-member-fullname': {
+    labelClassName: 'bold',
+    validate: ['required', 'notUrl', { type: 'maxlength', arguments: 250 }],
+    className: ['govuk-input', 'govuk-!-width-two-thirds']
+  },
+  'family-member-date-of-birth': dateComponent('family-member-date-of-birth', {
+    legend: {
+      className: 'bold'
+    },
+    validate: ['required', 'before', after1900Validator]
+  }),
+  'family-member-relationship': {
+    labelClassName: 'bold',
+    validate: ['required', 'notUrl', { type: 'maxlength', arguments: 250 }],
+    className: ['govuk-input', 'govuk-!-width-two-thirds']
+  },
+  'has-family-member-been-evacuated': {
+    mixin: 'radio-group',
+    options: ['yes', 'no'],
+    validate: 'required',
+    legend: {
+      className: 'bold'
+    }
+  },
+  memberIndex: {
+    className: 'visuallyhidden',
+    labelClassName: 'visuallyhidden'
   },
   'how-send-decision': {
     mixin: 'radio-group',

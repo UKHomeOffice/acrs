@@ -7,6 +7,10 @@ const CheckEmailToken = require('./behaviours/check-email-token');
 const SaveFormSession = require('./behaviours/save-form-session');
 const SaveAndExit = require('./behaviours/save-and-exit');
 const Utilities = require('../../lib/utilities');
+const FamilyMemberBahaviour = require('./behaviours/family-member');
+const FamilyDetailBahaviour = require('./behaviours/get-family-detail');
+const AggregateSaveUpdate = require('./behaviours/aggregator-save-update');
+const FamilyInUkLocalsBehaviour = require('./behaviours/family-in-uk-locals');
 
 module.exports = {
   name: 'acrs',
@@ -269,7 +273,6 @@ module.exports = {
       fields: [],
       next: '/family-in-uk'
     },
-
     '/no-family-referred': {
       forks: [{
         target: '/parent',
@@ -280,7 +283,7 @@ module.exports = {
       next: '/partner'
     },
     '/family-in-uk': {
-      fields: ['has-family-in-uk'],
+      behaviours: [SaveFormSession, FamilyMemberBahaviour],
       forks: [
         {
           target: '/family-in-uk-details',
@@ -302,24 +305,36 @@ module.exports = {
       next: '/family-in-uk-details'
     },
     '/family-in-uk-details': {
-      fields: [],
-      next: '/family-in-uk-summary'
+      behaviours: [SaveFormSession, FamilyDetailBahaviour],
+      fields: [
+        'family-member-fullname',
+        'family-member-date-of-birth',
+        'family-member-relationship',
+        'has-family-member-been-evacuated'
+      ],
+      backLink: 'family-in-uk',
+      next: '/family-in-uk-summary',
+      locals: { showSaveAndExit: true },
+      titleField: 'countryAddNumber'
     },
     '/family-in-uk-summary': {
-      fields: [],
-      next: '/family-in-uk-details-2'
-    },
-    '/family-in-uk-details-2': {
-      fields: [],
-      next: '/family-in-uk-details-3'
-    },
-    '/family-in-uk-details-3': {
-      fields: [],
+      behaviours: [AggregateSaveUpdate, FamilyInUkLocalsBehaviour, SaveFormSession],
+      aggregateTo: 'family-member-in-uk',
+      aggregateFrom: [
+        'family-member-fullname',
+        'family-member-relationship',
+        'family-member-date-of-birth',
+        'has-family-member-been-evacuated',
+        'memberIndex'
+      ],
+      titleField: 'memberIndex',
+      addStep: 'family-in-uk-details',
+      addAnotherLinkText: 'family member',
+      template: 'family-in-uk-summary',
+      locals: { showSaveAndExit: true },
+      continueOnEdit: true,
       next: '/upload-evidence'
     },
-
-    // Figma Section: "Upload evidence / check details / submit" (upload-evidence)
-
     '/upload-evidence': {
       fields: [],
       next: '/evidence-notes'
