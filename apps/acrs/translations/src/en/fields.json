@@ -120,6 +120,20 @@
         }
       }
   },
+  "provide-telephone-number-options": {
+    "options": {
+        "yes": {
+          "label": "Yes"
+        },
+        "no": {
+          "label": "No"
+        }
+      }
+  },
+  "provide-telephone-number-number": {
+    "label": "Telephone number",
+    "hint": "For international numbers, include the country code."
+  },  
   "children": {
       "label": "SKELETON: children",
       "options": {
