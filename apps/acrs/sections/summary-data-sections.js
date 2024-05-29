@@ -28,7 +28,7 @@ module.exports = {
       },
       {
         steps: '/confirm-referrer-email',
-        field: '',
+        field: 'confirm-referrer-email',
         parse: (list, req) => {
           if (!req.sessionModel.get('steps').includes('/confirm-referrer-email')) {
             return null;
