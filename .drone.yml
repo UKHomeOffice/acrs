@@ -391,7 +391,7 @@ steps:
     when:
       branch: master
       event: push
-
+      
    # Deploy to Staging environment
   - name: deploy_to_stg
     pull: if-not-exists

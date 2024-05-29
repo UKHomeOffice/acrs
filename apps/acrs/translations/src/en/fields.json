@@ -19,27 +19,95 @@
       }
     }
   },
+  "helper-full-name": {
+    "label": "Full name"
+  },
+  "helper-relationship": {
+    "label": "Your relationship to the referrer"
+  },
+  "helper-organisation": {
+    "label": "Organisation name (optional)"
+  },
+  "legal-representative-address": {
+    "label": "Postal address"
+  },
+  "legal-representative-house-number": {
+    "label": "Address line 1"
+  },
+  "legal-representative-postcode": {
+    "label": "Postcode"
+  },
+  "legal-representative-street": {
+    "label": "Address line 2 (optional)"
+  },
+  "legal-representative-townOrCity": {
+    "label": "Town or city"
+  },
+  "legal-representative-county": {
+    "label": "County (optional)"
+  },
+  "legal-representative-fullname": {
+    "label": "Full name"
+  },
+  "legal-representative-organisation": {
+    "label": "Organisation or law firm"
+  },
+  "legal-representative-phone-number": {
+    "label": "Telephone number",
+    "hint": "For international numbers, include the country code."
+  },
+  "is-legal-representative-email": {
+    "legend": "Is {{values.user-email}} your email address?",
+    "options": {
+      "yes": {
+        "label": "Yes"
+      },
+      "no": {
+        "label": "No"
+      }
+    }
+  },
+  "legal-representative-email": {
+    "label": "Enter your email address"
+  },
   "full-name": {
-      "label": "SKELETON: full-name",
+    "label": "What is your full name?",
+    "hint": "You can copy this from your biometric residence permit card or any letters from the Home Office"
+  },
+  "confirm-referrer-email": {
       "options": {
-        "under-18": {
-          "label": "SKELETON: Referrer DOB < 28-09-2023 (under 18)"
+        "yes": {
+          "label": "Yes"
         },
-        "over-18": {
-          "label": "SKELETON: Referrer DOB >= 28-09-2023 (over 18)"
+        "no": {
+          "label": "No"
         }
       }
   },
-  "confirm-referrer-email": {
-      "label": "SKELETON: confirm-referrer-email",
-      "options": {
+  "referrer-email-options": {
+    "options": {
         "yes": {
-          "label": "SKELETON: Yes"
+          "label": "Yes"
         },
         "no": {
-          "label": "SKELETON: No"
+          "label": "No"
         }
       }
+  },
+  "referrer-email-address": {
+    "label": "{{values.full-name}}'s email address"
+  },
+  "your-address-line-1": {
+    "label": "Address line 1"
+  },
+  "your-address-line-2": {
+    "label": "Address line 2 (optional)"
+  },
+  "your-address-town-or-city": {
+    "label": "Town or city"
+  },
+  "your-address-postcode": {
+    "label": "Postcode"
   },
   "partner": {
       "label": "SKELETON: partner",
@@ -51,6 +119,48 @@
           "label": "SKELETON: No"
         }
       }
+  },
+  "provide-telephone-number-options": {
+    "options": {
+        "yes": {
+          "label": "Yes"
+        },
+        "no": {
+          "label": "No"
+        }
+      }
+  },
+  "provide-telephone-number-number": {
+    "label": "Telephone number",
+    "hint": "For international numbers, include the country code."
+  },  
+  "partner-full-name": {
+    "label": "Partner’s full name"
+  },
+  "partner-phone-number": {
+    "label": "Partner’s telephone number (optional)",
+    "hint": "For international numbers include the country code"
+  },
+  "partner-email": {
+    "label": "Partner’s email address (optional)"
+  },
+  "partner-date-of-birth": {
+    "legend": "Partner’s date of birth",
+    "hint": "For example, 27 3 1988. If they do not have a date of birth, enter a date that matches any evidence"
+  },
+  "partner-country": {
+    "label": "What country do they live in?",
+    "hint": "Start to type the country and options will appear. Select 'Unknown' if you do not know",
+    "options": {
+      "null": "Select a country"
+    }
+  },
+  "partner-living-situation": {
+    "label": "Partner’s living situation",
+    "hint": "For example, who they are living with, their relationship to who they are living with and how long they have lived there"
+  },
+  "partner-why-without-partner": {
+    "label": "Why were you evacuated without your partner?"
   },
   "children": {
       "label": "SKELETON: children",
@@ -64,15 +174,40 @@
       }
   },
   "parent": {
-      "label": "SKELETON: parent",
+      "legend": "Are you referring a parent to come to the UK?",
+      "hint": "You can only refer your own parents. You can refer a maximum of 2 parents",
       "options": {
         "yes": {
-          "label": "SKELETON: Yes"
+          "label": "Yes"
         },
         "no": {
-          "label": "SKELETON: No"
+          "label": "No"
         }
       }
+  },
+  "parent-full-name": {
+    "label": "Parent's full name"
+  },
+  "parent-phone-number": {
+    "label": "Parent's telephone number (optional)",
+    "hint": "For international numbers include the country code"
+  },
+  "parent-email": {
+    "label": "Parent's email address (optional)"
+  },
+  "parent-date-of-birth": {
+    "legend": "Parent's date of birth",
+    "hint": "For example, 27 3 1988. If they do not have a date of birth, enter a date that matches any evidence"
+  },
+  "parent-country": {
+    "label": "What country do they live in?",
+    "hint": "Start to type the country and options will appear. Select 'Unknown' if you do not know",
+    "options": {
+      "null": "Select a country"
+    }
+  },
+  "parent-evacuated-without-reason": {
+    "label": "Why were you evacuated without this parent?"
   },
   "brother-or-sister": {
       "label": "SKELETON: brother-or-sister",
