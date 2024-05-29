@@ -327,5 +327,14 @@ module.exports = {
       toggle: 'legal-representative-email-details-fieldset',
       child: 'partials/legal-representative-email-details'
     }]
+  },
+  'legal-representative-email': {
+    mixin: 'input-text',
+    validate: ['email', 'required'],
+    className: ['govuk-input', 'govuk-!-width-two-thirds'],
+    dependent: {
+      field: 'is-legal-representative-email',
+      value: 'no'
+    }
   }
 };
