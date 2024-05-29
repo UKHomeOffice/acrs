@@ -84,7 +84,7 @@ spec:
                   {{ else if eq .KUBE_NAMESPACE .STG_ENV }}
                   name: acrs-rds-stg
                   {{ else }}
-                  name: acrs-prod
+                  name: acrs-rds-prod
                   {{ end }}
             - name: DB_PASS
               valueFrom:
@@ -95,7 +95,7 @@ spec:
                   {{ else if eq .KUBE_NAMESPACE .STG_ENV }}
                   name: acrs-rds-stg
                   {{ else }}
-                  name: acrs-prod
+                  name: acrs-rds-prod
                   {{ end }}
           resources:
             requests:

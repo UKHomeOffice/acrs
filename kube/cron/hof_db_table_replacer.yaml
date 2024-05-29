@@ -80,7 +80,7 @@ spec:
                     {{ if or (eq .KUBE_NAMESPACE .BRANCH_ENV) (eq .KUBE_NAMESPACE .UAT_ENV) }}
                     name: acrs-notprod-rds
                     {{ else if eq .KUBE_NAMESPACE .STG_ENV }}
-                  name: acrs-rds-stg
+                    name: acrs-rds-stg
                     {{ else }}
                     name: acrs-rds-prod
                     {{ end }}
@@ -91,7 +91,7 @@ spec:
                     {{ if or (eq .KUBE_NAMESPACE .BRANCH_ENV) (eq .KUBE_NAMESPACE .UAT_ENV) }}
                     name: acrs-notprod-rds
                     {{ else if eq .KUBE_NAMESPACE .STG_ENV }}
-                  name: acrs-rds-stg
+                    name: acrs-rds-stg
                     {{ else }}
                     name: acrs-rds-prod
                     {{ end }}
@@ -102,7 +102,7 @@ spec:
                     {{ if or (eq .KUBE_NAMESPACE .BRANCH_ENV) (eq .KUBE_NAMESPACE .UAT_ENV) }}
                     name: acrs-notprod-rds
                     {{ else if eq .KUBE_NAMESPACE .STG_ENV }}
-                  name: acrs-rds-stg
+                    name: acrs-rds-stg
                     {{ else }}
                     name: acrs-rds-prod
                     {{ end }}
@@ -113,7 +113,7 @@ spec:
                     {{ if or (eq .KUBE_NAMESPACE .BRANCH_ENV) (eq .KUBE_NAMESPACE .UAT_ENV) }}
                     name: acrs-notprod-rds
                     {{ else if eq .KUBE_NAMESPACE .STG_ENV }}
-                  name: acrs-rds-stg
+                    name: acrs-rds-stg
                     {{ else }}
                     name: acrs-rds-prod
                     {{ end }}
@@ -136,3 +136,4 @@ spec:
                 memory: 8Gi
                 cpu: 400m
           restartPolicy: OnFailure
+  
