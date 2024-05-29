@@ -1,0 +1,18 @@
+{{<partials-page}}
+  {{$page-content}}
+    <p>You can <a href="{{urlReferPartner}}" class="govuk-link">refer your spouse (wife or husband) or your unmarried partner to come to the UK</a>.</p>
+    <div class="govuk-warning-text">
+      <span class="govuk-warning-text__icon" aria-hidden="true">!</span>
+      <strong class="govuk-warning-text__text">
+        <span class="govuk-warning-text__assistive">Warning</span>
+        You can only refer one husband, wife or unmarried partner
+      </strong>
+    </div>
+    <p>If you have a partner in the UK, you cannot refer another partner to join you.</p>
+    <legend class="govuk-fieldset__legend bold">Are you referring a partner to come to the UK?</legend>
+    {{#fields}}
+      {{#renderField}}{{/renderField}}
+    {{/fields}}
+    {{#input-submit}}continue{{/input-submit}}
+  {{/page-content}}
+{{/partials-page}}

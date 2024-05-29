@@ -41,5 +41,10 @@ module.exports = {
   PRETTY_DATE_FORMAT: 'Do MMMM YYYY',
   dateTimeFormat: 'DD MMM YYYY HH:mm:ss',
   dobFormat: 'YYYY-MM-DD',
-  dobCutoff: '2003-08-23'
+  dobCutoff: '2003-08-23',
+  
+  // These `locals` key-value pairs are made available to the view via the `assign-locals-from-config` behaviour
+  locals: {
+    urlReferPartner: '/tbd/url/policy-to-provide' // TODO update URL (Policy to provide)
+  }
 };

@@ -110,13 +110,12 @@
     "label": "Postcode"
   },
   "partner": {
-      "label": "SKELETON: partner",
-      "options": {
+    "options": {
         "yes": {
-          "label": "SKELETON: Yes"
+          "label": "Yes"
         },
         "no": {
-          "label": "SKELETON: No"
+          "label": "No"
         }
       }
   },
