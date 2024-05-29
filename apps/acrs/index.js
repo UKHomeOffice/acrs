@@ -7,6 +7,7 @@ const CheckEmailToken = require('./behaviours/check-email-token');
 const SaveFormSession = require('./behaviours/save-form-session');
 const SaveAndExit = require('./behaviours/save-and-exit');
 const Utilities = require('../../lib/utilities');
+const locals18Flag = require('./behaviours/locals-18-flag');
 
 module.exports = {
   name: 'acrs',
@@ -253,15 +254,38 @@ module.exports = {
     // Figma Section: "Additional family members" (additional-family)
 
     '/additional-family': {
+      behaviours: [SaveFormSession, locals18Flag],
       fields: ['additional-family'],
-      forks: [{
-        target: '/no-family-referred',
-        condition: {
-          field: 'additional-family',
-          value: 'no'
+      forks: [
+        {
+          target: '/no-family-referred',
+          condition: req => {
+            if (Utilities.isOver18(req.sessionModel.get('date-of-birth'))) {
+              return (req.sessionModel.get('partner') === 'no' &&
+                req.sessionModel.get('children') === 'no' &&
+                req.sessionModel.get('additional-family') === 'no');
+            } else {
+              return (req.sessionModel.get('parent') === 'no' &&
+                req.sessionModel.get('brother-or-sister') === 'no' &&
+                req.sessionModel.get('additional-family') === 'no');
+            }
+          }
+        },
+        {
+          target: '/family-in-uk',
+          condition: req => {
+            if (Utilities.isOver18(req.sessionModel.get('date-of-birth'))) {
+              return (req.sessionModel.get('partner') === 'yes' ||
+                req.sessionModel.get('children') === 'yes');
+            } else {
+              return (req.sessionModel.get('parent') === 'yes' ||
+                req.sessionModel.get('brother-or-sister') === 'yes');
+            }
+          }
         }
-      }],
-      next: '/additional-family-details'
+      ],
+      next: '/additional-family-details',
+      locals: { showSaveAndExit: true }
     },
 
     '/additional-family-details': {
@@ -272,15 +296,8 @@ module.exports = {
       fields: [],
       next: '/family-in-uk'
     },
-
     '/no-family-referred': {
-      forks: [{
-        target: '/parent',
-        condition: req => {
-          return ! Utilities.isOver18(req.sessionModel.get('date-of-birth'));
-        }
-      }],
-      next: '/partner'
+      behaviours: locals18Flag
     },
 
     // Figma Section: "Family members that live in the UK" (family-uk)

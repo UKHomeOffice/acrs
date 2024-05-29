@@ -1,0 +1,23 @@
+{{<partials-page}}
+  {{$page-content}}
+    <p class="govuk-body">{{#t}}pages.additional-family.paragraph-1{{/t}}</p>
+    <ul class="govuk-list govuk-list--bullet">
+      {{#over18}}
+        <li>{{#t}}pages.additional-family.list.over-18.item-1{{/t}}</li>
+        <li>{{#t}}pages.additional-family.list.over-18.item-2{{/t}}</li>
+      {{/over18}}
+      {{^over18}}
+        <li>{{#t}}pages.additional-family.list.under-18.item-1{{/t}}</li>
+        <li>{{#t}}pages.additional-family.list.under-18.item-2{{/t}}</li>
+      {{/over18}}
+    </ul>
+    <p class="govuk-body">
+      {{#t}}pages.additional-family.paragraph-2{{/t}}
+      <a href="">{{#t}}pages.additional-family.link-text{{/t}}</a>
+      .
+    </p>
+    <p class="govuk-body">{{#t}}pages.additional-family.paragraph-3{{/t}}</p>
+    {{#renderField}}additional-family{{/renderField}}
+    {{#input-submit}}continue-only{{/input-submit}}
+  {{/page-content}}
+{{/partials-page}}
