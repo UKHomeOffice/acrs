@@ -162,7 +162,7 @@
     "label": "Why were you evacuated without your partner?"
   },
   "children": {
-    "legend": "Children aged under 18",
+    "legend": "Are you referring your children to come to the UK?",
     "options": {
       "yes": {
         "label": "Yes"
