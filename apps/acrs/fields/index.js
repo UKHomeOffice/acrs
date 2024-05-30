@@ -112,6 +112,57 @@ module.exports = {
     },
     validate: ['required', 'internationalPhoneNumber', { type: 'maxlength', arguments: 20 }]
   },
+  'partner-full-name': {
+    validate: ['required', 'notUrl', { type: 'maxlength', arguments: [250] }],
+    labelClassName: 'bold'
+  },
+  'partner-phone-number': {
+    labelClassName: 'bold',
+    validate: ['internationalPhoneNumber', { type: 'maxlength', arguments: [250] }],
+    className: ['govuk-input', 'govuk-!-width-one-half']
+  },
+  'partner-email': {
+    labelClassName: 'bold',
+    validate: ['email']
+  },
+  'partner-date-of-birth': dateComponent('partner-date-of-birth', {
+    legend: { className: 'bold' },
+    validate: ['required', 'before', after1900Validator]
+  }),
+  'partner-country': {
+    labelClassName: 'bold',
+    mixin: 'select',
+    validate: ['required', isInCountriesList],
+    className: ['js-hidden'],
+    options: [
+      {
+        value: '',
+        label: 'fields.partner-country.options.null'
+      }
+    ].concat(_.sortBy(countries, o => o.label))
+  },
+  'partner-living-situation': {
+    labelClassName: 'bold',
+    mixin: 'textarea',
+    attributes: [{ attribute: 'rows', value: 5 }],
+    validate: [
+      'required',
+      'notUrl',
+      { type: 'regex', arguments: /^[^\[\]\|<>]*$/ },
+      { type: 'maxlength', arguments: 15000 }
+    ]
+  },
+  'partner-why-without-partner': {
+    labelClassName: 'bold',
+    mixin: 'textarea',
+    attributes: [{ attribute: 'rows', value: 5 }],
+    validate: [
+      'required',
+      'notUrl',
+      { type: 'regex', arguments: /^[^\[\]\|<>]*$/ },
+      { type: 'maxlength', arguments: 15000 }
+    ]
+  },
   children: {
     mixin: 'radio-group',
     options: ['yes', 'no'],
@@ -274,5 +325,14 @@ module.exports = {
       toggle: 'legal-representative-email-details-fieldset',
       child: 'partials/legal-representative-email-details'
     }]
+  },
+  'legal-representative-email': {
+    mixin: 'input-text',
+    validate: ['email', 'required'],
+    className: ['govuk-input', 'govuk-!-width-two-thirds'],
+    dependent: {
+      field: 'is-legal-representative-email',
+      value: 'no'
+    }
   }
 };

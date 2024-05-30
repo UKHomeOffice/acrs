@@ -92,6 +92,36 @@
     "partner": {
       "required": "You must select an option"
     },
+    "partner-full-name": {
+      "required": "Enter this partner's full name",
+      "notUrl": "Please do not enter a link/url into your answers"
+    },
+    "partner-phone-number": {
+      "internationalPhoneNumber": "Enter a partner's telephone number, like 01632 960 001, 07700 900 982 or +44 808 157 0192"
+    },
+    "partner-email": {
+      "email": "Enter a real email address"
+    },
+    "partner-date-of-birth": {
+      "required": "Enter partner's date of birth",
+      "date": "Please enter a valid date",
+      "after": "Enter a date after 01 01 1900",
+      "before": "Partner's date of birth must be in the past"
+    },
+    "partner-country": {
+      "required": "Enter the country this parent lives in",
+      "isInCountriesList": "You must choose a country from the provided list"
+    },
+    "partner-living-situation": {
+      "required": "Explain your partner's living situation",
+      "regex": "Living situation details must be less than 15,000 characters",
+      "notUrl": "Please do not enter a link/url into your answers"
+    },
+    "partner-why-without-partner": {
+      "required": "Explain why you were evacuated without your partner",
+      "regex": "Details about why you were evacuated without your partner must be less than 15,000 characters",
+      "notUrl": "Please do not enter a link/url into your answers"
+    },
     "children": {
       "required": "You must select an option"
     },
@@ -107,7 +137,7 @@
     "is-legal-representative-email": {
       "required": "You must select an option"
     },
-    "legal-representative-name": {
+    "legal-representative-fullname": {
       "required": "Enter your name",
       "notUrl": "Please do not enter a link/url into your answers"
     },
@@ -121,6 +151,10 @@
     },
     "legal-representative-house-number": {
       "required": "Enter your house number/name, and street name",
+      "notUrl": "Please do not enter a link/url into your answers"
+    },
+    "legal-representative-organisation": {
+      "required": "Enter your organisation name",
       "notUrl": "Please do not enter a link/url into your answers"
     },
     "legal-representative-street": {
