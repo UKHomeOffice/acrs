@@ -127,7 +127,13 @@
     "header": "SKELETON: /brother-or-sister-summary"
   },
   "partner": {
-    "header": "Wives, husbands, spouses and unmarried partners"
+    "header": "Wives, husbands, spouses and unmarried partners",
+    "warning-assistive": "Warning",
+    "warning-text": "You can only refer one husband, wife or unmarried partner",
+    "notice-1": "If you have a partner in the UK, you cannot refer another partner to join you.",
+    "question-1": "Are you referring a partner to come to the UK?",
+    "link-text-1": "You can ",
+    "link-text-2": "refer your spouse (wife or husband) or your unmarried partner to come to the UK"
   },
   "partner-details": {
     "header": "Partner's details"
