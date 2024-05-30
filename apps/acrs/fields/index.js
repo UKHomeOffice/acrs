@@ -80,14 +80,6 @@ module.exports = {
     labelClassName: 'bold',
     className: ['govuk-input', 'govuk-input--width-10']
   },
-  partner: {
-    mixin: 'radio-group',
-    options: ['yes', 'no'],
-    validate: 'required',
-    legend: {
-      className: 'visuallyhidden'
-    }
-  },
   'provide-telephone-number-options': {
     mixin: 'radio-group',
     options: [
@@ -111,6 +103,14 @@ module.exports = {
       value: 'yes'
     },
     validate: ['required', 'internationalPhoneNumber', { type: 'maxlength', arguments: 20 }]
+  },
+  partner: {
+    mixin: 'radio-group',
+    options: ['yes', 'no'],
+    validate: 'required',
+    legend: {
+      className: 'visuallyhidden'
+    }
   },
   'partner-full-name': {
     validate: ['required', 'notUrl', { type: 'maxlength', arguments: [250] }],
