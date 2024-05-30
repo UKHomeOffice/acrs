@@ -247,6 +247,8 @@ module.exports = {
           value: 'no'
         }
       }],
+      behaviours: SaveFormSession,
+      locals: { showSaveAndExit: true },
       next: '/child-details'
     },
 
