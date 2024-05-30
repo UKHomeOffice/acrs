@@ -7,7 +7,7 @@ const CheckEmailToken = require('./behaviours/check-email-token');
 const SaveFormSession = require('./behaviours/save-form-session');
 const SaveAndExit = require('./behaviours/save-and-exit');
 const Utilities = require('../../lib/utilities');
-const locals18Flag = require('./behaviours/locals-18-flag');
+const Locals18Flag = require('./behaviours/locals-18-flag');
 
 module.exports = {
   name: 'acrs',
@@ -264,7 +264,7 @@ module.exports = {
     // Figma Section: "Additional family members" (additional-family)
 
     '/additional-family': {
-      behaviours: [SaveFormSession, locals18Flag],
+      behaviours: [SaveFormSession, Locals18Flag],
       fields: ['additional-family'],
       forks: [
         {
@@ -301,7 +301,7 @@ module.exports = {
       next: '/family-in-uk'
     },
     '/no-family-referred': {
-      behaviours: locals18Flag
+      behaviours: Locals18Flag
     },
 
     // Figma Section: "Family members that live in the UK" (family-uk)
