@@ -264,27 +264,21 @@ module.exports = {
               return (req.sessionModel.get('partner') === 'no' &&
                 req.sessionModel.get('children') === 'no' &&
                 req.sessionModel.get('additional-family') === 'no');
-            } else {
-              return (req.sessionModel.get('parent') === 'no' &&
-                req.sessionModel.get('brother-or-sister') === 'no' &&
-                req.sessionModel.get('additional-family') === 'no');
             }
+            return (req.sessionModel.get('parent') === 'no' &&
+              req.sessionModel.get('brother-or-sister') === 'no' &&
+              req.sessionModel.get('additional-family') === 'no');
           }
         },
         {
-          target: '/family-in-uk',
-          condition: req => {
-            if (Utilities.isOver18(req.sessionModel.get('date-of-birth'))) {
-              return (req.sessionModel.get('partner') === 'yes' ||
-                req.sessionModel.get('children') === 'yes');
-            } else {
-              return (req.sessionModel.get('parent') === 'yes' ||
-                req.sessionModel.get('brother-or-sister') === 'yes');
-            }
+          target: '/additional-family-details',
+          condition: {
+            field: 'additional-family',
+            value: 'yes'
           }
         }
       ],
-      next: '/additional-family-details',
+      next: '/family-in-uk',
       locals: { showSaveAndExit: true }
     },
 
