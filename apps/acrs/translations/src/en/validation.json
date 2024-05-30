@@ -128,9 +128,6 @@
     "additional-family": {
       "required": "You must select an option"
     },
-    "no-family-referred": {
-      "required": "You must select an option"
-    },
     "family-in-uk": {
       "required": "You must select an option"
     },

@@ -221,24 +221,13 @@
       }
   },
   "additional-family": {
-      "label": "SKELETON: additional-family",
-      "options": {
-        "yes": {
-          "label": "SKELETON: Yes"
-        },
-        "no": {
-          "label": "SKELETON: No"
-        }
-      }
-  },
-  "no-family-referred": {
-    "label": "SKELETON: no-family-referred",
+    "legend": "Are you referring additional family members to come to the UK?",
     "options": {
-      "under-18": {
-        "label": "SKELETON: Referrer DOB < 28-09-2023 (under 18)"
+      "yes": {
+        "label": "Yes"
       },
-      "over-18": {
-        "label": "SKELETON: Referrer DOB >= 28-09-2023 (over 18)"
+      "no": {
+        "label": "No"
       }
     }
   },

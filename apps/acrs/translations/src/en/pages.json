@@ -148,13 +148,30 @@
     "header": "SKELETON: /child-details-2"
   },
   "additional-family": {
-    "header": "SKELETON: /additional-family"
+    "header": "Additional family members",
+    "paragraph-1": "Additional family member means anyone who is not:",
+    "list": {
+      "over-18": {
+        "item-1": "your husband or wife (spouse), or unmarried partner",
+        "item-2": "your own child"
+      },
+      "under-18": {
+        "item-1": "your parents",
+        "item-2": "your brothers or sisters"
+      }
+    },
+    "paragraph-2": "You must only refer additional family members to come to the UK in",
+    "link-text": "exceptional circumstances",
+    "paragraph-3": "You must have evidence to prove the exceptional circumstances."
   },
   "additional-family-details": {
     "header": "SKELETON: /additional-family-details"
   },
   "no-family-referred": {
-    "header": "SKELETON: /no-family-referred"
+    "header": "You must refer a family member",
+    "paragraph-1": "You have told us you are not referring any family members.",
+    "paragraph-2": "If you are not referring a family member, you do not need to use this form.",
+    "link-text": "Return and refer a family member"
   },
   "who-is-responsible": {
     "header": "SKELETON: /who-is-responsible"

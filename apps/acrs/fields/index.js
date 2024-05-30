@@ -226,12 +226,10 @@ module.exports = {
     }
   },
   'additional-family': {
+    legend: { className: 'bold' },
     mixin: 'radio-group',
     options: ['yes', 'no'],
-    validate: 'required',
-    legend: {
-      className: 'visuallyhidden'
-    }
+    validate: 'required'
   },
   'no-family-referred': {
     // SKELETON: for the purposes of the Skeleton this page is used to determine
