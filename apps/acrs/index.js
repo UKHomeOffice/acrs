@@ -6,7 +6,6 @@ const ResumeSession = require('./behaviours/resume-form-session');
 const CheckEmailToken = require('./behaviours/check-email-token');
 const SaveFormSession = require('./behaviours/save-form-session');
 const SaveAndExit = require('./behaviours/save-and-exit');
-const AssignLocalsFromConfig = require('./behaviours/assign-locals-from-config');
 const Utilities = require('../../lib/utilities');
 
 module.exports = {
@@ -214,10 +213,7 @@ module.exports = {
           value: 'no'
         }
       }],
-      behaviours: [
-        SaveFormSession,
-        AssignLocalsFromConfig  // assign `urlReferPartner` to locals for use in the view
-      ],
+      behaviours: SaveFormSession,
       locals: { showSaveAndExit: true },
       next: '/partner-details'
     },
