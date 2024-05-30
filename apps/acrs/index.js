@@ -297,12 +297,13 @@ module.exports = {
     '/additional-family-details': {
       fields: [
         'additional-family-full-name',
-        'additional-family--number',
-        'additional-family-email',
         'additional-family-date-of-birth',
+        'additional-family-relationship',
         'additional-family-country',
         'additional-family-living-situation',
-        'additional-family-why-without-partner'
+        'additional-family-needs-support',
+        'additional-family-why-evac-without',
+        'additional-family-why-referring'
       ],
       behaviours: SaveFormSession,
       locals: { showSaveAndExit: true },
