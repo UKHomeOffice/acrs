@@ -233,7 +233,7 @@ module.exports = {
     validate: ['required', 'notUrl', { type: 'maxlength', arguments: [250] }],
     labelClassName: 'bold'
   },
-  'additional-family-date-of-birth': dateComponent('parent-date-of-birth', {
+  'additional-family-date-of-birth': dateComponent('additional-family-date-of-birth', {
     legend: { className: 'bold' },
     validate: ['required', 'before', after1900Validator]
   }),
