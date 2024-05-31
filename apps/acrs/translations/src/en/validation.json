@@ -134,6 +134,23 @@
     "has-family-in-uk": {
       "required": "You must select an option"
     },
+    "family-member-fullname": {
+      "required": "Enter your name",
+      "notUrl": "Please do not enter a link/url into your answers"
+    },
+    "family-member-date-of-birth": {
+      "required": "Enter your date of birth",
+      "before": "Enter a date in the past",
+      "after": "Enter a date after 01 01 1900",
+      "date": "Enter a valid date of birth"
+    },
+    "family-member-relationship": {
+      "required": "Enter your relationship to family member",
+      "notUrl": "Please do not enter a link/url into your answers"
+    },
+    "has-family-member-been-evacuated": {
+      "required": "You must select an option"
+    },
     "/how-send-decision": {
       "required": "You must select an option"
     },
