@@ -88,6 +88,8 @@ spec:
                 secretKeyRef:
                   {{ if or (eq .KUBE_NAMESPACE .BRANCH_ENV) (eq .KUBE_NAMESPACE .UAT_ENV) }}
                   name: acrs-s3-bucket
+                  {{ else if eq .KUBE_NAMESPACE .STG_ENV }}
+                  name: acrs-s3-bucket-stg
                   {{ else }}
                   name: acrs-s3-prod
                   {{ end }}
