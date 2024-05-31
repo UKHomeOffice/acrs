@@ -292,16 +292,6 @@ module.exports = {
       { type: 'maxlength', arguments: 15000 }
     ]
   },
-  'no-family-referred': {
-    // SKELETON: for the purposes of the Skeleton this page is used to determine
-    // under/over 18 and return to parent/partner flow
-    mixin: 'radio-group',
-    options: ['under-18', 'over-18'],
-    validate: 'required',
-    legend: {
-      className: 'visuallyhidden'
-    }
-  },
   'family-in-uk': {
     mixin: 'radio-group',
     options: ['yes', 'no'],

@@ -128,6 +128,47 @@
     "additional-family": {
       "required": "You must select an option"
     },
+    "additional-family-full-name": {
+      "required": "Enter additional family member's full name",
+      "notUrl": "Please do not enter a link/url into your answers",
+      "maxlength": "Additional family member's full name must be less than 250 characters"
+    },
+    "additional-family-date-of-birth": {
+      "required": "Enter additional family member's date of birth",
+      "date": "Enter a real date of birth",
+      "after": "Enter a date after 01 01 1900",
+      "before": "Partner's date of birth must be in the past"
+    },
+    "additional-family-relationship": {
+      "required": "Enter additional family member's relationship to you",
+      "maxlength": "Additional family member's relationship to you must be less than 250 characters",
+      "notUrl": "Please do not enter a link/url into your answers"
+    },
+    "additional-family-country": {
+      "required": "Enter the country they currently live in, like 'Pakistan'",
+      "isInCountriesList": "You must choose a country from the provided list"
+    },
+    "additional-family-living-situation": {
+      "required": "Explain your additional family member's living situation",
+      "maxlength": "Living situation details must be less than 15,000 characters",
+      "notUrl": "Please do not enter a link/url into your answers",
+      "regex": "Details must not include these characters: [ ] < > / |"
+    },
+    "additional-family-needs-support": {
+      "required": "Tell us if this family member needs you for support"
+    },
+    "additional-family-why-evac-without": {
+      "required": "Explain why you were evacuated without this additional family member",
+      "maxlength": "Details about why you were evacuated without this additional family member must be less than 15,000 characters",
+      "notUrl": "Please do not enter a link/url into your answers",
+      "regex": "Details must not include these characters: [ ] < > / |"
+    },
+    "additional-family-why-referring": {
+      "required": "Explain why you are referring this family member",
+      "maxlength": "Details about why you are referring this family member must be less than 15,000 characters",
+      "regex": "Details must not include these characters: [ ] < > / |",
+      "notUrl": "Please do not enter a link/url into your answers"
+    },
     "family-in-uk": {
       "required": "You must select an option"
     },
