@@ -2,23 +2,125 @@
     "who-completing-form": {
         "required": "You must select an option"
     },
+    "helper-full-name": {
+      "required": "Enter the helper's full name",
+      "notUrl": "Please do not enter a link/url into your answers"
+    },
+    "helper-relationship": {
+      "required": "Enter the helper's relationship to the referrer",
+      "notUrl": "Please do not enter a link/url into your answers"
+    },
+    "helper-organisation": {
+      "notUrl": "Please do not enter a link/url into your answers"
+    },
     "referral": {
         "required": "You must select an option"
     },
     "full-name": {
-        "required": "You must select an option"
+      "required": "You must enter your full name",
+      "maxlength": "You can't use more than {{maxlength}} characters for your answer"
     },
     "confirm-referrer-email": {
-        "required": "You must select an option"
+      "required": "You must select an option"
+    },
+    "referrer-email-options": {
+        "required": "Tell us if the referrer has an email address"
+    },
+    "referrer-email-address": {
+      "maxlength": "Email address must be between 6 and 254 characters",
+      "email": "Enter a real email address",
+      "required": "Enter the referrer's email address"
+    },
+    "your-address-line-1": {
+      "required": "Enter your house number or name",
+      "notUrl": "Your answer must not contain URLs or links",
+      "maxlength": "Address line 1 must be 250 characters or less"
+    },
+    "your-address-line-2": {
+      "notUrl": "Your answer must not contain URLs or links",
+      "maxlength": "Address line 2 must be 250 characters or less"
+    },
+    "your-address-town-or-city": {
+      "required": "Enter your town or city",
+      "notUrl": "Your answer must not contain URLs or links",
+      "maxlength": "Town/City must be 250 characters or less"
+    },
+    "your-address-postcode": {
+      "required": "Enter your UK postcode",
+      "notUrl": "Your answer must not contain URLs or links",
+      "postcode": "Enter a valid UK postcode"
     },
     "parent": {
-        "required": "You must select an option"
+      "required": "You must select an option"
     },
-    "brother-or-sister": {
+    "parent-full-name": {
+      "required": "Enter this parent's full name",
+      "notUrl": "Please do not enter a link/url into your answers"
+    },
+    "parent-phone-number": {
+      "internationalPhoneNumber": "Enter a valid phone number"
+    },
+    "parent-email": {
+      "email": "Enter a valid email address"
+    },
+    "parent-date-of-birth": {
+      "required": "Enter this parent's date of birth",
+      "date": "Please enter a valid date",
+      "after": "Enter a date after 01 01 1900",
+      "before": "Please enter a date in the past"
+    },
+    "parent-country": {
+      "required": "Enter the country this parent lives in",
+      "isInCountriesList": "You must choose a country from the provided list"
+    },
+    "parent-evacuated-without-reason": {
+      "required": "Enter the reason you were evacuated without this parent",
+      "regex": "Explanation must be 15,000 characters or less and must not include [ ] < > / |",
+      "notUrl": "Please do not enter a link/url into your answers"
+    },
+    "provide-telephone-number-options": {
+      "required": "Tell us if you can provide a telephone number"
+    },
+    "provide-telephone-number-number": {
+      "required": "Enter a telephone number",
+      "maxlength": "Telephone number must be between 8 and 16 characters",
+      "internationalPhoneNumber": "Enter a telephone number, like 01632 960 001, 07700 900 982 or +44 808 157 0192"
+    },
+      "brother-or-sister": {
         "required": "You must select an option"
     },
     "partner": {
       "required": "You must select an option"
+    },
+    "partner-full-name": {
+      "required": "Enter this partner's full name",
+      "notUrl": "Please do not enter a link/url into your answers"
+    },
+    "partner-phone-number": {
+      "internationalPhoneNumber": "Enter a partner's telephone number, like 01632 960 001, 07700 900 982 or +44 808 157 0192"
+    },
+    "partner-email": {
+      "email": "Enter a real email address"
+    },
+    "partner-date-of-birth": {
+      "required": "Enter partner's date of birth",
+      "date": "Please enter a valid date",
+      "after": "Enter a date after 01 01 1900",
+      "before": "Partner's date of birth must be in the past"
+    },
+    "partner-country": {
+      "required": "Enter the country this parent lives in",
+      "isInCountriesList": "You must choose a country from the provided list"
+    },
+    "partner-living-situation": {
+      "required": "Explain your partner's living situation",
+      "regex": "Living situation details must be less than 15,000 characters",
+      "notUrl": "Please do not enter a link/url into your answers"
+    },
+    "partner-why-without-partner": {
+      "required": "Explain why you were evacuated without your partner",
+      "regex": "Details about why you were evacuated without your partner must be less than 15,000 characters",
+      "notUrl": "Please do not enter a link/url into your answers"
     },
     "children": {
       "required": "You must select an option"
@@ -26,13 +128,106 @@
     "additional-family": {
       "required": "You must select an option"
     },
-    "no-family-referred": {
+    "additional-family-full-name": {
+      "required": "Enter additional family member's full name",
+      "notUrl": "Please do not enter a link/url into your answers",
+      "maxlength": "Additional family member's full name must be less than 250 characters"
+    },
+    "additional-family-date-of-birth": {
+      "required": "Enter additional family member's date of birth",
+      "date": "Enter a real date of birth",
+      "after": "Enter a date after 01 01 1900",
+      "before": "Partner's date of birth must be in the past"
+    },
+    "additional-family-relationship": {
+      "required": "Enter additional family member's relationship to you",
+      "maxlength": "Additional family member's relationship to you must be less than 250 characters",
+      "notUrl": "Please do not enter a link/url into your answers"
+    },
+    "additional-family-country": {
+      "required": "Enter the country they currently live in, like 'Pakistan'",
+      "isInCountriesList": "You must choose a country from the provided list"
+    },
+    "additional-family-living-situation": {
+      "required": "Explain your additional family member's living situation",
+      "maxlength": "Living situation details must be less than 15,000 characters",
+      "notUrl": "Please do not enter a link/url into your answers",
+      "regex": "Details must not include these characters: [ ] < > / |"
+    },
+    "additional-family-needs-support": {
+      "required": "Tell us if this family member needs you for support"
+    },
+    "additional-family-why-evac-without": {
+      "required": "Explain why you were evacuated without this additional family member",
+      "maxlength": "Details about why you were evacuated without this additional family member must be less than 15,000 characters",
+      "notUrl": "Please do not enter a link/url into your answers",
+      "regex": "Details must not include these characters: [ ] < > / |"
+    },
+    "additional-family-why-referring": {
+      "required": "Explain why you are referring this family member",
+      "maxlength": "Details about why you are referring this family member must be less than 15,000 characters",
+      "regex": "Details must not include these characters: [ ] < > / |",
+      "notUrl": "Please do not enter a link/url into your answers"
+    },
+    "has-family-in-uk": {
       "required": "You must select an option"
     },
-    "family-in-uk": {
+    "family-member-fullname": {
+      "required": "Enter your name",
+      "notUrl": "Please do not enter a link/url into your answers"
+    },
+    "family-member-date-of-birth": {
+      "required": "Enter your date of birth",
+      "before": "Enter a date in the past",
+      "after": "Enter a date after 01 01 1900",
+      "date": "Enter a valid date of birth"
+    },
+    "family-member-relationship": {
+      "required": "Enter your relationship to family member",
+      "notUrl": "Please do not enter a link/url into your answers"
+    },
+    "has-family-member-been-evacuated": {
       "required": "You must select an option"
     },
     "/how-send-decision": {
       "required": "You must select an option"
+    },
+    "is-legal-representative-email": {
+      "required": "You must select an option"
+    },
+    "legal-representative-fullname": {
+      "required": "Enter your name",
+      "notUrl": "Please do not enter a link/url into your answers"
+    },
+    "legal-representative-phone-number": {
+      "required": "Enter your phone number",
+      "internationalPhoneNumber": "Enter a valid phone number"
+    },
+    "legal-representative-email": {
+      "required": "Enter your email address",
+      "email": "Enter a valid email address"
+    },
+    "legal-representative-house-number": {
+      "required": "Enter your house number/name, and street name",
+      "notUrl": "Please do not enter a link/url into your answers"
+    },
+    "legal-representative-organisation": {
+      "required": "Enter your organisation name",
+      "notUrl": "Please do not enter a link/url into your answers"
+    },
+    "legal-representative-street": {
+      "notUrl": "Enter a valid street name"
+    },
+    "legal-representative-townOrCity": {
+      "required": "Enter your town or city",
+      "notUrl": "Please do not enter a link/url into your answers"
+    },
+    "legal-representative-county": {
+      "notUrl": "Please do not enter a link/url into your answers"
+    },
+    "legal-representative-postcode": {
+      "required": "Enter your postcode",
+      "postcode": "Enter a valid UK postcode",
+      "notUrl": "Please do not enter a link/url into your answers"
     }
 }
