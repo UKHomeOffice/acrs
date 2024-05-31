@@ -305,18 +305,25 @@ module.exports = {
     '/no-family-referred': {
       behaviours: Locals18Flag
     },
-
-    // Figma Section: "Family members that live in the UK" (family-uk)
-
     '/family-in-uk': {
-      fields: ['family-in-uk'],
-      forks: [{
-        target: '/upload-evidence',
-        condition: {
-          field: 'family-in-uk',
-          value: 'no'
+      forks: [
+        {
+          target: '/family-in-uk-details',
+          condition: {
+            field: 'has-family-in-uk',
+            value: 'yes'
+          }
+        },
+        {
+          target: '/upload-evidence',
+          condition: {
+            field: 'has-family-in-uk',
+            value: 'no'
+          }
         }
-      }],
+      ],
+      fields: ['has-family-in-uk'],
+      locals: { showSaveAndExit: true },
       next: '/family-in-uk-details'
     },
     '/family-in-uk-details': {

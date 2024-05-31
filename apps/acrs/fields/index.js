@@ -239,12 +239,12 @@ module.exports = {
       className: 'visuallyhidden'
     }
   },
-  'family-in-uk': {
+  'has-family-in-uk': {
     mixin: 'radio-group',
     options: ['yes', 'no'],
     validate: 'required',
     legend: {
-      className: 'visuallyhidden'
+      className: 'bold'
     }
   },
   'how-send-decision': {

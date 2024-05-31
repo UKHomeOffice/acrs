@@ -128,7 +128,10 @@
     "additional-family": {
       "required": "You must select an option"
     },
-    "family-in-uk": {
+    "no-family-referred": {
+      "required": "You must select an option"
+    },
+    "has-family-in-uk": {
       "required": "You must select an option"
     },
     "/how-send-decision": {
