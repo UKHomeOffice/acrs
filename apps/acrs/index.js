@@ -237,7 +237,6 @@ module.exports = {
       fields: [],
       next: '/children'
     },
-
     '/children': {
       fields: ['children'],
       forks: [{
@@ -247,9 +246,10 @@ module.exports = {
           value: 'no'
         }
       }],
+      behaviours: SaveFormSession,
+      locals: { showSaveAndExit: true },
       next: '/child-details'
     },
-
     '/child-details': {
       fields: [],
       next: '/children-summary'
