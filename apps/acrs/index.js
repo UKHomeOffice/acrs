@@ -9,6 +9,7 @@ const SaveAndExit = require('./behaviours/save-and-exit');
 const Utilities = require('../../lib/utilities');
 const FamilyMemberBahaviour = require('./behaviours/family-member');
 const FamilyDetailBahaviour = require('./behaviours/get-family-detail');
+const Locals18Flag = require('./behaviours/locals-18-flag');
 
 module.exports = {
   name: 'acrs',
@@ -130,7 +131,10 @@ module.exports = {
       next: '/provide-telephone-number'
     },
     '/provide-telephone-number': {
-      fields: [],
+      fields: [
+        'provide-telephone-number-options',
+        'provide-telephone-number-number'
+      ],
       next: '/your-address'
     },
     '/your-address': {
@@ -212,18 +216,29 @@ module.exports = {
           value: 'no'
         }
       }],
+      behaviours: SaveFormSession,
+      locals: { showSaveAndExit: true },
       next: '/partner-details'
     },
 
     '/partner-details': {
-      fields: [],
+      fields: [
+        'partner-full-name',
+        'partner-phone-number',
+        'partner-email',
+        'partner-date-of-birth',
+        'partner-country',
+        'partner-living-situation',
+        'partner-why-without-partner'
+      ],
+      behaviours: SaveFormSession,
+      locals: { showSaveAndExit: true },
       next: '/partner-summary'
     },
     '/partner-summary': {
       fields: [],
       next: '/children'
     },
-
     '/children': {
       fields: ['children'],
       forks: [{
@@ -233,9 +248,10 @@ module.exports = {
           value: 'no'
         }
       }],
+      behaviours: SaveFormSession,
+      locals: { showSaveAndExit: true },
       next: '/child-details'
     },
-
     '/child-details': {
       fields: [],
       next: '/children-summary'
@@ -252,15 +268,32 @@ module.exports = {
     // Figma Section: "Additional family members" (additional-family)
 
     '/additional-family': {
+      behaviours: [SaveFormSession, Locals18Flag],
       fields: ['additional-family'],
-      forks: [{
-        target: '/no-family-referred',
-        condition: {
-          field: 'additional-family',
-          value: 'no'
+      forks: [
+        {
+          target: '/no-family-referred',
+          condition: req => {
+            if (Utilities.isOver18(req.sessionModel.get('date-of-birth'))) {
+              return (req.sessionModel.get('partner') === 'no' &&
+                req.sessionModel.get('children') === 'no' &&
+                req.sessionModel.get('additional-family') === 'no');
+            }
+            return (req.sessionModel.get('parent') === 'no' &&
+              req.sessionModel.get('brother-or-sister') === 'no' &&
+              req.sessionModel.get('additional-family') === 'no');
+          }
+        },
+        {
+          target: '/additional-family-details',
+          condition: {
+            field: 'additional-family',
+            value: 'yes'
+          }
         }
-      }],
-      next: '/additional-family-details'
+      ],
+      next: '/family-in-uk',
+      locals: { showSaveAndExit: true }
     },
 
     '/additional-family-details': {
@@ -272,13 +305,7 @@ module.exports = {
       next: '/family-in-uk'
     },
     '/no-family-referred': {
-      forks: [{
-        target: '/parent',
-        condition: req => {
-          return ! Utilities.isOver18(req.sessionModel.get('date-of-birth'));
-        }
-      }],
-      next: '/partner'
+      behaviours: Locals18Flag
     },
     '/family-in-uk': {
       behaviours: [SaveFormSession, FamilyMemberBahaviour],
