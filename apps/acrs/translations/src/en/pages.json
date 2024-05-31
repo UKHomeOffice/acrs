@@ -142,7 +142,9 @@
     "header": "SKELETON: /partner-summary"
   },
   "children": {
-    "header": "SKELETON: /children"
+    "header": "Children aged under 18",
+    "paragraph-1": "You can refer your own children to come to the UK, but they must have been born on or after 28 August 2003.",
+    "paragraph-2": "The children you refer must not be living independently or have their own family."
   },
   "child-details": {
     "header": "SKELETON: /child-details"

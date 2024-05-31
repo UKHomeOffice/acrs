@@ -162,15 +162,15 @@
     "label": "Why were you evacuated without your partner?"
   },
   "children": {
-      "label": "SKELETON: children",
-      "options": {
-        "yes": {
-          "label": "SKELETON: Yes"
-        },
-        "no": {
-          "label": "SKELETON: No"
-        }
+    "legend": "Are you referring your children to come to the UK?",
+    "options": {
+      "yes": {
+        "label": "Yes"
+      },
+      "no": {
+        "label": "No"
       }
+    }
   },
   "parent": {
       "legend": "Are you referring a parent to come to the UK?",
