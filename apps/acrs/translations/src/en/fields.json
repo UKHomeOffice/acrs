@@ -267,14 +267,14 @@
     "label": "Why are you referring this family member to come to the UK?",
     "hint": "You can only bring additional family to the UK in exceptional circumstances. You must provide evidence later in this form."
   },
-  "family-in-uk": {
-    "label": "SKELETON: family-in-uk",
+  "has-family-in-uk": {
+    "legend": "Do you have family that live in the UK?",
     "options": {
       "yes": {
-        "label": "SKELETON: Yes"
+        "label": "Yes"
       },
       "no": {
-        "label": "SKELETON: No"
+        "label": "No"
       }
     }
   },

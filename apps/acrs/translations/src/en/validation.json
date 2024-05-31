@@ -169,7 +169,7 @@
       "regex": "Details must not include these characters: [ ] < > / |",
       "notUrl": "Please do not enter a link/url into your answers"
     },
-    "family-in-uk": {
+    "has-family-in-uk": {
       "required": "You must select an option"
     },
     "/how-send-decision": {
