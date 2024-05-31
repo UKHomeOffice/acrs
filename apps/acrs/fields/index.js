@@ -249,7 +249,7 @@ module.exports = {
     options: [
       {
         value: '',
-        label: 'fields.parent-country.options.null'
+        label: 'fields.additional-family-country.options.null'
       }
     ].concat(_.sortBy(countries, o => o.label))
   },

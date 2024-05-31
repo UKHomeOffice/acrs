@@ -242,7 +242,10 @@
   },
   "additional-family-country": {
     "label": "What country do they live in?",
-    "hint": "Start to type the country and options will appear. Select 'Unknown' if you do not know "
+    "hint": "Start to type the country and options will appear. Select 'Unknown' if you do not know",
+    "options": {
+      "null": "Select a country"
+    }
   },
   "additional-family-living-situation": {
     "label": "Additional family member's living situation",
