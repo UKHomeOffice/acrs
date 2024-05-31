@@ -229,15 +229,68 @@ module.exports = {
     options: ['yes', 'no'],
     validate: 'required'
   },
-  'no-family-referred': {
-    // SKELETON: for the purposes of the Skeleton this page is used to determine
-    // under/over 18 and return to parent/partner flow
+  'additional-family-full-name': {
+    validate: ['required', 'notUrl', { type: 'maxlength', arguments: [250] }],
+    labelClassName: 'bold'
+  },
+  'additional-family-date-of-birth': dateComponent('additional-family-date-of-birth', {
+    legend: { className: 'bold' },
+    validate: ['required', 'before', after1900Validator]
+  }),
+  'additional-family-relationship': {
+    validate: ['required', 'notUrl', { type: 'maxlength', arguments: [250] }],
+    labelClassName: 'bold'
+  },
+  'additional-family-country': {
+    labelClassName: 'bold',
+    mixin: 'select',
+    validate: ['required', isInCountriesList],
+    className: ['js-hidden'],
+    options: [
+      {
+        value: '',
+        label: 'fields.additional-family-country.options.null'
+      }
+    ].concat(_.sortBy(countries, o => o.label))
+  },
+  'additional-family-living-situation': {
+    labelClassName: 'bold',
+    mixin: 'textarea',
+    attributes: [{ attribute: 'rows', value: 5 }],
+    validate: [
+      'required',
+      'notUrl',
+      { type: 'regex', arguments: /^[^\[\]\|<>]*$/ },
+      { type: 'maxlength', arguments: 15000 }
+    ]
+  },
+  'additional-family-needs-support': {
+    legend: { className: 'bold' },
     mixin: 'radio-group',
-    options: ['under-18', 'over-18'],
-    validate: 'required',
-    legend: {
-      className: 'visuallyhidden'
-    }
+    options: ['yes', 'no'],
+    validate: 'required'
+  },
+  'additional-family-why-evac-without': {
+    labelClassName: 'bold',
+    mixin: 'textarea',
+    attributes: [{ attribute: 'rows', value: 5 }],
+    validate: [
+      'required',
+      'notUrl',
+      { type: 'regex', arguments: /^[^\[\]\|<>]*$/ },
+      { type: 'maxlength', arguments: 15000 }
+    ]
+  },
+  'additional-family-why-referring': {
+    labelClassName: 'bold',
+    mixin: 'textarea',
+    attributes: [{ attribute: 'rows', value: 5 }],
+    validate: [
+      'required',
+      'notUrl',
+      { type: 'regex', arguments: /^[^\[\]\|<>]*$/ },
+      { type: 'maxlength', arguments: 15000 }
+    ]
   },
   'has-family-in-uk': {
     mixin: 'radio-group',

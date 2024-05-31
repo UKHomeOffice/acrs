@@ -230,6 +230,46 @@
       }
     }
   },
+  "additional-family-full-name": {
+    "label": "Additional family member's full name"
+  },
+  "additional-family-date-of-birth": {
+    "legend": "Additional family member's date of birth",
+    "hint": "For example, 27 3 1988. If they do not have a date of birth, enter a date that matches any evidence"
+  },
+  "additional-family-relationship": {
+    "label": "Additional family member's relationship to you"
+  },
+  "additional-family-country": {
+    "label": "What country do they live in?",
+    "hint": "Start to type the country and options will appear. Select 'Unknown' if you do not know",
+    "options": {
+      "null": "Select a country"
+    }
+  },
+  "additional-family-living-situation": {
+    "label": "Additional family member's living situation",
+    "hint": "For example, who they live with and their relationship to the people they live with"
+  },
+  "additional-family-needs-support": {
+    "legend": "Does this family member need you for support?",
+    "hint": "This includes help with housing, money, food and education",
+    "options": {
+      "yes": {
+        "label": "Yes"
+      },
+      "no": {
+        "label": "No"
+      }
+    }
+  },
+  "additional-family-why-evac-without": {
+    "label": "Why were you evacuated without this family member?"
+  },
+  "additional-family-why-referring": {
+    "label": "Why are you referring this family member to come to the UK?",
+    "hint": "You can only bring additional family to the UK in exceptional circumstances. You must provide evidence later in this form."
+  },
   "has-family-in-uk": {
     "legend": "Do you have family that live in the UK?",
     "options": {

@@ -297,7 +297,18 @@ module.exports = {
     },
 
     '/additional-family-details': {
-      fields: [],
+      fields: [
+        'additional-family-full-name',
+        'additional-family-date-of-birth',
+        'additional-family-relationship',
+        'additional-family-country',
+        'additional-family-living-situation',
+        'additional-family-needs-support',
+        'additional-family-why-evac-without',
+        'additional-family-why-referring'
+      ],
+      behaviours: SaveFormSession,
+      locals: { showSaveAndExit: true },
       next: '/additional-family-summary'
     },
     '/additional-family-summary': {

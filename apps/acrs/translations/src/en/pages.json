@@ -103,7 +103,8 @@
     "paragraph-3": "You must have evidence to prove the exceptional circumstances."
   },
   "additional-family-details": {
-    "header": "SKELETON: /additional-family-details"
+    "header": "Additional family member {{values.additionalFamilyCount}} details",
+    "paragraph": "Add your additional family members one at a time."
   },
   "no-family-referred": {
     "header": "You must refer a family member",
