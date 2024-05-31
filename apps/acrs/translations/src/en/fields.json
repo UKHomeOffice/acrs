@@ -110,26 +110,67 @@
     "label": "Postcode"
   },
   "partner": {
-      "label": "SKELETON: partner",
-      "options": {
+    "options": {
         "yes": {
-          "label": "SKELETON: Yes"
+          "label": "Yes"
         },
         "no": {
-          "label": "SKELETON: No"
+          "label": "No"
         }
       }
   },
-  "children": {
-      "label": "SKELETON: children",
-      "options": {
+  "provide-telephone-number-options": {
+    "options": {
         "yes": {
-          "label": "SKELETON: Yes"
+          "label": "Yes"
         },
         "no": {
-          "label": "SKELETON: No"
+          "label": "No"
         }
       }
+  },
+  "provide-telephone-number-number": {
+    "label": "Telephone number",
+    "hint": "For international numbers, include the country code."
+  },  
+  "partner-full-name": {
+    "label": "Partner’s full name"
+  },
+  "partner-phone-number": {
+    "label": "Partner’s telephone number (optional)",
+    "hint": "For international numbers include the country code"
+  },
+  "partner-email": {
+    "label": "Partner’s email address (optional)"
+  },
+  "partner-date-of-birth": {
+    "legend": "Partner’s date of birth",
+    "hint": "For example, 27 3 1988. If they do not have a date of birth, enter a date that matches any evidence"
+  },
+  "partner-country": {
+    "label": "What country do they live in?",
+    "hint": "Start to type the country and options will appear. Select 'Unknown' if you do not know",
+    "options": {
+      "null": "Select a country"
+    }
+  },
+  "partner-living-situation": {
+    "label": "Partner’s living situation",
+    "hint": "For example, who they are living with, their relationship to who they are living with and how long they have lived there"
+  },
+  "partner-why-without-partner": {
+    "label": "Why were you evacuated without your partner?"
+  },
+  "children": {
+    "legend": "Are you referring your children to come to the UK?",
+    "options": {
+      "yes": {
+        "label": "Yes"
+      },
+      "no": {
+        "label": "No"
+      }
+    }
   },
   "parent": {
       "legend": "Are you referring a parent to come to the UK?",
@@ -179,24 +220,13 @@
       }
   },
   "additional-family": {
-      "label": "SKELETON: additional-family",
-      "options": {
-        "yes": {
-          "label": "SKELETON: Yes"
-        },
-        "no": {
-          "label": "SKELETON: No"
-        }
-      }
-  },
-  "no-family-referred": {
-    "label": "SKELETON: no-family-referred",
+    "legend": "Are you referring additional family members to come to the UK?",
     "options": {
-      "under-18": {
-        "label": "SKELETON: Referrer DOB < 28-09-2023 (under 18)"
+      "yes": {
+        "label": "Yes"
       },
-      "over-18": {
-        "label": "SKELETON: Referrer DOB >= 28-09-2023 (over 18)"
+      "no": {
+        "label": "No"
       }
     }
   },
