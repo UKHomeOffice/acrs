@@ -200,8 +200,15 @@ module.exports = {
     },
 
     '/brother-or-sister-details': {
-      fields: [],
-      next: '/brother-or-sister-summary'
+      behaviours: SaveFormSession,
+      fields: [
+        'brother-or-sister-full-name',
+        'brother-or-sister-date-of-birth',
+        'brother-or-sister-country',
+        'brother-or-sister-evacuated-without-reason'
+      ],
+      next: '/brother-or-sister-summary',
+      locals: { showSaveAndExit: true }
     },
     '/brother-or-sister-summary': {
       fields: [],
