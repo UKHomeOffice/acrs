@@ -209,15 +209,16 @@
     "label": "Why were you evacuated without this parent?"
   },
   "brother-or-sister": {
-      "label": "SKELETON: brother-or-sister",
-      "options": {
-        "yes": {
-          "label": "SKELETON: Yes"
-        },
-        "no": {
-          "label": "SKELETON: No"
-        }
+    "legend": "Are you referring a brother or sister to come to the UK?",
+    "hint": "You can only refer brothers or sisters that your parents are responsible for",
+    "options": {
+      "yes": {
+        "label": "Yes"
+      },
+      "no": {
+        "label": "No"
       }
+    }
   },
   "additional-family": {
     "legend": "Are you referring additional family members to come to the UK?",

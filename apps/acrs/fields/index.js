@@ -219,9 +219,7 @@ module.exports = {
     mixin: 'radio-group',
     options: ['yes', 'no'],
     validate: 'required',
-    legend: {
-      className: 'visuallyhidden'
-    }
+    isPageHeading: true
   },
   'additional-family': {
     legend: { className: 'bold' },

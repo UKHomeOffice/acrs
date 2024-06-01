@@ -86,8 +86,8 @@
       "maxlength": "Telephone number must be between 8 and 16 characters",
       "internationalPhoneNumber": "Enter a telephone number, like 01632 960 001, 07700 900 982 or +44 808 157 0192"
     },
-      "brother-or-sister": {
-        "required": "You must select an option"
+    "brother-or-sister": {
+      "required": "You must select an option"
     },
     "partner": {
       "required": "You must select an option"
