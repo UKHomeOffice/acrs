@@ -394,26 +394,31 @@ module.exports = {
       fields: [],
       next: '/how-send-decision'
     },
-
     '/how-send-decision': {
-      fields: ['how-send-decision'],
+      fields: ['how-to-send-decision'],
       forks: [{
         target: '/email-decision',
         condition: {
-          field: 'how-send-decision',
+          field: 'how-to-send-decision',
           value: 'email'
         }
       }],
-      next: '/your-postal-address'
+      next: '/decision-postal-address'
     },
-
     '/email-decision': {
-      fields: [],
+      behaviours: SaveFormSession,
+      fields: ['is-decision-by-email', 'is-decision-by-email-detail'],
+      locals: { showSaveAndExit: true },
       next: '/confirm'
     },
-
-    '/your-postal-address': {
-      fields: [],
+    '/decision-postal-address': {
+      fields: [
+        'is-decision-post-address-1',
+        'is-decision-post-address-2',
+        'is-decision-post-town-or-city',
+        'is-decision-post-postcode'
+      ],
+      locals: { showSaveAndExit: true },
       next: '/confirm'
     },
     '/confirm': {

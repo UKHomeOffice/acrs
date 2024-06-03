@@ -193,9 +193,6 @@
     "has-family-in-uk": {
       "required": "You must select an option"
     },
-    "has-family-in-uk": {
-      "required": "You must select an option"
-    },
     "family-member-fullname": {
       "required": "Enter your name",
       "notUrl": "Please do not enter a link/url into your answers"
@@ -213,11 +210,32 @@
     "has-family-member-been-evacuated": {
       "required": "You must select an option"
     },
-    "/how-send-decision": {
+    "how-to-send-decision": {
       "required": "You must select an option"
+    },
+    "is-decision-by-email": {
+      "required": "Tell us if this is the correct email for your decision"
+    },
+    "is-decision-by-email-detail": {
+      "required": "Enter an email address for the decision",
+      "email": "Email address must be between 6 and 254 characters"
     },
     "is-legal-representative-email": {
       "required": "You must select an option"
+    },
+    "is-decision-post-address-1": {
+      "required": "Address line 1 must be between 1 and 250 characters"
+    },
+    "is-decision-post-address-2": {
+      "notUrl": "Please do not enter a link/url"
+    },
+    "is-decision-post-town-or-city": {
+      "required": "Town or city must be between 1 and 250 characters"
+    },
+    "is-decision-post-postcode": {
+      "required": "Enter a postcode",
+      "maxlength": "Town or city must be between 1 and 250 characters",
+      "postcode": "Enter a real UK postcode"
     },
     "legal-representative-fullname": {
       "required": "Enter your name",

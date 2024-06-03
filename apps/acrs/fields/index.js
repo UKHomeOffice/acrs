@@ -332,14 +332,6 @@ module.exports = {
       className: 'bold'
     }
   },
-  'has-family-in-uk': {
-    mixin: 'radio-group',
-    options: ['yes', 'no'],
-    validate: 'required',
-    legend: {
-      className: 'bold'
-    }
-  },
   'family-member-fullname': {
     labelClassName: 'bold',
     validate: ['required', 'notUrl', { type: 'maxlength', arguments: 250 }],
@@ -368,13 +360,66 @@ module.exports = {
     className: 'visuallyhidden',
     labelClassName: 'visuallyhidden'
   },
-  'how-send-decision': {
+  'how-to-send-decision': {
     mixin: 'radio-group',
     options: ['email', 'post'],
     validate: 'required',
     legend: {
       className: 'visuallyhidden'
     }
+  },
+  'is-decision-by-email': {
+    isPageHeading: true,
+    mixin: 'radio-group',
+    validate: ['required'],
+    options: [
+      {
+        value: 'yes'
+      },
+      {
+        value: 'no',
+        toggle: 'is-decision-by-email-detail',
+        child: 'input-text'
+      }
+    ]
+  },
+  'is-decision-by-email-detail': {
+    validate: ['required', 'email'],
+    className: ['govuk-input', 'govuk-!-width-two-thirds'],
+    dependent: {
+      field: 'is-decision-by-email',
+      value: 'no'
+    }
+  },
+  'is-decision-post-address-1': {
+    mixin: 'input-text',
+    validate: ['required', 'notUrl'],
+    includeInSummary: true,
+    labelClassName: 'bold'
+  },
+  'is-decision-post-address-2': {
+    mixin: 'input-text',
+    validate: ['notUrl'],
+    includeInSummary: true,
+    labelClassName: 'bold'
+  },
+  'is-decision-post-town-or-city': {
+    mixin: 'input-text',
+    validate: ['required', 'notUrl',
+      { type: 'regex', arguments: /^([^0-9]*)$/ },
+      { type: 'maxlength', arguments: 200 }
+    ],
+    className: ['govuk-input', 'govuk-!-width-two-thirds'],
+    includeInSummary: true,
+    labelClassName: 'bold'
+  },
+  'is-decision-post-postcode': {
+    mixin: 'input-text',
+    validate: ['required', 'postcode', { type: 'maxlength', arguments: [200] }],
+    formatter: ['ukPostcode'],
+    className: ['govuk-input', 'govuk-input--width-10'],
+    includeInSummary: true,
+    labelClassName: 'bold'
   },
   'immigration-adviser-details': {
     isPageHeading: true

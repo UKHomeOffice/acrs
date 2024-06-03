@@ -8,7 +8,7 @@ module.exports = superclass => class extends superclass {
     (familyMemberEditUrl === req._parsedOriginalUrl.pathname) ?
       req.form.values.memberIndex = parseInt(req.params.id, 10) + 1 :
       req.form.values.memberIndex = familyMemberArray.length + 1;
-    
+
     return super.locals(req, res, next);
   }
 };
