@@ -10,6 +10,10 @@ const Utilities = require('../../lib/utilities');
 const FamilyMemberBahaviour = require('./behaviours/family-member');
 const FamilyDetailBahaviour = require('./behaviours/get-family-detail');
 const Locals18Flag = require('./behaviours/locals-18-flag');
+const AggregateSaveUpdate = require('./behaviours/aggregator-save-update');
+const ParentSummary = require('./behaviours/parent-summary');
+const LimitParents = require('./behaviours/limit-parents');
+const ResetParentSummary = require('./behaviours/reset-parent-summary')
 
 module.exports = {
   name: 'acrs',
@@ -152,22 +156,43 @@ module.exports = {
     // Figma Section: "Who are you applying to bring to the UK? Sponsor under 18" (who-bringing-parent)
 
     '/parent': {
-      behaviours: SaveFormSession,
+      behaviours: [ResetParentSummary, SaveFormSession],
       fields: ['parent'],
-      forks: [{
-        target: '/brother-or-sister',
-        condition: {
-          field: 'parent',
-          value: 'no'
+      forks: [
+        {
+          target: '/parent-summary',
+          condition: {
+            field: 'parent',
+            value: 'yes'
+          }
+        },
+        {
+          target: '/brother-or-sister',
+          condition: {
+            field: 'parent',
+            value: 'no'
+          }
+        },
+        {
+          target: '/parent-details',
+          condition: req => {
+            if (
+              req.form.values['parent'] === 'yes' &&
+                req.sessionModel.get('referred-parent') &&
+                req.sessionModel.get('referred-parent').aggregatedValues.length === 0
+            ) {
+                return true;
+              }
+              return false;
+          }
         }
-      }],
-      next: '/parent-details',
+    ],
       locals: { showSaveAndExit: true },
       continueOnEdit: true
     },
 
     '/parent-details': {
-      behaviours: SaveFormSession,
+      behaviours: [LimitParents, SaveFormSession],
       fields: [
         'parent-full-name',
         'parent-phone-number',
@@ -180,7 +205,23 @@ module.exports = {
       locals: { showSaveAndExit: true }
     },
     '/parent-summary': {
-      fields: [],
+      behaviours: [AggregateSaveUpdate, ParentSummary, LimitParents, SaveFormSession],
+      aggregateTo: 'referred-parents',
+      aggregateFrom: [
+        'parent-full-name',
+        'parent-phone-number',
+        'parent-email',
+        'parent-date-of-birth',
+        'parent-country',
+        'parent-evacuated-without-reason'
+      ],
+      titleField: 'parent-full-name',
+      addStep: 'parent-details',
+      addAnotherLinkText: 'parent',
+      locals: { showSaveAndExit: true },
+      continueOnEdit: false,
+      template: 'parent-summary',
+      backLink: 'parent',
       next: '/brother-or-sister'
     },
 
