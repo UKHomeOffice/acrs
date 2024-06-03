@@ -332,14 +332,6 @@ module.exports = {
       className: 'bold'
     }
   },
-  'has-family-in-uk': {
-    mixin: 'radio-group',
-    options: ['yes', 'no'],
-    validate: 'required',
-    legend: {
-      className: 'bold'
-    }
-  },
   'family-member-fullname': {
     labelClassName: 'bold',
     validate: ['required', 'notUrl', { type: 'maxlength', arguments: 250 }],
