@@ -15,9 +15,9 @@ spec:
       {{ if eq .KUBE_NAMESPACE .PROD_ENV }}
         - acrs-data-service.internal.sas.homeoffice.gov.uk
       {{ else if eq .KUBE_NAMESPACE .STG_ENV }}
-        - acrs-data-service.stg.sas.homeoffice.gov.uk
+        - acrs-data-service.internal.stg.sas.homeoffice.gov.uk
       {{ else if eq .KUBE_NAMESPACE .UAT_ENV }}
-        - acrs-data-service.uat.sas-notprod.homeoffice.gov.uk
+        - acrs-data-service.internal.uat.sas-notprod.homeoffice.gov.uk
       {{ else if eq .KUBE_NAMESPACE .BRANCH_ENV }}
         - data-service-{{ .DRONE_BUILD_NUMBER }}.branch.sas-notprod.homeoffice.gov.uk
         - data-service-{{ .DRONE_SOURCE_BRANCH }}.branch.sas-notprod.homeoffice.gov.uk
@@ -29,11 +29,11 @@ spec:
       {{ end }}
   rules:
     {{ if eq .KUBE_NAMESPACE .PROD_ENV }}
-    - acrs-data-service.internal.sas.homeoffice.gov.uk
+    - host: acrs-data-service.internal.sas.homeoffice.gov.uk
     {{ else if eq .KUBE_NAMESPACE .STG_ENV }}
-    - host: acrs-data-service.stg.sas.homeoffice.gov.uk
+    - host: acrs-data-service.internal.stg.sas.homeoffice.gov.uk
     {{ else if eq .KUBE_NAMESPACE .UAT_ENV }}
-    - host: acrs-data-service.uat.sas-notprod.homeoffice.gov.uk
+    - host: acrs-data-service.internal.uat.sas-notprod.homeoffice.gov.uk
     {{ else if eq .KUBE_NAMESPACE .BRANCH_ENV }}
     - host: data-service-{{ .DRONE_SOURCE_BRANCH }}.branch.sas-notprod.homeoffice.gov.uk
     {{ end }}

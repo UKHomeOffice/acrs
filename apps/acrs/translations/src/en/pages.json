@@ -6,9 +6,160 @@
   "information-you-have-given-us": {
     "header": "Information you have given us"
   },
+  "immigration-adviser-details": {
+    "header": "Immigration adviser details",
+    "address": "Postal address"
+  },
+  "is-legal-representative-email": {
+    "header": "Is {{values.user-email}} your email address?"
+  },
   "information-saved": {
     "header": "Your information has been saved",
     "paragraph1": "if you need to continue the form"
+  },
+  "helper-details": {
+    "header": "Helper details"
+  },
+  "complete-as-referrer": {
+    "header": "Complete this form as if you are the referrer",
+    "paragraph": "Answer all remaining questions as if you are the person referring family to come the UK."
+  },
+  "confirm-referrer-email": {
+    "header": "Is this {{values.full-name}}’s email address?",
+    "paragraph": "We may use this email address to contact them for more information about the referral."
+  },
+  "referrer-email": {
+    "header": "Does {{values.full-name}} have an email address?",
+    "paragraph": "We may use this email address to contact them for more information about the referral."
+  },
+  "provide-telephone-number": {
+    "header": "Can you provide a telephone number?",
+    "paragraph": "We may contact you for more information about the referral"
+  },
+  "your-address": {
+    "header": "What is your address?",
+    "paragraph": "If you have no fixed address, enter an address we can use to contact you."
+  },
+  "parent-details": {
+    "header": "Parent {{values.parentCount}} details",
+    "paragraph": "Add your parents one at a time."
+  },
+  "parent-summary": {
+    "header": "SKELETON: /parent-summary"
+  },
+  "brother-or-sister-details": {
+    "header": "Brother or sister {{values.brotherOrSisterCount}} details",
+    "paragraph": "Add your brothers or sisters one at a time."
+  },
+  "brother-or-sister-summary": {
+    "header": "SKELETON: /brother-or-sister-summary"
+  },
+  "partner": {
+    "header": "Wives, husbands, spouses and unmarried partners",
+    "warning-assistive": "Warning",
+    "warning-text": "You can only refer one husband, wife or unmarried partner",
+    "notice-1": "If you have a partner in the UK, you cannot refer another partner to join you.",
+    "question-1": "Are you referring a partner to come to the UK?",
+    "link-text-1": "You can ",
+    "link-text-2": "refer your spouse (wife or husband) or your unmarried partner to come to the UK"
+  },
+  "partner-details": {
+    "header": "Partner's details"
+  },
+  "partner-summary": {
+    "header": "SKELETON: /partner-summary"
+  },
+  "children": {
+    "header": "Children aged under 18",
+    "paragraph-1": "You can refer your own children to come to the UK, but they must have been born on or after 28 August 2003.",
+    "paragraph-2": "The children you refer must not be living independently or have their own family."
+  },
+  "child-details": {
+    "header": "SKELETON: /child-details"
+  },
+  "children-summary": {
+    "header": "SKELETON: /children-summary"
+  },
+  "child-details-2": {
+    "header": "SKELETON: /child-details-2"
+  },
+  "additional-family": {
+    "header": "Additional family members",
+    "paragraph-1": "Additional family member means anyone who is not:",
+    "list": {
+      "over-18": {
+        "item-1": "your husband or wife (spouse), or unmarried partner",
+        "item-2": "your own child"
+      },
+      "under-18": {
+        "item-1": "your parents",
+        "item-2": "your brothers or sisters"
+      }
+    },
+    "paragraph-2": "You must only refer additional family members to come to the UK in",
+    "link-text": "exceptional circumstances",
+    "paragraph-3": "You must have evidence to prove the exceptional circumstances."
+  },
+  "additional-family-details": {
+    "header": "Additional family member {{values.additionalFamilyCount}} details",
+    "paragraph": "Add your additional family members one at a time."
+  },
+  "no-family-referred": {
+    "header": "You must refer a family member",
+    "paragraph-1": "You have told us you are not referring any family members.",
+    "paragraph-2": "If you are not referring a family member, you do not need to use this form.",
+    "link-text": "Return and refer a family member"
+  },
+  "who-is-responsible": {
+    "header": "SKELETON: /who-is-responsible"
+  },
+  "guardian-details": {
+    "header": "SKELETON: /guardian-details"
+  },
+  "guardian-details-2": {
+    "header": "SKELETON: /guardian-details-2"
+  },
+  "additional-family-summary": {
+    "header": "SKELETON: /additional-family-summary"
+  },
+  "family-in-uk": {
+    "header": "Family that live in the UK"
+  },
+  "family-in-uk-details": {
+    "header": "Family member {{values.memberNumber}} living in the UK",
+    "hint": "Enter the details of a family member that lives in the UK."
+  },
+  "family-in-uk-summary": {
+    "header": "SKELETON: /family-in-uk-summary"
+  },
+  "upload-evidence": {
+    "header": "SKELETON: /upload-evidence"
+  },
+  "evidence-notes": {
+    "header": "SKELETON: /evidence-notes"
+  },
+  "how-send-decision": {
+    "header": "SKELETON: /how-send-decision"
+  },
+  "email-decision": {
+    "header": "SKELETON: /email-decision"
+  },
+  "your-postal-address": {
+    "header": "SKELETON: /your-postal-address"
+  },
+  "declaration": {
+    "header": "SKELETON: /declaration"
+  },
+  "referral-submitted": {
+    "header": "SKELETON: /referral-submitted"
+  },
+  "confirmation": {
+    "header": "SKELETON: /confirmation"
+  },
+  "link-expired": {
+    "header": "Your link has expired",
+    "paragraph": "To keep your information safe, we need to check some of your details and email you a new link.",
+    "link-text": "Get a new link"
   },
   "confirm": {
     "header": "Check your answers",
@@ -39,6 +190,9 @@
       "confirm-referrer-email": {
         "label": "Email"
       },
+      "legal-representative-fullname": {
+        "label": "Full name"
+      },
       "legal-representative-email": {
         "label": "Email"
       },
@@ -53,131 +207,5 @@
       }
     
     }
-  },
-  "immigration-adviser-details": {
-    "header": "SKELETON: /immigration-adviser-details"
-  },
-  "helper-details": {
-    "header": "SKELETON: /helper-details"
-  },
-  "complete-as-referrer": {
-    "header": "SKELETON: /complete-as-referrer"
-  },
-  "confirm-referrer-email": {
-    "header": "Is this {{values.full-name}}’s email address?",
-    "paragraph": "We may use this email address to contact them for more information about the referral."
-  },
-  "referrer-email": {
-    "header": "SKELETON: /referrer-email"
-  },
-  "provide-telephone-number": {
-    "header": "SKELETON: /provide-telephone-number"
-  },
-  "your-address": {
-    "header": "SKELETON: /your-address"
-  },
-  "parent": {
-    "header": "SKELETON: /parent"
-  },
-  "parent-details": {
-    "header": "SKELETON: /parent-details"
-  },
-  "parent-summary": {
-    "header": "SKELETON: /parent-summary"
-  },
-  "brother-or-sister": {
-    "header": "SKELETON: /brother-or-sister"
-  },
-  "brother-or-sister-details": {
-    "header": "SKELETON: /brother-or-sister-details"
-  },
-  "brother-or-sister-summary": {
-    "header": "SKELETON: /brother-or-sister-summary"
-  },
-  "partner": {
-    "header": "SKELETON: /partner"
-  },
-  "partner-details": {
-    "header": "SKELETON: /partner-details"
-  },
-  "partner-summary": {
-    "header": "SKELETON: /partner-summary"
-  },
-  "children": {
-    "header": "SKELETON: /children"
-  },
-  "child-details": {
-    "header": "SKELETON: /child-details"
-  },
-  "children-summary": {
-    "header": "SKELETON: /children-summary"
-  },
-  "child-details-2": {
-    "header": "SKELETON: /child-details-2"
-  },
-  "additional-family": {
-    "header": "SKELETON: /additional-family"
-  },
-  "additional-family-details": {
-    "header": "SKELETON: /additional-family-details"
-  },
-  "no-family-referred": {
-    "header": "SKELETON: /no-family-referred"
-  },
-  "who-is-responsible": {
-    "header": "SKELETON: /who-is-responsible"
-  },
-  "guardian-details": {
-    "header": "SKELETON: /guardian-details"
-  },
-  "guardian-details-2": {
-    "header": "SKELETON: /guardian-details-2"
-  },
-  "additional-family-summary": {
-    "header": "SKELETON: /additional-family-summary"
-  },
-  "family-in-uk": {
-    "header": "SKELETON: /family-in-uk"
-  },
-  "family-in-uk-details": {
-    "header": "SKELETON: /family-in-uk-details"
-  },
-  "family-in-uk-summary": {
-    "header": "SKELETON: /family-in-uk-summary"
-  },
-  "family-in-uk-details-2": {
-    "header": "SKELETON: /family-in-uk-details-2"
-  },
-  "family-in-uk-details-3": {
-    "header": "SKELETON: /family-in-uk-details-3"
-  },
-  "upload-evidence": {
-    "header": "SKELETON: /upload-evidence"
-  },
-  "evidence-notes": {
-    "header": "SKELETON: /evidence-notes"
-  },
-  "how-send-decision": {
-    "header": "SKELETON: /how-send-decision"
-  },
-  "email-decision": {
-    "header": "SKELETON: /email-decision"
-  },
-  "your-postal-address": {
-    "header": "SKELETON: /your-postal-address"
-  },
-  "declaration": {
-    "header": "SKELETON: /declaration"
-  },
-  "referral-submitted": {
-    "header": "SKELETON: /referral-submitted"
-  },
-  "confirmation": {
-    "header": "SKELETON: /confirmation"
-  },
-  "link-expired": {
-    "header": "Your link has expired",
-    "paragraph": "To keep your information safe, we need to check some of your details and email you a new link.",
-    "link-text": "Get a new link"
   }
 }
