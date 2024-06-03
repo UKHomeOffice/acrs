@@ -47,11 +47,9 @@
   "parent-summary": {
     "header": "SKELETON: /parent-summary"
   },
-  "brother-or-sister": {
-    "header": "SKELETON: /brother-or-sister"
-  },
   "brother-or-sister-details": {
-    "header": "SKELETON: /brother-or-sister-details"
+    "header": "Brother or sister {{values.brotherOrSisterCount}} details",
+    "paragraph": "Add your brothers or sisters one at a time."
   },
   "brother-or-sister-summary": {
     "header": "SKELETON: /brother-or-sister-summary"

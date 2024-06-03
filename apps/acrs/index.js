@@ -185,6 +185,7 @@ module.exports = {
     },
 
     '/brother-or-sister': {
+      behaviours: SaveFormSession,
       fields: ['brother-or-sister'],
       forks: [{
         target: '/additional-family',
@@ -193,12 +194,21 @@ module.exports = {
           value: 'no'
         }
       }],
-      next: '/brother-or-sister-details'
+      next: '/brother-or-sister-details',
+      locals: { showSaveAndExit: true },
+      continueOnEdit: true
     },
 
     '/brother-or-sister-details': {
-      fields: [],
-      next: '/brother-or-sister-summary'
+      behaviours: SaveFormSession,
+      fields: [
+        'brother-or-sister-full-name',
+        'brother-or-sister-date-of-birth',
+        'brother-or-sister-country',
+        'brother-or-sister-evacuated-without-reason'
+      ],
+      next: '/brother-or-sister-summary',
+      locals: { showSaveAndExit: true }
     },
     '/brother-or-sister-summary': {
       fields: [],
@@ -218,7 +228,8 @@ module.exports = {
       }],
       behaviours: SaveFormSession,
       locals: { showSaveAndExit: true },
-      next: '/partner-details'
+      next: '/partner-details',
+      continueOnEdit: true
     },
 
     '/partner-details': {
@@ -293,7 +304,8 @@ module.exports = {
         }
       ],
       next: '/family-in-uk',
-      locals: { showSaveAndExit: true }
+      locals: { showSaveAndExit: true },
+      continueOnEdit: true
     },
 
     '/additional-family-details': {
