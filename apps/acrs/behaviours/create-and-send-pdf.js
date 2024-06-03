@@ -11,6 +11,8 @@ const PDFModel = require('hof').apis.pdfConverter;
 
 const submissionTemplateId = config.govukNotify.submissionTemplateId;
 const submissionFailedTemplateId = config.govukNotify.submissionFailedTemplateId;
+const caseworkerEmail = config.govukNotify.caseworkerEmail;
+const customerReceiptTemplateId = config.govukNotify.customerReceiptTemplateId;
 const notifyKey = config.govukNotify.notifyApiKey;
 const dateTimeFormat = config.dateTimeFormat;
 const baseUrl = `${config.saveService.host}:${config.saveService.port}/saved_applications`;
@@ -106,13 +108,10 @@ module.exports = class CreateAndSendPDF {
 
     return notifyClient.sendEmail(submissionTemplateId, email, {
       personalisation: Object.assign({}, {
-        claimaint_name: req.sessionModel.get('name'),
-        cepr: req.sessionModel.get('cepr'),
+        name: req.sessionModel.get('full-name'),
         link_to_file: config.env !== 'production' ?
           notifyClient.prepareUpload(pdfData, { confirmEmailBeforeDownload: false }) :
-          notifyClient.prepareUpload(pdfData),
-        has_supporting_documents: _.get(req.sessionModel.get('images'), 'length') ? 'yes' : 'no',
-        supporting_documents: imageNames
+          notifyClient.prepareUpload(pdfData)
       })
     });
   }
