@@ -178,8 +178,8 @@ module.exports = {
           condition: req => {
             if (
               req.form.values['parent'] === 'yes' &&
-                req.sessionModel.get('referred-parent') &&
-                req.sessionModel.get('referred-parent').aggregatedValues.length === 0
+                req.sessionModel.get('referred-parents') &&
+                req.sessionModel.get('referred-parents').aggregatedValues.length === 0
             ) {
                 return true;
               }
@@ -187,10 +187,9 @@ module.exports = {
           }
         }
     ],
-      locals: { showSaveAndExit: true },
-      continueOnEdit: true
+    locals: { showSaveAndExit: true },
+    continueOnEdit: true
     },
-
     '/parent-details': {
       behaviours: [LimitParents, SaveFormSession],
       fields: [
