@@ -205,7 +205,6 @@ pre.looped-records {
   margin-left: 15px;
 }
 
-
 .wrap-table-cell,
 .confirm-row {
   white-space: pre-wrap;
@@ -255,5 +254,7 @@ pre.looped-records {
 
 .summary-label {
   min-width: 200px;
-
+  
+.govuk-character-count__message {
+  display: none;
 }

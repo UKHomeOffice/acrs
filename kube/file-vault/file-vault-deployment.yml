@@ -77,8 +77,10 @@ spec:
                 secretKeyRef:
                   {{ if or (eq .KUBE_NAMESPACE .BRANCH_ENV) (eq .KUBE_NAMESPACE .UAT_ENV) }}
                   name: acrs-s3-bucket
+                  {{ else if eq .KUBE_NAMESPACE .STG_ENV }}
+                  name: acrs-s3-bucket-stg
                   {{ else }}
-                  name: acrs-s3-prod
+                  name: acrs-s3-bucket-prod
                   {{ end }}
                   key: access_key_id
             - name: AWS_SECRET_ACCESS_KEY
@@ -86,8 +88,10 @@ spec:
                 secretKeyRef:
                   {{ if or (eq .KUBE_NAMESPACE .BRANCH_ENV) (eq .KUBE_NAMESPACE .UAT_ENV) }}
                   name: acrs-s3-bucket
+                  {{ else if eq .KUBE_NAMESPACE .STG_ENV }}
+                  name: acrs-s3-bucket-stg
                   {{ else }}
-                  name: acrs-s3-prod
+                  name: acrs-s3-bucket-prod
                   {{ end }}
                   key: secret_access_key
             - name: AWS_KMS_KEY_ID
@@ -95,8 +99,10 @@ spec:
                 secretKeyRef:
                   {{ if or (eq .KUBE_NAMESPACE .BRANCH_ENV) (eq .KUBE_NAMESPACE .UAT_ENV) }}
                   name: acrs-s3-bucket
+                  {{ else if eq .KUBE_NAMESPACE .STG_ENV }}
+                  name: acrs-s3-bucket-stg
                   {{ else }}
-                  name: acrs-s3-prod
+                  name: acrs-s3-bucket-prod
                   {{ end }}
                   key: kms_key_id
             - name: AWS_BUCKET
@@ -104,8 +110,10 @@ spec:
                 secretKeyRef:
                   {{ if or (eq .KUBE_NAMESPACE .BRANCH_ENV) (eq .KUBE_NAMESPACE .UAT_ENV) }}
                   name: acrs-s3-bucket
+                  {{ else if eq .KUBE_NAMESPACE .STG_ENV }}
+                  name: acrs-s3-bucket-stg
                   {{ else }}
-                  name: acrs-s3-prod
+                  name: acrs-s3-bucket-prod
                   {{ end }}
                   key: name
             - name: AWS_PASSWORD

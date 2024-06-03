@@ -1,0 +1,18 @@
+{{<partials-page}}
+  {{$page-content}}
+    <p class="govuk-body">{{#t}}pages.no-family-referred.paragraph-1{{/t}}</p>
+    <p class="govuk-body">{{#t}}pages.no-family-referred.paragraph-2{{/t}}</p>
+    <p class="govuk-body">
+      {{#over18}}
+      <a href="/acrs/partner">
+        {{#t}}pages.no-family-referred.link-text{{/t}}
+      </a>
+    {{/over18}}
+    {{^over18}}
+      <a href="/acrs/parent">
+        {{#t}}pages.no-family-referred.link-text{{/t}}
+      </a>
+    {{/over18}}
+    </p>
+  {{/page-content}}
+{{/partials-page}}

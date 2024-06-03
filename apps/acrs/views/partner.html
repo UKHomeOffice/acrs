@@ -1,0 +1,18 @@
+{{<partials-page}}
+  {{$page-content}}
+    <p>{{#t}}pages.partner.link-text-1{{/t}}<a href="https://www.gov.uk/guidance/afghan-citizens-resettlement-scheme-separated-families-route" class="govuk-link">{{#t}}pages.partner.link-text-2{{/t}}</a>.</p>
+    <div class="govuk-warning-text">
+      <span class="govuk-warning-text__icon" aria-hidden="true">!</span>
+      <strong class="govuk-warning-text__text">
+        <span class="govuk-warning-text__assistive">{{#t}}pages.partner.warning-assistive{{/t}}</span>
+        {{#t}}pages.partner.warning-text{{/t}}
+      </strong>
+    </div>
+    <p>{{#t}}pages.partner.notice-1{{/t}}</p>
+    <legend class="govuk-fieldset__legend bold">{{#t}}pages.partner.question-1{{/t}}</legend>
+    {{#fields}}
+      {{#renderField}}{{/renderField}}
+    {{/fields}}
+    {{#input-submit}}continue{{/input-submit}}
+  {{/page-content}}
+{{/partials-page}}

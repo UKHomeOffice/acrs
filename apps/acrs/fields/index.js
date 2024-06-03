@@ -80,6 +80,30 @@ module.exports = {
     labelClassName: 'bold',
     className: ['govuk-input', 'govuk-input--width-10']
   },
+  'provide-telephone-number-options': {
+    mixin: 'radio-group',
+    options: [
+      {
+        value: 'yes',
+        toggle: 'provide-telephone-number-number',
+        child: 'input-text'
+      },
+      {
+        value: 'no'
+      }
+    ],
+    validate: 'required',
+    legend: {
+      className: 'visuallyhidden'
+    }
+  },
+  'provide-telephone-number-number': {
+    dependent: {
+      field: 'provide-telephone-number-options',
+      value: 'yes'
+    },
+    validate: ['required', 'internationalPhoneNumber', { type: 'maxlength', arguments: 20 }]
+  },
   partner: {
     mixin: 'radio-group',
     options: ['yes', 'no'],
@@ -88,13 +112,62 @@ module.exports = {
       className: 'visuallyhidden'
     }
   },
+  'partner-full-name': {
+    validate: ['required', 'notUrl', { type: 'maxlength', arguments: [250] }],
+    labelClassName: 'bold'
+  },
+  'partner-phone-number': {
+    labelClassName: 'bold',
+    validate: ['internationalPhoneNumber', { type: 'maxlength', arguments: [250] }],
+    className: ['govuk-input', 'govuk-!-width-one-half']
+  },
+  'partner-email': {
+    labelClassName: 'bold',
+    validate: ['email']
+  },
+  'partner-date-of-birth': dateComponent('partner-date-of-birth', {
+    legend: { className: 'bold' },
+    validate: ['required', 'before', after1900Validator]
+  }),
+  'partner-country': {
+    labelClassName: 'bold',
+    mixin: 'select',
+    validate: ['required', isInCountriesList],
+    className: ['js-hidden'],
+    options: [
+      {
+        value: '',
+        label: 'fields.partner-country.options.null'
+      }
+    ].concat(_.sortBy(countries, o => o.label))
+  },
+  'partner-living-situation': {
+    labelClassName: 'bold',
+    mixin: 'textarea',
+    attributes: [{ attribute: 'rows', value: 5 }],
+    validate: [
+      'required',
+      'notUrl',
+      { type: 'regex', arguments: /^[^\[\]\|<>]*$/ },
+      { type: 'maxlength', arguments: 15000 }
+    ]
+  },
+  'partner-why-without-partner': {
+    labelClassName: 'bold',
+    mixin: 'textarea',
+    attributes: [{ attribute: 'rows', value: 5 }],
+    validate: [
+      'required',
+      'notUrl',
+      { type: 'regex', arguments: /^[^\[\]\|<>]*$/ },
+      { type: 'maxlength', arguments: 15000 }
+    ]
+  },
   children: {
     mixin: 'radio-group',
     options: ['yes', 'no'],
     validate: 'required',
-    legend: {
-      className: 'visuallyhidden'
-    }
+    legend: { className: 'bold' }
   },
   parent: {
     mixin: 'radio-group',
@@ -146,26 +219,117 @@ module.exports = {
     mixin: 'radio-group',
     options: ['yes', 'no'],
     validate: 'required',
-    legend: {
-      className: 'visuallyhidden'
-    }
+    isPageHeading: true
+  },
+  'brother-or-sister-full-name': {
+    validate: ['required', 'notUrl', { type: 'maxlength', arguments: [250] }],
+    labelClassName: 'bold'
+  },
+  'brother-or-sister-date-of-birth': dateComponent('brother-or-sister-date-of-birth', {
+    legend: { className: 'bold' },
+    validate: [
+      'required',
+      'before',
+      { type: 'after', arguments: ['2003-08-27'] }]
+  }),
+  'brother-or-sister-country': {
+    labelClassName: 'bold',
+    mixin: 'select',
+    validate: ['required', isInCountriesList],
+    className: ['js-hidden'],
+    options: [
+      {
+        value: '',
+        label: 'fields.brother-or-sister-country.options.null'
+      }
+    ].concat(_.sortBy(countries, o => o.label))
+  },
+  'brother-or-sister-evacuated-without-reason': {
+    labelClassName: 'bold',
+    mixin: 'textarea',
+    attributes: [{ attribute: 'rows', value: 5 }],
+    validate: [
+      'required',
+      'notUrl',
+      { type: 'regex', arguments: /^[^\[\]\|<>]*$/ },
+      { type: 'maxlength', arguments: 15000 }
+    ]
   },
   'additional-family': {
+    legend: { className: 'bold' },
+    mixin: 'radio-group',
+    options: ['yes', 'no'],
+    validate: 'required'
+  },
+  'additional-family-full-name': {
+    validate: ['required', 'notUrl', { type: 'maxlength', arguments: [250] }],
+    labelClassName: 'bold'
+  },
+  'additional-family-date-of-birth': dateComponent('additional-family-date-of-birth', {
+    legend: { className: 'bold' },
+    validate: ['required', 'before', after1900Validator]
+  }),
+  'additional-family-relationship': {
+    validate: ['required', 'notUrl', { type: 'maxlength', arguments: [250] }],
+    labelClassName: 'bold'
+  },
+  'additional-family-country': {
+    labelClassName: 'bold',
+    mixin: 'select',
+    validate: ['required', isInCountriesList],
+    className: ['js-hidden'],
+    options: [
+      {
+        value: '',
+        label: 'fields.additional-family-country.options.null'
+      }
+    ].concat(_.sortBy(countries, o => o.label))
+  },
+  'additional-family-living-situation': {
+    labelClassName: 'bold',
+    mixin: 'textarea',
+    attributes: [{ attribute: 'rows', value: 5 }],
+    validate: [
+      'required',
+      'notUrl',
+      { type: 'regex', arguments: /^[^\[\]\|<>]*$/ },
+      { type: 'maxlength', arguments: 15000 }
+    ]
+  },
+  'additional-family-needs-support': {
+    legend: { className: 'bold' },
+    mixin: 'radio-group',
+    options: ['yes', 'no'],
+    validate: 'required'
+  },
+  'additional-family-why-evac-without': {
+    labelClassName: 'bold',
+    mixin: 'textarea',
+    attributes: [{ attribute: 'rows', value: 5 }],
+    validate: [
+      'required',
+      'notUrl',
+      { type: 'regex', arguments: /^[^\[\]\|<>]*$/ },
+      { type: 'maxlength', arguments: 15000 }
+    ]
+  },
+  'additional-family-why-referring': {
+    labelClassName: 'bold',
+    mixin: 'textarea',
+    attributes: [{ attribute: 'rows', value: 5 }],
+    validate: [
+      'required',
+      'notUrl',
+      { type: 'regex', arguments: /^[^\[\]\|<>]*$/ },
+      { type: 'maxlength', arguments: 15000 }
+    ]
+  },
+  'has-family-in-uk': {
     mixin: 'radio-group',
     options: ['yes', 'no'],
     validate: 'required',
     legend: {
-      className: 'visuallyhidden'
-    }
-  },
-  'no-family-referred': {
-    // SKELETON: for the purposes of the Skeleton this page is used to determine
-    // under/over 18 and return to parent/partner flow
-    mixin: 'radio-group',
-    options: ['under-18', 'over-18'],
-    validate: 'required',
-    legend: {
-      className: 'visuallyhidden'
+      className: 'bold'
     }
   },
   'has-family-in-uk': {
@@ -280,5 +444,14 @@ module.exports = {
       toggle: 'legal-representative-email-details-fieldset',
       child: 'partials/legal-representative-email-details'
     }]
+  },
+  'legal-representative-email': {
+    mixin: 'input-text',
+    validate: ['email', 'required'],
+    className: ['govuk-input', 'govuk-!-width-two-thirds'],
+    dependent: {
+      field: 'is-legal-representative-email',
+      value: 'no'
+    }
   }
 };

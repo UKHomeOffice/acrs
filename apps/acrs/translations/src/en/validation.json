@@ -78,11 +78,70 @@
       "regex": "Explanation must be 15,000 characters or less and must not include [ ] < > / |",
       "notUrl": "Please do not enter a link/url into your answers"
     },
+    "provide-telephone-number-options": {
+      "required": "Tell us if you can provide a telephone number"
+    },
+    "provide-telephone-number-number": {
+      "required": "Enter a telephone number",
+      "maxlength": "Telephone number must be between 8 and 16 characters",
+      "internationalPhoneNumber": "Enter a telephone number, like 01632 960 001, 07700 900 982 or +44 808 157 0192"
+    },
     "brother-or-sister": {
-        "required": "You must select an option"
+      "required": "You must select an option"
+    },
+    "brother-or-sister-full-name": {
+      "required": "Enter this brother or sister's full name",
+      "notUrl": "Please do not enter a link/url into your answers",
+      "maxlength": "Brother or sister's full name must be between 1 and 250 characters"
+    },
+    "brother-or-sister-date-of-birth": {
+      "required": "Enter brother or sister's date of birth",
+      "date": "Enter a real date of birth",
+      "after": "Brothers or sisters born before 28 August 2003 cannot be referred to come to the UK",
+      "before": "Brother or sister's date of birth must be in the past"
+    },
+    "brother-or-sister-country": {
+      "required": "Enter the country this brother or sister lives in",
+      "isInCountriesList": "You must choose a country from the provided list"
+    },
+    "brother-or-sister-evacuated-without-reason": {
+      "required": "Enter the reason you were evacuated without this brother or sister",
+      "maxlength": "Living situation details must be less than 15,000 characters",
+      "notUrl": "Please do not enter a link/url into your answers",
+      "regex": "Details must not include these characters: [ ] < > / |"
     },
     "partner": {
       "required": "You must select an option"
+    },
+    "partner-full-name": {
+      "required": "Enter this partner's full name",
+      "notUrl": "Please do not enter a link/url into your answers"
+    },
+    "partner-phone-number": {
+      "internationalPhoneNumber": "Enter a partner's telephone number, like 01632 960 001, 07700 900 982 or +44 808 157 0192"
+    },
+    "partner-email": {
+      "email": "Enter a real email address"
+    },
+    "partner-date-of-birth": {
+      "required": "Enter partner's date of birth",
+      "date": "Please enter a valid date",
+      "after": "Enter a date after 01 01 1900",
+      "before": "Partner's date of birth must be in the past"
+    },
+    "partner-country": {
+      "required": "Enter the country this parent lives in",
+      "isInCountriesList": "You must choose a country from the provided list"
+    },
+    "partner-living-situation": {
+      "required": "Explain your partner's living situation",
+      "regex": "Living situation details must be less than 15,000 characters",
+      "notUrl": "Please do not enter a link/url into your answers"
+    },
+    "partner-why-without-partner": {
+      "required": "Explain why you were evacuated without your partner",
+      "regex": "Details about why you were evacuated without your partner must be less than 15,000 characters",
+      "notUrl": "Please do not enter a link/url into your answers"
     },
     "children": {
       "required": "You must select an option"
@@ -90,7 +149,48 @@
     "additional-family": {
       "required": "You must select an option"
     },
-    "no-family-referred": {
+    "additional-family-full-name": {
+      "required": "Enter additional family member's full name",
+      "notUrl": "Please do not enter a link/url into your answers",
+      "maxlength": "Additional family member's full name must be less than 250 characters"
+    },
+    "additional-family-date-of-birth": {
+      "required": "Enter additional family member's date of birth",
+      "date": "Enter a real date of birth",
+      "after": "Enter a date after 01 01 1900",
+      "before": "Partner's date of birth must be in the past"
+    },
+    "additional-family-relationship": {
+      "required": "Enter additional family member's relationship to you",
+      "maxlength": "Additional family member's relationship to you must be less than 250 characters",
+      "notUrl": "Please do not enter a link/url into your answers"
+    },
+    "additional-family-country": {
+      "required": "Enter the country they currently live in, like 'Pakistan'",
+      "isInCountriesList": "You must choose a country from the provided list"
+    },
+    "additional-family-living-situation": {
+      "required": "Explain your additional family member's living situation",
+      "maxlength": "Living situation details must be less than 15,000 characters",
+      "notUrl": "Please do not enter a link/url into your answers",
+      "regex": "Details must not include these characters: [ ] < > / |"
+    },
+    "additional-family-needs-support": {
+      "required": "Tell us if this family member needs you for support"
+    },
+    "additional-family-why-evac-without": {
+      "required": "Explain why you were evacuated without this additional family member",
+      "maxlength": "Details about why you were evacuated without this additional family member must be less than 15,000 characters",
+      "notUrl": "Please do not enter a link/url into your answers",
+      "regex": "Details must not include these characters: [ ] < > / |"
+    },
+    "additional-family-why-referring": {
+      "required": "Explain why you are referring this family member",
+      "maxlength": "Details about why you are referring this family member must be less than 15,000 characters",
+      "regex": "Details must not include these characters: [ ] < > / |",
+      "notUrl": "Please do not enter a link/url into your answers"
+    },
+    "has-family-in-uk": {
       "required": "You must select an option"
     },
     "has-family-in-uk": {
@@ -119,7 +219,7 @@
     "is-legal-representative-email": {
       "required": "You must select an option"
     },
-    "legal-representative-name": {
+    "legal-representative-fullname": {
       "required": "Enter your name",
       "notUrl": "Please do not enter a link/url into your answers"
     },
@@ -133,6 +233,10 @@
     },
     "legal-representative-house-number": {
       "required": "Enter your house number/name, and street name",
+      "notUrl": "Please do not enter a link/url into your answers"
+    },
+    "legal-representative-organisation": {
+      "required": "Enter your organisation name",
       "notUrl": "Please do not enter a link/url into your answers"
     },
     "legal-representative-street": {

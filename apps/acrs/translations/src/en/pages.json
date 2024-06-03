@@ -33,7 +33,8 @@
     "paragraph": "We may use this email address to contact them for more information about the referral."
   },
   "provide-telephone-number": {
-    "header": "SKELETON: /provide-telephone-number"
+    "header": "Can you provide a telephone number?",
+    "paragraph": "We may contact you for more information about the referral"
   },
   "your-address": {
     "header": "What is your address?",
@@ -46,26 +47,32 @@
   "parent-summary": {
     "header": "SKELETON: /parent-summary"
   },
-  "brother-or-sister": {
-    "header": "SKELETON: /brother-or-sister"
-  },
   "brother-or-sister-details": {
-    "header": "SKELETON: /brother-or-sister-details"
+    "header": "Brother or sister {{values.brotherOrSisterCount}} details",
+    "paragraph": "Add your brothers or sisters one at a time."
   },
   "brother-or-sister-summary": {
     "header": "SKELETON: /brother-or-sister-summary"
   },
   "partner": {
-    "header": "SKELETON: /partner"
+    "header": "Wives, husbands, spouses and unmarried partners",
+    "warning-assistive": "Warning",
+    "warning-text": "You can only refer one husband, wife or unmarried partner",
+    "notice-1": "If you have a partner in the UK, you cannot refer another partner to join you.",
+    "question-1": "Are you referring a partner to come to the UK?",
+    "link-text-1": "You can ",
+    "link-text-2": "refer your spouse (wife or husband) or your unmarried partner to come to the UK"
   },
   "partner-details": {
-    "header": "SKELETON: /partner-details"
+    "header": "Partner's details"
   },
   "partner-summary": {
     "header": "SKELETON: /partner-summary"
   },
   "children": {
-    "header": "SKELETON: /children"
+    "header": "Children aged under 18",
+    "paragraph-1": "You can refer your own children to come to the UK, but they must have been born on or after 28 August 2003.",
+    "paragraph-2": "The children you refer must not be living independently or have their own family."
   },
   "child-details": {
     "header": "SKELETON: /child-details"
@@ -77,13 +84,31 @@
     "header": "SKELETON: /child-details-2"
   },
   "additional-family": {
-    "header": "SKELETON: /additional-family"
+    "header": "Additional family members",
+    "paragraph-1": "Additional family member means anyone who is not:",
+    "list": {
+      "over-18": {
+        "item-1": "your husband or wife (spouse), or unmarried partner",
+        "item-2": "your own child"
+      },
+      "under-18": {
+        "item-1": "your parents",
+        "item-2": "your brothers or sisters"
+      }
+    },
+    "paragraph-2": "You must only refer additional family members to come to the UK in",
+    "link-text": "exceptional circumstances",
+    "paragraph-3": "You must have evidence to prove the exceptional circumstances."
   },
   "additional-family-details": {
-    "header": "SKELETON: /additional-family-details"
+    "header": "Additional family member {{values.additionalFamilyCount}} details",
+    "paragraph": "Add your additional family members one at a time."
   },
   "no-family-referred": {
-    "header": "SKELETON: /no-family-referred"
+    "header": "You must refer a family member",
+    "paragraph-1": "You have told us you are not referring any family members.",
+    "paragraph-2": "If you are not referring a family member, you do not need to use this form.",
+    "link-text": "Return and refer a family member"
   },
   "who-is-responsible": {
     "header": "SKELETON: /who-is-responsible"
