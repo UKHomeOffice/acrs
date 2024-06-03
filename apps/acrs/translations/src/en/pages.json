@@ -139,10 +139,12 @@
     "header": "SKELETON: /evidence-notes"
   },
   "how-send-decision": {
-    "header": "SKELETON: /how-send-decision"
+    "header": "How do we send the decision on your referral?"
   },
   "email-decision": {
-    "header": "SKELETON: /email-decision"
+    "header": "Do we send your decision to",
+    "label": "{{values.user-email}}",
+    "title": "Email address for your decision - Refer family to come to the UK"
   },
   "your-postal-address": {
     "header": "SKELETON: /your-postal-address"

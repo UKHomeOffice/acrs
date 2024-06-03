@@ -213,8 +213,15 @@
     "has-family-member-been-evacuated": {
       "required": "You must select an option"
     },
-    "/how-send-decision": {
+    "how-to-send-decision": {
       "required": "You must select an option"
+    },
+    "is-decision-by-email": {
+      "required": "Tell us if this is the correct email for your decision"
+    },
+    "is-decision-by-email-detail": {
+      "required": "Enter an email address for the decision",
+      "email": "Enter a real email address"
     },
     "is-legal-representative-email": {
       "required": "You must select an option"

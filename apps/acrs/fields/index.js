@@ -332,14 +332,6 @@ module.exports = {
       className: 'bold'
     }
   },
-  'has-family-in-uk': {
-    mixin: 'radio-group',
-    options: ['yes', 'no'],
-    validate: 'required',
-    legend: {
-      className: 'bold'
-    }
-  },
   'family-member-fullname': {
     labelClassName: 'bold',
     validate: ['required', 'notUrl', { type: 'maxlength', arguments: 250 }],
@@ -368,12 +360,37 @@ module.exports = {
     className: 'visuallyhidden',
     labelClassName: 'visuallyhidden'
   },
-  'how-send-decision': {
+  'how-to-send-decision': {
     mixin: 'radio-group',
     options: ['email', 'post'],
     validate: 'required',
     legend: {
       className: 'visuallyhidden'
+    }
+  },
+  'is-decision-by-email': {
+    mixin: 'radio-group',
+    validate: ['required'],
+    options: [
+      {
+        value: 'yes'
+      },
+      {
+        value: 'no',
+        toggle: 'is-decision-by-email-detail',
+        child: 'input-text'
+      }
+    ],
+    legend: {
+      className: 'visuallyhidden'
+    }
+  },
+  'is-decision-by-email-detail': {
+    validate: ['required', 'email'],
+    className: ['govuk-input', 'govuk-!-width-two-thirds'],
+    dependent: {
+      field: 'is-decision-by-email',
+      value: 'no'
     }
   },
   'immigration-adviser-details': {

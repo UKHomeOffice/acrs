@@ -1,0 +1,10 @@
+<title>{{#t}}pages.email-decision.title{{/t}} – GOV.UK</title>
+{{<partials-page}}
+  {{$page-content}}
+   <h2 class="email-decision">{{#t}}pages.email-decision.label{{/t}}</h2>
+   {{#fields}}
+      {{#renderField}}{{/renderField}}
+    {{/fields}}
+    {{#input-submit}}continue{{/input-submit}}
+  {{/page-content}}
+{{/partials-page}}

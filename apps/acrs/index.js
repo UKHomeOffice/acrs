@@ -394,21 +394,21 @@ module.exports = {
       fields: [],
       next: '/how-send-decision'
     },
-
     '/how-send-decision': {
-      fields: ['how-send-decision'],
+      fields: ['how-to-send-decision'],
       forks: [{
         target: '/email-decision',
         condition: {
-          field: 'how-send-decision',
+          field: 'how-to-send-decision',
           value: 'email'
         }
       }],
       next: '/your-postal-address'
     },
-
     '/email-decision': {
-      fields: [],
+      behaviours: SaveFormSession,
+      fields: ['is-decision-by-email', 'is-decision-by-email-detail'],
+      locals: { showSaveAndExit: true },
       next: '/confirm'
     },
 

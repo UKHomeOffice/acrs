@@ -299,17 +299,6 @@
       }
     }
   },
-  "has-family-in-uk": {
-    "legend": "Do you have family that live in the UK?",
-    "options": {
-      "yes": {
-        "label": "Yes"
-      },
-      "no": {
-        "label": "No"
-      }
-    }
-  },
   "family-member-fullname": {
     "label": "Family member's full name",
     "summary-heading": "Full name"
@@ -335,15 +324,28 @@
     },
     "summary-heading": "Were they evacuated with you?"
   },
-  "how-send-decision": {
-    "label": "SKELETON: how-send-decision",
+  "how-to-send-decision": {
+    "hint": "You will receive your decision quicker by email",
     "options": {
       "email": {
-        "label": "SKELETON: Email"
+        "label": "Email"
       },
       "post": {
-        "label": "SKELETON: Post"
+        "label": "Post"
       }
     }
+  },
+  "is-decision-by-email": {
+    "options": {
+      "yes": {
+        "label": "Yes"
+      },
+      "no": {
+        "label": "No"
+      }
+    }
+  },
+  "is-decision-by-email-detail": {
+    "label": "Email address for decision"
   }
 }
