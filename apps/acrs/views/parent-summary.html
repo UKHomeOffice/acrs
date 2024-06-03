@@ -2,15 +2,17 @@
   {{$page-content}}
    <br>
   {{> partials-parent-summary-table}}
+  <p class="govuk-body">You can refer a maximum of 2 parents to come to the UK.</p>
   {{#noMoreParents}}
     <p>You cannot add any more parents</p>
   {{/noMoreParents}}
   <br>
   {{^noMoreParents}}
-    <p><a href="{{baseUrl}}/{{addStep}}" class="govuk-link">Add another {{addAnotherLinkText}}</a></p>
-    <br>
+  <a href="{{baseUrl}}/{{addStep}}" class="govuk-button govuk-button--secondary" data-module="govuk-button">
+      Add another {{addAnotherLinkText}}
+  </a>
+  <br>
   {{/noMoreParents}}
-  <p class="govuk-body">You can refer a maximum of 2 parents to come to the UK.</p>
   {{#input-submit}}continue{{/input-submit}}
   {{/page-content}}
 {{/partials-page}}

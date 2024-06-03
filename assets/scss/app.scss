@@ -204,3 +204,12 @@ pre.looped-records {
 .save-and-exit-button {
   margin-left: 15px;
 }
+
+
+
+.table-options {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: baseline;
+}
