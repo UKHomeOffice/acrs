@@ -402,6 +402,10 @@ module.exports = {
     className: 'visuallyhidden',
     labelClassName: 'visuallyhidden'
   },
+  image: {
+    mixin: 'input-file',
+    labelClassName: 'visuallyhidden'
+  },
   'how-to-send-decision': {
     mixin: 'radio-group',
     options: ['email', 'post'],
