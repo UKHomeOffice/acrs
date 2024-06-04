@@ -45,17 +45,10 @@ module.exports = superclass => class extends superclass {
 
     let itemTitle = '';
 
-    let undefinedValueExists = false;
-
     req.form.options.aggregateFrom.forEach(aggregateFromElement => {
       const aggregateFromField = aggregateFromElement.field || aggregateFromElement;
       const isTitleField = req.form.options.titleField === aggregateFromField;
       const value = req.sessionModel.get(aggregateFromField);
-
-      // Check for an undefined title caused by pressing the browser back button after a deletion
-      if (isTitleField && value === undefined) {
-        undefinedValueExists = true;
-      }
 
       let isRefNumber = false;
 

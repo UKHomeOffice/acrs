@@ -10,7 +10,6 @@ module.exports = superclass => class extends superclass {
 
   locals(req, res) {
     const locals = super.locals(req, res);
-    // console.dir(locals.items, {depth:null});
     locals.items = locals.items.map(item => {
       item.fields = item.fields.map(field => {
         if (field.field.includes('date-of-birth')) {
@@ -24,5 +23,17 @@ module.exports = superclass => class extends superclass {
       return item;
     });
     return locals;
+  }
+
+  validate(req, res, next) {
+    const parentsLimit = req.form.options.limit;
+    const referredParentsCount = req.sessionModel.get('referred-parents').aggregatedValues.length;
+    if (referredParentsCount > parentsLimit) {
+      return next({'error-field': new this.ValidationError('error-field', {
+        type: 'tooManyParents',
+        redirect: undefined
+      })});
+    }
+    return super.validate(req, res, next);
   }
 };
