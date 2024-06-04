@@ -44,7 +44,9 @@
     "paragraph": "Add your parents one at a time."
   },
   "parent-summary": {
-    "header": "Parents you are referring"
+    "header": "Parents you are referring",
+    "parent-limit-message": "You can refer a maximum of 2 parents to come to the UK.",
+    "parent-limit-exceeded": "You can not refer any more parents."
   },
   "brother-or-sister-details": {
     "header": "Brother or sister {{values.brotherOrSisterCount}} details",

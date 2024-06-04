@@ -204,7 +204,6 @@ module.exports = {
       locals: { showSaveAndExit: true }
     },
     '/parent-summary': {
-      fields: ['error-field'],
       behaviours: [AggregateSaveUpdate, ParentSummary, LimitParents, SaveFormSession],
       aggregateTo: 'referred-parents',
       aggregateFrom: [
@@ -222,7 +221,7 @@ module.exports = {
       continueOnEdit: false,
       template: 'parent-summary',
       backLink: 'parent',
-      limit: 2,
+      aggregateLimit: 2,
       next: '/brother-or-sister'
     },
 

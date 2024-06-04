@@ -24,16 +24,4 @@ module.exports = superclass => class extends superclass {
     });
     return locals;
   }
-
-  validate(req, res, next) {
-    const parentsLimit = req.form.options.limit;
-    const referredParentsCount = req.sessionModel.get('referred-parents').aggregatedValues.length;
-    if (referredParentsCount > parentsLimit) {
-      return next({'error-field': new this.ValidationError('error-field', {
-        type: 'tooManyParents',
-        redirect: undefined
-      })});
-    }
-    return super.validate(req, res, next);
-  }
 };

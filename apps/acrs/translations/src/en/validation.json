@@ -78,9 +78,6 @@
       "regex": "Explanation must be 15,000 characters or less and must not include [ ] < > / |",
       "notUrl": "Please do not enter a link/url into your answers"
     },
-    "error-field": {
-      "tooManyParents": "You can only refer up to two parents. Please remove parents from the list until two remain."
-    },
     "provide-telephone-number-options": {
       "required": "Tell us if you can provide a telephone number"
     },
