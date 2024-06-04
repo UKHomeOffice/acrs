@@ -1,4 +1,3 @@
-const _ = require('lodash');
 const moment = require('moment');
 module.exports = superclass => class extends superclass {
   configure(req, res, next) {

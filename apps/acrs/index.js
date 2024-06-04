@@ -13,7 +13,7 @@ const Locals18Flag = require('./behaviours/locals-18-flag');
 const AggregateSaveUpdate = require('./behaviours/aggregator-save-update');
 const ParentSummary = require('./behaviours/parent-summary');
 const LimitParents = require('./behaviours/limit-parents');
-const ResetSummary = require('./behaviours/reset-summary')
+const ResetSummary = require('./behaviours/reset-summary');
 
 module.exports = {
   name: 'acrs',
@@ -177,18 +177,18 @@ module.exports = {
           target: '/parent-details',
           condition: req => {
             if (
-              req.form.values['parent'] === 'yes' &&
+              req.form.values.parent === 'yes' &&
                 req.sessionModel.get('referred-parents') &&
                 req.sessionModel.get('referred-parents').aggregatedValues.length === 0
             ) {
-                return true;
-              }
-              return false;
+              return true;
+            }
+            return false;
           }
         }
-    ],
-    locals: { showSaveAndExit: true },
-    continueOnEdit: true
+      ],
+      locals: { showSaveAndExit: true },
+      continueOnEdit: true
     },
     '/parent-details': {
       behaviours: [LimitParents, SaveFormSession],
