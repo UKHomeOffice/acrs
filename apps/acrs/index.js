@@ -7,6 +7,8 @@ const CheckEmailToken = require('./behaviours/check-email-token');
 const SaveFormSession = require('./behaviours/save-form-session');
 const SaveAndExit = require('./behaviours/save-and-exit');
 const Utilities = require('../../lib/utilities');
+
+const Submit = require('./behaviours/submit');
 const FamilyMemberBahaviour = require('./behaviours/family-member');
 const FamilyDetailBahaviour = require('./behaviours/get-family-detail');
 const Locals18Flag = require('./behaviours/locals-18-flag');
@@ -98,7 +100,6 @@ module.exports = {
       next: '/full-name',
       locals: { showSaveAndExit: true }
     },
-
     '/full-name': {
       fields: ['full-name'],
       forks: [{
@@ -111,7 +112,6 @@ module.exports = {
       behaviours: SaveFormSession,
       locals: { showSaveAndExit: true }
     },
-
     '/confirm-referrer-email': {
       fields: ['confirm-referrer-email'],
       forks: [{
@@ -442,7 +442,7 @@ module.exports = {
       next: '/confirm'
     },
     '/confirm': {
-      behaviours: [SummaryPageBehaviour, ModifySummaryChangeLinks],
+      behaviours: [SummaryPageBehaviour, ModifySummaryChangeLinks, Submit],
       sections: require('./sections/summary-data-sections'),
       next: '/declaration'
     },
