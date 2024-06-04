@@ -1,0 +1,10 @@
+{{<partials-page}}
+  {{$pageTitle}}{{#t}}pages.evidence-notes.header{{/t}} - Refer family to come to the UK – GOV.UK{{/pageTitle}}
+  {{$page-content}}
+    {{#renderField}}evidence-notes-details{{/renderField}}
+    {{#input-submit}}continue{{/input-submit}}
+    <button class="govuk-button govuk-button--secondary save-and-exit-button" name="save-and-exit" value="save-and-exit">
+      {{#t}}buttons.save-and-exit{{/t}}
+    </button>
+  {{/page-content}}
+{{/partials-page}}

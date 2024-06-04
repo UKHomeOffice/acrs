@@ -604,7 +604,8 @@ module.exports = {
       next: '/evidence-notes'
     },
     '/evidence-notes': {
-      fields: [],
+      behaviours: [SaveFormSession],
+      fields: ['evidence-notes-details'],
       continueOnEdit: false,
       next: '/how-send-decision'
     },

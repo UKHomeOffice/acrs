@@ -134,7 +134,7 @@
     "header": "Upload evidence"
   },
   "evidence-notes": {
-    "header": "SKELETON: /evidence-notes"
+    "header": "Evidence notes (optional)"
   },
   "how-send-decision": {
     "header": "How do we send the decision on your referral?",
@@ -181,6 +181,9 @@
       },
       "evidence-documents": {
         "header": "Evidence"
+      },
+      "evidence-notes": {
+        "header": "Notes"
       }
     },
     "fields": {
@@ -297,6 +300,9 @@
       },
       "images": {
         "label": "Files uploaded"
+      },
+      "evidence-notes-details": {
+        "label": "Evidence notes"
       }
     }
   }

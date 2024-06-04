@@ -375,6 +375,10 @@
     },
     "summary-heading": "Were they evacuated with you?"
   },
+  "evidence-notes-details": {
+    "label": "Evidence notes (optional)",
+    "hint": "Add any extra information to help us understand your evidence. For example why a date of birth on a document is incorrect, or why you cannot provide evidence."
+  },
   "how-to-send-decision": {
     "hint": "You will receive your decision quicker by email",
     "options": {

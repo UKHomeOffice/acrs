@@ -336,5 +336,18 @@ module.exports = {
         return 'None uploaded';
       }
     }
+  ],
+  'evidence-notes': [
+    {
+      step: '/evidence-notes',
+      field: 'evidence-notes-details',
+      parse: (list, req) => {
+        if ( !req.sessionModel.get('steps').includes('/evidence-notes') ||
+        req.sessionModel.get('evidence-notes-details') === '') {
+          return null;
+        }
+        return req.sessionModel.get('evidence-notes-details');
+      }
+    }
   ]
 };
