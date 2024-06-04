@@ -2,17 +2,17 @@
   {{$intro}}
     {{#intro}}<p>{{intro}}</p>{{/intro}}
   {{/intro}}
-  
+
   {{$form}}{{/form}}
-  
+
   {{#showSaveAndExit}}
     {{^loopedPage}}
-      <button class="govuk-button govuk-button--secondary save-and-exit-button" name="save-and-exit" value="save-and-exit">
+      <button class="govuk-button govuk-button--secondary govuk-!-margin-left-5" name="save-and-exit" value="save-and-exit">
         {{#t}}buttons.save-and-exit{{/t}}
       </button>
     {{/loopedPage}}
   {{/showSaveAndExit}}
-  
+
   {{#csrf-token}}
     <input type="hidden" name="x-csrf-token" value="{{csrf-token}}" />
   {{/csrf-token}}

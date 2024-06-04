@@ -1,10 +1,9 @@
 {{<partials-page}}
   {{$page-content}}
-   <br>
   {{> partials-parent-summary-table}}
-  <p class="govuk-body">You can refer a maximum of 2 parents to come to the UK.</p>
+  <p class="govuk-body">{{#t}}pages.parent-summary.parent-limit-message{{/t}}</p>
   {{#noMoreParents}}
-    <p>You cannot add any more parents</p>
+    <p>{{#t}}pages.parent-summary.parent-limit-exceeded{{/t}}</p>
   {{/noMoreParents}}
   <br>
   {{^noMoreParents}}
