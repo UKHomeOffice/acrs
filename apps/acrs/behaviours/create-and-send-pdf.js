@@ -9,10 +9,10 @@ const _ = require('lodash');
 const NotifyClient = utilities.NotifyClient;
 const PDFModel = require('hof').apis.pdfConverter;
 
-const submissionTemplateId = config.govukNotify.submissionTemplateId;
+const customerReceiptTemplateId = config.govukNotify.customerReceiptTemplateId;
 const submissionFailedTemplateId = config.govukNotify.submissionFailedTemplateId;
 const caseworkerEmail = config.govukNotify.caseworkerEmail;
-const customerReceiptTemplateId = config.govukNotify.customerReceiptTemplateId;
+const submissionTemplateId = config.govukNotify.submissionTemplateId;
 const notifyKey = config.govukNotify.notifyApiKey;
 const dateTimeFormat = config.dateTimeFormat;
 const baseUrl = `${config.saveService.host}:${config.saveService.port}/saved_applications`;
@@ -50,7 +50,7 @@ module.exports = class CreateAndSendPDF {
       locals = this.sortSections(locs);
     }
 
-    locals.title = 'ACRS claim form submission';
+    locals.title = 'ACRS referral submission';
     locals.dateTime = moment().format(dateTimeFormat);
     locals.values = req.sessionModel.toJSON();
     locals.htmlLang = res.locals.htmlLang || 'en';
@@ -62,6 +62,37 @@ module.exports = class CreateAndSendPDF {
     });
   }
 
+  async sendEmailWithAttachment(req, pdfData) {
+    const personalisations = this.behaviourConfig.notifyPersonalisations;
+
+    try {
+      if (notifyKey === 'USE_MOCK') {
+        req.log('warn', '*** Notify API Key set to USE_MOCK. Ensure disabled in production! ***');
+      }
+      const imageNames = req.sessionModel.get('images') ?
+        req.sessionModel.get('images').map(o => `• ${o.name}\n  ${o.url}`).join('\n') : '';
+
+      await notifyClient.sendEmail(submissionTemplateId, caseworkerEmail, {
+        personalisation: Object.assign({}, personalisations, {
+          link_to_file: notifyClient.prepareUpload(pdfData, { confirmEmailBeforeDownload: false }),
+          has_supporting_documents: _.get(req.sessionModel.get('images'), 'length') ? 'yes' : 'no',
+          supporting_documents: imageNames
+        })
+      });
+
+      const trackedPageStartTime = Number(req.sessionModel.get('session.started.timestamp'));
+      const timeSpentOnForm = utilities.secondsBetween(trackedPageStartTime, new Date());
+
+      req.log('info', 'acq.submit_form.create_email_with_file_notify.successful');
+      req.log('info', `acq.submission.duration=[${timeSpentOnForm}] seconds`);
+
+      return await this.notifyByEmail(req, pdfData);
+    } catch (err) {
+      const error = _.get(err, 'response.data.errors[0]', err.message || err);
+      req.log('error', 'acq.submit_form.create_email_with_file_notify.error', error);
+      throw new Error(error);
+    }
+  }
   async notifyByEmail(req, pdfData) {
     if (!this.behaviourConfig.sendReceipt) {
       return Promise.resolve();
@@ -90,7 +121,8 @@ module.exports = class CreateAndSendPDF {
       pdfModel.set({ template: html });
       const pdfData = await pdfModel.save();
 
-      await this.notifyByEmail(req, pdfData);
+      // await this.notifyByEmail(req, pdfData);
+      await this.sendEmailWithAttachment(req, pdfData);
 
       req.log('info', 'acrs.form.submit_form.successful');
       const id = req.sessionModel.get('id');
@@ -106,12 +138,14 @@ module.exports = class CreateAndSendPDF {
     const imageNames = req.sessionModel.get('images') ?
       req.sessionModel.get('images').map(o => `• ${o.name}\n  ${o.url}`).join('\n') : '';
 
-    return notifyClient.sendEmail(submissionTemplateId, email, {
+    return notifyClient.sendEmail(customerReceiptTemplateId, email, {
       personalisation: Object.assign({}, {
         name: req.sessionModel.get('full-name'),
         link_to_file: config.env !== 'production' ?
           notifyClient.prepareUpload(pdfData, { confirmEmailBeforeDownload: false }) :
-          notifyClient.prepareUpload(pdfData)
+          notifyClient.prepareUpload(pdfData),
+        has_supporting_documents: _.get(req.sessionModel.get('images'), 'length') ? 'yes' : 'no',
+        supporting_documents: imageNames
       })
     });
   }
