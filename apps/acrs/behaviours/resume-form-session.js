@@ -69,7 +69,7 @@ module.exports = superclass => class extends superclass {
         }
 
         const filteredCases = this.addCasesToSession(req, cases, idNumber);
-        this.setupRadioButtons(req, filteredCases.filter(form => form.id));
+        this.setupRadioButtons(req, filteredCases);
 
         return super.configure(req, res, next);
       })
@@ -129,7 +129,7 @@ module.exports = superclass => class extends superclass {
   saveValues(req, res, next) {
     const cases = req.sessionModel.get('user-cases') || [];
     const idType = req.sessionModel.get('id-type');
-    const caseObj = cases.find(obj => obj.session[idType]);
+    const caseObj = cases.find(obj => obj.session[idType] === req.form.values.referral);
 
     if (caseObj) {
       req.sessionModel.set('id', caseObj.id);
