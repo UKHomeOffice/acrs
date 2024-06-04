@@ -45,6 +45,8 @@ module.exports = superclass => class extends superclass {
 
     let itemTitle = '';
 
+    const aggregateLimit = req.form.options.aggregatelimit || undefined;
+
     req.form.options.aggregateFrom.forEach(aggregateFromElement => {
       const aggregateFromField = aggregateFromElement.field || aggregateFromElement;
       const isTitleField = req.form.options.titleField === aggregateFromField;
@@ -77,7 +79,13 @@ module.exports = superclass => class extends superclass {
 
     const newItem = { itemTitle, fields };
 
-    items.push(newItem);
+    if (aggregateLimit) {
+      if (items.length < aggregateLimit) {
+        items.push(newItem);
+      }
+    } else {
+      items.push(newItem);
+    }
 
     this.setAggregateArray(req, items);
     res.redirect(`${req.baseUrl}${req.form.options.route}`);
