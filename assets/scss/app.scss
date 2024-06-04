@@ -205,7 +205,9 @@ pre.looped-records {
   margin-left: 15px;
 }
 
-
+.govuk-character-count__message {
+  display: none;
+}
 
 .table-options {
   display: flex;

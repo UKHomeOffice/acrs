@@ -219,9 +219,41 @@ module.exports = {
     mixin: 'radio-group',
     options: ['yes', 'no'],
     validate: 'required',
-    legend: {
-      className: 'visuallyhidden'
-    }
+    isPageHeading: true
+  },
+  'brother-or-sister-full-name': {
+    validate: ['required', 'notUrl', { type: 'maxlength', arguments: [250] }],
+    labelClassName: 'bold'
+  },
+  'brother-or-sister-date-of-birth': dateComponent('brother-or-sister-date-of-birth', {
+    legend: { className: 'bold' },
+    validate: [
+      'required',
+      'before',
+      { type: 'after', arguments: ['2003-08-27'] }]
+  }),
+  'brother-or-sister-country': {
+    labelClassName: 'bold',
+    mixin: 'select',
+    validate: ['required', isInCountriesList],
+    className: ['js-hidden'],
+    options: [
+      {
+        value: '',
+        label: 'fields.brother-or-sister-country.options.null'
+      }
+    ].concat(_.sortBy(countries, o => o.label))
+  },
+  'brother-or-sister-evacuated-without-reason': {
+    labelClassName: 'bold',
+    mixin: 'textarea',
+    attributes: [{ attribute: 'rows', value: 5 }],
+    validate: [
+      'required',
+      'notUrl',
+      { type: 'regex', arguments: /^[^\[\]\|<>]*$/ },
+      { type: 'maxlength', arguments: 15000 }
+    ]
   },
   'additional-family': {
     legend: { className: 'bold' },
