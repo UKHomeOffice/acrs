@@ -104,7 +104,7 @@ module.exports = {
           return ! Utilities.isOver18(req.sessionModel.get('date-of-birth'));
         }
       }],
-      next: '/confirm',
+      next: '/confirm-referrer-email',
       behaviours: SaveFormSession,
       locals: { showSaveAndExit: true }
     },
