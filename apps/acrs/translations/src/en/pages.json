@@ -170,6 +170,9 @@
       },
       "immigration-adviser-details": {
         "header": "Immigration adviser details"
+      },
+      "family-in-your-referral": {
+        "header": "Family in your referral"
       }
     },
     "fields": {
@@ -205,8 +208,10 @@
       },
       "current-email": {
         "label": "Email"
+      },
+      "referred-parents": {
+        "label": "Parents referred"
       }
-    
     }
   }
 }

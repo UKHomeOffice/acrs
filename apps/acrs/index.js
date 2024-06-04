@@ -14,6 +14,7 @@ const AggregateSaveUpdate = require('./behaviours/aggregator-save-update');
 const ParentSummary = require('./behaviours/parent-summary');
 const LimitParents = require('./behaviours/limit-parents');
 const ResetSummary = require('./behaviours/reset-summary');
+const ModifySummaryChangeLinks = require('./behaviours/summary-modify-change-link');
 
 module.exports = {
   name: 'acrs',
@@ -34,7 +35,7 @@ module.exports = {
       backLink: false
     },
     '/information-you-have-given-us': {
-      behaviours: [SummaryPageBehaviour, CheckInformationGivenBehaviour],
+      behaviours: [SummaryPageBehaviour, CheckInformationGivenBehaviour, ModifySummaryChangeLinks],
       sections: require('./sections/summary-data-sections'),
       backLink: false,
       journeyStart: '/who-completing-form'
@@ -441,7 +442,7 @@ module.exports = {
       next: '/confirm'
     },
     '/confirm': {
-      behaviours: [SummaryPageBehaviour],
+      behaviours: [SummaryPageBehaviour, ModifySummaryChangeLinks],
       sections: require('./sections/summary-data-sections'),
       next: '/declaration'
     },
