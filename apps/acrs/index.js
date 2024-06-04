@@ -95,7 +95,6 @@ module.exports = {
       next: '/full-name',
       locals: { showSaveAndExit: true }
     },
-
     '/full-name': {
       fields: ['full-name'],
       forks: [{
@@ -108,7 +107,6 @@ module.exports = {
       behaviours: SaveFormSession,
       locals: { showSaveAndExit: true }
     },
-
     '/confirm-referrer-email': {
       fields: ['confirm-referrer-email'],
       forks: [{
