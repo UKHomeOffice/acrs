@@ -95,7 +95,6 @@ module.exports = {
       next: '/full-name',
       locals: { showSaveAndExit: true }
     },
-
     '/full-name': {
       fields: ['full-name'],
       forks: [{
@@ -104,11 +103,10 @@ module.exports = {
           return ! Utilities.isOver18(req.sessionModel.get('date-of-birth'));
         }
       }],
-      next: '/confirm',
+      next: '/confirm-referrer-email',
       behaviours: SaveFormSession,
       locals: { showSaveAndExit: true }
     },
-
     '/confirm-referrer-email': {
       fields: ['confirm-referrer-email'],
       forks: [{
