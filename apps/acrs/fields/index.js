@@ -215,6 +215,7 @@ module.exports = {
       { type: 'maxlength', arguments: 15000 }
     ]
   },
+  'error-field': {},
   'brother-or-sister': {
     mixin: 'radio-group',
     options: ['yes', 'no'],
