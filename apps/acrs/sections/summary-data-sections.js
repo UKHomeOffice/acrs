@@ -137,8 +137,8 @@ module.exports = {
             return null;
           }
           if (list.aggregatedValues.length) {
-            const parentValues = list.aggregatedValues
-            const parentNames = parentValues.map(parent => parent.itemTitle).join(', ')
+            const parentValues = list.aggregatedValues;
+            const parentNames = parentValues.map(parent => parent.itemTitle).join(', ');
             return parentNames;
           }
           return null;
