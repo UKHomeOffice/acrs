@@ -4,7 +4,7 @@ module.exports = superclass => class extends superclass {
     locals.parentCount = '1';
     if(req.sessionModel.get('referred-parents') !== undefined) {
       const referredParents = req.sessionModel.get('referred-parents').aggregatedValues;
-      const parentsLimit = referredParents.length >= 2;
+      const parentsLimit = referredParents.length >= req.form.options.aggregateLimit;
       const parentCount = referredParents.length + 1;
 
       if (referredParents && parentsLimit) {

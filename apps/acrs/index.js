@@ -13,7 +13,7 @@ const Locals18Flag = require('./behaviours/locals-18-flag');
 const AggregateSaveUpdate = require('./behaviours/aggregator-save-update');
 const ParentSummary = require('./behaviours/parent-summary');
 const LimitParents = require('./behaviours/limit-parents');
-const ResetParentSummary = require('./behaviours/reset-parent-summary')
+const ResetSummary = require('./behaviours/reset-summary')
 
 module.exports = {
   name: 'acrs',
@@ -156,7 +156,7 @@ module.exports = {
     // Figma Section: "Who are you applying to bring to the UK? Sponsor under 18" (who-bringing-parent)
 
     '/parent': {
-      behaviours: [ResetParentSummary, SaveFormSession],
+      behaviours: [ResetSummary('referred-parents', 'parent'), SaveFormSession],
       fields: ['parent'],
       forks: [
         {

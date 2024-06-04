@@ -45,7 +45,7 @@ module.exports = superclass => class extends superclass {
 
     let itemTitle = '';
 
-    const aggregateLimit = req.form.options.aggregatelimit || undefined;
+    const aggregateLimit = req.form.options.aggregateLimit || undefined;
 
     req.form.options.aggregateFrom.forEach(aggregateFromElement => {
       const aggregateFromField = aggregateFromElement.field || aggregateFromElement;
