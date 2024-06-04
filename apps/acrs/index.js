@@ -7,6 +7,8 @@ const CheckEmailToken = require('./behaviours/check-email-token');
 const SaveFormSession = require('./behaviours/save-form-session');
 const SaveAndExit = require('./behaviours/save-and-exit');
 const Utilities = require('../../lib/utilities');
+
+const Submit = require('./behaviours/submit');
 const FamilyMemberBahaviour = require('./behaviours/family-member');
 const FamilyDetailBahaviour = require('./behaviours/get-family-detail');
 const Locals18Flag = require('./behaviours/locals-18-flag');
@@ -102,7 +104,7 @@ module.exports = {
           return ! Utilities.isOver18(req.sessionModel.get('date-of-birth'));
         }
       }],
-      next: '/confirm-referrer-email',
+      next: '/confirm',
       behaviours: SaveFormSession,
       locals: { showSaveAndExit: true }
     },
@@ -400,7 +402,7 @@ module.exports = {
       next: '/confirm'
     },
     '/confirm': {
-      behaviours: [SummaryPageBehaviour],
+      behaviours: [SummaryPageBehaviour, Submit],
       sections: require('./sections/summary-data-sections'),
       next: '/declaration'
     },
