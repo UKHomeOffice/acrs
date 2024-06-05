@@ -131,18 +131,8 @@ module.exports = {
       {
         step: '/parent-summary',
         field: 'referred-parents',
-        parse: (list, req) => {
-          if (req.sessionModel.get('referred-parents') === undefined ||
-            req.sessionModel.get('referred-parents').aggregatedValues.length < 1) {
-            return null;
-          }
-          if (list.aggregatedValues.length) {
-            const parentValues = list.aggregatedValues;
-            const parentNames = parentValues.map(parent => parent.itemTitle).join(', ');
-            return parentNames;
-          }
-          return null;
-        }
+        addElementSeparators: true,
+        dependsOn: 'parent',
       }
     ]
   },

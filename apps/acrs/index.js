@@ -18,6 +18,9 @@ const LimitParents = require('./behaviours/limit-parents');
 const ResetSummary = require('./behaviours/reset-summary');
 const ModifySummaryChangeLinks = require('./behaviours/summary-modify-change-link');
 
+// Aggregator section limits
+const PARENT_LIMIT = 2;
+
 module.exports = {
   name: 'acrs',
   params: '/:action?/:id?/:edit?',
@@ -202,7 +205,8 @@ module.exports = {
         'parent-evacuated-without-reason'
       ],
       next: '/parent-summary',
-      locals: { showSaveAndExit: true }
+      locals: { showSaveAndExit: true },
+      continueOnEdit: true
     },
     '/parent-summary': {
       behaviours: [AggregateSaveUpdate, ParentSummary, LimitParents, SaveFormSession],
@@ -219,10 +223,10 @@ module.exports = {
       addStep: 'parent-details',
       addAnotherLinkText: 'parent',
       locals: { showSaveAndExit: true },
-      continueOnEdit: false,
+      // continueOnEdit: false,
       template: 'parent-summary',
       backLink: 'parent',
-      aggregateLimit: 2,
+      aggregateLimit: PARENT_LIMIT,
       next: '/brother-or-sister'
     },
 
@@ -238,7 +242,7 @@ module.exports = {
       }],
       next: '/brother-or-sister-details',
       locals: { showSaveAndExit: true },
-      continueOnEdit: true
+      // continueOnEdit: true
     },
 
     '/brother-or-sister-details': {
