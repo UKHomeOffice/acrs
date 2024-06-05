@@ -13,7 +13,7 @@ module.exports = superclass => class extends superclass {
           if (row.section === 'Family in your referral') {
             _.forEach(fields, sectionFields => {
               _.forEach(sectionFields, field => {
-                if (field.field === 'referred-parents') {
+                if (field.field === 'parent-full-name') {
                   field.changeLink = '/acrs/parent-summary';
                 }
               });

@@ -211,6 +211,24 @@
       },
       "referred-parents": {
         "label": "Parents referred"
+      },
+      "parent-full-name": {
+        "label": "Full name"
+      },
+      "parent-phone-number": {
+        "label": "Telephone number"
+      },
+      "parent-email": {
+        "label": "Email address"
+      },
+      "parent-date-of-birth": {
+        "label": "Date of birth"
+      },
+      "parent-country": {
+        "label": "Country they live in"
+      },
+      "parent-evacuated-without-reason": {
+        "label": "Not evacuated together because"
       }
     }
   }

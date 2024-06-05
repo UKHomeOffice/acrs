@@ -223,7 +223,7 @@ module.exports = {
       addStep: 'parent-details',
       addAnotherLinkText: 'parent',
       locals: { showSaveAndExit: true },
-      // continueOnEdit: false,
+      continueOnEdit: false,
       template: 'parent-summary',
       backLink: 'parent',
       aggregateLimit: PARENT_LIMIT,
@@ -242,7 +242,7 @@ module.exports = {
       }],
       next: '/brother-or-sister-details',
       locals: { showSaveAndExit: true },
-      // continueOnEdit: true
+      continueOnEdit: true
     },
 
     '/brother-or-sister-details': {
