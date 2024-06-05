@@ -133,11 +133,11 @@ module.exports = {
         field: 'referred-parents',
         addElementSeparators: true,
         dependsOn: 'parent',
-        parse: (obj, req) => {
+        parse: obj => {
           if (!obj?.aggregatedValues) {
             return null;
           }
-          let items = obj.aggregatedValues ?? null;
+          const items = obj.aggregatedValues ?? null;
           for (const item of items) {
             item.fields.map(field => {
               if (field.field === 'parent-full-name') {
@@ -145,10 +145,10 @@ module.exports = {
               }
               field.omitChangeLink = true;
               return field;
-            })
+            });
           }
           obj.aggregatedValues = items;
-          return obj
+          return obj;
         }
       }
     ]

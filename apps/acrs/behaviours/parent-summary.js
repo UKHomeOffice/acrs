@@ -1,7 +1,7 @@
 const moment = require('moment');
 module.exports = superclass => class extends superclass {
   configure(req, res, next) {
-    // Allow the aggregator behaviour to redirect to the looping section intro page when all previously added parents are removed
+    // Let the aggregator behaviour to redirect to the loop section intro when all previously added parents are removed
     if(req.sessionModel.get('referred-parents') && !req.sessionModel.get('referred-parents').aggregatedValues.length) {
       req.form.options.addStep = 'parent';
     }
