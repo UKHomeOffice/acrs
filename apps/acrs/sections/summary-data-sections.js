@@ -134,11 +134,8 @@ module.exports = {
         addElementSeparators: true,
         dependsOn: 'parent',
         parse: obj => {
-          if (!obj?.aggregatedValues) {
-            return null;
-          }
-          const items = obj.aggregatedValues ?? null;
-          for (const item of items) {
+          if (!obj?.aggregatedValues) { return null; }
+          for (const item of obj.aggregatedValues) {
             item.fields.map(field => {
               if (field.field === 'parent-full-name') {
                 field.isAggregatorTitle = true;
@@ -147,7 +144,6 @@ module.exports = {
               return field;
             });
           }
-          obj.aggregatedValues = items;
           return obj;
         }
       }
