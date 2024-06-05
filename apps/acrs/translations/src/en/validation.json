@@ -67,7 +67,8 @@
       "required": "Enter this parent's date of birth",
       "date": "Please enter a valid date",
       "after": "Enter a date after 01 01 1900",
-      "before": "Please enter a date in the past"
+      "before": "Please enter a date in the past",
+      "over18": "Parent must be over 18. Parents that are under 18 cannot be referred."
     },
     "parent-country": {
       "required": "Enter the country this parent lives in",
@@ -127,7 +128,8 @@
       "required": "Enter partner's date of birth",
       "date": "Please enter a valid date",
       "after": "Enter a date after 01 01 1900",
-      "before": "Partner's date of birth must be in the past"
+      "before": "Partner's date of birth must be in the past",
+      "over18": "Partner must be over 18. Partners that are under 18 cannot be referred."
     },
     "partner-country": {
       "required": "Enter the country this parent lives in",
