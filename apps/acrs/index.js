@@ -350,7 +350,15 @@ module.exports = {
       next: '/child-details'
     },
     '/child-details': {
-      fields: [],
+      fields: [
+        'child-full-name',
+        'child-date-of-birth',
+        'child-country',
+        'child-living-situation',
+        'child-why-without-child'
+      ],
+      behaviours: SaveFormSession,
+      locals: { showSaveAndExit: true },
       next: '/children-summary'
     },
     '/children-summary': {

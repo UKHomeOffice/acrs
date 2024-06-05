@@ -220,5 +220,29 @@ module.exports = {
         field: 'partner-why-without-partner'
       }
     ]
+  },
+  'child-details': {
+    steps: [
+      {
+        steps: '/child-details',
+        field: 'child-full-name'
+      },
+      {
+        steps: '/child-details',
+        field: 'child-date-of-birth'
+      },
+      {
+        steps: '/child-details',
+        field: 'child-country'
+      },
+      {
+        steps: '/child-details',
+        field: 'child-living-situation'
+      },
+      {
+        steps: '/child-details',
+        field: 'child-why-without-child'
+      }
+    ]
   }
 };
