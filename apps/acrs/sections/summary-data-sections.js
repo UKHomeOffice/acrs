@@ -115,6 +115,113 @@ module.exports = {
       }
     ]
   },
+  'family-in-your-referral': {
+    steps: [
+      {
+        steps: '/parent',
+        field: 'parent',
+        parse: (list, req) => {
+          if (!req.sessionModel.get('steps').includes('/parent')) {
+            return null;
+          }
+          return req.sessionModel.get('parent') === 'yes' ?
+            'Yes' : 'No';
+        }
+      },
+      {
+        step: '/parent-summary',
+        field: 'referred-parents',
+        addElementSeparators: true,
+        dependsOn: 'parent',
+        parse: obj => {
+          if (!obj?.aggregatedValues) { return null; }
+          for (const item of obj.aggregatedValues) {
+            item.fields.map(field => {
+              if (field.field === 'parent-full-name') {
+                field.isAggregatorTitle = true;
+              }
+              field.omitChangeLink = true;
+              if (field.field.includes('date-of-birth')) {
+                if (field.value !== undefined) {
+                  field.parsed = moment(field.value, 'YYYY-MMMM-DD').format('DD MMMM YYYY');
+                }
+              }
+              return field;
+            });
+          }
+          return obj;
+        }
+      },
+      {
+        steps: '/brother-or-sister',
+        field: 'brother-or-sister',
+        parse: (list, req) => {
+          if (!req.sessionModel.get('steps').includes('/brother-or-sister')) {
+            return null;
+          }
+          return req.sessionModel.get('brother-or-sister') === 'yes' ?
+            'Yes' : 'No';
+        }
+      },
+      {
+        step: '/brother-or-sister-summary',
+        field: 'referred-siblings',
+        addElementSeparators: true,
+        dependsOn: 'brother-or-sister',
+        parse: obj => {
+          if (!obj?.aggregatedValues) { return null; }
+          for (const item of obj.aggregatedValues) {
+            item.fields.map(field => {
+              if (field.field === 'brother-or-sister-full-name') {
+                field.isAggregatorTitle = true;
+              }
+              field.omitChangeLink = true;
+              if (field.field.includes('date-of-birth')) {
+                if (field.value !== undefined) {
+                  field.parsed = moment(field.value, 'YYYY-MMMM-DD').format('DD MMMM YYYY');
+                }
+              }
+              return field;
+            });
+          }
+          return obj;
+        }
+      },
+      {
+        step: '/children',
+        field: 'children',
+        parse: (list, req) => {
+          if ( !req.sessionModel.get('steps').includes('/children') ) {
+            return null;
+          }
+          return req.sessionModel.get('children') === 'yes' ? 'Yes' : 'No';
+        }
+      },
+      {
+        step: '/children-summary',
+        field: 'referred-children',
+        addElementSeparators: true,
+        dependsOn: 'children',
+        parse: obj => {
+          if ( !obj?.aggregatedValues ) { return null; }
+
+          for (const item of obj.aggregatedValues) {
+            item.fields.map(field => {
+              field.isAggregatorTitle = field.field === 'child-full-name';
+              field.omitChangeLink = true;
+              if (field.field.includes('date-of-birth')) {
+                if (field.value !== undefined) {
+                  field.parsed = moment(field.value, 'YYYY-MMMM-DD').format('DD MMMM YYYY');
+                }
+              }
+              return field;
+            });
+          }
+          return obj;
+        }
+      }
+    ]
+  },
   'partner-details': {
     steps: [
       {

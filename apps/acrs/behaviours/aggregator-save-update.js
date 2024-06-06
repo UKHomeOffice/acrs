@@ -1,6 +1,3 @@
-
-const path = require('path');
-
 module.exports = superclass => class extends superclass {
   constructor(options) {
     if (!options.aggregateTo) {
@@ -15,100 +12,85 @@ module.exports = superclass => class extends superclass {
   deleteItem(req, res) {
     const id = req.params.id;
 
+    let items = '';
+
     if (id) {
-      const items = this.getAggregateArray(req).filter((element, index) => index !== parseInt(id, 10));
+      items = this.getAggregateArray(req).filter((element, index) => index !== parseInt(id, 10));
       this.setAggregateArray(req, items);
     }
+
     res.redirect(`${req.baseUrl}${req.form.options.route}`);
   }
 
   updateItem(req, res) {
-    const id = req.sessionModel.get(`${req.form.options.aggregateTo}-itemToReplaceId`);
-    const items = this.getAggregateArray(req);
-
-    let itemTitle = '';
-
-    req.form.options.aggregateFrom.forEach(aggregateFromElement => {
-      const aggregateFromField = aggregateFromElement.field || aggregateFromElement;
-
-      if (req.form.options.titleField === aggregateFromField) {
-        itemTitle = req.sessionModel.get(aggregateFromField);
-      }
-      const value = req.sessionModel.get(aggregateFromField);
-      const fieldToUpdate = items[id].fields.find(field => field.field === aggregateFromField);
-      fieldToUpdate.value = req.sessionModel.get(aggregateFromField);
-      fieldToUpdate.parsed = this.parseField(aggregateFromElement, value, req);
-
-      req.sessionModel.unset(aggregateFromField);
-    });
-
-    items[id].itemTitle = itemTitle;
-    this.setAggregateArray(req, items);
-    req.sessionModel.unset(`${req.form.options.aggregateTo}-itemToReplaceId`);
-
-
-    if (req.sessionModel.get('returnToSummary') && !this.continueOnEdit) {
-      req.sessionModel.unset('returnToSummary');
-      res.redirect(path.join(req.baseUrl, this.confirmStep));
-    } else {
-      res.redirect(`${req.baseUrl}${req.form.options.route}`);
-    }
-  }
-
-  showEditItemPage(req, res) {
-    const items = this.getAggregateArray(req);
     const id = req.params.id;
 
-    if (req.query.returnToSummary) {
-      req.sessionModel.set('returnToSummary', true);
-    }
+    const items = this.getAggregateArray(req);
 
-    if (id) {
-      req.sessionModel.set(`${req.form.options.aggregateTo}-itemToReplaceId`, id);
-
-      req.form.options.aggregateFrom.forEach(aggregateFromElement => {
-        const aggregateFromField = aggregateFromElement.field || aggregateFromElement;
-
-        req.sessionModel.set(aggregateFromField,
-          items[id].fields.find(field => field.field === aggregateFromField).value);
+    if (items[id]) {
+      items[id].fields.forEach(obj => {
+        req.sessionModel.set(obj.field, obj.value);
       });
-      const editPath = `/edit/${req.params.id}`;
-      res.redirect(`${req.baseUrl}/${req.form.options.addStep}${editPath}`);
-    } else {
-      res.redirect(`${req.baseUrl}${req.form.options.route}`);
+
+      items.splice(id, 1);
+      this.setAggregateArray(req, items);
     }
+
+    return this.redirectToAddStep(req, res);
   }
+
   addItem(req, res) {
     const items = this.getAggregateArray(req);
     const fields = [];
+
     let itemTitle = '';
+
+    const aggregateLimit = req.form.options.aggregateLimit || undefined;
 
     req.form.options.aggregateFrom.forEach(aggregateFromElement => {
       const aggregateFromField = aggregateFromElement.field || aggregateFromElement;
       const isTitleField = req.form.options.titleField === aggregateFromField;
       const value = req.sessionModel.get(aggregateFromField);
 
+      let isRefNumber = false;
+
       if (isTitleField) {
         itemTitle = value;
       }
+
+      if(aggregateFromElement === 'uan-detail') {
+        isRefNumber = true;
+      } else {
+        isRefNumber = false;
+      }
+
       fields.push({
         field: aggregateFromField,
         parsed: this.parseField(aggregateFromField, value, req),
         value,
-        showInSummary: !isTitleField,
+        isRefNumber,
+        showInSummary: true,
         changeField: aggregateFromElement.changeField
       });
 
       this.setAggregateArray(req, items);
       req.sessionModel.unset(aggregateFromField);
     });
+
     const newItem = { itemTitle, fields };
 
-    items.push(newItem);
+    if (aggregateLimit) {
+      if (items.length < aggregateLimit) {
+        items.push(newItem);
+      }
+    } else {
+      items.push(newItem);
+    }
 
     this.setAggregateArray(req, items);
     res.redirect(`${req.baseUrl}${req.form.options.route}`);
   }
+
   getAggregateArray(req) {
     const aggregateToField = req.sessionModel.get(req.form.options.aggregateTo) || { aggregatedValues: [] };
     return aggregateToField.aggregatedValues;
@@ -131,25 +113,17 @@ module.exports = superclass => class extends superclass {
   }
 
   redirectToAddStep(req, res) {
-    res.redirect(`${req.baseUrl}/${req.form.options.addStep}`);
-  }
-
-  editItem(req, res) {
-    if (req.sessionModel.get(`${req.form.options.aggregateTo}-itemToReplaceId`)) {
-      this.updateItem(req, res);
-    } else {
-      this.showEditItemPage(req, res);
-    }
+    return res.redirect(`${req.baseUrl}/${req.form.options.addStep}`);
   }
 
   getAction(req) {
-    const noItemsPresent = () => this.getAggregateArray(req).length === 0;
+    const noItemsPresent = this.getAggregateArray(req).length === 0;
 
     let action;
 
     if (this.newFieldsProvided(req)) {
       action = 'addItem';
-    } else if (noItemsPresent()) {
+    } else if (noItemsPresent) {
       action = 'redirectToAddStep';
     }
 
@@ -160,13 +134,14 @@ module.exports = superclass => class extends superclass {
     const action = req.params.action || this.getAction(req, res, next);
     this.handleAction(req, res, next, action);
   }
+
   handleAction(req, res, next, action) {
     switch (action) {
       case 'delete':
         this.deleteItem(req, res);
         break;
       case 'edit':
-        this.editItem(req, res);
+        this.updateItem(req, res);
         break;
       case 'addItem':
         this.addItem(req, res);
@@ -189,9 +164,11 @@ module.exports = superclass => class extends superclass {
 
   locals(req, res) {
     const items = this.getAggregateArray(req);
+
     items.forEach((element, index) => {
       element.index = index;
     });
+
     return Object.assign({}, super.locals(req, res), {
       items,
       hasItems: items.length > 0,
