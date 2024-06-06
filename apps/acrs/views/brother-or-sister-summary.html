@@ -1,0 +1,17 @@
+{{<partials-page}}
+  {{$page-content}}
+  {{> partials-aggregator-summary-table}}
+  <p class="govuk-body">{{#t}}pages.brother-or-sister-summary.brother-or-sister-limit-message{{/t}}</p>
+  {{#noMoreSiblings}}
+    <p>{{#t}}pages.brother-or-sister-summary.brother-or-sister-limit-exceeded{{/t}}</p>
+  {{/noMoreSiblings}}
+  <br>
+  {{^noMoreSiblings}}
+  <a href="{{baseUrl}}/{{addStep}}" class="govuk-button govuk-button--secondary" data-module="govuk-button">
+      Add another {{addAnotherLinkText}}
+  </a>
+  <br>
+  {{/noMoreSiblings}}
+  {{#input-submit}}continue{{/input-submit}}
+  {{/page-content}}
+{{/partials-page}}
