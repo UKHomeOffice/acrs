@@ -10,6 +10,7 @@ const Utilities = require('../../lib/utilities');
 const FamilyDetailBahaviour = require('./behaviours/family-member-details');
 const AggregateSaveUpdate = require('./behaviours/aggregator-save-update');
 const FamilyInUkLocalsBehaviour = require('./behaviours/family-in-uk-locals');
+const Submit = require('./behaviours/submit');
 const Locals18Flag = require('./behaviours/locals-18-flag');
 
 
@@ -95,7 +96,6 @@ module.exports = {
       next: '/full-name',
       locals: { showSaveAndExit: true }
     },
-
     '/full-name': {
       fields: ['full-name'],
       forks: [{
@@ -108,7 +108,6 @@ module.exports = {
       behaviours: SaveFormSession,
       locals: { showSaveAndExit: true }
     },
-
     '/confirm-referrer-email': {
       fields: ['confirm-referrer-email'],
       forks: [{
@@ -416,7 +415,7 @@ module.exports = {
       next: '/confirm'
     },
     '/confirm': {
-      behaviours: [SummaryPageBehaviour],
+      behaviours: [SummaryPageBehaviour, Submit],
       sections: require('./sections/summary-data-sections'),
       next: '/declaration'
     },

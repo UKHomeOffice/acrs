@@ -127,7 +127,7 @@ module.exports = {
   },
   'partner-date-of-birth': dateComponent('partner-date-of-birth', {
     legend: { className: 'bold' },
-    validate: ['required', 'before', after1900Validator]
+    validate: ['required', 'before', after1900Validator, 'over18']
   }),
   'partner-country': {
     labelClassName: 'bold',
@@ -190,7 +190,7 @@ module.exports = {
   },
   'parent-date-of-birth': dateComponent('parent-date-of-birth', {
     legend: { className: 'bold' },
-    validate: ['required', 'before', after1900Validator]
+    validate: ['required', 'before', after1900Validator, 'over18']
   }),
   'parent-country': {
     labelClassName: 'bold',
