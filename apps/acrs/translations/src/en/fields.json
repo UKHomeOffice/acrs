@@ -227,21 +227,25 @@
     }
   },
   "brother-or-sister-full-name": {
-    "label": "Brother or sister's full name"
+    "label": "Brother or sister's full name",
+    "summary-heading": "Full name"
   },
   "brother-or-sister-date-of-birth": {
     "legend": "Brother or sister's date of birth",
-    "hint": "For example, 27 3 1988. If they do not have a date of birth, enter a date that matches any evidence"
+    "hint": "For example, 27 3 1988. If they do not have a date of birth, enter a date that matches any evidence",
+    "summary-heading": "Date of birth"
   },
   "brother-or-sister-country": {
     "label": "What country do they live in?",
     "hint": "Start to type the country and options will appear. Select 'Unknown' if you do not know",
     "options": {
       "null": "Select a country"
-    }
+    },
+    "summary-heading": "Country they live in"
   },
   "brother-or-sister-evacuated-without-reason": {
-    "label": "Why were you evacuated without this brother or sister?"
+    "label": "Why were you evacuated without this brother or sister?",
+    "summary-heading": "Why you were evacuated without them"
   },
   "additional-family": {
     "legend": "Are you referring additional family members to come to the UK?",

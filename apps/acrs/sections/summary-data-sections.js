@@ -153,6 +153,41 @@ module.exports = {
         }
       },
       {
+        steps: '/brother-or-sister',
+        field: 'brother-or-sister',
+        parse: (list, req) => {
+          if (!req.sessionModel.get('steps').includes('/brother-or-sister')) {
+            return null;
+          }
+          return req.sessionModel.get('brother-or-sister') === 'yes' ?
+            'Yes' : 'No';
+        }
+      },
+      {
+        step: '/brother-or-sister-summary',
+        field: 'referred-siblings',
+        addElementSeparators: true,
+        dependsOn: 'brother-or-sister',
+        parse: obj => {
+          if (!obj?.aggregatedValues) { return null; }
+          for (const item of obj.aggregatedValues) {
+            item.fields.map(field => {
+              if (field.field === 'brother-or-sister-full-name') {
+                field.isAggregatorTitle = true;
+              }
+              field.omitChangeLink = true;
+              if (field.field.includes('date-of-birth')) {
+                if (field.value !== undefined) {
+                  field.parsed = moment(field.value, 'YYYY-MMMM-DD').format('DD MMMM YYYY');
+                }
+              }
+              return field;
+            });
+          }
+          return obj;
+        }
+      },
+      {
         steps: '/additional-family',
         field: 'additional-family',
         parse: (list, req) => {

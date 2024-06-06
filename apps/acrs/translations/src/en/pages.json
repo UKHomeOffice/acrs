@@ -49,11 +49,12 @@
     "parent-limit-exceeded": "You can not refer any more parents."
   },
   "brother-or-sister-details": {
-    "header": "Brother or sister {{values.brotherOrSisterCount}} details",
     "paragraph": "Add your brothers or sisters one at a time."
   },
   "brother-or-sister-summary": {
-    "header": "SKELETON: /brother-or-sister-summary"
+    "header": "Brothers or sisters you are referring",
+    "brother-or-sister-limit-message": "You can only refer brothers or sisters that your parents are responsible for.",
+    "brother-or-sister-limit-exceeded": "You can not refer any more brothers or sisters."
   },
   "partner": {
     "header": "Wives, husbands, spouses and unmarried partners",
@@ -200,9 +201,6 @@
       "current-email": {
         "label": "Email"
       },
-      "referred-parents": {
-        "label": "Parents referred"
-      },
       "parent-full-name": {
         "label": "Full name"
       },
@@ -219,6 +217,18 @@
         "label": "Country they live in"
       },
       "parent-evacuated-without-reason": {
+        "label": "Not evacuated together because"
+      },
+      "brother-or-sister-full-name": {
+        "label": "Full name"
+      },
+      "brother-or-sister-date-of-birth": {
+        "label": "Date of birth"
+      },
+      "brother-or-sister-country": {
+        "label": "Country they live in"
+      },
+      "brother-or-sister-evacuated-without-reason": {
         "label": "Not evacuated together because"
       },
       "additional-family-full-name": {
