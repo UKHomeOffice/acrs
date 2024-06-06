@@ -77,13 +77,13 @@
     "paragraph-2": "The children you refer must not be living independently or have their own family."
   },
   "child-details": {
-    "header": "SKELETON: /child-details"
+    "header": "Child's details",
+    "paragraph": "Enter the details of a child you are referring to come to the UK. Add multiple children one at a time."
   },
   "children-summary": {
-    "header": "SKELETON: /children-summary"
-  },
-  "child-details-2": {
-    "header": "SKELETON: /child-details-2"
+    "header": "Children you are referring",
+    "children-limit-message": "You can refer a maximum of {{referredChildrenLimit}} children to come to the UK.",
+    "children-limit-exceeded": "You can not refer any more children."
   },
   "additional-family": {
     "header": "Additional family members",

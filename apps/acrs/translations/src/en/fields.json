@@ -172,6 +172,32 @@
       }
     }
   },
+  "child-full-name": {
+    "label": "Child’s full name",
+    "summary-heading": "Full name"
+  },
+  "child-date-of-birth": {
+    "legend": "Child’s date of birth",
+    "hint": "For example, 27 3 2007",
+    "summary-heading": "Date of birth"
+  },
+  "child-country": {
+    "label": "What country do they live in?",
+    "hint": "Start to type the country and options will appear. Select 'Unknown' if you do not know",
+    "options": {
+      "null": "Select a country"
+    },
+    "summary-heading": "Country they live in"
+  },
+  "child-living-situation": {
+    "label": "Child’s living situation",
+    "hint": "For example, who they are living with, their relationship to who they are living with and how long they have lived there",
+    "summary-heading": "Living situation"
+  },
+  "child-why-without-child": {
+    "label": "Why were you evacuated without this child?",
+    "summary-heading": "Why you were evacuated without them"
+  },
   "parent": {
       "legend": "Are you referring a parent to come to the UK?",
       "hint": "You can only refer your own parents. You can refer a maximum of 2 parents",

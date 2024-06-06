@@ -13,16 +13,21 @@ const FamilyMemberBahaviour = require('./behaviours/family-member');
 const FamilyDetailBahaviour = require('./behaviours/get-family-detail');
 const Locals18Flag = require('./behaviours/locals-18-flag');
 const AggregateSaveUpdate = require('./behaviours/aggregator-save-update');
+const AggregatorSaveUpdate = AggregateSaveUpdate;
 const ResetSummary = require('./behaviours/reset-summary');
 const ModifySummaryChangeLinks = require('./behaviours/summary-modify-change-link');
 const ParentSummary = require('./behaviours/parent-summary');
 const LimitParents = require('./behaviours/limit-parents');
 const BrotherSisterSummary = require('./behaviours/brother-sister-summary');
 const LimitBrothersOrSisters = require('./behaviours/limit-brother-sister');
+const ChildrenSummary = require('./behaviours/children-summary');
+const LimitChildren = require('./behaviours/limit-children');
+
 
 // Aggregator section limits
 const PARENT_LIMIT = 2;
 const BROTHER_OR_SISTER_LIMIT = 100;
+const CHILDREN_LIMIT = process.env.NODE_ENV === 'development' ? 2 : 100;
 
 module.exports = {
   name: 'acrs',
@@ -337,28 +342,78 @@ module.exports = {
       next: '/children'
     },
     '/children': {
+      behaviours: [ResetSummary('referred-children', 'children'), SaveFormSession],
       fields: ['children'],
-      forks: [{
-        target: '/additional-family',
-        condition: {
-          field: 'children',
-          value: 'no'
+      forks: [
+        {
+          target: '/children-summary',
+          condition: {
+            field: 'children',
+            value: 'yes'
+          }
+        },
+        {
+          target: '/additional-family',
+          condition: {
+            field: 'children',
+            value: 'no'
+          }
+        },
+        {
+          target: '/child-details',
+          condition: req => {
+            if (
+              req.form.values.children === 'yes' &&
+              req.sessionModel.get('referred-children') &&
+              req.sessionModel.get('referred-children').aggregatedValues.length === 0
+            ) {
+              return true;
+            }
+            return false;
+          }
         }
-      }],
-      behaviours: SaveFormSession,
+      ],
       locals: { showSaveAndExit: true },
-      next: '/child-details'
+      continueOnEdit: true
     },
     '/child-details': {
-      fields: [],
+      fields: [
+        'child-full-name',
+        'child-date-of-birth',
+        'child-country',
+        'child-living-situation',
+        'child-why-without-child'
+      ],
+      behaviours: SaveFormSession,
+      locals: { showSaveAndExit: true },
       next: '/children-summary'
     },
     '/children-summary': {
-      fields: [],
-      next: '/child-details-2'
-    },
-    '/child-details-2': {
-      fields: [],
+      behaviours: [
+        AggregatorSaveUpdate,
+        ChildrenSummary,
+        LimitChildren,
+        SaveFormSession
+      ],
+      aggregateTo: 'referred-children',
+      aggregateFrom: [
+        'child-full-name',
+        'child-date-of-birth',
+        'child-country',
+        'child-living-situation',
+        'child-why-without-child'
+      ],
+      aggregateLimit: CHILDREN_LIMIT,
+      titleField: 'child-full-name',
+      addStep: 'child-details',
+      addAnotherLinkText: 'child',
+      locals: {
+        showSaveAndExit: true,
+        referredChildrenLimit: CHILDREN_LIMIT
+      },
+      continueOnEdit: false,
+      template: 'children-summary',
+      backLink: 'children',
       next: '/additional-family'
     },
 
