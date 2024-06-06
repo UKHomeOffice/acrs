@@ -85,9 +85,6 @@
     "children-limit-message": "You can refer a maximum of {{referredChildrenLimit}} children to come to the UK.",
     "children-limit-exceeded": "You can not refer any more children."
   },
-  "child-details-2": {
-    "header": "SKELETON: /child-details-2"
-  },
   "additional-family": {
     "header": "Additional family members",
     "paragraph-1": "Additional family member means anyone who is not:",

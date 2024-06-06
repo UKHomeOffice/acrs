@@ -416,10 +416,6 @@ module.exports = {
       backLink: 'children',
       next: '/additional-family'
     },
-    '/child-details-2': {   // TODO remove
-      fields: [],
-      next: '/additional-family'
-    },
 
     // Figma Section: "Additional family members" (additional-family)
 
