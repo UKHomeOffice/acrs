@@ -7,15 +7,12 @@ const CheckEmailToken = require('./behaviours/check-email-token');
 const SaveFormSession = require('./behaviours/save-form-session');
 const SaveAndExit = require('./behaviours/save-and-exit');
 const Utilities = require('../../lib/utilities');
-
 const Submit = require('./behaviours/submit');
 const FamilyMemberBahaviour = require('./behaviours/family-member');
 const FamilyDetailBahaviour = require('./behaviours/get-family-detail');
 const AggregateSaveUpdate = require('./behaviours/aggregator-save-update');
 const FamilyInUkLocalsBehaviour = require('./behaviours/family-in-uk-locals');
 const Locals18Flag = require('./behaviours/locals-18-flag');
-const AggregateSaveUpdate = require('./behaviours/aggregator-save-update');
-const AggregatorSaveUpdate = AggregateSaveUpdate;
 const ResetSummary = require('./behaviours/reset-summary');
 const ModifySummaryChangeLinks = require('./behaviours/summary-modify-change-link');
 const ParentSummary = require('./behaviours/parent-summary');
@@ -393,7 +390,7 @@ module.exports = {
     },
     '/children-summary': {
       behaviours: [
-        AggregatorSaveUpdate,
+        AggregateSaveUpdate,
         ChildrenSummary,
         LimitChildren,
         SaveFormSession
