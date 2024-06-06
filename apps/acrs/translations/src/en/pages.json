@@ -143,13 +143,10 @@
   "how-send-decision": {
     "header": "How do we send the decision on your referral?"
   },
-  "email-decision": {
-    "header": "Do we send your decision to",
-    "label": "{{values.user-email}}",
-    "title": "Email address for your decision - Refer family to come to the UK"
-  },
-  "your-postal-address": {
-    "header": "SKELETON: /your-postal-address"
+  "decision-postal-address": {
+    "header": "Postal address for the decision",
+    "hint": "If you have no fixed address, enter an address we can use to contact you",
+    "title": "Postal address for the decision - Refer family to come to the UK"
   },
   "declaration": {
     "header": "SKELETON: /declaration"

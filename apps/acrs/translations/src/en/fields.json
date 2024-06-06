@@ -383,5 +383,17 @@
   },
   "is-decision-by-email-detail": {
     "label": "Email address for decision"
+  },
+  "is-decision-post-address-1": {
+    "label": "Address line 1"
+  },
+  "is-decision-post-address-2": {
+    "label": "Address line 2(optional)"
+  },
+  "is-decision-post-town-or-city": {
+    "label": "Town or city"
+  },
+  "is-decision-post-postcode": {
+    "label": "Postcode"
   }
 }

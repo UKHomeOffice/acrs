@@ -7,14 +7,12 @@ const CheckEmailToken = require('./behaviours/check-email-token');
 const SaveFormSession = require('./behaviours/save-form-session');
 const SaveAndExit = require('./behaviours/save-and-exit');
 const Utilities = require('../../lib/utilities');
-
 const Submit = require('./behaviours/submit');
 const FamilyMemberBahaviour = require('./behaviours/family-member');
 const FamilyDetailBahaviour = require('./behaviours/get-family-detail');
 const AggregateSaveUpdate = require('./behaviours/aggregator-save-update');
 const FamilyInUkLocalsBehaviour = require('./behaviours/family-in-uk-locals');
 const Locals18Flag = require('./behaviours/locals-18-flag');
-const AggregatorSaveUpdate = AggregateSaveUpdate;
 const ResetSummary = require('./behaviours/reset-summary');
 const ModifySummaryChangeLinks = require('./behaviours/summary-modify-change-link');
 const ParentSummary = require('./behaviours/parent-summary');
@@ -392,7 +390,7 @@ module.exports = {
     },
     '/children-summary': {
       behaviours: [
-        AggregatorSaveUpdate,
+        AggregateSaveUpdate,
         ChildrenSummary,
         LimitChildren,
         SaveFormSession
@@ -543,7 +541,7 @@ module.exports = {
           value: 'email'
         }
       }],
-      next: '/your-postal-address'
+      next: '/decision-postal-address'
     },
     '/email-decision': {
       behaviours: SaveFormSession,
@@ -551,9 +549,14 @@ module.exports = {
       locals: { showSaveAndExit: true },
       next: '/confirm'
     },
-
-    '/your-postal-address': {
-      fields: [],
+    '/decision-postal-address': {
+      fields: [
+        'is-decision-post-address-1',
+        'is-decision-post-address-2',
+        'is-decision-post-town-or-city',
+        'is-decision-post-postcode'
+      ],
+      locals: { showSaveAndExit: true },
       next: '/confirm'
     },
     '/confirm': {
