@@ -12,6 +12,17 @@ const AggregateSaveUpdate = require('./behaviours/aggregator-save-update');
 const FamilyInUkLocalsBehaviour = require('./behaviours/family-in-uk-locals');
 const Submit = require('./behaviours/submit');
 const Locals18Flag = require('./behaviours/locals-18-flag');
+const AggregateSaveUpdate = require('./behaviours/aggregator-save-update');
+const ResetSummary = require('./behaviours/reset-summary');
+const ModifySummaryChangeLinks = require('./behaviours/summary-modify-change-link');
+const ParentSummary = require('./behaviours/parent-summary');
+const LimitParents = require('./behaviours/limit-parents');
+const BrotherSisterSummary = require('./behaviours/brother-sister-summary');
+const LimitBrothersOrSisters = require('./behaviours/limit-brother-sister');
+
+// Aggregator section limits
+const PARENT_LIMIT = 2;
+const BROTHER_OR_SISTER_LIMIT = 100;
 
 
 module.exports = {
@@ -33,7 +44,7 @@ module.exports = {
       backLink: false
     },
     '/information-you-have-given-us': {
-      behaviours: [SummaryPageBehaviour, CheckInformationGivenBehaviour],
+      behaviours: [SummaryPageBehaviour, CheckInformationGivenBehaviour, ModifySummaryChangeLinks],
       sections: require('./sections/summary-data-sections'),
       backLink: false,
       journeyStart: '/who-completing-form'
@@ -153,22 +164,42 @@ module.exports = {
     // Figma Section: "Who are you applying to bring to the UK? Sponsor under 18" (who-bringing-parent)
 
     '/parent': {
-      behaviours: SaveFormSession,
+      behaviours: [ResetSummary('referred-parents', 'parent'), SaveFormSession],
       fields: ['parent'],
-      forks: [{
-        target: '/brother-or-sister',
-        condition: {
-          field: 'parent',
-          value: 'no'
+      forks: [
+        {
+          target: '/parent-summary',
+          condition: {
+            field: 'parent',
+            value: 'yes'
+          }
+        },
+        {
+          target: '/brother-or-sister',
+          condition: {
+            field: 'parent',
+            value: 'no'
+          }
+        },
+        {
+          target: '/parent-details',
+          condition: req => {
+            if (
+              req.form.values.parent === 'yes' &&
+                req.sessionModel.get('referred-parents') &&
+                req.sessionModel.get('referred-parents').aggregatedValues.length === 0
+            ) {
+              return true;
+            }
+            return false;
+          }
         }
-      }],
-      next: '/parent-details',
+      ],
       locals: { showSaveAndExit: true },
       continueOnEdit: true
     },
-
     '/parent-details': {
-      behaviours: SaveFormSession,
+      behaviours: [LimitParents, SaveFormSession],
       fields: [
         'parent-full-name',
         'parent-phone-number',
@@ -178,30 +209,69 @@ module.exports = {
         'parent-evacuated-without-reason'
       ],
       next: '/parent-summary',
-      locals: { showSaveAndExit: true }
+      locals: { showSaveAndExit: true },
+      continueOnEdit: true
     },
     '/parent-summary': {
-      fields: [],
+      behaviours: [AggregateSaveUpdate, ParentSummary, LimitParents, SaveFormSession],
+      aggregateTo: 'referred-parents',
+      aggregateFrom: [
+        'parent-full-name',
+        'parent-phone-number',
+        'parent-email',
+        'parent-date-of-birth',
+        'parent-country',
+        'parent-evacuated-without-reason'
+      ],
+      titleField: 'parent-full-name',
+      addStep: 'parent-details',
+      addAnotherLinkText: 'parent',
+      locals: { showSaveAndExit: true },
+      continueOnEdit: false,
+      template: 'parent-summary',
+      backLink: 'parent',
+      aggregateLimit: PARENT_LIMIT,
       next: '/brother-or-sister'
     },
 
     '/brother-or-sister': {
-      behaviours: SaveFormSession,
+      behaviours: [ResetSummary('referred-siblings', 'brother-or-sister'), SaveFormSession],
       fields: ['brother-or-sister'],
-      forks: [{
-        target: '/additional-family',
-        condition: {
-          field: 'brother-or-sister',
-          value: 'no'
+      forks: [
+        {
+          target: '/brother-or-sister-summary',
+          condition: {
+            field: 'brother-or-sister',
+            value: 'yes'
+          }
+        },
+        {
+          target: '/additional-family',
+          condition: {
+            field: 'brother-or-sister',
+            value: 'no'
+          }
+        },
+        {
+          target: '/brother-or-sister-details',
+          condition: req => {
+            if (
+              req.form.values['brother-or-sister'] === 'yes' &&
+                req.sessionModel.get('referred-siblings') &&
+                req.sessionModel.get('referred-siblings').aggregatedValues.length === 0
+            ) {
+              return true;
+            }
+            return false;
+          }
         }
-      }],
-      next: '/brother-or-sister-details',
+      ],
       locals: { showSaveAndExit: true },
       continueOnEdit: true
     },
 
     '/brother-or-sister-details': {
-      behaviours: SaveFormSession,
+      behaviours: [LimitBrothersOrSisters, SaveFormSession],
       fields: [
         'brother-or-sister-full-name',
         'brother-or-sister-date-of-birth',
@@ -209,10 +279,26 @@ module.exports = {
         'brother-or-sister-evacuated-without-reason'
       ],
       next: '/brother-or-sister-summary',
-      locals: { showSaveAndExit: true }
+      locals: { showSaveAndExit: true },
+      continueOnEdit: true
     },
     '/brother-or-sister-summary': {
-      fields: [],
+      behaviours: [AggregateSaveUpdate, BrotherSisterSummary, LimitBrothersOrSisters, SaveFormSession],
+      aggregateTo: 'referred-siblings',
+      aggregateFrom: [
+        'brother-or-sister-full-name',
+        'brother-or-sister-date-of-birth',
+        'brother-or-sister-country',
+        'brother-or-sister-evacuated-without-reason'
+      ],
+      titleField: 'brother-or-sister-full-name',
+      addStep: 'brother-or-sister-details',
+      addAnotherLinkText: 'brother or sister',
+      locals: { showSaveAndExit: true },
+      continueOnEdit: false,
+      template: 'brother-or-sister-summary',
+      backLink: 'brother-or-sister',
+      aggregateLimit: BROTHER_OR_SISTER_LIMIT,
       next: '/additional-family'
     },
 
@@ -416,7 +502,7 @@ module.exports = {
       next: '/confirm'
     },
     '/confirm': {
-      behaviours: [SummaryPageBehaviour, Submit],
+      behaviours: [SummaryPageBehaviour, ModifySummaryChangeLinks, Submit],
       sections: require('./sections/summary-data-sections'),
       next: '/declaration'
     },

@@ -41,18 +41,20 @@
     "paragraph": "If you have no fixed address, enter an address we can use to contact you."
   },
   "parent-details": {
-    "header": "Parent {{values.parentCount}} details",
     "paragraph": "Add your parents one at a time."
   },
   "parent-summary": {
-    "header": "SKELETON: /parent-summary"
+    "header": "Parents you are referring",
+    "parent-limit-message": "You can refer a maximum of 2 parents to come to the UK.",
+    "parent-limit-exceeded": "You can not refer any more parents."
   },
   "brother-or-sister-details": {
-    "header": "Brother or sister {{values.brotherOrSisterCount}} details",
     "paragraph": "Add your brothers or sisters one at a time."
   },
   "brother-or-sister-summary": {
-    "header": "SKELETON: /brother-or-sister-summary"
+    "header": "Brothers or sisters you are referring",
+    "brother-or-sister-limit-message": "You can only refer brothers or sisters that your parents are responsible for.",
+    "brother-or-sister-limit-exceeded": "You can not refer any more brothers or sisters."
   },
   "partner": {
     "header": "Wives, husbands, spouses and unmarried partners",
@@ -169,6 +171,9 @@
       },
       "immigration-adviser-details": {
         "header": "Immigration adviser details"
+      },
+      "family-in-your-referral": {
+        "header": "Family in your referral"
       }
     },
     "fields": {
@@ -204,8 +209,37 @@
       },
       "current-email": {
         "label": "Email"
+      },
+      "parent-full-name": {
+        "label": "Full name"
+      },
+      "parent-phone-number": {
+        "label": "Telephone number"
+      },
+      "parent-email": {
+        "label": "Email address"
+      },
+      "parent-date-of-birth": {
+        "label": "Date of birth"
+      },
+      "parent-country": {
+        "label": "Country they live in"
+      },
+      "parent-evacuated-without-reason": {
+        "label": "Not evacuated together because"
+      },
+      "brother-or-sister-full-name": {
+        "label": "Full name"
+      },
+      "brother-or-sister-date-of-birth": {
+        "label": "Date of birth"
+      },
+      "brother-or-sister-country": {
+        "label": "Country they live in"
+      },
+      "brother-or-sister-evacuated-without-reason": {
+        "label": "Not evacuated together because"
       }
-    
     }
   }
 }
