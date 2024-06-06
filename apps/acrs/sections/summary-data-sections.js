@@ -115,6 +115,45 @@ module.exports = {
       }
     ]
   },
+  'family-in-your-referral': {
+    steps: [
+      {
+        steps: '/parent',
+        field: 'parent',
+        parse: (list, req) => {
+          if (!req.sessionModel.get('steps').includes('/parent')) {
+            return null;
+          }
+          return req.sessionModel.get('parent') === 'yes' ?
+            'Yes' : 'No';
+        }
+      },
+      {
+        step: '/parent-summary',
+        field: 'referred-parents',
+        addElementSeparators: true,
+        dependsOn: 'parent',
+        parse: obj => {
+          if (!obj?.aggregatedValues) { return null; }
+          for (const item of obj.aggregatedValues) {
+            item.fields.map(field => {
+              if (field.field === 'parent-full-name') {
+                field.isAggregatorTitle = true;
+              }
+              field.omitChangeLink = true;
+              if (field.field.includes('date-of-birth')) {
+                if (field.value !== undefined) {
+                  field.parsed = moment(field.value, 'YYYY-MMMM-DD').format('DD MMMM YYYY');
+                }
+              }
+              return field;
+            });
+          }
+          return obj;
+        }
+      }
+    ]
+  },
   'partner-details': {
     steps: [
       {

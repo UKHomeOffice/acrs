@@ -41,11 +41,12 @@
     "paragraph": "If you have no fixed address, enter an address we can use to contact you."
   },
   "parent-details": {
-    "header": "Parent {{values.parentCount}} details",
     "paragraph": "Add your parents one at a time."
   },
   "parent-summary": {
-    "header": "SKELETON: /parent-summary"
+    "header": "Parents you are referring",
+    "parent-limit-message": "You can refer a maximum of 2 parents to come to the UK.",
+    "parent-limit-exceeded": "You can not refer any more parents."
   },
   "brother-or-sister-details": {
     "header": "Brother or sister {{values.brotherOrSisterCount}} details",
@@ -169,6 +170,9 @@
       },
       "immigration-adviser-details": {
         "header": "Immigration adviser details"
+      },
+      "family-in-your-referral": {
+        "header": "Family in your referral"
       }
     },
     "fields": {
@@ -204,8 +208,28 @@
       },
       "current-email": {
         "label": "Email"
+      },
+      "referred-parents": {
+        "label": "Parents referred"
+      },
+      "parent-full-name": {
+        "label": "Full name"
+      },
+      "parent-phone-number": {
+        "label": "Telephone number"
+      },
+      "parent-email": {
+        "label": "Email address"
+      },
+      "parent-date-of-birth": {
+        "label": "Date of birth"
+      },
+      "parent-country": {
+        "label": "Country they live in"
+      },
+      "parent-evacuated-without-reason": {
+        "label": "Not evacuated together because"
       }
-    
     }
   }
 }

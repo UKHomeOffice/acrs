@@ -205,6 +205,37 @@ pre.looped-records {
   margin-left: 15px;
 }
 
+@media only screen and (max-width: 685px) {
+  .save-and-exit-button {
+    margin-left: 0px;
+  }
+}
+
 .govuk-character-count__message {
   display: none;
+}
+
+.table-options {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: baseline;
+}
+
+.wrap-table-cell,
+.confirm-row {
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+
+.loop-summary-table .govuk-table__cell:nth-child(1){
+  font-weight: bold !important;
+}
+
+.loop-summary-table .data-col {
+  font-size: 28px;
+}
+
+.confirm-label[data-content="Files uploaded"] ~ .confirm-value {
+  white-space: pre-line
 }
