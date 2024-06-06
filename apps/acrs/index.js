@@ -381,6 +381,7 @@ module.exports = {
       addAnotherLinkText: 'family member',
       template: 'family-in-uk-summary',
       locals: { showSaveAndExit: true },
+      aggregateLimit: Utilities.DEFAULT_AGGREGATOR_LIMIT,
       continueOnEdit: true,
       next: '/upload-evidence'
     },
