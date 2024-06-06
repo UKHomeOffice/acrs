@@ -1,7 +1,10 @@
 const moment = require('moment');
 module.exports = superclass => class extends superclass {
   configure(req, res, next) {
-    if(req.sessionModel.get('referred-children') && !req.sessionModel.get('referred-children').aggregatedValues.length) {
+    const aggregateTo = req.form.options.aggregateTo; // 'referred-children'
+    const aggregate = req.sessionModel.get(aggregateTo);
+
+    if(aggregate && !aggregate.aggregatedValues.length) {
       req.form.options.addStep = 'children';
     }
     super.configure(req, res, next);
@@ -10,7 +13,8 @@ module.exports = superclass => class extends superclass {
   /**
    * Iterate the referred Children and fix up data in the fields
    * Date of Birth is formatted to DD MMMM YYYY
-   * By appending `.summary-heading` to the `.field` the legend used in the summary is taken from "summary-heading" in fields.json
+   * By appending `.summary-heading` to the `.field` the legend used
+   * in the summary is taken from "summary-heading" in fields.json
    *
    * @param {Object} req - The request object.
    * @param {Object} res - The response object.

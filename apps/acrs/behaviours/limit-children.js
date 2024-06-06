@@ -1,8 +1,8 @@
-  /**
-   * Adds the LimitChildren behaviour to the steps.
-   * This provides a flag `noMoreChildren` that indicates whether the user has 
-   * reached the maximum number of children that can be referred.
-   */
+/**
+ * Adds the LimitChildren behaviour to the steps.
+ * This provides a flag `noMoreChildren` that indicates whether the user has
+ * reached the maximum number of children that can be referred.
+ */
 
 module.exports = superclass => class extends superclass {
   locals(req, res) {
@@ -13,7 +13,7 @@ module.exports = superclass => class extends superclass {
 
     const aggregate = req.sessionModel.get(aggregateTo);
     if(aggregate && aggregate.aggregatedValues) {
-        locals.noMoreChildren = aggregate.aggregatedValues.length >= limit;
+      locals.noMoreChildren = aggregate.aggregatedValues.length >= limit;
     }
 
     return locals;

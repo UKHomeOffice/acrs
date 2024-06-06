@@ -385,7 +385,7 @@ module.exports = {
       titleField: 'child-full-name',
       addStep: 'child-details',
       addAnotherLinkText: 'child',
-      locals: { 
+      locals: {
         showSaveAndExit: true,
         referredChildrenLimit: CHILDREN_LIMIT
       },
