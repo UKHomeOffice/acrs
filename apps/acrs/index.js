@@ -21,12 +21,13 @@ const LimitParents = require('./behaviours/limit-parents');
 const BrotherSisterSummary = require('./behaviours/brother-sister-summary');
 const LimitBrothersOrSisters = require('./behaviours/limit-brother-sister');
 const ChildrenSummary = require('./behaviours/children-summary');
+const LimitChildren = require('./behaviours/limit-children');
 
 
 // Aggregator section limits
 const PARENT_LIMIT = 2;
 const BROTHER_OR_SISTER_LIMIT = 100;
-const CHILDREN_LIMIT = 100;
+const CHILDREN_LIMIT = process.env.NODE_ENV === 'development' ? 2 : 100;
 
 module.exports = {
   name: 'acrs',
@@ -369,7 +370,7 @@ module.exports = {
       behaviours: [
         AggregatorSaveUpdate,
         ChildrenSummary,
-        // LimitChildren,   // TODO
+        LimitChildren,
         SaveFormSession
       ],
       aggregateTo: 'referred-children',
@@ -380,14 +381,17 @@ module.exports = {
         'child-living-situation',
         'child-why-without-child'
       ],
+      aggregateLimit: CHILDREN_LIMIT,
       titleField: 'child-full-name',
       addStep: 'child-details',
       addAnotherLinkText: 'child',
-      locals: { showSaveAndExit: true },
+      locals: { 
+        showSaveAndExit: true,
+        referredChildrenLimit: CHILDREN_LIMIT
+      },
       continueOnEdit: false,
       template: 'children-summary',
       backLink: 'children',
-      aggregateLimit: CHILDREN_LIMIT,
       next: '/additional-family'
     },
     '/child-details-2': {   // TODO remove
