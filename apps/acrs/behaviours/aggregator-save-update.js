@@ -160,7 +160,7 @@ module.exports = superclass => class extends superclass {
 
   locals(req, res) {
     const items = this.getAggregateArray(req);
-    
+
     items.forEach((element, index) => {
       element.index = index;
     });

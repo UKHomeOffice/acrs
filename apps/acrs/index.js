@@ -12,7 +12,6 @@ const AggregateSaveUpdate = require('./behaviours/aggregator-save-update');
 const FamilyInUkLocalsBehaviour = require('./behaviours/family-in-uk-locals');
 const Submit = require('./behaviours/submit');
 const Locals18Flag = require('./behaviours/locals-18-flag');
-const AggregateSaveUpdate = require('./behaviours/aggregator-save-update');
 const ResetSummary = require('./behaviours/reset-summary');
 const ModifySummaryChangeLinks = require('./behaviours/summary-modify-change-link');
 const ParentSummary = require('./behaviours/parent-summary');
