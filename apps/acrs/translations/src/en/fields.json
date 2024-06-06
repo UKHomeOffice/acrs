@@ -336,14 +336,17 @@
     }
   },
   "family-member-fullname": {
-    "label": "Family member's full name"
+    "label": "Family member's full name",
+    "summary-heading": "Full name"
   },
   "family-member-date-of-birth": {
     "legend": "Family member's date of birth",
-    "hint": "For example, 27 3 1985. If they do not have a date of birth,enter a date that matches any evidence"
+    "hint": "For example, 27 3 1985. If they do not have a date of birth,enter a date that matches any evidence",
+    "summary-heading": "Date of birth"
   },
   "family-member-relationship": {
-    "label": "Family member's relationship to you"
+    "label": "Family member's relationship to you",
+    "summary-heading": "Relationship to you"
   },
   "has-family-member-been-evacuated": {
     "legend": "Was this family member evacuated with you?",
@@ -354,17 +357,44 @@
       "no": {
         "label": "No"
       }
-    }
+    },
+    "summary-heading": "Were they evacuated with you?"
   },
-  "how-send-decision": {
-    "label": "SKELETON: how-send-decision",
+  "how-to-send-decision": {
+    "hint": "You will receive your decision quicker by email",
     "options": {
       "email": {
-        "label": "SKELETON: Email"
+        "label": "Email"
       },
       "post": {
-        "label": "SKELETON: Post"
+        "label": "Post"
       }
     }
+  },
+  "is-decision-by-email": {
+    "legend": "Do we send your decision to {{values.user-email}}?",
+    "options": {
+      "yes": {
+        "label": "Yes"
+      },
+      "no": {
+        "label": "No"
+      }
+    }
+  },
+  "is-decision-by-email-detail": {
+    "label": "Email address for decision"
+  },
+  "is-decision-post-address-1": {
+    "label": "Address line 1"
+  },
+  "is-decision-post-address-2": {
+    "label": "Address line 2(optional)"
+  },
+  "is-decision-post-town-or-city": {
+    "label": "Town or city"
+  },
+  "is-decision-post-postcode": {
+    "label": "Postcode"
   }
 }

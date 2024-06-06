@@ -128,11 +128,11 @@
     "header": "Family that live in the UK"
   },
   "family-in-uk-details": {
-    "header": "Family member {{values.memberNumber}} living in the UK",
+    "header": "Family member {{values.memberIndex}} living in the UK",
     "hint": "Enter the details of a family member that lives in the UK."
   },
   "family-in-uk-summary": {
-    "header": "SKELETON: /family-in-uk-summary"
+    "header": "Family members that live in the UK"
   },
   "upload-evidence": {
     "header": "SKELETON: /upload-evidence"
@@ -141,13 +141,12 @@
     "header": "SKELETON: /evidence-notes"
   },
   "how-send-decision": {
-    "header": "SKELETON: /how-send-decision"
+    "header": "How do we send the decision on your referral?"
   },
-  "email-decision": {
-    "header": "SKELETON: /email-decision"
-  },
-  "your-postal-address": {
-    "header": "SKELETON: /your-postal-address"
+  "decision-postal-address": {
+    "header": "Postal address for the decision",
+    "hint": "If you have no fixed address, enter an address we can use to contact you",
+    "title": "Postal address for the decision - Refer family to come to the UK"
   },
   "declaration": {
     "header": "SKELETON: /declaration"

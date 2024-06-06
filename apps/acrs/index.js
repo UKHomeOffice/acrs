@@ -7,13 +7,12 @@ const CheckEmailToken = require('./behaviours/check-email-token');
 const SaveFormSession = require('./behaviours/save-form-session');
 const SaveAndExit = require('./behaviours/save-and-exit');
 const Utilities = require('../../lib/utilities');
-
 const Submit = require('./behaviours/submit');
 const FamilyMemberBahaviour = require('./behaviours/family-member');
 const FamilyDetailBahaviour = require('./behaviours/get-family-detail');
-const Locals18Flag = require('./behaviours/locals-18-flag');
 const AggregateSaveUpdate = require('./behaviours/aggregator-save-update');
-const AggregatorSaveUpdate = AggregateSaveUpdate;
+const FamilyInUkLocalsBehaviour = require('./behaviours/family-in-uk-locals');
+const Locals18Flag = require('./behaviours/locals-18-flag');
 const ResetSummary = require('./behaviours/reset-summary');
 const ModifySummaryChangeLinks = require('./behaviours/summary-modify-change-link');
 const ParentSummary = require('./behaviours/parent-summary');
@@ -28,6 +27,7 @@ const LimitChildren = require('./behaviours/limit-children');
 const PARENT_LIMIT = 2;
 const BROTHER_OR_SISTER_LIMIT = 100;
 const CHILDREN_LIMIT = process.env.NODE_ENV === 'development' ? 2 : 100;
+
 
 module.exports = {
   name: 'acrs',
@@ -390,7 +390,7 @@ module.exports = {
     },
     '/children-summary': {
       behaviours: [
-        AggregatorSaveUpdate,
+        AggregateSaveUpdate,
         ChildrenSummary,
         LimitChildren,
         SaveFormSession
@@ -499,8 +499,7 @@ module.exports = {
         'family-member-fullname',
         'family-member-date-of-birth',
         'family-member-relationship',
-        'has-family-member-been-evacuated',
-        'memberNumber'
+        'has-family-member-been-evacuated'
       ],
       backLink: 'family-in-uk',
       next: '/family-in-uk-summary',
@@ -508,7 +507,22 @@ module.exports = {
       titleField: 'countryAddNumber'
     },
     '/family-in-uk-summary': {
-      fields: []
+      behaviours: [AggregateSaveUpdate, FamilyInUkLocalsBehaviour, SaveFormSession],
+      aggregateTo: 'family-member-in-uk',
+      aggregateFrom: [
+        'family-member-fullname',
+        'family-member-relationship',
+        'family-member-date-of-birth',
+        'has-family-member-been-evacuated',
+        'memberIndex'
+      ],
+      titleField: 'memberIndex',
+      addStep: 'family-in-uk-details',
+      addAnotherLinkText: 'family member',
+      template: 'family-in-uk-summary',
+      locals: { showSaveAndExit: true },
+      continueOnEdit: true,
+      next: '/upload-evidence'
     },
     '/upload-evidence': {
       fields: [],
@@ -518,26 +532,31 @@ module.exports = {
       fields: [],
       next: '/how-send-decision'
     },
-
     '/how-send-decision': {
-      fields: ['how-send-decision'],
+      fields: ['how-to-send-decision'],
       forks: [{
         target: '/email-decision',
         condition: {
-          field: 'how-send-decision',
+          field: 'how-to-send-decision',
           value: 'email'
         }
       }],
-      next: '/your-postal-address'
+      next: '/decision-postal-address'
     },
-
     '/email-decision': {
-      fields: [],
+      behaviours: SaveFormSession,
+      fields: ['is-decision-by-email', 'is-decision-by-email-detail'],
+      locals: { showSaveAndExit: true },
       next: '/confirm'
     },
-
-    '/your-postal-address': {
-      fields: [],
+    '/decision-postal-address': {
+      fields: [
+        'is-decision-post-address-1',
+        'is-decision-post-address-2',
+        'is-decision-post-town-or-city',
+        'is-decision-post-postcode'
+      ],
+      locals: { showSaveAndExit: true },
       next: '/confirm'
     },
     '/confirm': {
