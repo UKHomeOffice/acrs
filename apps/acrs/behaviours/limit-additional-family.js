@@ -8,7 +8,7 @@ module.exports = superclass => class extends superclass {
       const referredAdditionalFamilyCount = referredAdditionalFamily.length + 1;
 
       if (referredAdditionalFamily && additionalFamilyLimit) {
-        locals.noMoreSiblings = true;
+        locals.noMoreAdditionalFamily = true;
       }
       locals.referredAdditionalFamilyCount = referredAdditionalFamilyCount.toString();
     }

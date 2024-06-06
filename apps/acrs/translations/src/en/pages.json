@@ -107,7 +107,7 @@
   },
   "additional-family-summary": {
     "header": "Additional family members in your referral",
-    "children-limit-exceeded": "You can not refer any more children."
+    "additional-family-limit-exceeded": "You can not refer any more family members."
   },
   "no-family-referred": {
     "header": "You must refer a family member",

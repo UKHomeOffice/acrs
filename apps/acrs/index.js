@@ -372,19 +372,6 @@ module.exports = {
       fields: ['additional-family'],
       forks: [
         {
-          target: '/no-family-referred',
-          condition: req => {
-            if (Utilities.isOver18(req.sessionModel.get('date-of-birth'))) {
-              return (req.sessionModel.get('partner') === 'no' &&
-                req.sessionModel.get('children') === 'no' &&
-                req.sessionModel.get('additional-family') === 'no');
-            }
-            return (req.sessionModel.get('parent') === 'no' &&
-              req.sessionModel.get('brother-or-sister') === 'no' &&
-              req.sessionModel.get('additional-family') === 'no');
-          }
-        },
-        {
           target: '/additional-family-summary',
           condition: {
             field: 'additional-family',
@@ -410,8 +397,22 @@ module.exports = {
             }
             return false;
           }
-        }
+        },
+        {
+          target: '/no-family-referred',
+          condition: req => {
+            if (Utilities.isOver18(req.sessionModel.get('date-of-birth'))) {
+              return (req.sessionModel.get('partner') === 'no' &&
+                req.sessionModel.get('children') === 'no' &&
+                req.sessionModel.get('additional-family') === 'no');
+            }
+            return (req.sessionModel.get('parent') === 'no' &&
+              req.sessionModel.get('brother-or-sister') === 'no' &&
+              req.sessionModel.get('additional-family') === 'no');
+          }
+        },
       ],
+      // next: '/family-in-uk',
       locals: { showSaveAndExit: true },
       continueOnEdit: true
     },

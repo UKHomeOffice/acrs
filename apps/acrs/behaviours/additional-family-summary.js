@@ -2,8 +2,8 @@ const moment = require('moment');
 module.exports = superclass => class extends superclass {
   configure(req, res, next) {
     // Let the aggregator behaviour to redirect to the loop section intro when all previously added family are removed
-    if(req.sessionModel.get('referred-additonal-family') &&
-      !req.sessionModel.get('referred-additonal-family').aggregatedValues.length) {
+    if(req.sessionModel.get('referred-additional-family') &&
+      !req.sessionModel.get('referred-additional-family').aggregatedValues.length) {
       req.form.options.addStep = 'additional-family';
     }
     super.configure(req, res, next);

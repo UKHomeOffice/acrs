@@ -170,7 +170,7 @@ module.exports = {
         dependsOn: 'brother-or-sister',
         parse: obj => {
           if (!obj?.aggregatedValues) { return null; }
-          for (const item of obj.aggregatedValues) {
+          for (const [index, item] of obj.aggregatedValues.entries()) {
             item.fields.map(field => {
               if (field.field === 'brother-or-sister-full-name') {
                 field.isAggregatorTitle = true;
@@ -183,6 +183,9 @@ module.exports = {
               }
               return field;
             });
+            // if (index === obj.aggregatedValues.length - 1) {
+            //   item.fields.push({ label: '', value: 'separator', changeLink: '', isSeparator: true });
+            // }
           }
           return obj;
         }
