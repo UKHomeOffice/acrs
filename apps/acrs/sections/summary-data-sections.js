@@ -141,6 +141,11 @@ module.exports = {
                 field.isAggregatorTitle = true;
               }
               field.omitChangeLink = true;
+              if (field.field.includes('date-of-birth')) {
+                if (field.value !== undefined) {
+                  field.parsed = moment(field.value, 'YYYY-MMMM-DD').format('DD MMMM YYYY');
+                }
+              }
               return field;
             });
           }
