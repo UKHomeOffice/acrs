@@ -4,6 +4,7 @@ module.exports = superclass => class extends superclass {
     const aggregateTo = req.form.options.aggregateTo; // 'referred-children'
     const aggregate = req.sessionModel.get(aggregateTo);
 
+    // When all children are removed redirect to the loop section intro
     if(aggregate && !aggregate.aggregatedValues.length) {
       req.form.options.addStep = 'children';
     }

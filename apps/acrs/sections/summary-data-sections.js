@@ -186,6 +186,39 @@ module.exports = {
           }
           return obj;
         }
+      },
+      {
+        step: '/children',
+        field: 'children',
+        parse: (list, req) => {
+          if ( !req.sessionModel.get('steps').includes('/children') ) {
+            return null;
+          }
+          return req.sessionModel.get('children') === 'yes' ? 'Yes' : 'No';
+        }
+      },
+      {
+        step: '/children-summary',
+        field: 'referred-children',
+        addElementSeparators: true,
+        dependsOn: 'children',
+        parse: obj => {
+          if ( !obj?.aggregatedValues ) { return null; }
+
+          for (const item of obj.aggregatedValues) {
+            item.fields.map(field => {
+              field.isAggregatorTitle = field.field === 'child-full-name';
+              field.omitChangeLink = true;
+              if (field.field.includes('date-of-birth')) {
+                if (field.value !== undefined) {
+                  field.parsed = moment(field.value, 'YYYY-MMMM-DD').format('DD MMMM YYYY');
+                }
+              }
+              return field;
+            });
+          }
+          return obj;
+        }
       }
     ]
   },
@@ -218,30 +251,6 @@ module.exports = {
       {
         steps: '/partner-details',
         field: 'partner-why-without-partner'
-      }
-    ]
-  },
-  'child-details': {
-    steps: [
-      {
-        steps: '/child-details',
-        field: 'child-full-name'
-      },
-      {
-        steps: '/child-details',
-        field: 'child-date-of-birth'
-      },
-      {
-        steps: '/child-details',
-        field: 'child-country'
-      },
-      {
-        steps: '/child-details',
-        field: 'child-living-situation'
-      },
-      {
-        steps: '/child-details',
-        field: 'child-why-without-child'
       }
     ]
   }
