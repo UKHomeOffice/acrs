@@ -23,7 +23,6 @@ module.exports = superclass => class extends superclass {
 
   updateItem(req, res) {
     const id = req.params.id;
-
     const items = this.getAggregateArray(req);
 
     if (items[id]) {
@@ -41,6 +40,7 @@ module.exports = superclass => class extends superclass {
   addItem(req, res) {
     const items = this.getAggregateArray(req);
     const fields = [];
+
 
     let itemTitle = '';
 
@@ -73,6 +73,7 @@ module.exports = superclass => class extends superclass {
       this.setAggregateArray(req, items);
       req.sessionModel.unset(aggregateFromField);
     });
+
 
     const newItem = { itemTitle, fields };
 
