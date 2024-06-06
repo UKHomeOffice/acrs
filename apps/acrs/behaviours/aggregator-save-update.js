@@ -17,10 +17,10 @@ module.exports = superclass => class extends superclass {
       items = this.getAggregateArray(req).filter((element, index) => index !== parseInt(id, 10));
       this.setAggregateArray(req, items);
     }
-    
+
     res.redirect(`${req.baseUrl}${req.form.options.route}`);
   }
-
+  
   updateItem(req, res) {
     const id = req.params.id;
     const items = this.getAggregateArray(req);
