@@ -20,7 +20,7 @@ module.exports = superclass => class extends superclass {
 
     res.redirect(`${req.baseUrl}${req.form.options.route}`);
   }
-  
+
   updateItem(req, res) {
     const id = req.params.id;
     const items = this.getAggregateArray(req);
