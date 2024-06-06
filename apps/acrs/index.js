@@ -342,17 +342,39 @@ module.exports = {
       next: '/children'
     },
     '/children': {
+      behaviours: [ResetSummary('referred-children', 'children'), SaveFormSession],
       fields: ['children'],
-      forks: [{
-        target: '/additional-family',
-        condition: {
-          field: 'children',
-          value: 'no'
+      forks: [
+        {
+          target: '/children-summary',
+          condition: {
+            field: 'children',
+            value: 'yes'
+          }
+        },
+        {
+          target: '/additional-family',
+          condition: {
+            field: 'children',
+            value: 'no'
+          }
+        },
+        {
+          target: '/child-details',
+          condition: req => {
+            if (
+              req.form.values.children === 'yes' &&
+              req.sessionModel.get('referred-children') &&
+              req.sessionModel.get('referred-children').aggregatedValues.length === 0
+            ) {
+              return true;
+            }
+            return false;
+          }
         }
-      }],
-      behaviours: SaveFormSession,
+      ],
       locals: { showSaveAndExit: true },
-      next: '/child-details'
+      continueOnEdit: true
     },
     '/child-details': {
       fields: [
