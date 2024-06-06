@@ -151,6 +151,41 @@ module.exports = {
           }
           return obj;
         }
+      },
+      {
+        steps: '/additional-family',
+        field: 'additional-family',
+        parse: (list, req) => {
+          if (!req.sessionModel.get('steps').includes('/additional-family')) {
+            return null;
+          }
+          return req.sessionModel.get('additional-family') === 'yes' ?
+            'Yes' : 'No';
+        }
+      },
+      {
+        step: '/additional-family-summary',
+        field: 'referred-additional-family',
+        addElementSeparators: true,
+        dependsOn: 'additional-family',
+        parse: obj => {
+          if (!obj?.aggregatedValues) { return null; }
+          for (const item of obj.aggregatedValues) {
+            item.fields.map(field => {
+              if (field.field === 'additional-family-full-name') {
+                field.isAggregatorTitle = true;
+              }
+              field.omitChangeLink = true;
+              if (field.field.includes('date-of-birth')) {
+                if (field.value !== undefined) {
+                  field.parsed = moment(field.value, 'YYYY-MMMM-DD').format('DD MMMM YYYY');
+                }
+              }
+              return field;
+            });
+          }
+          return obj;
+        }
       }
     ]
   },
