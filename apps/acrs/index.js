@@ -13,16 +13,20 @@ const FamilyMemberBahaviour = require('./behaviours/family-member');
 const FamilyDetailBahaviour = require('./behaviours/get-family-detail');
 const Locals18Flag = require('./behaviours/locals-18-flag');
 const AggregateSaveUpdate = require('./behaviours/aggregator-save-update');
+const AggregatorSaveUpdate = AggregateSaveUpdate;
 const ResetSummary = require('./behaviours/reset-summary');
 const ModifySummaryChangeLinks = require('./behaviours/summary-modify-change-link');
 const ParentSummary = require('./behaviours/parent-summary');
 const LimitParents = require('./behaviours/limit-parents');
 const BrotherSisterSummary = require('./behaviours/brother-sister-summary');
 const LimitBrothersOrSisters = require('./behaviours/limit-brother-sister');
+const ChildrenSummary = require('./behaviours/children-summary');
+
 
 // Aggregator section limits
 const PARENT_LIMIT = 2;
 const BROTHER_OR_SISTER_LIMIT = 100;
+const CHILDREN_LIMIT = 100;
 
 module.exports = {
   name: 'acrs',
@@ -362,10 +366,31 @@ module.exports = {
       next: '/children-summary'
     },
     '/children-summary': {
-      fields: [],
-      next: '/child-details-2'
+      behaviours: [
+        AggregatorSaveUpdate,
+        ChildrenSummary,
+        // LimitChildren,   // TODO
+        SaveFormSession
+      ],
+      aggregateTo: 'referred-children',
+      aggregateFrom: [
+        'child-full-name',
+        'child-date-of-birth',
+        'child-country',
+        'child-living-situation',
+        'child-why-without-child'
+      ],
+      titleField: 'child-full-name',
+      addStep: 'child-details',
+      addAnotherLinkText: 'child',
+      locals: { showSaveAndExit: true },
+      continueOnEdit: false,
+      template: 'children-summary',
+      backLink: 'children',
+      aggregateLimit: CHILDREN_LIMIT,
+      next: '/additional-family'
     },
-    '/child-details-2': {
+    '/child-details-2': {   // TODO remove
       fields: [],
       next: '/additional-family'
     },

@@ -81,7 +81,9 @@
     "paragraph": "Enter the details of a child you are referring to come to the UK. Add multiple children one at a time."
   },
   "children-summary": {
-    "header": "SKELETON: /children-summary"
+    "header": "Children you are referring",
+    "children-limit-message": "You can refer a maximum of {{values.referredChildrenLimit}} children to come to the UK.",
+    "children-limit-exceeded": "You can not refer any more children."
   },
   "child-details-2": {
     "header": "SKELETON: /child-details-2"
