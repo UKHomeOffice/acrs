@@ -13,13 +13,16 @@ const FamilyMemberBahaviour = require('./behaviours/family-member');
 const FamilyDetailBahaviour = require('./behaviours/get-family-detail');
 const Locals18Flag = require('./behaviours/locals-18-flag');
 const AggregateSaveUpdate = require('./behaviours/aggregator-save-update');
-const ParentSummary = require('./behaviours/parent-summary');
-const LimitParents = require('./behaviours/limit-parents');
 const ResetSummary = require('./behaviours/reset-summary');
 const ModifySummaryChangeLinks = require('./behaviours/summary-modify-change-link');
+const ParentSummary = require('./behaviours/parent-summary');
+const LimitParents = require('./behaviours/limit-parents');
+const AdditionalFamilySummary = require('./behaviours/additional-family-summary');
+const LimitAdditionalFamily = require('./behaviours/limit-additional-family');
 
 // Aggregator section limits
 const PARENT_LIMIT = 2;
+const ADDITIONAL_FAMILY_LIMIT = process.env.NODE_ENV === 'development' ? 2 : 100;
 
 module.exports = {
   name: 'acrs',
@@ -325,7 +328,7 @@ module.exports = {
     // Figma Section: "Additional family members" (additional-family)
 
     '/additional-family': {
-      behaviours: [SaveFormSession, Locals18Flag],
+      behaviours: [ResetSummary('referred-additional-family', 'additional-family'), SaveFormSession, Locals18Flag],
       fields: ['additional-family'],
       forks: [
         {
@@ -342,14 +345,33 @@ module.exports = {
           }
         },
         {
-          target: '/additional-family-details',
+          target: '/additional-family-summary',
           condition: {
             field: 'additional-family',
             value: 'yes'
           }
+        },
+        {
+          target: '/family-in-uk',
+          condition: {
+            field: 'additional-family',
+            value: 'no'
+          }
+        },
+        {
+          target: '/additional-family-details',
+          condition: req => {
+            if (
+              req.form.values['additional-family'] === 'yes' &&
+                req.sessionModel.get('referred-additional-family') &&
+                req.sessionModel.get('referred-additional-family').aggregatedValues.length === 0
+            ) {
+              return true;
+            }
+            return false;
+          }
         }
       ],
-      next: '/family-in-uk',
       locals: { showSaveAndExit: true },
       continueOnEdit: true
     },
@@ -365,12 +387,32 @@ module.exports = {
         'additional-family-why-evac-without',
         'additional-family-why-referring'
       ],
-      behaviours: SaveFormSession,
+      behaviours: [LimitAdditionalFamily, SaveFormSession],
       locals: { showSaveAndExit: true },
-      next: '/additional-family-summary'
+      next: '/additional-family-summary',
+      continueOnEdit: true
     },
     '/additional-family-summary': {
-      fields: [],
+      behaviours: [AggregateSaveUpdate, AdditionalFamilySummary, LimitAdditionalFamily, SaveFormSession],
+      aggregateTo: 'referred-additional-family',
+      aggregateFrom: [
+        'additional-family-full-name',
+        'additional-family-date-of-birth',
+        'additional-family-relationship',
+        'additional-family-country',
+        'additional-family-living-situation',
+        'additional-family-needs-support',
+        'additional-family-why-evac-without',
+        'additional-family-why-referring'
+      ],
+      titleField: 'additional-family-full-name',
+      addStep: 'additional-family-details',
+      addAnotherLinkText: 'family member',
+      locals: { showSaveAndExit: true },
+      continueOnEdit: false,
+      template: 'additional-family-summary',
+      backLink: 'additional-family',
+      aggregateLimit: ADDITIONAL_FAMILY_LIMIT,
       next: '/family-in-uk'
     },
     '/no-family-referred': {
