@@ -103,26 +103,17 @@
     "paragraph-3": "You must have evidence to prove the exceptional circumstances."
   },
   "additional-family-details": {
-    "header": "Additional family member {{values.additionalFamilyCount}} details",
     "paragraph": "Add your additional family members one at a time."
+  },
+  "additional-family-summary": {
+    "header": "Additional family members in your referral",
+    "additional-family-limit-exceeded": "You can not refer any more family members."
   },
   "no-family-referred": {
     "header": "You must refer a family member",
     "paragraph-1": "You have told us you are not referring any family members.",
     "paragraph-2": "If you are not referring a family member, you do not need to use this form.",
     "link-text": "Return and refer a family member"
-  },
-  "who-is-responsible": {
-    "header": "SKELETON: /who-is-responsible"
-  },
-  "guardian-details": {
-    "header": "SKELETON: /guardian-details"
-  },
-  "guardian-details-2": {
-    "header": "SKELETON: /guardian-details-2"
-  },
-  "additional-family-summary": {
-    "header": "SKELETON: /additional-family-summary"
   },
   "family-in-uk": {
     "header": "Family that live in the UK"
@@ -238,6 +229,30 @@
       },
       "brother-or-sister-evacuated-without-reason": {
         "label": "Not evacuated together because"
+      },
+      "additional-family-full-name": {
+        "label": "Full name"
+      },
+      "additional-family-date-of-birth": {
+        "label": "Date of birth"
+      },
+      "additional-family-relationship": {
+        "label": "Relationship to you"
+      },
+      "additional-family-country": {
+        "label": "Country they live in"
+      },
+      "additional-family-living-situation": {
+        "label": "Living situation"
+      },
+      "additional-family-needs-support": {
+        "label": "Need you for support?"
+      },
+      "additional-family-why-evac-without": {
+        "label": "Why were you evacuated without them?"
+      },
+      "additional-family-why-referring": {
+        "label": "Why are you referring them?"
       }
     }
   }
