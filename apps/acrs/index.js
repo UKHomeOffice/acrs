@@ -17,16 +17,16 @@ const ParentSummary = require('./behaviours/parent-summary');
 const LimitParents = require('./behaviours/limit-parents');
 const BrotherSisterSummary = require('./behaviours/brother-sister-summary');
 const LimitBrothersOrSisters = require('./behaviours/limit-brother-sister');
-const AdditionalFamilySummary = require('./behaviours/additional-family-summary');
-const LimitAdditionalFamily = require('./behaviours/limit-additional-family');
 const ChildrenSummary = require('./behaviours/children-summary');
 const LimitChildren = require('./behaviours/limit-children');
+const AdditionalFamilySummary = require('./behaviours/additional-family-summary');
+const LimitAdditionalFamily = require('./behaviours/limit-additional-family');
 
 // Aggregator section limits
 const PARENT_LIMIT = 2;
 const BROTHER_OR_SISTER_LIMIT = process.env.NODE_ENV === 'development' ? 2 : 100;
-const ADDITIONAL_FAMILY_LIMIT = process.env.NODE_ENV === 'development' ? 2 : 100;
 const CHILDREN_LIMIT = process.env.NODE_ENV === 'development' ? 2 : 100;
+const ADDITIONAL_FAMILY_LIMIT = process.env.NODE_ENV === 'development' ? 2 : 100;
 
 module.exports = {
   name: 'acrs',
@@ -461,9 +461,8 @@ module.exports = {
               req.sessionModel.get('brother-or-sister') === 'no' &&
               req.sessionModel.get('additional-family') === 'no');
           }
-        },
+        }
       ],
-      // next: '/family-in-uk',
       locals: { showSaveAndExit: true },
       continueOnEdit: true
     },
