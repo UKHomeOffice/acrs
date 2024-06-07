@@ -148,6 +148,30 @@
     "children": {
       "required": "You must select an option"
     },
+    "child-full-name": {
+      "required": "Enter child's full name",
+      "notUrl": "Please do not enter a link/url into your answers"
+    },
+    "child-date-of-birth": {
+      "required": "Enter child's date of birth",
+      "date": "Enter a real date of birth",
+      "after": "Enter a date after 01 01 1900",
+      "before": "Child's date of birth must be in the past"
+    },
+    "child-country": {
+      "required": "Enter the country they currently live in",
+      "isInCountriesList": "You must choose a country from the provided list"
+    },
+    "child-living-situation": {
+      "required": "Explain your child's living situation",
+      "regex": "Living situation details must be less than 15,000 characters",
+      "notUrl": "Please do not enter a link/url into your answers"
+    },
+    "child-why-without-child": {
+      "required": "Explain why you were evacuated without your child",
+      "regex": "Details about why you were evacuated without your child must be less than 15,000 characters",
+      "notUrl": "Please do not enter a link/url into your answers"
+    },
     "additional-family": {
       "required": "You must select an option"
     },
@@ -215,11 +239,32 @@
     "has-family-member-been-evacuated": {
       "required": "You must select an option"
     },
-    "/how-send-decision": {
+    "how-to-send-decision": {
       "required": "You must select an option"
+    },
+    "is-decision-by-email": {
+      "required": "Tell us if this is the correct email for your decision"
+    },
+    "is-decision-by-email-detail": {
+      "required": "Enter an email address for the decision",
+      "email": "Email address must be between 6 and 254 characters"
     },
     "is-legal-representative-email": {
       "required": "You must select an option"
+    },
+    "is-decision-post-address-1": {
+      "required": "Address line 1 must be between 1 and 250 characters"
+    },
+    "is-decision-post-address-2": {
+      "notUrl": "Please do not enter a link/url"
+    },
+    "is-decision-post-town-or-city": {
+      "required": "Town or city must be between 1 and 250 characters"
+    },
+    "is-decision-post-postcode": {
+      "required": "Enter a postcode",
+      "maxlength": "Town or city must be between 1 and 250 characters",
+      "postcode": "Enter a real UK postcode"
     },
     "legal-representative-fullname": {
       "required": "Enter your name",

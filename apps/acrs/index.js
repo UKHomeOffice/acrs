@@ -1,5 +1,4 @@
 'use strict';
-
 const SummaryPageBehaviour = require('hof').components.summary;
 const CheckInformationGivenBehaviour = require('./behaviours/continue-report');
 const ResumeSession = require('./behaviours/resume-form-session');
@@ -7,10 +6,10 @@ const CheckEmailToken = require('./behaviours/check-email-token');
 const SaveFormSession = require('./behaviours/save-form-session');
 const SaveAndExit = require('./behaviours/save-and-exit');
 const Utilities = require('../../lib/utilities');
+const Submit = require('./behaviours/submit');
 const FamilyDetailBahaviour = require('./behaviours/family-member-details');
 const AggregateSaveUpdate = require('./behaviours/aggregator-save-update');
 const FamilyInUkLocalsBehaviour = require('./behaviours/family-in-uk-locals');
-const Submit = require('./behaviours/submit');
 const Locals18Flag = require('./behaviours/locals-18-flag');
 const ResetSummary = require('./behaviours/reset-summary');
 const ModifySummaryChangeLinks = require('./behaviours/summary-modify-change-link');
@@ -18,10 +17,15 @@ const ParentSummary = require('./behaviours/parent-summary');
 const LimitParents = require('./behaviours/limit-parents');
 const BrotherSisterSummary = require('./behaviours/brother-sister-summary');
 const LimitBrothersOrSisters = require('./behaviours/limit-brother-sister');
+const ChildrenSummary = require('./behaviours/children-summary');
+const LimitChildren = require('./behaviours/limit-children');
+
 
 // Aggregator section limits
 const PARENT_LIMIT = 2;
 const BROTHER_OR_SISTER_LIMIT = 100;
+const CHILDREN_LIMIT = process.env.NODE_ENV === 'development' ? 2 : 100;
+
 
 
 module.exports = {
@@ -114,7 +118,7 @@ module.exports = {
           return ! Utilities.isOver18(req.sessionModel.get('date-of-birth'));
         }
       }],
-      next: '/confirm-referrer-email',
+      next: '/confirm',
       behaviours: SaveFormSession,
       locals: { showSaveAndExit: true }
     },
@@ -337,28 +341,78 @@ module.exports = {
       next: '/children'
     },
     '/children': {
+      behaviours: [ResetSummary('referred-children', 'children'), SaveFormSession],
       fields: ['children'],
-      forks: [{
-        target: '/additional-family',
-        condition: {
-          field: 'children',
-          value: 'no'
+      forks: [
+        {
+          target: '/children-summary',
+          condition: {
+            field: 'children',
+            value: 'yes'
+          }
+        },
+        {
+          target: '/additional-family',
+          condition: {
+            field: 'children',
+            value: 'no'
+          }
+        },
+        {
+          target: '/child-details',
+          condition: req => {
+            if (
+              req.form.values.children === 'yes' &&
+              req.sessionModel.get('referred-children') &&
+              req.sessionModel.get('referred-children').aggregatedValues.length === 0
+            ) {
+              return true;
+            }
+            return false;
+          }
         }
-      }],
-      behaviours: SaveFormSession,
+      ],
       locals: { showSaveAndExit: true },
-      next: '/child-details'
+      continueOnEdit: true
     },
     '/child-details': {
-      fields: [],
+      fields: [
+        'child-full-name',
+        'child-date-of-birth',
+        'child-country',
+        'child-living-situation',
+        'child-why-without-child'
+      ],
+      behaviours: SaveFormSession,
+      locals: { showSaveAndExit: true },
       next: '/children-summary'
     },
     '/children-summary': {
-      fields: [],
-      next: '/child-details-2'
-    },
-    '/child-details-2': {
-      fields: [],
+      behaviours: [
+        AggregateSaveUpdate,
+        ChildrenSummary,
+        LimitChildren,
+        SaveFormSession
+      ],
+      aggregateTo: 'referred-children',
+      aggregateFrom: [
+        'child-full-name',
+        'child-date-of-birth',
+        'child-country',
+        'child-living-situation',
+        'child-why-without-child'
+      ],
+      aggregateLimit: CHILDREN_LIMIT,
+      titleField: 'child-full-name',
+      addStep: 'child-details',
+      addAnotherLinkText: 'child',
+      locals: {
+        showSaveAndExit: true,
+        referredChildrenLimit: CHILDREN_LIMIT
+      },
+      continueOnEdit: false,
+      template: 'children-summary',
+      backLink: 'children',
       next: '/additional-family'
     },
 
@@ -478,26 +532,31 @@ module.exports = {
       fields: [],
       next: '/how-send-decision'
     },
-
     '/how-send-decision': {
-      fields: ['how-send-decision'],
+      fields: ['how-to-send-decision'],
       forks: [{
         target: '/email-decision',
         condition: {
-          field: 'how-send-decision',
+          field: 'how-to-send-decision',
           value: 'email'
         }
       }],
-      next: '/your-postal-address'
+      next: '/decision-postal-address'
     },
-
     '/email-decision': {
-      fields: [],
+      behaviours: SaveFormSession,
+      fields: ['is-decision-by-email', 'is-decision-by-email-detail'],
+      locals: { showSaveAndExit: true },
       next: '/confirm'
     },
-
-    '/your-postal-address': {
-      fields: [],
+    '/decision-postal-address': {
+      fields: [
+        'is-decision-post-address-1',
+        'is-decision-post-address-2',
+        'is-decision-post-town-or-city',
+        'is-decision-post-postcode'
+      ],
+      locals: { showSaveAndExit: true },
       next: '/confirm'
     },
     '/confirm': {
@@ -516,7 +575,6 @@ module.exports = {
     '/confirmation': {
       clearSession: true
     },
-
     // Out of Step Pages
 
     '/session-expired': {

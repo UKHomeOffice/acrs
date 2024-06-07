@@ -1,0 +1,24 @@
+{{<partials-page}}
+  {{$page-content}}
+  
+  {{> partials-aggregator-summary-table}}
+
+  <p class="govuk-body">{{#t}}pages.children-summary.children-limit-message{{/t}}</p>
+  
+  {{#noMoreChildren}}
+    <p>{{#t}}pages.children-summary.children-limit-exceeded{{/t}}</p>
+  {{/noMoreChildren}}
+
+  <br>
+
+  {{^noMoreChildren}}
+  <a href="{{baseUrl}}/{{addStep}}" class="govuk-button govuk-button--secondary" data-module="govuk-button">
+      Add another {{addAnotherLinkText}}
+  </a>
+  
+  <br>
+  {{/noMoreChildren}}
+  
+  {{#input-submit}}continue{{/input-submit}}
+  {{/page-content}}
+{{/partials-page}}
