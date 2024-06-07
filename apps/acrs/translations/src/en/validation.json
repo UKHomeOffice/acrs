@@ -219,6 +219,9 @@
     "has-family-in-uk": {
       "required": "You must select an option"
     },
+    "has-family-in-uk": {
+      "required": "You must select an option"
+    },
     "family-member-fullname": {
       "required": "Enter your name",
       "notUrl": "Please do not enter a link/url into your answers"

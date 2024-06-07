@@ -11,7 +11,6 @@ module.exports = superclass => class extends superclass {
 
   deleteItem(req, res) {
     const id = req.params.id;
-
     let items = '';
 
     if (id) {
@@ -24,7 +23,6 @@ module.exports = superclass => class extends superclass {
 
   updateItem(req, res) {
     const id = req.params.id;
-
     const items = this.getAggregateArray(req);
 
     if (items[id]) {
@@ -43,6 +41,7 @@ module.exports = superclass => class extends superclass {
     const items = this.getAggregateArray(req);
     const fields = [];
 
+
     let itemTitle = '';
 
     const aggregateLimit = req.form.options.aggregateLimit || undefined;
@@ -51,7 +50,6 @@ module.exports = superclass => class extends superclass {
       const aggregateFromField = aggregateFromElement.field || aggregateFromElement;
       const isTitleField = req.form.options.titleField === aggregateFromField;
       const value = req.sessionModel.get(aggregateFromField);
-
       let isRefNumber = false;
 
       if (isTitleField) {
@@ -63,7 +61,6 @@ module.exports = superclass => class extends superclass {
       } else {
         isRefNumber = false;
       }
-
       fields.push({
         field: aggregateFromField,
         parsed: this.parseField(aggregateFromField, value, req),
@@ -76,6 +73,7 @@ module.exports = superclass => class extends superclass {
       this.setAggregateArray(req, items);
       req.sessionModel.unset(aggregateFromField);
     });
+
 
     const newItem = { itemTitle, fields };
 
@@ -117,7 +115,6 @@ module.exports = superclass => class extends superclass {
 
   getAction(req) {
     const noItemsPresent = this.getAggregateArray(req).length === 0;
-
     let action;
 
     if (this.newFieldsProvided(req)) {
