@@ -28,6 +28,7 @@ module.exports = superclass => class extends superclass {
     const items = this.getAggregateArray(req);
 
     if (items[id]) {
+      req.sessionModel.set('aggregator-edit-id', id);
       items[id].fields.forEach(obj => {
         req.sessionModel.set(obj.field, obj.value);
       });

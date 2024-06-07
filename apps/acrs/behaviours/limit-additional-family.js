@@ -12,6 +12,10 @@ module.exports = superclass => class extends superclass {
       }
       locals.referredAdditionalFamilyCount = referredAdditionalFamilyCount.toString();
     }
+    if (req.sessionModel.get('aggregator-edit-id')) {
+      locals.parentCount = parseInt(req.sessionModel.get('aggregator-edit-id'), 10) + 1;
+      req.sessionModel.unset('aggregator-edit-id');
+    }
     return locals;
   }
 };
