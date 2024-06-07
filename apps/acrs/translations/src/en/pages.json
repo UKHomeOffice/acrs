@@ -141,7 +141,8 @@
     "header": "SKELETON: /evidence-notes"
   },
   "how-send-decision": {
-    "header": "How do we send the decision on your referral?"
+    "header": "How do we send the decision on your referral?",
+    "title": "How do we send the decision on your referral - Refer family to come to the UK"
   },
   "decision-postal-address": {
     "header": "Postal address for the decision",
