@@ -380,7 +380,6 @@
     }
   },
   "is-decision-by-email": {
-    "legend": "Do we send your decision to {{values.user-email}}?",
     "options": {
       "yes": {
         "label": "Yes"

@@ -262,6 +262,7 @@ pre.looped-records {
   display: none;
 }
 
+
 .table-options {
   display: flex;
   flex-direction: row;
@@ -327,4 +328,8 @@ pre.looped-records {
 
 .govuk-character-count__message {
   display: none;
+}
+
+.email-decision {
+  margin-top: -20px;
 }
