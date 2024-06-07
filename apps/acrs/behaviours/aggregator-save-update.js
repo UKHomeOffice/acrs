@@ -60,7 +60,6 @@ module.exports = superclass => class extends superclass {
       } else {
         isRefNumber = false;
       }
-
       fields.push({
         field: aggregateFromField,
         parsed: this.parseField(aggregateFromField, value, req),
@@ -73,6 +72,7 @@ module.exports = superclass => class extends superclass {
       this.setAggregateArray(req, items);
       req.sessionModel.unset(aggregateFromField);
     });
+
 
     const newItem = { itemTitle, fields };
 

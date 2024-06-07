@@ -7,9 +7,7 @@ const SaveFormSession = require('./behaviours/save-form-session');
 const SaveAndExit = require('./behaviours/save-and-exit');
 const Utilities = require('../../lib/utilities');
 const Submit = require('./behaviours/submit');
-const FamilyDetailBahaviour = require('./behaviours/family-member-details');
 const AggregateSaveUpdate = require('./behaviours/aggregator-save-update');
-const FamilyInUkLocalsBehaviour = require('./behaviours/family-in-uk-locals');
 const Locals18Flag = require('./behaviours/locals-18-flag');
 const ResetSummary = require('./behaviours/reset-summary');
 const ModifySummaryChangeLinks = require('./behaviours/summary-modify-change-link');
@@ -19,7 +17,8 @@ const BrotherSisterSummary = require('./behaviours/brother-sister-summary');
 const LimitBrothersOrSisters = require('./behaviours/limit-brother-sister');
 const ChildrenSummary = require('./behaviours/children-summary');
 const LimitChildren = require('./behaviours/limit-children');
-
+const limitFamilyInUk = require('./behaviours/limit-family-in-uk');
+const familyInUkSummary = require('./behaviours/family-in-uk-summary');
 
 // Aggregator section limits
 const PARENT_LIMIT = 2;
@@ -492,7 +491,7 @@ module.exports = {
       next: '/family-in-uk-details'
     },
     '/family-in-uk-details': {
-      behaviours: [SaveFormSession, FamilyDetailBahaviour],
+      behaviours: [SaveFormSession, limitFamilyInUk],
       fields: [
         'family-member-fullname',
         'family-member-date-of-birth',
@@ -505,20 +504,20 @@ module.exports = {
       titleField: 'countryAddNumber'
     },
     '/family-in-uk-summary': {
-      behaviours: [AggregateSaveUpdate, FamilyInUkLocalsBehaviour, SaveFormSession],
+      behaviours: [AggregateSaveUpdate, limitFamilyInUk, familyInUkSummary, SaveFormSession],
       aggregateTo: 'family-member-in-uk',
       aggregateFrom: [
         'family-member-fullname',
         'family-member-relationship',
         'family-member-date-of-birth',
-        'has-family-member-been-evacuated',
-        'memberIndex'
+        'has-family-member-been-evacuated'
       ],
-      titleField: 'memberIndex',
+      titleField: 'family-member-fullname',
       addStep: 'family-in-uk-details',
       addAnotherLinkText: 'family member',
       template: 'family-in-uk-summary',
       locals: { showSaveAndExit: true },
+      aggregateLimit: Utilities.DEFAULT_AGGREGATOR_LIMIT,
       continueOnEdit: true,
       next: '/upload-evidence'
     },
