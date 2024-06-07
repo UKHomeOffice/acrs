@@ -128,8 +128,11 @@ module.exports = superclass => class extends superclass {
   // POST lifecycle
   saveValues(req, res, next) {
     const cases = req.sessionModel.get('user-cases') || [];
-    const idType = req.sessionModel.get('id-type');
-    const caseObj = cases.find(obj => obj.session[idType] === req.form.values.referral);
+    // const idType = req.sessionModel.get('id-type');
+    const caseObj = cases.find(obj => {
+      return obj.session['brp'] === req.form.values.referral ||
+        obj.session['uan'] === req.form.values.referral;
+    });
 
     if (caseObj) {
       req.sessionModel.set('id', caseObj.id);

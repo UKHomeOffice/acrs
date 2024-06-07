@@ -13,6 +13,7 @@ const read = async token => {
   user.email = await redis.get(`${token}:email`);
   user.brp = await redis.get(`${token}:brp`);
   user.uan = await redis.get(`${token}:uan`);
+  user['id-type'] = await redis.get(`${token}:id-type`)
   user['date-of-birth'] = await redis.get(`${token}:date-of-birth`);
 
   return user;

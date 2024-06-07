@@ -4,7 +4,7 @@ const axios = require('axios');
 const logger = require('hof/lib/logger')({ env: config.env });
 
 const baseUrl = `${config.saveService.host}:${config.saveService.port}/verify_lookup`;
-
+const getIdType = brp => !brp ? 'uan' : 'brp';
 module.exports = superclass => class extends superclass {
   async saveValues(req, res, next) {
     let queryColumn;
@@ -24,6 +24,10 @@ module.exports = superclass => class extends superclass {
     if (!validCase) {
       return res.redirect(`/incorrect-details-${queryColumn}`);
     }
+    req.sessionModel.set('brp', validCase.brp);
+    req.sessionModel.set('uan', validCase.uan);
+    req.sessionModel.set('id-type', getIdType(req.form.values[queryColumn]));
+    req.sessionModel.set('date-of-birth', validCase.date_of_birth);
     return super.saveValues(req, res, next);
   }
 

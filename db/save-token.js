@@ -11,11 +11,13 @@ module.exports = {
     redis.set(`${token}:email`, email);
     redis.set(`${token}:brp`, req.sessionModel.get('brp'));
     redis.set(`${token}:uan`, req.sessionModel.get('uan'));
+    redis.set(`${token}:id-type`, req.sessionModel.get('id-type'));
     redis.set(`${token}:date-of-birth`, req.sessionModel.get('date-of-birth'));
     redis.expire(`token:${token}`, tokenExpiry);
     redis.expire(`${token}:email`, tokenExpiry);
     redis.expire(`${token}:brp`, tokenExpiry);
     redis.expire(`${token}:uan`, tokenExpiry);
+    redis.expire(`${token}:id-type`, tokenExpiry);
     redis.expire(`${token}:date-of-birth`, tokenExpiry);
 
     return token;
