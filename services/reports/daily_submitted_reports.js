@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 
 const moment = require('moment');
 const Reports = require('./reports');
@@ -7,7 +8,7 @@ const postgresDateFormat = config.saveService.postgresDateFormat;
 module.exports = class DailySubmittedReports {
   static async createReport(type, logger) {
     try {
-      const time10am = moment().set({h: 10, m: 0, s: 0});
+      const time10am = moment().set({h: 11, m: 0, s: 0});
 
       const report = new Reports({
         type,

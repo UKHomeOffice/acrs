@@ -11,6 +11,7 @@ const postgresDateFormat = config.saveService.postgresDateFormat;
 const NotifyClient = utilities.NotifyClient;
 const notifyKey = config.govukNotify.notifyApiKey;
 const csvReportTemplateId = config.govukNotify.csvReportTemplateId;
+const caseworkerEmail = config.govukNotify.caseworkerEmail;
 const { createLogger, format, transports } = require('winston');
 const { combine, timestamp, json } = format;
 

@@ -1,6 +1,6 @@
 'use strict';
 /* eslint-disable consistent-return, max-len */
-
+const fs = require('fs');
 const hof = require('hof');
 const config = require('./config.js');
 const _ = require('lodash');
