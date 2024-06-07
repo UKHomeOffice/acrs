@@ -21,12 +21,17 @@ const AdditionalFamilySummary = require('./behaviours/additional-family-summary'
 const LimitAdditionalFamily = require('./behaviours/limit-additional-family');
 const limitFamilyInUk = require('./behaviours/limit-family-in-uk');
 const familyInUkSummary = require('./behaviours/family-in-uk-summary');
+const PartnerSummary = require('./behaviours/partner-summary');
+const LimitPartners = require('./behaviours/limit-partners');
+
 
 // Aggregator section limits
 const PARENT_LIMIT = 2;
 const BROTHER_OR_SISTER_LIMIT = process.env.NODE_ENV === 'development' ? 5 : 100;
 const CHILDREN_LIMIT = process.env.NODE_ENV === 'development' ? 2 : 100;
 const ADDITIONAL_FAMILY_LIMIT = process.env.NODE_ENV === 'development' ? 5 : 100;
+const PARTNER_LIMIT = 1;
+
 
 module.exports = {
   name: 'acrs',
@@ -321,7 +326,6 @@ module.exports = {
       next: '/partner-details',
       continueOnEdit: true
     },
-
     '/partner-details': {
       fields: [
         'partner-full-name',
@@ -337,9 +341,36 @@ module.exports = {
       next: '/partner-summary'
     },
     '/partner-summary': {
-      fields: [],
+      behaviours: [
+        AggregateSaveUpdate,
+        PartnerSummary,
+        LimitPartners,
+        SaveFormSession
+      ],
+      aggregateTo: 'referred-partners',
+      aggregateFrom: [
+        'partner-full-name',
+        'partner-phone-number',
+        'partner-email',
+        'partner-date-of-birth',
+        'partner-country',
+        'partner-living-situation',
+        'partner-why-without-partner'
+      ],
+      aggregateLimit: PARTNER_LIMIT,
+      titleField: 'partner-full-name',
+      addStep: 'partner-details',
+      addAnotherLinkText: 'partner',
+      locals: {
+        showSaveAndExit: true,
+        referredPartnerLimit: PARTNER_LIMIT
+      },
+      continueOnEdit: false,
+      template: 'partner-summary',
+      backLink: 'partner',
       next: '/children'
     },
+
     '/children': {
       behaviours: [ResetSummary('referred-children', 'children'), SaveFormSession],
       fields: ['children'],

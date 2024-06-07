@@ -69,7 +69,9 @@
     "header": "Partner's details"
   },
   "partner-summary": {
-    "header": "SKELETON: /partner-summary"
+    "header": "Partner you are referring",
+    "partner-limit-message": "You can only refer one partner to come to the UK.",
+    "partner-limit-exceeded": "You can not refer any more partners."
   },
   "children": {
     "header": "Children aged under 18",
