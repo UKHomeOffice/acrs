@@ -1,5 +1,4 @@
 'use strict';
-
 const SummaryPageBehaviour = require('hof').components.summary;
 const CheckInformationGivenBehaviour = require('./behaviours/continue-report');
 const ResumeSession = require('./behaviours/resume-form-session');
@@ -8,8 +7,7 @@ const SaveFormSession = require('./behaviours/save-form-session');
 const SaveAndExit = require('./behaviours/save-and-exit');
 const Utilities = require('../../lib/utilities');
 const Submit = require('./behaviours/submit');
-const FamilyMemberBahaviour = require('./behaviours/family-member');
-const FamilyDetailBahaviour = require('./behaviours/get-family-detail');
+const FamilyDetailBahaviour = require('./behaviours/family-member-details');
 const AggregateSaveUpdate = require('./behaviours/aggregator-save-update');
 const FamilyInUkLocalsBehaviour = require('./behaviours/family-in-uk-locals');
 const Locals18Flag = require('./behaviours/locals-18-flag');
@@ -119,7 +117,7 @@ module.exports = {
           return ! Utilities.isOver18(req.sessionModel.get('date-of-birth'));
         }
       }],
-      next: '/confirm-referrer-email',
+      next: '/confirm',
       behaviours: SaveFormSession,
       locals: { showSaveAndExit: true }
     },
@@ -472,7 +470,7 @@ module.exports = {
       behaviours: Locals18Flag
     },
     '/family-in-uk': {
-      behaviours: [SaveFormSession, FamilyMemberBahaviour],
+      behaviours: [SaveFormSession],
       forks: [
         {
           target: '/family-in-uk-details',
@@ -575,7 +573,6 @@ module.exports = {
     '/confirmation': {
       clearSession: true
     },
-
     // Out of Step Pages
 
     '/session-expired': {

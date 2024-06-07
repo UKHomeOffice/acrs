@@ -90,7 +90,6 @@ module.exports = superclass => class extends superclass {
     this.setAggregateArray(req, items);
     res.redirect(`${req.baseUrl}${req.form.options.route}`);
   }
-
   getAggregateArray(req) {
     const aggregateToField = req.sessionModel.get(req.form.options.aggregateTo) || { aggregatedValues: [] };
     return aggregateToField.aggregatedValues;
@@ -134,7 +133,6 @@ module.exports = superclass => class extends superclass {
     const action = req.params.action || this.getAction(req, res, next);
     this.handleAction(req, res, next, action);
   }
-
   handleAction(req, res, next, action) {
     switch (action) {
       case 'delete':
