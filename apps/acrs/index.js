@@ -24,9 +24,9 @@ const LimitAdditionalFamily = require('./behaviours/limit-additional-family');
 
 // Aggregator section limits
 const PARENT_LIMIT = 2;
-const BROTHER_OR_SISTER_LIMIT = process.env.NODE_ENV === 'development' ? 2 : 100;
+const BROTHER_OR_SISTER_LIMIT = process.env.NODE_ENV === 'development' ? 5 : 100;
 const CHILDREN_LIMIT = process.env.NODE_ENV === 'development' ? 2 : 100;
-const ADDITIONAL_FAMILY_LIMIT = process.env.NODE_ENV === 'development' ? 2 : 100;
+const ADDITIONAL_FAMILY_LIMIT = process.env.NODE_ENV === 'development' ? 5 : 100;
 
 module.exports = {
   name: 'acrs',
