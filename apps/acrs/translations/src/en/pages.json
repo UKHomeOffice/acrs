@@ -119,7 +119,6 @@
     "header": "Family that live in the UK"
   },
   "family-in-uk-details": {
-    "header": "Family member {{values.memberIndex}} living in the UK",
     "hint": "Enter the details of a family member that lives in the UK."
   },
   "family-in-uk-summary": {
