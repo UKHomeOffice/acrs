@@ -28,26 +28,26 @@ if [[ ${KUBE_NAMESPACE} == ${BRANCH_ENV} ]]; then
   $kd -f kube/configmaps/configmap.yml -f kube/certs
   $kd -f kube/file-vault/file-vault-ingress.yml -f kube/html-pdf
   $kd -f kube/redis -f kube/hof-rds-api  -f kube/file-vault
-  $kd -f kube/app
+  $kd -f kube/app -f kube/cron
   $kd -f kube/autoscale/hpa-acrs.yml
 elif [[ ${KUBE_NAMESPACE} == ${UAT_ENV} ]]; then
   $kd -f kube/configmaps/configmap.yml
   $kd -f kube/file-vault/file-vault-ingress.yml -f kube/html-pdf
   $kd -f kube/hof-rds-api -f kube/redis -f kube/file-vault
-  $kd -f kube/app
+  $kd -f kube/app -f kube/cron
   $kd -f kube/autoscale/hpa-acrs.yml
 elif [[ ${KUBE_NAMESPACE} == ${STG_ENV} ]]; then
   $kd -f kube/configmaps/configmap.yml
   $kd -f kube/file-vault/file-vault-ingress.yml -f kube/html-pdf
   $kd -f kube/hof-rds-api -f kube/redis -f kube/file-vault
-  $kd -f kube/app
+  $kd -f kube/app -f kube/cron
   $kd -f kube/autoscale/hpa-acrs.yml
 elif [[ ${KUBE_NAMESPACE} == ${PROD_ENV} ]]; then
   $kd -f kube/configmaps/configmap.yml  -f kube/app/service.yml
   $kd -f kube/file-vault/file-vault-ingress.yml -f kube/html-pdf
   $kd -f kube/app/ingress-external.yml -f kube/app/networkpolicy-external.yml
   $kd -f kube/hof-rds-api -f kube/redis -f kube/file-vault
-  $kd -f kube/app/deployment.yml
+  $kd -f kube/app/deployment.yml -f kube/cron
   $kd -f kube/autoscale/hpa-acrs.yml
 fi
 

@@ -83,13 +83,13 @@ module.exports = class CreateAndSendPDF {
       const trackedPageStartTime = Number(req.sessionModel.get('session.started.timestamp'));
       const timeSpentOnForm = utilities.secondsBetween(trackedPageStartTime, new Date());
 
-      req.log('info', 'acq.submit_form.create_email_with_file_notify.successful');
-      req.log('info', `acq.submission.duration=[${timeSpentOnForm}] seconds`);
+      req.log('info', 'acrs.submit_form.create_email_with_file_notify.successful');
+      req.log('info', `acrs.submission.duration=[${timeSpentOnForm}] seconds`);
 
       return await this.notifyByEmail(req, pdfData);
     } catch (err) {
       const error = _.get(err, 'response.data.errors[0]', err.message || err);
-      req.log('error', 'acq.submit_form.create_email_with_file_notify.error', error);
+      req.log('error', 'acrs.submit_form.create_email_with_file_notify.error', error);
       throw new Error(error);
     }
   }

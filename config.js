@@ -12,7 +12,8 @@ module.exports = {
     caseworkerEmail: process.env.CASEWORKER_EMAIL,
     saveAndExitTemplateId: process.env.SAVE_AND_EXIT_TEMPLATE_ID,
     customerReceiptTemplateId: process.env.SUBMISSION_TEMPLATE_ID,
-    submissionTemplateId: process.env.CASEWORKER_SUBMISSION_TEMPLATE_ID
+    submissionTemplateId: process.env.CASEWORKER_SUBMISSION_TEMPLATE_ID,
+    csvReportTemplateId: process.env.CSV_REPORT_TEMPLATE_ID,
   },
   saveService: {
     postgresDateFormat: 'YYYY-MM-DD HH:mm:ss',
