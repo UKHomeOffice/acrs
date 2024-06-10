@@ -255,6 +255,27 @@
       },
       "additional-family-why-referring": {
         "label": "Why are you referring them?"
+      },
+      "partner-full-name": {
+        "label": "Partner's name"
+      },
+      "partner-phone-number": {
+        "label": "Telephone number"
+      },
+      "partner-email": {
+        "label": "Email address"
+      },
+      "partner-date-of-birth": {
+        "label": "Date of birth"
+      },
+      "partner-country": {
+        "label": "Country"
+      },
+      "partner-living-situation": {
+        "label": "Partner’s living situation"
+      },
+      "partner-why-without-partner": {
+        "label": "Not evacuated together because"
       }
     }
   }
