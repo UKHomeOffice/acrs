@@ -22,8 +22,14 @@ module.exports = superclass => class extends superclass {
                 if (field.field === 'child-full-name') {
                   field.changeLink = '/acrs/children-summary';
                 }
+                if (field.field === 'additional-family-full-name') {
+                  field.changeLink = '/acrs/additional-family-summary';
+                }
                 if (field.field === 'family-member-fullname') {
                   field.changeLink = '/acrs/family-member-summary';
+                }
+                if (field.field === 'partner-full-name') {
+                  field.changeLink = '/acrs/partner-summary';
                 }
               });
             });

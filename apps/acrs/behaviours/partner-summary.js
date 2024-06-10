@@ -1,18 +1,18 @@
 const moment = require('moment');
 module.exports = superclass => class extends superclass {
   configure(req, res, next) {
-    const aggregateTo = req.form.options.aggregateTo; // 'referred-children'
+    const aggregateTo = req.form.options.aggregateTo; // 'referred-partners'
     const aggregate = req.sessionModel.get(aggregateTo);
 
-    // When all children are removed redirect to the loop section intro
+    // When all partners are removed redirect to the loop section intro
     if(aggregate && !aggregate.aggregatedValues.length) {
-      req.form.options.addStep = 'children';
+      req.form.options.addStep = 'partner';
     }
     super.configure(req, res, next);
   }
 
   /**
-   * Iterate the referred Children and fix up data in the fields
+   * Iterate the referred Partners and fix up data in the fields
    * Date of Birth is formatted to DD MMMM YYYY
    * By appending `.summary-heading` to the `.field` the legend used
    * in the summary is taken from "summary-heading" in fields.json
@@ -23,7 +23,6 @@ module.exports = superclass => class extends superclass {
    */
   locals(req, res) {
     const locals = super.locals(req, res);
-
     locals.items = locals.items.map(item => {
       item.fields = item.fields.map(field => {
         if (field.field.includes('date-of-birth')) {
@@ -36,7 +35,6 @@ module.exports = superclass => class extends superclass {
       });
       return item;
     });
-
     return locals;
   }
 };

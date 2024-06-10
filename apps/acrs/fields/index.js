@@ -411,7 +411,6 @@ module.exports = {
     }
   },
   'is-decision-by-email': {
-    isPageHeading: true,
     mixin: 'radio-group',
     validate: ['required'],
     options: [
@@ -423,7 +422,10 @@ module.exports = {
         toggle: 'is-decision-by-email-detail',
         child: 'input-text'
       }
-    ]
+    ],
+    legend: {
+      className: 'visuallyhidden'
+    }
   },
   'is-decision-by-email-detail': {
     validate: ['required', 'email'],

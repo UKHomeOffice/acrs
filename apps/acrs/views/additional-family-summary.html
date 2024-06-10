@@ -1,0 +1,16 @@
+{{<partials-page}}
+  {{$page-content}}
+  {{> partials-aggregator-summary-table}}
+  {{#noMoreAdditionalFamily}}
+    <p>{{#t}}pages.additional-family-summary.additional-family-limit-exceeded{{/t}}</p>
+  {{/noMoreAdditionalFamily}}
+  <br>
+  {{^noMoreAdditionalFamily}}
+  <a href="{{baseUrl}}/{{addStep}}" class="govuk-button govuk-button--secondary" data-module="govuk-button">
+      Add another {{addAnotherLinkText}}
+  </a>
+  <br>
+  {{/noMoreAdditionalFamily}}
+  {{#input-submit}}continue{{/input-submit}}
+  {{/page-content}}
+{{/partials-page}}

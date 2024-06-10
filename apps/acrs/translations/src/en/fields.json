@@ -134,32 +134,39 @@
     "hint": "For international numbers, include the country code."
   },  
   "partner-full-name": {
-    "label": "Partner’s full name"
+    "label": "Partner’s full name",
+    "summary-heading": "Full name"
   },
   "partner-phone-number": {
     "label": "Partner’s telephone number (optional)",
-    "hint": "For international numbers include the country code"
+    "hint": "For international numbers include the country code",
+    "summary-heading": "Telephone number"
   },
   "partner-email": {
-    "label": "Partner’s email address (optional)"
+    "label": "Partner’s email address (optional)",
+    "summary-heading": "Email address"
   },
   "partner-date-of-birth": {
     "legend": "Partner’s date of birth",
-    "hint": "For example, 27 3 1988. If they do not have a date of birth, enter a date that matches any evidence"
+    "hint": "For example, 27 3 1988. If they do not have a date of birth, enter a date that matches any evidence",
+    "summary-heading": "Date of birth"
   },
   "partner-country": {
     "label": "What country do they live in?",
     "hint": "Start to type the country and options will appear. Select 'Unknown' if you do not know",
     "options": {
       "null": "Select a country"
-    }
+    },
+    "summary-heading": "Country they live in"
   },
   "partner-living-situation": {
     "label": "Partner’s living situation",
-    "hint": "For example, who they are living with, their relationship to who they are living with and how long they have lived there"
+    "hint": "For example, who they are living with, their relationship to who they are living with and how long they have lived there",
+    "summary-heading": "Living situation"
   },
   "partner-why-without-partner": {
-    "label": "Why were you evacuated without your partner?"
+    "label": "Why were you evacuated without your partner?",
+    "summary-heading": "Why you were evacuated without them"
   },
   "children": {
     "legend": "Are you referring your children to come to the UK?",
@@ -285,25 +292,30 @@
     }
   },
   "additional-family-full-name": {
-    "label": "Additional family member's full name"
+    "label": "Additional family member's full name",
+    "summary-heading": "Full name"
   },
   "additional-family-date-of-birth": {
     "legend": "Additional family member's date of birth",
-    "hint": "For example, 27 3 1988. If they do not have a date of birth, enter a date that matches any evidence"
+    "hint": "For example, 27 3 1988. If they do not have a date of birth, enter a date that matches any evidence",
+    "summary-heading": "Date of birth"
   },
   "additional-family-relationship": {
-    "label": "Additional family member's relationship to you"
+    "label": "Additional family member's relationship to you",
+    "summary-heading": "Relationship to you"
   },
   "additional-family-country": {
     "label": "What country do they live in?",
     "hint": "Start to type the country and options will appear. Select 'Unknown' if you do not know",
     "options": {
       "null": "Select a country"
-    }
+    },
+    "summary-heading": "Country they live in"
   },
   "additional-family-living-situation": {
     "label": "Additional family member's living situation",
-    "hint": "For example, who they live with and their relationship to the people they live with"
+    "hint": "For example, who they live with and their relationship to the people they live with",
+    "summary-heading": "Living situation"
   },
   "additional-family-needs-support": {
     "legend": "Does this family member need you for support?",
@@ -315,14 +327,17 @@
       "no": {
         "label": "No"
       }
-    }
+    },
+    "summary-heading": "Need you for support?"
   },
   "additional-family-why-evac-without": {
-    "label": "Why were you evacuated without this family member?"
+    "label": "Why were you evacuated without this family member?",
+    "summary-heading": "Why were you evacuated without them?"
   },
   "additional-family-why-referring": {
     "label": "Why are you referring this family member to come to the UK?",
-    "hint": "You can only bring additional family to the UK in exceptional circumstances. You must provide evidence later in this form."
+    "hint": "You can only bring additional family to the UK in exceptional circumstances. You must provide evidence later in this form.",
+    "summary-heading": "Why are you referring them?"
   },
   "has-family-in-uk": {
     "legend": "Do you have family that live in the UK?",
@@ -372,7 +387,6 @@
     }
   },
   "is-decision-by-email": {
-    "legend": "Do we send your decision to {{values.user-email}}?",
     "options": {
       "yes": {
         "label": "Yes"

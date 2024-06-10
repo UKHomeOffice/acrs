@@ -219,9 +219,6 @@
     "has-family-in-uk": {
       "required": "You must select an option"
     },
-    "has-family-in-uk": {
-      "required": "You must select an option"
-    },
     "family-member-fullname": {
       "required": "Enter your name",
       "notUrl": "Please do not enter a link/url into your answers"
@@ -247,7 +244,7 @@
     },
     "is-decision-by-email-detail": {
       "required": "Enter an email address for the decision",
-      "email": "Email address must be between 6 and 254 characters"
+      "email": "Enter a real email address"
     },
     "is-legal-representative-email": {
       "required": "You must select an option"

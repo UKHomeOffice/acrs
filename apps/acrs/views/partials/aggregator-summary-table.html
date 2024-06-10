@@ -2,7 +2,7 @@
 <div class="loop-summary-table">
     {{#items}}
     <div class="table-options">
-        <h2 class="govuk-table__h2 govuk-table__h2--m">{{itemTitle}}</h2>
+        <h2 class="govuk-table__caption--m">{{itemTitle}}</h2>
         <div>
             <a href="{{baseUrl}}/{{route}}/edit/{{index}}">{{#t}}buttons.edit{{/t}}<span class="visuallyhidden">Change {{itemTitle}} details</span></a>
             <a href="{{baseUrl}}/{{route}}/delete/{{index}}" class="govuk-!-margin-left-3">{{#t}}buttons.remove{{/t}}<span class="visuallyhidden">Remove {{itemTitle}}</span></a>
