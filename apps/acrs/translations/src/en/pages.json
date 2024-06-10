@@ -69,7 +69,9 @@
     "header": "Partner's details"
   },
   "partner-summary": {
-    "header": "SKELETON: /partner-summary"
+    "header": "Partner you are referring",
+    "partner-limit-message": "You can only refer one partner to come to the UK.",
+    "partner-limit-exceeded": "You can not refer any more partners."
   },
   "children": {
     "header": "Children aged under 18",
@@ -144,8 +146,9 @@
     "hint": "If you have no fixed address, enter an address we can use to contact you",
     "title": "Postal address for the decision - Refer family to come to the UK"
   },
-  "declaration": {
-    "header": "SKELETON: /declaration"
+  "declaration-children": {
+    "header": "Declaration",
+    "title": "Declaration - Refer family to come to the UK"
   },
   "referral-submitted": {
     "header": "SKELETON: /referral-submitted"
@@ -258,6 +261,27 @@
       },
       "additional-family-why-referring": {
         "label": "Why are you referring them?"
+      },
+      "partner-full-name": {
+        "label": "Partner's name"
+      },
+      "partner-phone-number": {
+        "label": "Telephone number"
+      },
+      "partner-email": {
+        "label": "Email address"
+      },
+      "partner-date-of-birth": {
+        "label": "Date of birth"
+      },
+      "partner-country": {
+        "label": "Country"
+      },
+      "partner-living-situation": {
+        "label": "Partner’s living situation"
+      },
+      "partner-why-without-partner": {
+        "label": "Not evacuated together because"
       }
     }
   }
