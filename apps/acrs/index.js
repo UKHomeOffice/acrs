@@ -24,7 +24,8 @@ const familyInUkSummary = require('./behaviours/family-in-uk-summary');
 const DeclarationBehaviour = require('./behaviours/declaration');
 const PartnerSummary = require('./behaviours/partner-summary');
 const LimitPartners = require('./behaviours/limit-partners');
-const DeclarationBehaviour = require('./behaviours/declaration');
+
+
 // Aggregator section limits
 const PARENT_LIMIT = 2;
 const BROTHER_OR_SISTER_LIMIT = process.env.NODE_ENV === 'development' ? 5 : 100;
