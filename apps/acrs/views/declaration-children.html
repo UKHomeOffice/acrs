@@ -1,0 +1,18 @@
+<title>{{#t}}pages.declaration.title{{/t}} – GOV.UK</title>
+{{<partials-page}}
+{{$page-content}}
+    {{^isChildrenOver18}}
+        <p>{{#markdown}}declaration-no-children{{/markdown}}</p>
+    {{/isChildrenOver18}}
+    {{#isChildrenOver18}}
+        <p>{{#markdown}}declaration-with-children{{/markdown}}</p>
+    {{/isChildrenOver18}}
+
+    <br>
+    {{#fields}}
+        {{#renderField}}{{/renderField}}
+    {{/fields}}
+  
+  {{#input-submit}}continue{{/input-submit}} 
+{{/page-content}}
+{{/partials-page}}
