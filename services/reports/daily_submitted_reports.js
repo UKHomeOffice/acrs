@@ -8,7 +8,7 @@ const postgresDateFormat = config.saveService.postgresDateFormat;
 module.exports = class DailySubmittedReports {
   static async createReport(type, logger) {
     try {
-      const time10am = moment().set({h: 12, m: 50, s: 0});
+      const time10am = moment().set({h: 13, m: 30, s: 0});
 
       const report = new Reports({
         type,
