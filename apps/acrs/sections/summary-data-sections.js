@@ -223,6 +223,39 @@ module.exports = {
         }
       },
       {
+        steps: '/partner',
+        field: 'partner',
+        parse: (list, req) => {
+          if ( !req.sessionModel.get('steps').includes('/partner') ) {
+            return null;
+          }
+          return req.sessionModel.get('partner') === 'yes' ? 'Yes' : 'No';
+        }
+      },
+      {
+        step: '/partner-summary',
+        field: 'referred-partners',
+        addElementSeparators: true,
+        dependsOn: 'partner',
+        parse: obj => {
+          if ( !obj?.aggregatedValues ) { return null; }
+
+          for (const item of obj.aggregatedValues) {
+            item.fields.map(field => {
+              field.isAggregatorTitle = field.field === 'partner-full-name';
+              field.omitChangeLink = true;
+              if (field.field.includes('date-of-birth')) {
+                if (field.value !== undefined) {
+                  field.parsed = moment(field.value, 'YYYY-MMMM-DD').format('DD MMMM YYYY');
+                }
+              }
+              return field;
+            });
+          }
+          return obj;
+        }
+      },
+      {
         step: '/children',
         field: 'children',
         parse: (list, req) => {
@@ -254,38 +287,6 @@ module.exports = {
           }
           return obj;
         }
-      }
-    ]
-  },
-  'partner-details': {
-    steps: [
-      {
-        steps: '/partner-details',
-        field: 'partner-full-name'
-      },
-      {
-        steps: '/partner-details',
-        field: 'partner-phone-number'
-      },
-      {
-        steps: '/partner-details',
-        field: 'partner-email'
-      },
-      {
-        steps: '/partner-details',
-        field: 'partner-date-of-birth'
-      },
-      {
-        steps: '/partner-details',
-        field: 'partner-country'
-      },
-      {
-        steps: '/partner-details',
-        field: 'partner-living-situation'
-      },
-      {
-        steps: '/partner-details',
-        field: 'partner-why-without-partner'
       }
     ]
   }
