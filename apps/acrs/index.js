@@ -641,9 +641,9 @@ module.exports = {
     '/confirm': {
       behaviours: [SummaryPageBehaviour, ModifySummaryChangeLinks, Submit],
       sections: require('./sections/summary-data-sections'),
-      next: '/declaration-children'
+      next: '/declaration'
     },
-    '/declaration-children': {
+    '/declaration': {
       fields: ['children-declaration'],
       behaviours: [DeclarationBehaviour, SaveFormSession],
       locals: { showSaveAndExit: true },

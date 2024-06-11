@@ -150,7 +150,7 @@
     "hint": "If you have no fixed address, enter an address we can use to contact you",
     "title": "Postal address for the decision - Refer family to come to the UK"
   },
-  "declaration-children": {
+  "declaration": {
     "header": "Declaration",
     "title": "Declaration - Refer family to come to the UK"
   },
