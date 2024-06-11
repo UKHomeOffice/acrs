@@ -102,7 +102,7 @@ describe('Server.js app file', () => {
 
   describe('Use Locals', () => {
     it('should set locals on the response', () => {
-      expect(res.locals).to.have.all.keys('formUrl', 'htmlLang')
+      expect(res.locals).to.have.all.keys('formUrl', 'htmlLang');
     });
 
     it('should call next twice', () => {
