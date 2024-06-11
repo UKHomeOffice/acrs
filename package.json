@@ -34,7 +34,7 @@
     "lodash": "^4.17.21",
     "moment": "^2.29.4",
     "ms-nationalities": "^1.0.1",
-    "notifications-node-client": "^8.0.0",
+    "notifications-node-client": "^8.1.0",
     "uuid": "^9.0.0",
     "winston": "^3.8.2"
   },
