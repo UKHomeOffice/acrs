@@ -2,10 +2,10 @@
 {{<partials-page}}
 {{$page-content}}
     {{^isChildrenOver18}}
-        <p>{{#markdown}}declaration-no-children{{/markdown}}</p>
+     <p>{{#markdown}}declaration-with-children{{/markdown}}</p>
     {{/isChildrenOver18}}
     {{#isChildrenOver18}}
-        <p>{{#markdown}}declaration-with-children{{/markdown}}</p>
+     <p>{{#markdown}}declaration-no-children{{/markdown}}</p>
     {{/isChildrenOver18}}
 
     <br>

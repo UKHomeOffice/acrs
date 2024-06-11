@@ -1,4 +1,4 @@
-If found eligible. your famil members will be required to travel to thee nearest accessible Visa Application Center.
+If found eligible, your family members will be required to travel to the nearest accessible Visa Application Center.
 
 
 I acknowledge that:
