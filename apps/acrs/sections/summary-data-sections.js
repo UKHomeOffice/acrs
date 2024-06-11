@@ -289,5 +289,65 @@ module.exports = {
         }
       }
     ]
-  }
+  },
+  'partner-details': {
+    steps: [
+      {
+        steps: '/partner-details',
+        field: 'partner-full-name'
+      },
+      {
+        steps: '/partner-details',
+        field: 'partner-phone-number'
+      },
+      {
+        steps: '/partner-details',
+        field: 'partner-email'
+      },
+      {
+        steps: '/partner-details',
+        field: 'partner-date-of-birth'
+      },
+      {
+        steps: '/partner-details',
+        field: 'partner-country'
+      },
+      {
+        steps: '/partner-details',
+        field: 'partner-living-situation'
+      },
+      {
+        steps: '/partner-details',
+        field: 'partner-why-without-partner'
+      }
+    ]
+  },
+  'evidence-documents': [
+    {
+      step: '/upload-evidence',
+      field: 'images',
+      parse: (list, req) => {
+        if (!req.sessionModel.get('steps').includes('/upload-evidence')) {
+          return null;
+        }
+        if (req.sessionModel.get('images')) {
+          return req.sessionModel.get('images').length > 0 ? list && list.map(i => i.name).join('\n') : 'None uploaded';
+        }
+        return 'None uploaded';
+      }
+    }
+  ],
+  'evidence-notes': [
+    {
+      step: '/evidence-notes',
+      field: 'evidence-notes-details',
+      parse: (list, req) => {
+        if ( !req.sessionModel.get('steps').includes('/evidence-notes') ||
+        req.sessionModel.get('evidence-notes-details') === '') {
+          return null;
+        }
+        return req.sessionModel.get('evidence-notes-details');
+      }
+    }
+  ]
 };

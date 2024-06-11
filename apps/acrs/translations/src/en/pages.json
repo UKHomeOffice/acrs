@@ -41,12 +41,16 @@
     "paragraph": "If you have no fixed address, enter an address we can use to contact you."
   },
   "parent-details": {
+    "header": "Parent {{values.parentCount}} details",
     "paragraph": "Add your parents one at a time."
   },
   "parent-summary": {
     "header": "Parents you are referring",
     "parent-limit-message": "You can refer a maximum of 2 parents to come to the UK.",
     "parent-limit-exceeded": "You can not refer any more parents."
+  },
+  "brother-or-sister": {
+    "header": "SKELETON: /brother-or-sister"
   },
   "brother-or-sister-details": {
     "paragraph": "Add your brothers or sisters one at a time."
@@ -127,10 +131,10 @@
     "header": "Family members that live in the UK"
   },
   "upload-evidence": {
-    "header": "SKELETON: /upload-evidence"
+    "header": "Upload evidence"
   },
   "evidence-notes": {
-    "header": "SKELETON: /evidence-notes"
+    "header": "Evidence notes (optional)"
   },
   "how-send-decision": {
     "header": "How do we send the decision on your referral?",
@@ -172,6 +176,12 @@
       },
       "family-in-your-referral": {
         "header": "Family in your referral"
+      },
+      "evidence-documents": {
+        "header": "Evidence"
+      },
+      "evidence-notes": {
+        "header": "Notes"
       }
     },
     "fields": {
@@ -282,6 +292,15 @@
       },
       "partner-why-without-partner": {
         "label": "Not evacuated together because"
+      },
+      "your-address-postcode": {
+        "label": "Contact postcode"
+      },
+      "images": {
+        "label": "Files uploaded"
+      },
+      "evidence-notes-details": {
+        "label": "Evidence notes"
       }
     }
   }

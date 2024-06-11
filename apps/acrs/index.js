@@ -4,6 +4,9 @@ const CheckInformationGivenBehaviour = require('./behaviours/continue-report');
 const ResumeSession = require('./behaviours/resume-form-session');
 const CheckEmailToken = require('./behaviours/check-email-token');
 const SaveFormSession = require('./behaviours/save-form-session');
+const SaveImage = require('./behaviours/save-image');
+const RemoveImage = require('./behaviours/remove-image');
+const LimitDocument = require('./behaviours/limit-documents');
 const SaveAndExit = require('./behaviours/save-and-exit');
 const Utilities = require('../../lib/utilities');
 const Submit = require('./behaviours/submit');
@@ -24,6 +27,7 @@ const familyInUkSummary = require('./behaviours/family-in-uk-summary');
 const DeclarationBehaviour = require('./behaviours/declaration');
 const PartnerSummary = require('./behaviours/partner-summary');
 const LimitPartners = require('./behaviours/limit-partners');
+const ExitToSignIn = require('./behaviours/exit-to-sign-in');
 
 
 // Aggregator section limits
@@ -53,7 +57,7 @@ module.exports = {
       backLink: false
     },
     '/information-you-have-given-us': {
-      behaviours: [SummaryPageBehaviour, CheckInformationGivenBehaviour, ModifySummaryChangeLinks],
+      behaviours: [ExitToSignIn, SummaryPageBehaviour, CheckInformationGivenBehaviour, ModifySummaryChangeLinks],
       sections: require('./sections/summary-data-sections'),
       backLink: false,
       journeyStart: '/who-completing-form'
@@ -595,11 +599,16 @@ module.exports = {
       next: '/upload-evidence'
     },
     '/upload-evidence': {
-      fields: [],
+      behaviours: [SaveFormSession, SaveImage('image'), RemoveImage, LimitDocument],
+      fields: ['image'],
+      locals: { showSaveAndExit: true },
+      continueOnEdit: true,
       next: '/evidence-notes'
     },
     '/evidence-notes': {
-      fields: [],
+      behaviours: [SaveFormSession],
+      fields: ['evidence-notes-details'],
+      continueOnEdit: false,
       next: '/how-send-decision'
     },
     '/how-send-decision': {

@@ -8,11 +8,13 @@
         {{#rows}}
           {{> partials-summary-table}}
         {{/rows}}
-        {{#visitedImagesPage}}
-          {{> partials-evidence-thumbnails}}
-        {{/visitedImagesPage}}
       </tbody>
     </table>
+
     {{#input-submit}}continue-only{{/input-submit}}
+
+    <button class="govuk-button govuk-button--secondary exit-button" name="exit" value="exit">
+      {{#t}}buttons.exit{{/t}}
+    </button>
   {{/page-content}}
 {{/partials-page}}
