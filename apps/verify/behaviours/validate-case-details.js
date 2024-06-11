@@ -4,7 +4,6 @@ const axios = require('axios');
 const logger = require('hof/lib/logger')({ env: config.env });
 
 const baseUrl = `${config.saveService.host}:${config.saveService.port}/verify_lookup`;
-const getIdType = brp => !brp ? 'uan' : 'brp';
 module.exports = superclass => class extends superclass {
   async saveValues(req, res, next) {
     const queryColumn = req.sessionModel.get('sign-in-method')
