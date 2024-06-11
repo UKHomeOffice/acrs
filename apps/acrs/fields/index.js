@@ -406,6 +406,15 @@ module.exports = {
     mixin: 'input-file',
     labelClassName: 'visuallyhidden'
   },
+  'evidence-notes-details': {
+    mixin: 'textarea',
+    labelClassName: 'visuallyhidden',
+    attributes: [{
+      attribute: 'rows',
+      value: 5
+    }],
+    validate: ['notUrl', { type: 'maxlength', arguments: 15000 }]
+  },
   'how-to-send-decision': {
     mixin: 'radio-group',
     options: ['email', 'post'],

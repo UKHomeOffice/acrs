@@ -243,6 +243,10 @@
       "fileType": "This file is not a valid file format you can upload to this service.",
       "tooMany": "You can only submit up to 250 attachments."
     },
+    "evidence-notes-details": {
+      "notUrl": "Please do not enter a link/url",
+      "maxlength": "Evidence notes must be less than 15,000 characters"
+    },
     "how-to-send-decision": {
       "required": "You must select an option"
     },
