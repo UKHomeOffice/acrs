@@ -28,7 +28,7 @@
     "header": "Is this {{values.full-name}}’s email address?",
     "paragraph": "We may use this email address to contact them for more information about the referral."
   },
-  "referrer-email": {
+  "your-email": {
     "header": "Does {{values.full-name}} have an email address?",
     "paragraph": "We may use this email address to contact them for more information about the referral."
   },

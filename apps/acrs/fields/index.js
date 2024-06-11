@@ -39,12 +39,12 @@ module.exports = {
       className: 'visuallyhidden'
     }
   },
-  'referrer-email-options': {
+  'your-email-options': {
     mixin: 'radio-group',
     options: [
       {
         value: 'yes',
-        toggle: 'referrer-email-address',
+        toggle: 'your-email-address',
         child: 'input-text'
       },
       {
@@ -56,9 +56,9 @@ module.exports = {
       className: 'visuallyhidden'
     }
   },
-  'referrer-email-address': {
+  'your-email-address': {
     dependent: {
-      field: 'referrer-email-options',
+      field: 'your-email-options',
       value: 'yes'
     },
     validate: ['required', 'email', { type: 'maxlength', arguments: 254 }]

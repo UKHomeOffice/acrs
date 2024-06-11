@@ -84,7 +84,7 @@
         }
       }
   },
-  "referrer-email-options": {
+  "your-email-options": {
     "options": {
         "yes": {
           "label": "Yes"
@@ -94,7 +94,7 @@
         }
       }
   },
-  "referrer-email-address": {
+  "your-email-address": {
     "label": "{{values.full-name}}'s email address"
   },
   "your-address-line-1": {
