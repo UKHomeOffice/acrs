@@ -15,7 +15,7 @@ module.exports = {
       },
       {
         field: 'date-of-birth',
-        parse: date => date && moment(date).format(PRETTY_DATE_FORMAT),
+        parse: date => date  && moment(date).format(PRETTY_DATE_FORMAT),
         omitChangeLink: true
       },
       {

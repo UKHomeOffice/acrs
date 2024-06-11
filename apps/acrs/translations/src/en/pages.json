@@ -175,10 +175,10 @@
     },
     "fields": {
       "brp": {
-       "label": "BRP"
+       "label": "Biometric residence permit number"
       },
       "uan": {
-        "label": "UAN"
+        "label": "Unique application number"
       },
       "date-of-birth": {
         "label": "Date of birth"

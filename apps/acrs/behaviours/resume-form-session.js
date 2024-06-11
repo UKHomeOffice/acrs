@@ -156,7 +156,11 @@ module.exports = superclass => class extends superclass {
       validate: ['required'],
       options: cases.map(obj => {
         dob = obj.session['date-of-birth'];
-        objType = obj.session['id-type'];
+        if (obj.id) {
+          objType = obj.session['id-type'];
+        } else {
+          objType = req.sessionModel.get('id-type');
+        }
 
         if (objType === 'brp') {
           idNumber = obj.session.brp;
@@ -184,6 +188,12 @@ module.exports = superclass => class extends superclass {
     const cases = req.sessionModel.get('user-cases');
     // ensure no /edit steps are add to the steps property when session resumed
     session.steps = session.steps.filter(step => !step.match(/\/change|edit$/));
+
+    if (session['id-type'] === 'brp') {
+      delete session.uan
+    } else if ((session['id-type'] === 'uan')) {
+      delete session.brp
+    }
 
     delete session['csrf-secret'];
     delete session.errors;

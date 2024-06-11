@@ -7,16 +7,10 @@ const baseUrl = `${config.saveService.host}:${config.saveService.port}/verify_lo
 const getIdType = brp => !brp ? 'uan' : 'brp';
 module.exports = superclass => class extends superclass {
   async saveValues(req, res, next) {
-    let queryColumn;
-    switch(true) {
-      case !!req.form.values.brp:
-        queryColumn = 'brp';
-        break;
-      case !!req.form.values.uan:
-        queryColumn = 'uan';
-        break;
-      default:
-        return res.redirect('/incorrect-details-brp');
+    const queryColumn = req.sessionModel.get('sign-in-method')
+
+    if (!queryColumn) {
+      return res.redirect('/incorrect-details-brp');
     }
     const queryValue = req.form.values[queryColumn];
 
@@ -26,7 +20,7 @@ module.exports = superclass => class extends superclass {
     }
     req.sessionModel.set('brp', validCase.brp);
     req.sessionModel.set('uan', validCase.uan);
-    req.sessionModel.set('id-type', getIdType(req.form.values[queryColumn]));
+    req.sessionModel.set('id-type', queryColumn);
     req.sessionModel.set('date-of-birth', validCase.date_of_birth);
     return super.saveValues(req, res, next);
   }
