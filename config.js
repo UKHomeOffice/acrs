@@ -11,7 +11,7 @@ module.exports = {
     userAuthTemplateId: process.env.USER_AUTHORISATION_TEMPLATE_ID,
     caseworkerEmail: process.env.CASEWORKER_EMAIL,
     saveAndExitTemplateId: process.env.SAVE_AND_EXIT_TEMPLATE_ID,
-    customerReceiptTemplateId: process.env.SUBMISSION_TEMPLATE_ID,
+    customerReceiptTemplateId: process.env.CUSTOMER_RECEIPT_TEMPLATE_ID,
     submissionTemplateId: process.env.CASEWORKER_SUBMISSION_TEMPLATE_ID
   },
   keycloak: {
