@@ -14,6 +14,13 @@ module.exports = {
     customerReceiptTemplateId: process.env.SUBMISSION_TEMPLATE_ID,
     submissionTemplateId: process.env.CASEWORKER_SUBMISSION_TEMPLATE_ID
   },
+  keycloak: {
+    token: process.env.KEYCLOAK_TOKEN_URL,
+    username: process.env.KEYCLOAK_USERNAME,
+    password: process.env.KEYCLOAK_PASSWORD,
+    clientId: process.env.KEYCLOAK_CLIENT_ID,
+    secret: process.env.KEYCLOAK_SECRET
+  },
   saveService: {
     postgresDateFormat: 'YYYY-MM-DD HH:mm:ss',
     port: process.env.DATASERVICE_SERVICE_PORT_HTTPS,
@@ -23,6 +30,28 @@ module.exports = {
   redis: {
     port: process.env.REDIS_PORT || '6379',
     host: process.env.REDIS_HOST || '127.0.0.1'
+  },
+  upload: {
+    maxFileSizeInBytes: 25 * 1000 * 1000, // 25MB in bytes
+    hostname: process.env.FILE_VAULT_URL,
+    allowedMimeTypes: [
+      'image/png',
+      'image/jpg',
+      'image/jpeg',
+      'application/pdf',
+      'text/plain',
+      'text/html',
+      'application/vnd',
+      'message/rfc822',
+      'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+      'application/vnd.ms-powerpoint',
+      'application/vnd.openxmlformats-officedocument.presentationml.presentation',
+      'application/rtf',
+      'text/csv',
+      'application/vnd.ms-excel',
+      'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+      'application/xml'
+    ]
   },
   login: {
     tokenExpiry: 1800,
