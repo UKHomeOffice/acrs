@@ -637,13 +637,13 @@ module.exports = {
       next: '/confirm'
     },
     '/confirm': {
-      behaviours: [SummaryPageBehaviour, ModifySummaryChangeLinks, Submit],
+      behaviours: [SummaryPageBehaviour, ModifySummaryChangeLinks],
       sections: require('./sections/summary-data-sections'),
-      next: '/declaration-children'
+      next: '/declaration'
     },
-    '/declaration-children': {
+    '/declaration': {
       fields: ['children-declaration'],
-      behaviours: [DeclarationBehaviour, SaveFormSession],
+      behaviours: [DeclarationBehaviour, SaveFormSession, Submit],
       locals: { showSaveAndExit: true },
       next: '/referral-submitted'
     },

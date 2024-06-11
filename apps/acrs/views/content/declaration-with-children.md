@@ -1,6 +1,6 @@
-If found eligible. your famil members will be required to travel to thee nearest accessible Visa Application Center.
+If found eligible. your family members will be required to travel to the nearest accessible Visa Application Center.
 
-If any of your eligible family members are children under the age of 18 thay should make this journey with an adult. Children should not travel without aan adult.
+If any of your eligible family members are children under the age of 18 they should make this journey with an adult. Children should not travel without aan adult.
 
 
 I acknowledge that:
