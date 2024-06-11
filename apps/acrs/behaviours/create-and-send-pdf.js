@@ -148,10 +148,10 @@ module.exports = class CreateAndSendPDF {
           notifyClient.prepareUpload(pdfData),
         has_supporting_documents: _.get(req.sessionModel.get('images'), 'length') ? 'yes' : 'no',
         supporting_documents: imageNames,
-        uses_brp_number: brp != undefined ? 'yes' : 'no',
-        brp_number: brp != undefined ? brp : '',
-        uses_uan:  uan != undefined ? 'yes' : 'no',
-        uan_number: uan != undefined ? uan : '',
+        uses_brp_number: brp !== undefined ? 'yes' : 'no',
+        brp_number: brp !== undefined ? brp : '',
+        uses_uan: uan !== undefined ? 'yes' : 'no',
+        uan_number: uan !== undefined ? uan : ''
       })
     });
   }
