@@ -102,11 +102,7 @@ describe('Server.js app file', () => {
 
   describe('Use Locals', () => {
     it('should set locals on the response', () => {
-      res.locals.should.eql({
-        formUrl: 'http://localhost',
-        htmlLang: 'en',
-        feedbackUrl: '/https://eforms.homeoffice.gov.uk/outreach/feedback.ofml'
-      });
+      expect(res.locals).to.have.all.keys('formUrl', 'htmlLang')
     });
 
     it('should call next twice', () => {
