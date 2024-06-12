@@ -29,8 +29,8 @@
     "paragraph": "We may use this email address to contact them for more information about the referral."
   },
   "your-email": {
-    "header": "Does {{values.full-name}} have an email address?",
-    "paragraph": "We may use this email address to contact them for more information about the referral."
+    "header": "Do you have an email address?",
+    "paragraph": "We may use this email address to contact you for more information about the referral."
   },
   "provide-telephone-number": {
     "header": "Can you provide a telephone number?",
