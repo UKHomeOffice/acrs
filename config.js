@@ -28,43 +28,6 @@ module.exports = {
     host: process.env.DATASERVICE_SERVICE_HOST &&
       `https://${process.env.DATASERVICE_SERVICE_HOST}` || 'http://127.0.0.1'
   },
-  upload: {
-    maxFileSize: '25mb',
-    allowedMimeTypes: [
-      'application/json',
-      'application/msword',
-      'application/pdf',
-      'application/rtf',
-      'application/vnd.ms-excel',
-      'application/vnd.ms-outlook',
-      'application/vnd.ms-powerpoint',
-      'application/vnd.openxmlformats-officedocument.presentationml.presentation',
-      'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
-      'application/vnd.openxmlformats-officedocument.spreadsheetml.template',
-      'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
-      'application/xml',
-      'application/x-tika-ooxml',
-      'audio/vnd.wave',
-      'audio/wav',
-      'audio/x-wav',
-      'image/bmp',
-      'image/jpeg',
-      'image/jpg',
-      'image/png',
-      'message/rfc822',
-      'text/csv',
-      'text/plain',
-      'text/xml'
-    ],
-    hostname: process.env.FILE_VAULT_URL || 'http://localhost:3003/file'
-  },
-  keycloak: {
-    token: process.env.KEYCLOAK_TOKEN_URL,
-    username: process.env.KEYCLOAK_USERNAME,
-    password: process.env.KEYCLOAK_PASSWORD,
-    clientId: process.env.KEYCLOAK_CLIENT_ID,
-    secret: process.env.KEYCLOAK_SECRET
-  },
   redis: {
     port: process.env.REDIS_PORT || '6379',
     host: process.env.REDIS_HOST || '127.0.0.1'
