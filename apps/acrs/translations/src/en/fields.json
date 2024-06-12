@@ -74,7 +74,7 @@
     "label": "What is your full name?",
     "hint": "You can copy this from your biometric residence permit card or any letters from the Home Office"
   },
-  "confirm-referrer-email": {
+  "confirm-your-email": {
     "options": {
         "yes": {
           "label": "Yes"
