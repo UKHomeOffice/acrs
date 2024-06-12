@@ -125,7 +125,7 @@
   },
   "family-in-uk-summary": {
     "header": "Family members that live in the UK",
-    "family-in-uk-limit-exceeded": "You can not refer any more family members in the UK."
+    "family-in-uk-limit-exceeded": "You can not add any more family members in the UK."
   },
   "upload-evidence": {
     "header": "Upload evidence"
