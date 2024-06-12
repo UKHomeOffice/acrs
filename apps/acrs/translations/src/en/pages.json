@@ -24,9 +24,9 @@
     "header": "Complete this form as if you are the referrer",
     "paragraph": "Answer all remaining questions as if you are the person referring family to come the UK."
   },
-  "confirm-referrer-email": {
-    "header": "Is this {{values.full-name}}’s email address?",
-    "paragraph": "We may use this email address to contact them for more information about the referral."
+  "confirm-your-email": {
+    "header": "Is this your email address?",
+    "paragraph": "We may use this email address to contact you for more information about the referral."
   },
   "your-email": {
     "header": "Do you have an email address?",
@@ -151,12 +151,6 @@
     "header": "Declaration",
     "title": "Declaration - Refer family to come to the UK"
   },
-  "referral-submitted": {
-    "header": "SKELETON: /referral-submitted"
-  },
-  "confirmation": {
-    "header": "SKELETON: /confirmation"
-  },
   "link-expired": {
     "header": "Your link has expired",
     "paragraph": "To keep your information safe, we need to check some of your details and email you a new link.",
@@ -197,7 +191,7 @@
       "full-name": {
         "label": "Full name"
       },
-      "confirm-referrer-email": {
+      "confirm-your-email": {
         "label": "Email"
       },
       "legal-representative-fullname": {

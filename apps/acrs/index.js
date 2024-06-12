@@ -28,7 +28,8 @@ const DeclarationBehaviour = require('./behaviours/declaration');
 const PartnerSummary = require('./behaviours/partner-summary');
 const LimitPartners = require('./behaviours/limit-partners');
 const ExitToSignIn = require('./behaviours/exit-to-sign-in');
-
+const DecisionEmail = require('./behaviours/decision-email');
+const HowToSendDecision = require('./behaviours/how-send-decision');
 // Aggregator section limits
 const PARENT_LIMIT = 2;
 const BROTHER_OR_SISTER_LIMIT = process.env.NODE_ENV === 'development' ? 5 : 100;
@@ -127,16 +128,16 @@ module.exports = {
           return ! Utilities.isOver18(req.sessionModel.get('date-of-birth'));
         }
       }],
-      next: '/confirm-referrer-email',
+      next: '/confirm-your-email',
       behaviours: SaveFormSession,
       locals: { showSaveAndExit: true }
     },
-    '/confirm-referrer-email': {
-      fields: ['confirm-referrer-email'],
+    '/confirm-your-email': {
+      fields: ['confirm-your-email'],
       forks: [{
         target: '/your-email',
         condition: {
-          field: 'confirm-referrer-email',
+          field: 'confirm-your-email',
           value: 'no'
         }
       }],
@@ -612,22 +613,32 @@ module.exports = {
     },
     '/how-send-decision': {
       fields: ['how-to-send-decision'],
-      forks: [{
-        target: '/email-decision',
-        condition: {
-          field: 'how-to-send-decision',
-          value: 'email'
+      forks: [
+        {
+          target: '/email-decision',
+          condition: {
+            field: 'how-to-send-decision',
+            value: 'email'
+          }
+        },
+        {
+          target: '/decision-postal-address',
+          condition: {
+            field: 'how-to-send-decision',
+            value: 'post'
+          }
         }
-      }],
-      next: '/decision-postal-address'
+      ],
+      next: ''
     },
     '/email-decision': {
-      behaviours: SaveFormSession,
+      behaviours: [SaveFormSession, HowToSendDecision],
       fields: ['is-decision-by-email', 'is-decision-by-email-detail'],
       locals: { showSaveAndExit: true },
       next: '/confirm'
     },
     '/decision-postal-address': {
+      behaviours: [SaveFormSession, HowToSendDecision],
       fields: [
         'is-decision-post-address-1',
         'is-decision-post-address-2',
@@ -638,8 +649,9 @@ module.exports = {
       next: '/confirm'
     },
     '/confirm': {
-      behaviours: [SummaryPageBehaviour, ModifySummaryChangeLinks],
+      behaviours: [SummaryPageBehaviour, SaveFormSession, ModifySummaryChangeLinks, DecisionEmail],
       sections: require('./sections/summary-data-sections'),
+      locals: { showSaveAndExit: true },
       next: '/declaration'
     },
     '/declaration': {
@@ -649,14 +661,9 @@ module.exports = {
       next: '/referral-submitted'
     },
     '/referral-submitted': {
-      fields: [],
-      next: '/confirmation'
+      clearSession: true,
+      backLink: false
     },
-    '/confirmation': {
-      clearSession: true
-    },
-    // Out of Step Pages
-
     '/session-expired': {
       fields: [],
       next: '/confirm'
