@@ -134,7 +134,7 @@ module.exports = {
     '/confirm-referrer-email': {
       fields: ['confirm-referrer-email'],
       forks: [{
-        target: '/referrer-email',
+        target: '/your-email',
         condition: {
           field: 'confirm-referrer-email',
           value: 'no'
@@ -145,10 +145,10 @@ module.exports = {
       locals: { showSaveAndExit: true }
     },
 
-    '/referrer-email': {
+    '/your-email': {
       fields: [
-        'referrer-email-options',
-        'referrer-email-address'
+        'your-email-options',
+        'your-email-address'
       ],
       behaviours: SaveFormSession,
       locals: { showSaveAndExit: true },

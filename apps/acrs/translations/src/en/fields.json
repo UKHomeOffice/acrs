@@ -75,16 +75,6 @@
     "hint": "You can copy this from your biometric residence permit card or any letters from the Home Office"
   },
   "confirm-referrer-email": {
-      "options": {
-        "yes": {
-          "label": "Yes"
-        },
-        "no": {
-          "label": "No"
-        }
-      }
-  },
-  "referrer-email-options": {
     "options": {
         "yes": {
           "label": "Yes"
@@ -94,8 +84,18 @@
         }
       }
   },
-  "referrer-email-address": {
-    "label": "{{values.full-name}}'s email address"
+  "your-email-options": {
+    "options": {
+        "yes": {
+          "label": "Yes"
+        },
+        "no": {
+          "label": "No"
+        }
+      }
+  },
+  "your-email-address": {
+    "label": "Your email address"
   },
   "your-address-line-1": {
     "label": "Address line 1"
