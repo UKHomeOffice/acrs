@@ -290,38 +290,6 @@ module.exports = {
       }
     ]
   },
-  'partner-details': {
-    steps: [
-      {
-        steps: '/partner-details',
-        field: 'partner-full-name'
-      },
-      {
-        steps: '/partner-details',
-        field: 'partner-phone-number'
-      },
-      {
-        steps: '/partner-details',
-        field: 'partner-email'
-      },
-      {
-        steps: '/partner-details',
-        field: 'partner-date-of-birth'
-      },
-      {
-        steps: '/partner-details',
-        field: 'partner-country'
-      },
-      {
-        steps: '/partner-details',
-        field: 'partner-living-situation'
-      },
-      {
-        steps: '/partner-details',
-        field: 'partner-why-without-partner'
-      }
-    ]
-  },
   'evidence-documents': [
     {
       step: '/upload-evidence',

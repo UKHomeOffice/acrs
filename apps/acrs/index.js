@@ -545,7 +545,7 @@ module.exports = {
       behaviours: Locals18Flag
     },
     '/family-in-uk': {
-      behaviours: [SaveFormSession],
+      behaviours: [ResetSummary('family-member-in-uk', 'family-in-uk'), SaveFormSession],
       forks: [
         {
           target: '/family-in-uk-details',

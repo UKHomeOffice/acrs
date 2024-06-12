@@ -1,11 +1,17 @@
 {{<partials-page}}
   {{$page-content}}
     <title>{{#t}}pages.uk-family-member-details.header{{/t}} – GOV.UK</title>
-  
-    <!-- {{> partials-family-in-uk-summary-table}} -->
     {{> partials-aggregator-summary-table}}
-    <p><a class="add-another-button govuk-button govuk-button--secondary" href="{{baseUrl}}/{{addStep}}">Add another {{addAnotherLinkText}}</a></p>
-    
+    {{#noMoreFamilyMembers}}
+      <p>{{#t}}pages.family-in-uk-summary.family-in-uk-limit-exceeded{{/t}}</p>
+    {{/noMoreFamilyMembers}}
+    <br>
+    {{^noMoreFamilyMembers}}
+    <a href="{{baseUrl}}/{{addStep}}" class="govuk-button govuk-button--secondary" data-module="govuk-button">
+      Add another {{addAnotherLinkText}}
+    </a>
+    <br>
+    {{/noMoreFamilyMembers}}
     {{#input-submit}}continue{{/input-submit}}
   {{/page-content}}
 {{/partials-page}}

@@ -41,16 +41,12 @@
     "paragraph": "If you have no fixed address, enter an address we can use to contact you."
   },
   "parent-details": {
-    "header": "Parent {{values.parentCount}} details",
     "paragraph": "Add your parents one at a time."
   },
   "parent-summary": {
     "header": "Parents you are referring",
     "parent-limit-message": "You can refer a maximum of 2 parents to come to the UK.",
     "parent-limit-exceeded": "You can not refer any more parents."
-  },
-  "brother-or-sister": {
-    "header": "SKELETON: /brother-or-sister"
   },
   "brother-or-sister-details": {
     "paragraph": "Add your brothers or sisters one at a time."
@@ -128,7 +124,8 @@
     "hint": "Enter the details of a family member that lives in the UK."
   },
   "family-in-uk-summary": {
-    "header": "Family members that live in the UK"
+    "header": "Family members that live in the UK",
+    "family-in-uk-limit-exceeded": "You can not add any more family members in the UK."
   },
   "upload-evidence": {
     "header": "Upload evidence"
