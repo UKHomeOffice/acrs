@@ -1,0 +1,21 @@
+<table>
+    <tbody>
+      {{#items}}
+        <dl>
+          <div class="confirm-row">
+            <dt class="confirm-label uk-family-member">{{itemTitle}}</dt>
+            <dd class="summary-links summary-links-change"><span><a href="{{baseUrl}}/{{route}}/edit/{{index}}">{{#t}}buttons.edit{{/t}}<span class="visuallyhidden"> {{itemTitle}}</span></a></span></dd>
+            <dd class="summary-links summary-links-delete"><span><a href="{{baseUrl}}/{{route}}/delete/{{index}}">{{#t}}buttons.remove{{/t}}<span class="visuallyhidden"> {{itemTitle}}</span></a></span></dd>
+          </div>
+          {{#fields}}
+            {{#showInSummary}}
+              <div class="confirm-row">
+                <dt class="confirm-label summary-label">{{#t}}fields.{{field}}{{/t}}</dt>
+                <dd class="confirm-value" data-value="{{#parsed}}{{parsed}}{{/parsed}}{{^parsed}}{{value}}{{/parsed}}">{{#parsed}}{{parsed}}{{/parsed}}{{^parsed}}{{value}}{{/parsed}}</dd>
+              </div>
+            {{/showInSummary}}
+          {{/fields}}
+        </dl>
+      {{/items}}
+    </tbody>
+  </table>

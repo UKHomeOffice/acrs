@@ -201,10 +201,137 @@ pre.looped-records {
   text-decoration: none;
 }
 
-.save-and-exit-button {
+.save-and-exit-button,
+.exit-button {
   margin-left: 15px;
+}
+
+.wrap-table-cell,
+.confirm-row {
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+
+.confirm-row {
+  padding: 10px 200px 10px 20px;
+}
+
+.confirm-row .confirm-label {
+  padding: 10px 80px 10px 20px;
+}
+
+.uk-family-member {
+  font-size: 125%;
+}
+
+.uk-family-member,
+.uk-family-member-links {
+  border-bottom: 0px;
+  font-weight: bold;
+}
+
+.uk-family-member-links {
+  float: right;
+  padding-right: 1rem;
+}
+
+.summary-links {
+  border-bottom: 0px;
+  font-weight: bold;
+}
+
+.summary-links-change {
+  display: inline;
+  justify-content: flex-end;
+  margin-left: 150px;
+  padding-right: 1rem;
+}
+
+.summary-links-delete {
+  display: inline;
+  justify-content: flex-end;
+  padding-right: 1rem;
+}
+
+.summary-label {
+  min-width: 200px;
+}
+
+
+
+.govuk-character-count__message {
+  display: none;
+}
+
+
+.table-options {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: baseline;
+}
+
+.wrap-table-cell,
+.confirm-row {
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+
+.confirm-row {
+  padding: 10px 200px 10px 20px;
+}
+
+.confirm-row .confirm-label {
+  padding: 10px 80px 10px 20px;
+}
+
+.uk-family-member {
+  font-size: 125%;
+}
+
+.uk-family-member,
+.uk-family-member-links {
+  border-bottom: 0px;
+  font-weight: bold;
+}
+
+.uk-family-member-links {
+  float: right;
+  padding-right: 1rem;
+}
+
+.summary-links {
+  border-bottom: 0px;
+  font-weight: bold;
+}
+
+.summary-links-change {
+  display: inline;
+  justify-content: flex-end;
+  margin-left: 150px;
+  padding-right: 1rem;
+}
+
+.summary-links-delete {
+  display: inline;
+  justify-content: flex-end;
+  padding-right: 1rem;
+}
+
+.summary-label {
+  min-width: 200px;
+}
+@media only screen and (max-width: 685px) {
+  .save-and-exit-button,
+  .exit-button {
+    margin-left: 0px;
+  }
 }
 
 .govuk-character-count__message {
   display: none;
+}
+
+.email-decision {
+  margin-top: -20px;
 }

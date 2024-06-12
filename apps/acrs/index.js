@@ -1,17 +1,41 @@
 'use strict';
-
 const SummaryPageBehaviour = require('hof').components.summary;
 const CheckInformationGivenBehaviour = require('./behaviours/continue-report');
 const ResumeSession = require('./behaviours/resume-form-session');
 const CheckEmailToken = require('./behaviours/check-email-token');
 const SaveFormSession = require('./behaviours/save-form-session');
+const SaveImage = require('./behaviours/save-image');
+const RemoveImage = require('./behaviours/remove-image');
+const LimitDocument = require('./behaviours/limit-documents');
 const SaveAndExit = require('./behaviours/save-and-exit');
 const Utilities = require('../../lib/utilities');
-
 const Submit = require('./behaviours/submit');
-const FamilyMemberBahaviour = require('./behaviours/family-member');
-const FamilyDetailBahaviour = require('./behaviours/get-family-detail');
+const AggregateSaveUpdate = require('./behaviours/aggregator-save-update');
 const Locals18Flag = require('./behaviours/locals-18-flag');
+const ResetSummary = require('./behaviours/reset-summary');
+const ModifySummaryChangeLinks = require('./behaviours/summary-modify-change-link');
+const ParentSummary = require('./behaviours/parent-summary');
+const LimitParents = require('./behaviours/limit-parents');
+const BrotherSisterSummary = require('./behaviours/brother-sister-summary');
+const LimitBrothersOrSisters = require('./behaviours/limit-brother-sister');
+const ChildrenSummary = require('./behaviours/children-summary');
+const LimitChildren = require('./behaviours/limit-children');
+const AdditionalFamilySummary = require('./behaviours/additional-family-summary');
+const LimitAdditionalFamily = require('./behaviours/limit-additional-family');
+const limitFamilyInUk = require('./behaviours/limit-family-in-uk');
+const familyInUkSummary = require('./behaviours/family-in-uk-summary');
+const PartnerSummary = require('./behaviours/partner-summary');
+const LimitPartners = require('./behaviours/limit-partners');
+const ExitToSignIn = require('./behaviours/exit-to-sign-in');
+
+
+// Aggregator section limits
+const PARENT_LIMIT = 2;
+const BROTHER_OR_SISTER_LIMIT = process.env.NODE_ENV === 'development' ? 5 : 100;
+const CHILDREN_LIMIT = process.env.NODE_ENV === 'development' ? 2 : 100;
+const ADDITIONAL_FAMILY_LIMIT = process.env.NODE_ENV === 'development' ? 5 : 100;
+const PARTNER_LIMIT = 1;
+
 
 module.exports = {
   name: 'acrs',
@@ -27,12 +51,12 @@ module.exports = {
       next: '/select-form'
     },
     '/select-form': {
-      behaviours: [ResumeSession, SaveFormSession],
+      behaviours: [ExitToSignIn, ResumeSession, SaveFormSession],
       next: '/information-you-have-given-us',
       backLink: false
     },
     '/information-you-have-given-us': {
-      behaviours: [SummaryPageBehaviour, CheckInformationGivenBehaviour],
+      behaviours: [ExitToSignIn, SummaryPageBehaviour, CheckInformationGivenBehaviour, ModifySummaryChangeLinks],
       sections: require('./sections/summary-data-sections'),
       backLink: false,
       journeyStart: '/who-completing-form'
@@ -152,22 +176,42 @@ module.exports = {
     // Figma Section: "Who are you applying to bring to the UK? Sponsor under 18" (who-bringing-parent)
 
     '/parent': {
-      behaviours: SaveFormSession,
+      behaviours: [ResetSummary('referred-parents', 'parent'), SaveFormSession],
       fields: ['parent'],
-      forks: [{
-        target: '/brother-or-sister',
-        condition: {
-          field: 'parent',
-          value: 'no'
+      forks: [
+        {
+          target: '/parent-summary',
+          condition: {
+            field: 'parent',
+            value: 'yes'
+          }
+        },
+        {
+          target: '/brother-or-sister',
+          condition: {
+            field: 'parent',
+            value: 'no'
+          }
+        },
+        {
+          target: '/parent-details',
+          condition: req => {
+            if (
+              req.form.values.parent === 'yes' &&
+                req.sessionModel.get('referred-parents') &&
+                req.sessionModel.get('referred-parents').aggregatedValues.length === 0
+            ) {
+              return true;
+            }
+            return false;
+          }
         }
-      }],
-      next: '/parent-details',
+      ],
       locals: { showSaveAndExit: true },
       continueOnEdit: true
     },
-
     '/parent-details': {
-      behaviours: SaveFormSession,
+      behaviours: [LimitParents, SaveFormSession],
       fields: [
         'parent-full-name',
         'parent-phone-number',
@@ -177,30 +221,69 @@ module.exports = {
         'parent-evacuated-without-reason'
       ],
       next: '/parent-summary',
-      locals: { showSaveAndExit: true }
+      locals: { showSaveAndExit: true },
+      continueOnEdit: true
     },
     '/parent-summary': {
-      fields: [],
+      behaviours: [AggregateSaveUpdate, ParentSummary, LimitParents, SaveFormSession],
+      aggregateTo: 'referred-parents',
+      aggregateFrom: [
+        'parent-full-name',
+        'parent-phone-number',
+        'parent-email',
+        'parent-date-of-birth',
+        'parent-country',
+        'parent-evacuated-without-reason'
+      ],
+      titleField: 'parent-full-name',
+      addStep: 'parent-details',
+      addAnotherLinkText: 'parent',
+      locals: { showSaveAndExit: true },
+      continueOnEdit: false,
+      template: 'parent-summary',
+      backLink: 'parent',
+      aggregateLimit: PARENT_LIMIT,
       next: '/brother-or-sister'
     },
 
     '/brother-or-sister': {
-      behaviours: SaveFormSession,
+      behaviours: [ResetSummary('referred-siblings', 'brother-or-sister'), SaveFormSession],
       fields: ['brother-or-sister'],
-      forks: [{
-        target: '/additional-family',
-        condition: {
-          field: 'brother-or-sister',
-          value: 'no'
+      forks: [
+        {
+          target: '/brother-or-sister-summary',
+          condition: {
+            field: 'brother-or-sister',
+            value: 'yes'
+          }
+        },
+        {
+          target: '/additional-family',
+          condition: {
+            field: 'brother-or-sister',
+            value: 'no'
+          }
+        },
+        {
+          target: '/brother-or-sister-details',
+          condition: req => {
+            if (
+              req.form.values['brother-or-sister'] === 'yes' &&
+                req.sessionModel.get('referred-siblings') &&
+                req.sessionModel.get('referred-siblings').aggregatedValues.length === 0
+            ) {
+              return true;
+            }
+            return false;
+          }
         }
-      }],
-      next: '/brother-or-sister-details',
+      ],
       locals: { showSaveAndExit: true },
       continueOnEdit: true
     },
 
     '/brother-or-sister-details': {
-      behaviours: SaveFormSession,
+      behaviours: [LimitBrothersOrSisters, SaveFormSession],
       fields: [
         'brother-or-sister-full-name',
         'brother-or-sister-date-of-birth',
@@ -208,10 +291,26 @@ module.exports = {
         'brother-or-sister-evacuated-without-reason'
       ],
       next: '/brother-or-sister-summary',
-      locals: { showSaveAndExit: true }
+      locals: { showSaveAndExit: true },
+      continueOnEdit: true
     },
     '/brother-or-sister-summary': {
-      fields: [],
+      behaviours: [AggregateSaveUpdate, BrotherSisterSummary, LimitBrothersOrSisters, SaveFormSession],
+      aggregateTo: 'referred-siblings',
+      aggregateFrom: [
+        'brother-or-sister-full-name',
+        'brother-or-sister-date-of-birth',
+        'brother-or-sister-country',
+        'brother-or-sister-evacuated-without-reason'
+      ],
+      titleField: 'brother-or-sister-full-name',
+      addStep: 'brother-or-sister-details',
+      addAnotherLinkText: 'brother or sister',
+      locals: { showSaveAndExit: true },
+      continueOnEdit: false,
+      template: 'brother-or-sister-summary',
+      backLink: 'brother-or-sister',
+      aggregateLimit: BROTHER_OR_SISTER_LIMIT,
       next: '/additional-family'
     },
 
@@ -231,7 +330,6 @@ module.exports = {
       next: '/partner-details',
       continueOnEdit: true
     },
-
     '/partner-details': {
       fields: [
         'partner-full-name',
@@ -247,41 +345,145 @@ module.exports = {
       next: '/partner-summary'
     },
     '/partner-summary': {
-      fields: [],
+      behaviours: [
+        AggregateSaveUpdate,
+        PartnerSummary,
+        LimitPartners,
+        SaveFormSession
+      ],
+      aggregateTo: 'referred-partners',
+      aggregateFrom: [
+        'partner-full-name',
+        'partner-phone-number',
+        'partner-email',
+        'partner-date-of-birth',
+        'partner-country',
+        'partner-living-situation',
+        'partner-why-without-partner'
+      ],
+      aggregateLimit: PARTNER_LIMIT,
+      titleField: 'partner-full-name',
+      addStep: 'partner-details',
+      addAnotherLinkText: 'partner',
+      locals: {
+        showSaveAndExit: true,
+        referredPartnerLimit: PARTNER_LIMIT
+      },
+      continueOnEdit: false,
+      template: 'partner-summary',
+      backLink: 'partner',
       next: '/children'
     },
+
     '/children': {
+      behaviours: [ResetSummary('referred-children', 'children'), SaveFormSession],
       fields: ['children'],
-      forks: [{
-        target: '/additional-family',
-        condition: {
-          field: 'children',
-          value: 'no'
+      forks: [
+        {
+          target: '/children-summary',
+          condition: {
+            field: 'children',
+            value: 'yes'
+          }
+        },
+        {
+          target: '/additional-family',
+          condition: {
+            field: 'children',
+            value: 'no'
+          }
+        },
+        {
+          target: '/child-details',
+          condition: req => {
+            if (
+              req.form.values.children === 'yes' &&
+              req.sessionModel.get('referred-children') &&
+              req.sessionModel.get('referred-children').aggregatedValues.length === 0
+            ) {
+              return true;
+            }
+            return false;
+          }
         }
-      }],
-      behaviours: SaveFormSession,
+      ],
       locals: { showSaveAndExit: true },
-      next: '/child-details'
+      continueOnEdit: true
     },
     '/child-details': {
-      fields: [],
+      fields: [
+        'child-full-name',
+        'child-date-of-birth',
+        'child-country',
+        'child-living-situation',
+        'child-why-without-child'
+      ],
+      behaviours: SaveFormSession,
+      locals: { showSaveAndExit: true },
       next: '/children-summary'
     },
     '/children-summary': {
-      fields: [],
-      next: '/child-details-2'
-    },
-    '/child-details-2': {
-      fields: [],
+      behaviours: [
+        AggregateSaveUpdate,
+        ChildrenSummary,
+        LimitChildren,
+        SaveFormSession
+      ],
+      aggregateTo: 'referred-children',
+      aggregateFrom: [
+        'child-full-name',
+        'child-date-of-birth',
+        'child-country',
+        'child-living-situation',
+        'child-why-without-child'
+      ],
+      aggregateLimit: CHILDREN_LIMIT,
+      titleField: 'child-full-name',
+      addStep: 'child-details',
+      addAnotherLinkText: 'child',
+      locals: {
+        showSaveAndExit: true,
+        referredChildrenLimit: CHILDREN_LIMIT
+      },
+      continueOnEdit: false,
+      template: 'children-summary',
+      backLink: 'children',
       next: '/additional-family'
     },
 
     // Figma Section: "Additional family members" (additional-family)
 
     '/additional-family': {
-      behaviours: [SaveFormSession, Locals18Flag],
+      behaviours: [ResetSummary('referred-additional-family', 'additional-family'), SaveFormSession, Locals18Flag],
       fields: ['additional-family'],
       forks: [
+        {
+          target: '/additional-family-summary',
+          condition: {
+            field: 'additional-family',
+            value: 'yes'
+          }
+        },
+        {
+          target: '/family-in-uk',
+          condition: {
+            field: 'additional-family',
+            value: 'no'
+          }
+        },
+        {
+          target: '/additional-family-details',
+          condition: req => {
+            if (
+              req.form.values['additional-family'] === 'yes' &&
+                req.sessionModel.get('referred-additional-family') &&
+                req.sessionModel.get('referred-additional-family').aggregatedValues.length === 0
+            ) {
+              return true;
+            }
+            return false;
+          }
+        },
         {
           target: '/no-family-referred',
           condition: req => {
@@ -294,16 +496,8 @@ module.exports = {
               req.sessionModel.get('brother-or-sister') === 'no' &&
               req.sessionModel.get('additional-family') === 'no');
           }
-        },
-        {
-          target: '/additional-family-details',
-          condition: {
-            field: 'additional-family',
-            value: 'yes'
-          }
         }
       ],
-      next: '/family-in-uk',
       locals: { showSaveAndExit: true },
       continueOnEdit: true
     },
@@ -319,19 +513,39 @@ module.exports = {
         'additional-family-why-evac-without',
         'additional-family-why-referring'
       ],
-      behaviours: SaveFormSession,
+      behaviours: [LimitAdditionalFamily, SaveFormSession],
       locals: { showSaveAndExit: true },
-      next: '/additional-family-summary'
+      next: '/additional-family-summary',
+      continueOnEdit: true
     },
     '/additional-family-summary': {
-      fields: [],
+      behaviours: [AggregateSaveUpdate, AdditionalFamilySummary, LimitAdditionalFamily, SaveFormSession],
+      aggregateTo: 'referred-additional-family',
+      aggregateFrom: [
+        'additional-family-full-name',
+        'additional-family-date-of-birth',
+        'additional-family-relationship',
+        'additional-family-country',
+        'additional-family-living-situation',
+        'additional-family-needs-support',
+        'additional-family-why-evac-without',
+        'additional-family-why-referring'
+      ],
+      titleField: 'additional-family-full-name',
+      addStep: 'additional-family-details',
+      addAnotherLinkText: 'family member',
+      locals: { showSaveAndExit: true },
+      continueOnEdit: false,
+      template: 'additional-family-summary',
+      backLink: 'additional-family',
+      aggregateLimit: ADDITIONAL_FAMILY_LIMIT,
       next: '/family-in-uk'
     },
     '/no-family-referred': {
       behaviours: Locals18Flag
     },
     '/family-in-uk': {
-      behaviours: [SaveFormSession, FamilyMemberBahaviour],
+      behaviours: [SaveFormSession],
       forks: [
         {
           target: '/family-in-uk-details',
@@ -353,13 +567,12 @@ module.exports = {
       next: '/family-in-uk-details'
     },
     '/family-in-uk-details': {
-      behaviours: [SaveFormSession, FamilyDetailBahaviour],
+      behaviours: [SaveFormSession, limitFamilyInUk],
       fields: [
         'family-member-fullname',
         'family-member-date-of-birth',
         'family-member-relationship',
-        'has-family-member-been-evacuated',
-        'memberNumber'
+        'has-family-member-been-evacuated'
       ],
       backLink: 'family-in-uk',
       next: '/family-in-uk-summary',
@@ -367,40 +580,65 @@ module.exports = {
       titleField: 'countryAddNumber'
     },
     '/family-in-uk-summary': {
-      fields: []
+      behaviours: [AggregateSaveUpdate, limitFamilyInUk, familyInUkSummary, SaveFormSession],
+      aggregateTo: 'family-member-in-uk',
+      aggregateFrom: [
+        'family-member-fullname',
+        'family-member-relationship',
+        'family-member-date-of-birth',
+        'has-family-member-been-evacuated'
+      ],
+      titleField: 'family-member-fullname',
+      addStep: 'family-in-uk-details',
+      addAnotherLinkText: 'family member',
+      template: 'family-in-uk-summary',
+      locals: { showSaveAndExit: true },
+      aggregateLimit: Utilities.DEFAULT_AGGREGATOR_LIMIT,
+      continueOnEdit: true,
+      next: '/upload-evidence'
     },
     '/upload-evidence': {
-      fields: [],
+      behaviours: [SaveFormSession, SaveImage('image'), RemoveImage, LimitDocument],
+      fields: ['image'],
+      locals: { showSaveAndExit: true },
+      continueOnEdit: true,
       next: '/evidence-notes'
     },
     '/evidence-notes': {
-      fields: [],
+      behaviours: [SaveFormSession],
+      fields: ['evidence-notes-details'],
+      continueOnEdit: false,
       next: '/how-send-decision'
     },
-
     '/how-send-decision': {
-      fields: ['how-send-decision'],
+      fields: ['how-to-send-decision'],
       forks: [{
         target: '/email-decision',
         condition: {
-          field: 'how-send-decision',
+          field: 'how-to-send-decision',
           value: 'email'
         }
       }],
-      next: '/your-postal-address'
+      next: '/decision-postal-address'
     },
-
     '/email-decision': {
-      fields: [],
+      behaviours: SaveFormSession,
+      fields: ['is-decision-by-email', 'is-decision-by-email-detail'],
+      locals: { showSaveAndExit: true },
       next: '/confirm'
     },
-
-    '/your-postal-address': {
-      fields: [],
+    '/decision-postal-address': {
+      fields: [
+        'is-decision-post-address-1',
+        'is-decision-post-address-2',
+        'is-decision-post-town-or-city',
+        'is-decision-post-postcode'
+      ],
+      locals: { showSaveAndExit: true },
       next: '/confirm'
     },
     '/confirm': {
-      behaviours: [SummaryPageBehaviour, Submit],
+      behaviours: [SummaryPageBehaviour, ModifySummaryChangeLinks, Submit],
       sections: require('./sections/summary-data-sections'),
       next: '/declaration'
     },
@@ -415,7 +653,6 @@ module.exports = {
     '/confirmation': {
       clearSession: true
     },
-
     // Out of Step Pages
 
     '/session-expired': {

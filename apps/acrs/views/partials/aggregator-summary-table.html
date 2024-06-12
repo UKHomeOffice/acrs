@@ -1,0 +1,33 @@
+{{#hasItems}}
+<div class="loop-summary-table">
+    {{#items}}
+    <div class="table-options">
+        <h2 class="govuk-table__caption--m">{{itemTitle}}</h2>
+        <div>
+            <a href="{{baseUrl}}/{{route}}/edit/{{index}}">{{#t}}buttons.edit{{/t}}<span class="visuallyhidden">Change {{itemTitle}} details</span></a>
+            <a href="{{baseUrl}}/{{route}}/delete/{{index}}" class="govuk-!-margin-left-3">{{#t}}buttons.remove{{/t}}<span class="visuallyhidden">Remove {{itemTitle}}</span></a>
+        </div>
+    </div>
+    <table class="govuk-table govuk-!-width-full">
+        <thead class="visuallyhidden">
+            <tr class="govuk-table__row">
+              <th scope="col">item</th>
+              <th scope="col">value</th>
+            </tr>
+        </thead>
+        <tbody class="govuk-table__body">
+        {{#fields}}
+        {{#showInSummary}}
+          <tr class="govuk-table__row">
+            <td class="govuk-table__cell" class="govuk-table__header data-col"><strong>{{#t}}fields.{{field}}{{/t}}</strong></td>
+            <td></td>
+            <td class="govuk-table__cell" class="govuk-table__header data-col">{{#parsed}}{{parsed}}{{/parsed}}{{^parsed}}{{value}}{{/parsed}}</td>
+            <td></td>
+          </tr>
+        {{/showInSummary}}
+        {{/fields}}
+        </tbody>
+    </table>
+    {{/items}}
+</div>
+{{/hasItems}}

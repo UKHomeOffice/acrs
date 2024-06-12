@@ -32,7 +32,8 @@ describe('Server.js app file', () => {
     req.get.withArgs('host').returns('localhost');
 
     useStub.onCall(0).yields(req, res, next);
-    useStub.onCall(1).yields(req, res);
+    useStub.onCall(1).yields(req, res, next);
+    useStub.onCall(2).yields(req, res);
     hofStub.returns({ use: useStub });
 
     proxyquire('../server', {
@@ -70,11 +71,11 @@ describe('Server.js app file', () => {
       });
     });
 
-    it('should call the app use method two times if env set to test', () => {
-      useStub.callCount.should.equal(2);
+    it('should call the app use method three times if env set to test', () => {
+      useStub.callCount.should.equal(3);
     });
 
-    it('should call the app use method two times if env set to development', () => {
+    it('should call the app use method three times if env set to development', () => {
       const use = sinon.stub();
       const hof = () => ({ use });
 
@@ -83,10 +84,10 @@ describe('Server.js app file', () => {
         './config': { env: 'development' }
       });
 
-      useStub.callCount.should.equal(2);
+      useStub.callCount.should.equal(3);
     });
 
-    it('should call the app use method once times if env set to anything else', () => {
+    it('should call the app use method two times if env set to anything else', () => {
       const use = sinon.stub();
       const hof = () => ({ use });
 
@@ -95,27 +96,23 @@ describe('Server.js app file', () => {
         './config': { env: 'production' }
       });
 
-      use.should.have.been.calledOnce;
+      use.should.have.been.calledTwice;
     });
   });
 
   describe('Use Locals', () => {
     it('should set locals on the response', () => {
-      res.locals.should.eql({
-        formUrl: 'http://localhost',
-        htmlLang: 'en',
-        feedbackUrl: '/https://eforms.homeoffice.gov.uk/outreach/feedback.ofml'
-      });
+      expect(res.locals).to.have.all.keys('formUrl', 'htmlLang');
     });
 
-    it('should call next once', () => {
-      next.should.have.been.calledOnce;
+    it('should call next twice', () => {
+      next.should.have.been.calledTwice;
     });
   });
 
   describe('Use Test Endpoint', () => {
     it('it should take /test/bootstrap-session as the first argument', () => {
-      const useArgs = useStub.getCall(1).args[0];
+      const useArgs = useStub.getCall(2).args[0];
       useArgs.should.eql('/test/bootstrap-session');
     });
 

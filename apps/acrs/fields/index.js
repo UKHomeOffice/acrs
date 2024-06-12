@@ -127,7 +127,7 @@ module.exports = {
   },
   'partner-date-of-birth': dateComponent('partner-date-of-birth', {
     legend: { className: 'bold' },
-    validate: ['required', 'before', after1900Validator]
+    validate: ['required', 'before', after1900Validator, 'over18']
   }),
   'partner-country': {
     labelClassName: 'bold',
@@ -169,6 +169,48 @@ module.exports = {
     validate: 'required',
     legend: { className: 'bold' }
   },
+  'child-full-name': {
+    validate: ['required', 'notUrl', { type: 'maxlength', arguments: [250] }],
+    labelClassName: 'bold'
+  },
+  'child-date-of-birth': dateComponent('child-date-of-birth', {
+    legend: { className: 'bold' },
+    validate: ['required', 'before', after1900Validator]
+  }),
+  'child-country': {
+    labelClassName: 'bold',
+    mixin: 'select',
+    validate: ['required', isInCountriesList],
+    className: ['js-hidden'],
+    options: [
+      {
+        value: '',
+        label: 'fields.child-country.options.null'
+      }
+    ].concat(_.sortBy(countries, o => o.label))
+  },
+  'child-living-situation': {
+    labelClassName: 'bold',
+    mixin: 'textarea',
+    attributes: [{ attribute: 'rows', value: 5 }],
+    validate: [
+      'required',
+      'notUrl',
+      { type: 'regex', arguments: /^[^\[\]\|<>]*$/ },
+      { type: 'maxlength', arguments: 15000 }
+    ]
+  },
+  'child-why-without-child': {
+    labelClassName: 'bold',
+    mixin: 'textarea',
+    attributes: [{ attribute: 'rows', value: 5 }],
+    validate: [
+      'required',
+      'notUrl',
+      { type: 'regex', arguments: /^[^\[\]\|<>]*$/ },
+      { type: 'maxlength', arguments: 15000 }
+    ]
+  },
   parent: {
     mixin: 'radio-group',
     options: ['yes', 'no'],
@@ -190,7 +232,7 @@ module.exports = {
   },
   'parent-date-of-birth': dateComponent('parent-date-of-birth', {
     legend: { className: 'bold' },
-    validate: ['required', 'before', after1900Validator]
+    validate: ['required', 'before', after1900Validator, 'over18']
   }),
   'parent-country': {
     labelClassName: 'bold',
@@ -356,17 +398,85 @@ module.exports = {
       className: 'bold'
     }
   },
-  memberNumber: {
+  memberIndex: {
     className: 'visuallyhidden',
     labelClassName: 'visuallyhidden'
   },
-  'how-send-decision': {
+  image: {
+    mixin: 'input-file',
+    labelClassName: 'visuallyhidden'
+  },
+  'evidence-notes-details': {
+    mixin: 'textarea',
+    labelClassName: 'visuallyhidden',
+    attributes: [{
+      attribute: 'rows',
+      value: 5
+    }],
+    validate: ['notUrl', { type: 'maxlength', arguments: 15000 }]
+  },
+  'how-to-send-decision': {
     mixin: 'radio-group',
     options: ['email', 'post'],
     validate: 'required',
     legend: {
       className: 'visuallyhidden'
     }
+  },
+  'is-decision-by-email': {
+    mixin: 'radio-group',
+    validate: ['required'],
+    options: [
+      {
+        value: 'yes'
+      },
+      {
+        value: 'no',
+        toggle: 'is-decision-by-email-detail',
+        child: 'input-text'
+      }
+    ],
+    legend: {
+      className: 'visuallyhidden'
+    }
+  },
+  'is-decision-by-email-detail': {
+    validate: ['required', 'email'],
+    className: ['govuk-input', 'govuk-!-width-two-thirds'],
+    dependent: {
+      field: 'is-decision-by-email',
+      value: 'no'
+    }
+  },
+  'is-decision-post-address-1': {
+    mixin: 'input-text',
+    validate: ['required', 'notUrl'],
+    includeInSummary: true,
+    labelClassName: 'bold'
+  },
+  'is-decision-post-address-2': {
+    mixin: 'input-text',
+    validate: ['notUrl'],
+    includeInSummary: true,
+    labelClassName: 'bold'
+  },
+  'is-decision-post-town-or-city': {
+    mixin: 'input-text',
+    validate: ['required', 'notUrl',
+      { type: 'regex', arguments: /^([^0-9]*)$/ },
+      { type: 'maxlength', arguments: 200 }
+    ],
+    className: ['govuk-input', 'govuk-!-width-two-thirds'],
+    includeInSummary: true,
+    labelClassName: 'bold'
+  },
+  'is-decision-post-postcode': {
+    mixin: 'input-text',
+    validate: ['required', 'postcode', { type: 'maxlength', arguments: [200] }],
+    formatter: ['ukPostcode'],
+    className: ['govuk-input', 'govuk-input--width-10'],
+    includeInSummary: true,
+    labelClassName: 'bold'
   },
   'immigration-adviser-details': {
     isPageHeading: true

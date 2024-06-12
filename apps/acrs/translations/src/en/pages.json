@@ -45,14 +45,20 @@
     "paragraph": "Add your parents one at a time."
   },
   "parent-summary": {
-    "header": "SKELETON: /parent-summary"
+    "header": "Parents you are referring",
+    "parent-limit-message": "You can refer a maximum of 2 parents to come to the UK.",
+    "parent-limit-exceeded": "You can not refer any more parents."
+  },
+  "brother-or-sister": {
+    "header": "SKELETON: /brother-or-sister"
   },
   "brother-or-sister-details": {
-    "header": "Brother or sister {{values.brotherOrSisterCount}} details",
     "paragraph": "Add your brothers or sisters one at a time."
   },
   "brother-or-sister-summary": {
-    "header": "SKELETON: /brother-or-sister-summary"
+    "header": "Brothers or sisters you are referring",
+    "brother-or-sister-limit-message": "You can only refer brothers or sisters that your parents are responsible for.",
+    "brother-or-sister-limit-exceeded": "You can not refer any more brothers or sisters."
   },
   "partner": {
     "header": "Wives, husbands, spouses and unmarried partners",
@@ -67,7 +73,9 @@
     "header": "Partner's details"
   },
   "partner-summary": {
-    "header": "SKELETON: /partner-summary"
+    "header": "Partner you are referring",
+    "partner-limit-message": "You can only refer one partner to come to the UK.",
+    "partner-limit-exceeded": "You can not refer any more partners."
   },
   "children": {
     "header": "Children aged under 18",
@@ -75,13 +83,13 @@
     "paragraph-2": "The children you refer must not be living independently or have their own family."
   },
   "child-details": {
-    "header": "SKELETON: /child-details"
+    "header": "Child's details",
+    "paragraph": "Enter the details of a child you are referring to come to the UK. Add multiple children one at a time."
   },
   "children-summary": {
-    "header": "SKELETON: /children-summary"
-  },
-  "child-details-2": {
-    "header": "SKELETON: /child-details-2"
+    "header": "Children you are referring",
+    "children-limit-message": "You can refer a maximum of {{referredChildrenLimit}} children to come to the UK.",
+    "children-limit-exceeded": "You can not refer any more children."
   },
   "additional-family": {
     "header": "Additional family members",
@@ -101,8 +109,11 @@
     "paragraph-3": "You must have evidence to prove the exceptional circumstances."
   },
   "additional-family-details": {
-    "header": "Additional family member {{values.additionalFamilyCount}} details",
     "paragraph": "Add your additional family members one at a time."
+  },
+  "additional-family-summary": {
+    "header": "Additional family members in your referral",
+    "additional-family-limit-exceeded": "You can not refer any more family members."
   },
   "no-family-referred": {
     "header": "You must refer a family member",
@@ -110,39 +121,34 @@
     "paragraph-2": "If you are not referring a family member, you do not need to use this form.",
     "link-text": "Return and refer a family member"
   },
-  "who-is-responsible": {
-    "header": "SKELETON: /who-is-responsible"
-  },
-  "guardian-details": {
-    "header": "SKELETON: /guardian-details"
-  },
-  "guardian-details-2": {
-    "header": "SKELETON: /guardian-details-2"
-  },
-  "additional-family-summary": {
-    "header": "SKELETON: /additional-family-summary"
-  },
   "family-in-uk": {
     "header": "Family that live in the UK"
   },
   "family-in-uk-details": {
-    "header": "Family member {{values.memberNumber}} living in the UK",
     "hint": "Enter the details of a family member that lives in the UK."
   },
   "family-in-uk-summary": {
-    "header": "SKELETON: /family-in-uk-summary"
+    "header": "Family members that live in the UK"
   },
   "upload-evidence": {
-    "header": "SKELETON: /upload-evidence"
+    "header": "Upload evidence"
   },
   "evidence-notes": {
-    "header": "SKELETON: /evidence-notes"
+    "header": "Evidence notes (optional)"
   },
   "how-send-decision": {
-    "header": "SKELETON: /how-send-decision"
+    "header": "How do we send the decision on your referral?",
+    "title": "How do we send the decision on your referral - Refer family to come to the UK"
   },
   "email-decision": {
-    "header": "SKELETON: /email-decision"
+    "header": "Do we send your decision to",
+    "label": "{{values.user-email}}",
+    "title": "Email address for your decision - Refer family to come to the UK"
+  },
+  "decision-postal-address": {
+    "header": "Postal address for the decision",
+    "hint": "If you have no fixed address, enter an address we can use to contact you",
+    "title": "Postal address for the decision - Refer family to come to the UK"
   },
   "your-postal-address": {
     "header": "SKELETON: /your-postal-address"
@@ -169,6 +175,15 @@
       },
       "immigration-adviser-details": {
         "header": "Immigration adviser details"
+      },
+      "family-in-your-referral": {
+        "header": "Family in your referral"
+      },
+      "evidence-documents": {
+        "header": "Evidence"
+      },
+      "evidence-notes": {
+        "header": "Notes"
       }
     },
     "fields": {
@@ -204,8 +219,91 @@
       },
       "current-email": {
         "label": "Email"
+      },
+      "parent-full-name": {
+        "label": "Full name"
+      },
+      "parent-phone-number": {
+        "label": "Telephone number"
+      },
+      "parent-email": {
+        "label": "Email address"
+      },
+      "parent-date-of-birth": {
+        "label": "Date of birth"
+      },
+      "parent-country": {
+        "label": "Country they live in"
+      },
+      "parent-evacuated-without-reason": {
+        "label": "Not evacuated together because"
+      },
+      "brother-or-sister-full-name": {
+        "label": "Full name"
+      },
+      "brother-or-sister-date-of-birth": {
+        "label": "Date of birth"
+      },
+      "brother-or-sister-country": {
+        "label": "Country they live in"
+      },
+      "brother-or-sister-evacuated-without-reason": {
+        "label": "Not evacuated together because"
+      },
+      "additional-family-full-name": {
+        "label": "Full name"
+      },
+      "additional-family-date-of-birth": {
+        "label": "Date of birth"
+      },
+      "additional-family-relationship": {
+        "label": "Relationship to you"
+      },
+      "additional-family-country": {
+        "label": "Country they live in"
+      },
+      "additional-family-living-situation": {
+        "label": "Living situation"
+      },
+      "additional-family-needs-support": {
+        "label": "Need you for support?"
+      },
+      "additional-family-why-evac-without": {
+        "label": "Why were you evacuated without them?"
+      },
+      "additional-family-why-referring": {
+        "label": "Why are you referring them?"
+      },
+      "partner-full-name": {
+        "label": "Partner's name"
+      },
+      "partner-phone-number": {
+        "label": "Telephone number"
+      },
+      "partner-email": {
+        "label": "Email address"
+      },
+      "partner-date-of-birth": {
+        "label": "Date of birth"
+      },
+      "partner-country": {
+        "label": "Country"
+      },
+      "partner-living-situation": {
+        "label": "Partner’s living situation"
+      },
+      "partner-why-without-partner": {
+        "label": "Not evacuated together because"
+      },
+      "your-address-postcode": {
+        "label": "Contact postcode"
+      },
+      "images": {
+        "label": "Files uploaded"
+      },
+      "evidence-notes-details": {
+        "label": "Evidence notes"
       }
-    
     }
   }
 }

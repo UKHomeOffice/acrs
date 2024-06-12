@@ -1,9 +1,8 @@
+<title>{{#t}}pages.email-decision.title{{/t}} – GOV.UK</title>
 {{<partials-page}}
   {{$page-content}}
-    <h1 class="govuk-heading-l">Parent {{parentCount}} details</h1>
-    <p>{{#t}}pages.parent-details.paragraph{{/t}}</p>
-    <br>
-    {{#fields}}
+   <h2 class="email-decision">{{#t}}pages.email-decision.label{{/t}}</h2>
+   {{#fields}}
       {{#renderField}}{{/renderField}}
     {{/fields}}
     {{#input-submit}}continue{{/input-submit}}

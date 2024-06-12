@@ -1,0 +1,12 @@
+<title>{{#t}}pages.decision-postal-address.title{{/t}} – GOV.UK</title>
+{{<partials-page}}
+  {{$page-content}}
+    <div class="govuk-hint">
+        {{#t}}pages.decision-postal-address.hint{{/t}}
+    </div>
+   {{#fields}}
+      {{#renderField}}{{/renderField}}
+    {{/fields}}
+    {{#input-submit}}continue{{/input-submit}}
+  {{/page-content}}
+{{/partials-page}}
