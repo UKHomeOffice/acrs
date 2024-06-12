@@ -127,16 +127,16 @@ module.exports = {
           return ! Utilities.isOver18(req.sessionModel.get('date-of-birth'));
         }
       }],
-      next: '/confirm-referrer-email',
+      next: '/confirm-your-email',
       behaviours: SaveFormSession,
       locals: { showSaveAndExit: true }
     },
-    '/confirm-referrer-email': {
-      fields: ['confirm-referrer-email'],
+    '/confirm-your-email': {
+      fields: ['confirm-your-email'],
       forks: [{
         target: '/your-email',
         condition: {
-          field: 'confirm-referrer-email',
+          field: 'confirm-your-email',
           value: 'no'
         }
       }],

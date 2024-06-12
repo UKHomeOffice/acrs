@@ -20,7 +20,7 @@
       "required": "You must enter your full name",
       "maxlength": "You can't use more than {{maxlength}} characters for your answer"
     },
-    "confirm-referrer-email": {
+    "confirm-your-email": {
       "required": "You must select an option"
     },
     "your-email-options": {

@@ -31,7 +31,7 @@ module.exports = {
     mixin: 'input-text',
     validate: ['required', { type: 'maxlength', arguments: 250 }]
   },
-  'confirm-referrer-email': {
+  'confirm-your-email': {
     mixin: 'radio-group',
     options: ['yes', 'no'],
     validate: 'required',

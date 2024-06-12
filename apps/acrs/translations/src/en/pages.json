@@ -24,7 +24,7 @@
     "header": "Complete this form as if you are the referrer",
     "paragraph": "Answer all remaining questions as if you are the person referring family to come the UK."
   },
-  "confirm-referrer-email": {
+  "confirm-your-email": {
     "header": "Is this {{values.full-name}}’s email address?",
     "paragraph": "We may use this email address to contact them for more information about the referral."
   },
@@ -202,7 +202,7 @@
       "full-name": {
         "label": "Full name"
       },
-      "confirm-referrer-email": {
+      "confirm-your-email": {
         "label": "Email"
       },
       "legal-representative-fullname": {

@@ -27,13 +27,13 @@ module.exports = {
         field: 'full-name'
       },
       {
-        steps: '/confirm-referrer-email',
-        field: 'confirm-referrer-email',
+        steps: '/confirm-your-email',
+        field: 'confirm-your-email',
         parse: (list, req) => {
-          if (!req.sessionModel.get('steps').includes('/confirm-referrer-email')) {
+          if (!req.sessionModel.get('steps').includes('/confirm-your-email')) {
             return null;
           }
-          return req.sessionModel.get('confirm-referrer-email') === 'yes' ?
+          return req.sessionModel.get('confirm-your-email') === 'yes' ?
             `${req.sessionModel.get('user-email')}` :
             `${req.sessionModel.get('referral-email')}`;
         }
