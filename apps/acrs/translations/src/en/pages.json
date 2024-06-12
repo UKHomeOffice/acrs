@@ -150,11 +150,9 @@
     "hint": "If you have no fixed address, enter an address we can use to contact you",
     "title": "Postal address for the decision - Refer family to come to the UK"
   },
-  "your-postal-address": {
-    "header": "SKELETON: /your-postal-address"
-  },
   "declaration": {
-    "header": "SKELETON: /declaration"
+    "header": "Declaration",
+    "title": "Declaration - Refer family to come to the UK"
   },
   "referral-submitted": {
     "header": "SKELETON: /referral-submitted"

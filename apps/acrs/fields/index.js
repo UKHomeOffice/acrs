@@ -555,5 +555,9 @@ module.exports = {
       field: 'is-legal-representative-email',
       value: 'no'
     }
+  },
+  'children-declaration': {
+    mixin: 'checkbox',
+    validate: 'required'
   }
 };

@@ -24,10 +24,10 @@ const AdditionalFamilySummary = require('./behaviours/additional-family-summary'
 const LimitAdditionalFamily = require('./behaviours/limit-additional-family');
 const limitFamilyInUk = require('./behaviours/limit-family-in-uk');
 const familyInUkSummary = require('./behaviours/family-in-uk-summary');
+const DeclarationBehaviour = require('./behaviours/declaration');
 const PartnerSummary = require('./behaviours/partner-summary');
 const LimitPartners = require('./behaviours/limit-partners');
 const ExitToSignIn = require('./behaviours/exit-to-sign-in');
-
 
 // Aggregator section limits
 const PARENT_LIMIT = 2;
@@ -638,12 +638,14 @@ module.exports = {
       next: '/confirm'
     },
     '/confirm': {
-      behaviours: [SummaryPageBehaviour, ModifySummaryChangeLinks, Submit],
+      behaviours: [SummaryPageBehaviour, ModifySummaryChangeLinks],
       sections: require('./sections/summary-data-sections'),
       next: '/declaration'
     },
     '/declaration': {
-      fields: [],
+      fields: ['children-declaration'],
+      behaviours: [DeclarationBehaviour, SaveFormSession, Submit],
+      locals: { showSaveAndExit: true },
       next: '/referral-submitted'
     },
     '/referral-submitted': {

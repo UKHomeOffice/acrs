@@ -308,5 +308,8 @@
       "required": "Enter your postcode",
       "postcode": "Enter a valid UK postcode",
       "notUrl": "Please do not enter a link/url into your answers"
+    },
+    "children-declaration": {
+      "required": "Confirm you understand and agree with this declaration"
     }
 }

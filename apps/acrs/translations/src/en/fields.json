@@ -414,5 +414,8 @@
   },
   "is-decision-post-postcode": {
     "label": "Postcode"
+  },
+  "children-declaration": {
+    "label": "I understand and agree with this declaration."
   }
 }
