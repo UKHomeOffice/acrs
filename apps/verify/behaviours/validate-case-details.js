@@ -7,18 +7,12 @@ const baseUrl = `${config.saveService.host}:${config.saveService.port}/verify_lo
 
 module.exports = superclass => class extends superclass {
   async saveValues(req, res, next) {
-    let queryColumn;
-    switch(true) {
-      case !!req.form.values.brp:
-        queryColumn = 'brp';
-        break;
-      case !!req.form.values.uan:
-        queryColumn = 'uan';
-        break;
-      default:
-        return res.redirect('/incorrect-details-brp');
+    const queryColumn = req.sessionModel.get('sign-in-method') ?? null;
+    const queryValue = req.form.values[queryColumn].toUpperCase() ?? null;
+    req.form.values[queryColumn] = queryValue;
+    if (!queryColumn || !queryValue) {
+      return res.redirect('/incorrect-details-brp');
     }
-    const queryValue = req.form.values[queryColumn];
 
     const validCase = await this.isValidCase(req, queryColumn, queryValue);
     if (!validCase) {
