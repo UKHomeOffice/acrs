@@ -8,7 +8,7 @@ const baseUrl = `${config.saveService.host}:${config.saveService.port}/verify_lo
 module.exports = superclass => class extends superclass {
   async saveValues(req, res, next) {
     const queryColumn = req.sessionModel.get('sign-in-method') ?? null;
-    const queryValue = req.form.values[queryColumn].toUpperCase() ?? null;
+    const queryValue = req.form.values[queryColumn]?.toUpperCase() ?? null;
     req.form.values[queryColumn] = queryValue;
     if (!queryColumn || !queryValue) {
       return res.redirect('/incorrect-details-brp');
