@@ -72,7 +72,7 @@
       "over18": "Parent must be over 18. Parents that are under 18 cannot be referred."
     },
     "parent-country": {
-      "required": "Enter the country this parent lives in",
+      "required": "Enter the country they currently live in, like 'Pakistan'.",
       "isInCountriesList": "You must choose a country from the provided list"
     },
     "parent-evacuated-without-reason": {
@@ -103,7 +103,7 @@
       "before": "Brother or sister's date of birth must be in the past"
     },
     "brother-or-sister-country": {
-      "required": "Enter the country this brother or sister lives in",
+      "required": "Enter the country they currently live in, like 'Pakistan'.",
       "isInCountriesList": "You must choose a country from the provided list"
     },
     "brother-or-sister-evacuated-without-reason": {
@@ -133,7 +133,7 @@
       "over18": "Partner must be over 18. Partners that are under 18 cannot be referred."
     },
     "partner-country": {
-      "required": "Enter the country this parent lives in",
+      "required": "Enter the country they currently live in, like 'Pakistan'.",
       "isInCountriesList": "You must choose a country from the provided list"
     },
     "partner-living-situation": {
@@ -160,7 +160,7 @@
       "before": "Child's date of birth must be in the past"
     },
     "child-country": {
-      "required": "Enter the country they currently live in",
+      "required": "Enter the country they currently live in, like 'Pakistan'.",
       "isInCountriesList": "You must choose a country from the provided list"
     },
     "child-living-situation": {
