@@ -29,7 +29,7 @@ module.exports = {
   'full-name': {
     isPageHeading: true,
     mixin: 'input-text',
-    validate: ['required', { type: 'maxlength', arguments: 250 }]
+    validate: ['required', 'notUrl', { type: 'maxlength', arguments: 250 }]
   },
   'confirm-your-email': {
     mixin: 'radio-group',
