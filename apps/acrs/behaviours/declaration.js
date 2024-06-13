@@ -33,13 +33,13 @@ module.exports = superclass => class extends superclass {
   locals(req, res) {
     const locals = super.locals(req, res);
 
-    const refferedSiblings = CheckAggregatedValueExist(req.sessionModel.get('referred-siblings'));
-    const refferedChildren = CheckAggregatedValueExist(req.sessionModel.get('referred-children'));
-    const refferedAddFamily = CheckAggregatedValueExist(req.sessionModel.get('referred-additional-family'));
+    const referredSiblings = CheckAggregatedValueExist(req.sessionModel.get('referred-siblings'));
+    const referredChildren = CheckAggregatedValueExist(req.sessionModel.get('referred-children'));
+    const referredAddFamily = CheckAggregatedValueExist(req.sessionModel.get('referred-additional-family'));
 
-    const isAddFamilyUnder18 = CheckUnder18InAggregatedValue(refferedAddFamily, 'additional-family-date-of-birth');
-    const isSiblingUnder18 = CheckUnder18InAggregatedValue(refferedSiblings, 'brother-or-sister-date-of-birth');
-    const isChildUnder18 = CheckUnder18InAggregatedValue(refferedChildren, 'child-date-of-birth');
+    const isAddFamilyUnder18 = CheckUnder18InAggregatedValue(referredAddFamily, 'additional-family-date-of-birth');
+    const isSiblingUnder18 = CheckUnder18InAggregatedValue(referredSiblings, 'brother-or-sister-date-of-birth');
+    const isChildUnder18 = CheckUnder18InAggregatedValue(referredChildren, 'child-date-of-birth');
 
     const conditionsArray = [
       isAddFamilyUnder18,
