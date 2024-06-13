@@ -159,6 +159,8 @@ module.exports = {
         'provide-telephone-number-options',
         'provide-telephone-number-number'
       ],
+      behaviours: SaveFormSession,
+      locals: { showSaveAndExit: true },
       next: '/your-address'
     },
     '/your-address': {
