@@ -612,22 +612,32 @@ module.exports = {
     },
     '/how-send-decision': {
       fields: ['how-to-send-decision'],
-      forks: [{
-        target: '/email-decision',
-        condition: {
-          field: 'how-to-send-decision',
-          value: 'email'
+      forks: [
+        {
+          target: '/email-decision',
+          condition: {
+            field: 'how-to-send-decision',
+            value: 'email'
+          }
+        },
+        {
+          target: '/decision-postal-address',
+          condition: {
+            field: 'how-to-send-decision',
+            value: 'post'
+          }
         }
-      }],
-      next: '/decision-postal-address'
+      ],
+      next: ''
     },
     '/email-decision': {
-      behaviours: SaveFormSession,
+      behaviours: [SaveFormSession],
       fields: ['is-decision-by-email', 'is-decision-by-email-detail'],
       locals: { showSaveAndExit: true },
       next: '/confirm'
     },
     '/decision-postal-address': {
+      behaviours: [SaveFormSession],
       fields: [
         'is-decision-post-address-1',
         'is-decision-post-address-2',
@@ -638,8 +648,9 @@ module.exports = {
       next: '/confirm'
     },
     '/confirm': {
-      behaviours: [SummaryPageBehaviour, ModifySummaryChangeLinks],
+      behaviours: [SummaryPageBehaviour, SaveFormSession, ModifySummaryChangeLinks],
       sections: require('./sections/summary-data-sections'),
+      locals: { showSaveAndExit: true },
       next: '/declaration'
     },
     '/declaration': {
@@ -649,14 +660,9 @@ module.exports = {
       next: '/referral-submitted'
     },
     '/referral-submitted': {
-      fields: [],
-      next: '/confirmation'
+      clearSession: true,
+      backLink: false
     },
-    '/confirmation': {
-      clearSession: true
-    },
-    // Out of Step Pages
-
     '/session-expired': {
       fields: [],
       next: '/confirm'

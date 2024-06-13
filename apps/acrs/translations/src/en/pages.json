@@ -151,12 +151,6 @@
     "header": "Declaration",
     "title": "Declaration - Refer family to come to the UK"
   },
-  "referral-submitted": {
-    "header": "SKELETON: /referral-submitted"
-  },
-  "confirmation": {
-    "header": "SKELETON: /confirmation"
-  },
   "link-expired": {
     "header": "Your link has expired",
     "paragraph": "To keep your information safe, we need to check some of your details and email you a new link.",
