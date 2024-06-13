@@ -40,7 +40,7 @@ module.exports = superclass => class extends superclass {
         return res.redirect(`/incorrect-details-${queryColumn}`);
       }
     } catch (error) {
-      return next(error)
+      return next(Error(`Failed to verify referrer login details: ${error}`));
     }
     return super.saveValues(req, res, next);
   }
