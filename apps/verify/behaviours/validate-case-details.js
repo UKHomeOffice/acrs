@@ -23,7 +23,7 @@ const isValidCase = async (req, queryColumn, queryValue) => {
     logger.log('error', `Could not get valid cases: ${error}`);
     throw error;
   }
-}
+};
 
 module.exports = superclass => class extends superclass {
   async saveValues(req, res, next) {
