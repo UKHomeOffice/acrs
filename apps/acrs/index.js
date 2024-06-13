@@ -28,8 +28,7 @@ const DeclarationBehaviour = require('./behaviours/declaration');
 const PartnerSummary = require('./behaviours/partner-summary');
 const LimitPartners = require('./behaviours/limit-partners');
 const ExitToSignIn = require('./behaviours/exit-to-sign-in');
-const DecisionEmail = require('./behaviours/decision-email');
-const HowToSendDecision = require('./behaviours/how-send-decision');
+
 // Aggregator section limits
 const PARENT_LIMIT = 2;
 const BROTHER_OR_SISTER_LIMIT = process.env.NODE_ENV === 'development' ? 5 : 100;
@@ -632,13 +631,13 @@ module.exports = {
       next: ''
     },
     '/email-decision': {
-      behaviours: [SaveFormSession, HowToSendDecision],
+      behaviours: [SaveFormSession],
       fields: ['is-decision-by-email', 'is-decision-by-email-detail'],
       locals: { showSaveAndExit: true },
       next: '/confirm'
     },
     '/decision-postal-address': {
-      behaviours: [SaveFormSession, HowToSendDecision],
+      behaviours: [SaveFormSession],
       fields: [
         'is-decision-post-address-1',
         'is-decision-post-address-2',
@@ -649,7 +648,7 @@ module.exports = {
       next: '/confirm'
     },
     '/confirm': {
-      behaviours: [SummaryPageBehaviour, SaveFormSession, ModifySummaryChangeLinks, DecisionEmail],
+      behaviours: [SummaryPageBehaviour, SaveFormSession, ModifySummaryChangeLinks],
       sections: require('./sections/summary-data-sections'),
       locals: { showSaveAndExit: true },
       next: '/declaration'
