@@ -657,7 +657,8 @@ module.exports = {
     },
     '/declaration': {
       fields: ['children-declaration'],
-      behaviours: [DeclarationBehaviour, SaveFormSession, Submit],
+      sections: require('./sections/summary-data-sections'),
+      behaviours: [DeclarationBehaviour, SaveFormSession, SummaryPageBehaviour, ModifySummaryChangeLinks, Submit],
       locals: { showSaveAndExit: true },
       next: '/referral-submitted'
     },
