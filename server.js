@@ -1,6 +1,6 @@
 'use strict';
 /* eslint-disable consistent-return, max-len */
-
+const fs = require('fs');
 const hof = require('hof');
 const config = require('./config.js');
 const _ = require('lodash');
@@ -14,6 +14,10 @@ settings = Object.assign({}, settings, {
   routes: settings.routes.map(require),
   behaviours: settings.behaviours.map(require)
 });
+
+if (!fs.existsSync(config.dataDirectory)) {
+  fs.mkdirSync(config.dataDirectory);
+}
 
 const app = hof(settings);
 
