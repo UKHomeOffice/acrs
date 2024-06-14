@@ -1,5 +1,5 @@
 const assert = require('chai').assert;
-const { calcDateBefore, isOver18 } = require('../../../lib/utilities');
+const { calcDateBefore, isOver18, generateUniqueReference } = require('../../../lib/utilities');
 
 describe('calcDateBefore function', () => {
   it('should return true if the date is before the cutoff date', () => {
@@ -26,5 +26,17 @@ describe('isOver18 function', () => {
   it('should return false if the date of birth is under 18 years old', () => {
     const dateOfBirth = '2010-01-01';
     assert.isFalse(isOver18(dateOfBirth));
+  });
+});
+
+describe('generateUniqueReference function', () => {
+  it('should return a string of the length supplied', async () => {
+    const generatedId = await generateUniqueReference(6, 'ABC');
+    expect(generatedId).to.have.lengthOf(6);
+  });
+
+  it('should return a string containing only the supplied characters', async () => {
+    const generatedId = await generateUniqueReference(3, 'A');
+    expect(generatedId).to.equal('AAA');
   });
 });
