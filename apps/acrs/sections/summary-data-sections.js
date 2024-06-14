@@ -7,6 +7,29 @@ const addressFormatter = (model, fieldNames) => {
   return fields.map(field => field.trim()).filter(field => field).join('\n');
 };
 
+/**
+ * Parses an Aggregator array to promote the Title field, reformat the DOB and remove the Change link
+ *
+ * @param {Array} aggregate - The Aggregator
+ * @param {string} titleField - The field used as the title for aggregation.
+ * @param {string} [dobField='date-of-birth'] - The field representing the date of birth.
+ * @return {void} It's all side-effects
+ */const aggregateParser = (aggregate, titleField, dobField = 'date-of-birth') => {
+    for (const item of aggregate) {
+      item.fields.map(field => {
+        field.omitChangeLink = true;
+        if (field.field === titleField) {
+          field.isAggregatorTitle = true;
+        }
+        if (field.field.includes(dobField) && field.value !== undefined) {
+            field.parsed = moment(field.value, 'YYYY-MMMM-DD').format(PRETTY_DATE_FORMAT);
+        }
+        return field;
+      });
+    }
+}
+
+
 module.exports = {
   'referral-details': {
     steps: [
@@ -211,20 +234,7 @@ module.exports = {
         dependsOn: 'additional-family',
         parse: obj => {
           if (!obj?.aggregatedValues) { return null; }
-          for (const item of obj.aggregatedValues) {
-            item.fields.map(field => {
-              if (field.field === 'additional-family-full-name') {
-                field.isAggregatorTitle = true;
-              }
-              field.omitChangeLink = true;
-              if (field.field.includes('date-of-birth')) {
-                if (field.value !== undefined) {
-                  field.parsed = moment(field.value, 'YYYY-MMMM-DD').format('DD MMMM YYYY');
-                }
-              }
-              return field;
-            });
-          }
+          aggregateParser(obj.aggregatedValues, 'additional-family-full-name');
           return obj;
         }
       },
@@ -244,20 +254,8 @@ module.exports = {
         addElementSeparators: true,
         dependsOn: 'partner',
         parse: obj => {
-          if ( !obj?.aggregatedValues ) { return null; }
-
-          for (const item of obj.aggregatedValues) {
-            item.fields.map(field => {
-              field.isAggregatorTitle = field.field === 'partner-full-name';
-              field.omitChangeLink = true;
-              if (field.field.includes('date-of-birth')) {
-                if (field.value !== undefined) {
-                  field.parsed = moment(field.value, 'YYYY-MMMM-DD').format('DD MMMM YYYY');
-                }
-              }
-              return field;
-            });
-          }
+          if (!obj?.aggregatedValues) { return null; }
+          aggregateParser(obj.aggregatedValues, 'partner-full-name');
           return obj;
         }
       },
@@ -277,20 +275,8 @@ module.exports = {
         addElementSeparators: true,
         dependsOn: 'children',
         parse: obj => {
-          if ( !obj?.aggregatedValues ) { return null; }
-
-          for (const item of obj.aggregatedValues) {
-            item.fields.map(field => {
-              field.isAggregatorTitle = field.field === 'child-full-name';
-              field.omitChangeLink = true;
-              if (field.field.includes('date-of-birth')) {
-                if (field.value !== undefined) {
-                  field.parsed = moment(field.value, 'YYYY-MMMM-DD').format('DD MMMM YYYY');
-                }
-              }
-              return field;
-            });
-          }
+          if (!obj?.aggregatedValues) { return null; }
+          aggregateParser(obj.aggregatedValues, 'child-full-name');
           return obj;
         }
       }
