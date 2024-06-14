@@ -156,7 +156,7 @@
     "child-date-of-birth": {
       "required": "Enter child's date of birth",
       "date": "Enter a real date of birth",
-      "after": "Enter a date after 01 01 1900",
+      "isUnder18": "Children born before 28 August 2003 cannot be referred to come to the UK",
       "before": "Child's date of birth must be in the past"
     },
     "child-country": {

@@ -5,6 +5,7 @@ const dateComponent = require('hof').components.date;
 const after1900Validator = { type: 'after', arguments: ['1900'] };
 const countries = require('hof').utils.countries().concat([{ value: 'Unknown', label: 'Unknown' }]);
 const isInCountriesList = value => countries.some(country => country.value === value);
+const isUnder18 = value => ! require('../../../lib/utilities').isOver18(value);
 
 module.exports = {
   isInCountriesList,
@@ -175,7 +176,11 @@ module.exports = {
   },
   'child-date-of-birth': dateComponent('child-date-of-birth', {
     legend: { className: 'bold' },
-    validate: ['required', 'before', after1900Validator]
+    validate: [
+      'required',
+      'before',
+      isUnder18
+    ]
   }),
   'child-country': {
     labelClassName: 'bold',
