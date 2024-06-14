@@ -2,6 +2,11 @@
 const moment = require('moment');
 const PRETTY_DATE_FORMAT = 'DD MMMM YYYY';
 
+const addressFormatter = (model, fieldNames) => {
+  const fields = fieldNames.map(fieldName => model.get(fieldName));
+  return fields.map(field => field.trim()).filter(field => field).join('\n');
+};
+
 module.exports = {
   'referral-details': {
     steps: [
@@ -40,19 +45,18 @@ module.exports = {
       },
       {
         steps: '/your-address',
-        field: 'your-address-line-1'
-      },
-      {
-        steps: '/your-address',
-        field: 'your-address-line-2'
-      },
-      {
-        steps: '/your-address',
-        field: 'your-address-town-or-city'
-      },
-      {
-        steps: '/your-address',
-        field: 'your-address-postcode'
+        field: 'your-address-line-1',
+        parse: (list, req) => {
+          if (!req.sessionModel.get('steps').includes('/your-address')) {
+            return null;
+          }
+          return addressFormatter(req.sessionModel, [
+            'your-address-line-1',
+            'your-address-line-2',
+            'your-address-town-or-city',
+            'your-address-postcode'
+          ]);
+        }
       }
     ]
   },
@@ -90,11 +94,13 @@ module.exports = {
           if (!req.sessionModel.get('steps').includes('/immigration-adviser-details')) {
             return null;
           }
-          return `${req.sessionModel.get('legal-representative-house-number')} \n` +
-            `${req.sessionModel.get('legal-representative-street')} \n` +
-            `${req.sessionModel.get('legal-representative-townOrCity')}\n` +
-            `${req.sessionModel.get('legal-representative-county')}\n` +
-            `${req.sessionModel.get('legal-representative-postcode')}`;
+          return addressFormatter(req.sessionModel, [
+            'legal-representative-house-number',
+            'legal-representative-street',
+            'legal-representative-townOrCity',
+            'legal-representative-county',
+            'legal-representative-postcode'
+          ]);
         }
       }
     ]

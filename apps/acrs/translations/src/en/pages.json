@@ -194,6 +194,9 @@
       "confirm-your-email": {
         "label": "Email"
       },
+      "your-address-line-1": {
+        "label": "What is your address?"
+      },
       "legal-representative-fullname": {
         "label": "Full name"
       },
