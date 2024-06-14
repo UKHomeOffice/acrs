@@ -24,10 +24,10 @@ const AdditionalFamilySummary = require('./behaviours/additional-family-summary'
 const LimitAdditionalFamily = require('./behaviours/limit-additional-family');
 const limitFamilyInUk = require('./behaviours/limit-family-in-uk');
 const familyInUkSummary = require('./behaviours/family-in-uk-summary');
+const DeclarationBehaviour = require('./behaviours/declaration');
 const PartnerSummary = require('./behaviours/partner-summary');
 const LimitPartners = require('./behaviours/limit-partners');
 const ExitToSignIn = require('./behaviours/exit-to-sign-in');
-
 
 // Aggregator section limits
 const PARENT_LIMIT = 2;
@@ -127,16 +127,16 @@ module.exports = {
           return ! Utilities.isOver18(req.sessionModel.get('date-of-birth'));
         }
       }],
-      next: '/confirm-referrer-email',
+      next: '/confirm-your-email',
       behaviours: SaveFormSession,
       locals: { showSaveAndExit: true }
     },
-    '/confirm-referrer-email': {
-      fields: ['confirm-referrer-email'],
+    '/confirm-your-email': {
+      fields: ['confirm-your-email'],
       forks: [{
-        target: '/referrer-email',
+        target: '/your-email',
         condition: {
-          field: 'confirm-referrer-email',
+          field: 'confirm-your-email',
           value: 'no'
         }
       }],
@@ -145,10 +145,10 @@ module.exports = {
       locals: { showSaveAndExit: true }
     },
 
-    '/referrer-email': {
+    '/your-email': {
       fields: [
-        'referrer-email-options',
-        'referrer-email-address'
+        'your-email-options',
+        'your-email-address'
       ],
       behaviours: SaveFormSession,
       locals: { showSaveAndExit: true },
@@ -159,6 +159,8 @@ module.exports = {
         'provide-telephone-number-options',
         'provide-telephone-number-number'
       ],
+      behaviours: SaveFormSession,
+      locals: { showSaveAndExit: true },
       next: '/your-address'
     },
     '/your-address': {
@@ -545,7 +547,7 @@ module.exports = {
       behaviours: Locals18Flag
     },
     '/family-in-uk': {
-      behaviours: [SaveFormSession],
+      behaviours: [ResetSummary('family-member-in-uk', 'family-in-uk'), SaveFormSession],
       forks: [
         {
           target: '/family-in-uk-details',
@@ -612,22 +614,32 @@ module.exports = {
     },
     '/how-send-decision': {
       fields: ['how-to-send-decision'],
-      forks: [{
-        target: '/email-decision',
-        condition: {
-          field: 'how-to-send-decision',
-          value: 'email'
+      forks: [
+        {
+          target: '/email-decision',
+          condition: {
+            field: 'how-to-send-decision',
+            value: 'email'
+          }
+        },
+        {
+          target: '/decision-postal-address',
+          condition: {
+            field: 'how-to-send-decision',
+            value: 'post'
+          }
         }
-      }],
-      next: '/decision-postal-address'
+      ],
+      next: ''
     },
     '/email-decision': {
-      behaviours: SaveFormSession,
+      behaviours: [SaveFormSession],
       fields: ['is-decision-by-email', 'is-decision-by-email-detail'],
       locals: { showSaveAndExit: true },
       next: '/confirm'
     },
     '/decision-postal-address': {
+      behaviours: [SaveFormSession],
       fields: [
         'is-decision-post-address-1',
         'is-decision-post-address-2',
@@ -638,23 +650,22 @@ module.exports = {
       next: '/confirm'
     },
     '/confirm': {
-      behaviours: [SummaryPageBehaviour, ModifySummaryChangeLinks, Submit],
+      behaviours: [SummaryPageBehaviour, SaveFormSession, ModifySummaryChangeLinks],
       sections: require('./sections/summary-data-sections'),
+      locals: { showSaveAndExit: true },
       next: '/declaration'
     },
     '/declaration': {
-      fields: [],
+      fields: ['children-declaration'],
+      sections: require('./sections/summary-data-sections'),
+      behaviours: [DeclarationBehaviour, SaveFormSession, SummaryPageBehaviour, ModifySummaryChangeLinks, Submit],
+      locals: { showSaveAndExit: true },
       next: '/referral-submitted'
     },
     '/referral-submitted': {
-      fields: [],
-      next: '/confirmation'
+      clearSession: true,
+      backLink: false
     },
-    '/confirmation': {
-      clearSession: true
-    },
-    // Out of Step Pages
-
     '/session-expired': {
       fields: [],
       next: '/confirm'

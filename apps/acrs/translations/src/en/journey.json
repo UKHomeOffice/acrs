@@ -1,4 +1,7 @@
 {
   "header": "Refer family to come to the UK (Afghan Citizens Resettlement Scheme)",
-  "phase": "beta"
+  "phase": "beta",
+  "confirmation": {
+    "message": "Referral submitted"
+  }
 }

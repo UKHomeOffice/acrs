@@ -13,7 +13,8 @@ module.exports = {
     saveAndExitTemplateId: process.env.SAVE_AND_EXIT_TEMPLATE_ID,
     customerReceiptTemplateId: process.env.CUSTOMER_RECEIPT_TEMPLATE_ID,
     submissionTemplateId: process.env.CASEWORKER_SUBMISSION_TEMPLATE_ID,
-    csvReportTemplateId: process.env.CSV_REPORT_TEMPLATE_ID
+    csvReportTemplateId: process.env.CSV_REPORT_TEMPLATE_ID,
+    submissionFailedTemplateId: process.env.SUBMISSION_FAILED_TEMPLATE_ID
   },
   keycloak: {
     token: process.env.KEYCLOAK_TOKEN_URL,
@@ -71,5 +72,6 @@ module.exports = {
   PRETTY_DATE_FORMAT: 'Do MMMM YYYY',
   dateTimeFormat: 'DD MMM YYYY HH:mm:ss',
   dobFormat: 'YYYY-MM-DD',
-  dobCutoff: '2003-08-23'
+  // dobCutoff is the earliest date of birth that qualifies as under 18, therefore 27 August 2003 is considered over 18
+  dobCutoff: '2003-08-28'
 };

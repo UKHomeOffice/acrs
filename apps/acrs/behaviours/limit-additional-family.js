@@ -10,7 +10,7 @@ module.exports = superclass => class extends superclass {
       if (referredAdditionalFamily && additionalFamilyLimit) {
         locals.noMoreAdditionalFamily = true;
       }
-      locals.referredAdditionalFamilyCount = referredAdditionalFamilyCount.toString();
+      locals.additionalFamilyCount = referredAdditionalFamilyCount.toString();
     }
     if (req.sessionModel.get('aggregator-edit-id')) {
       locals.additionalFamilyCount = parseInt(req.sessionModel.get('aggregator-edit-id'), 10) + 1;
