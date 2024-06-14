@@ -1,6 +1,7 @@
 const Utilities = require('../../../lib/utilities');
+const {dobFormat, AGE_LIMIT} = require('../../../config');
 
-const CheckUnder18InAggregatedValue = (aggregateArray, fieldLabel) => {
+const CheckUnder18InAggregatedValue = (aggregateArray, fieldLabel, format, ageLimit) => {
   const aggregatedLength = aggregateArray.length;
 
   if (aggregatedLength > 0 &&
@@ -13,9 +14,7 @@ const CheckUnder18InAggregatedValue = (aggregateArray, fieldLabel) => {
         .map(v => v)
         .filter(field => field.field === fieldLabel);
 
-      if (!Utilities.isOver18(responseObject[0].value)) {
-        return true;
-      }
+      if (Utilities.IsAgeUnderLimit(responseObject[0].value, format, ageLimit)) {return true;}
     }
   }
   return false;
@@ -37,9 +36,18 @@ module.exports = superclass => class extends superclass {
     const referredChildren = CheckAggregatedValueExist(req.sessionModel.get('referred-children'));
     const referredAddFamily = CheckAggregatedValueExist(req.sessionModel.get('referred-additional-family'));
 
-    const isAddFamilyUnder18 = CheckUnder18InAggregatedValue(referredAddFamily, 'additional-family-date-of-birth');
-    const isSiblingUnder18 = CheckUnder18InAggregatedValue(referredSiblings, 'brother-or-sister-date-of-birth');
-    const isChildUnder18 = CheckUnder18InAggregatedValue(referredChildren, 'child-date-of-birth');
+    const isAddFamilyUnder18 = CheckUnder18InAggregatedValue(referredAddFamily,
+      'additional-family-date-of-birth',
+      dobFormat,
+      AGE_LIMIT);
+    const isSiblingUnder18 = CheckUnder18InAggregatedValue(referredSiblings,
+      'brother-or-sister-date-of-birth',
+      dobFormat,
+      AGE_LIMIT);
+    const isChildUnder18 = CheckUnder18InAggregatedValue(referredChildren,
+      'child-date-of-birth',
+      dobFormat,
+      AGE_LIMIT);
 
     const conditionsArray = [
       isAddFamilyUnder18,

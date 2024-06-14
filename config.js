@@ -71,5 +71,6 @@ module.exports = {
   dateTimeFormat: 'DD MMM YYYY HH:mm:ss',
   dobFormat: 'YYYY-MM-DD',
   // dobCutoff is the earliest date of birth that qualifies as under 18, therefore 27 August 2003 is considered over 18
-  dobCutoff: '2003-08-28'
+  dobCutoff: '2003-08-28',
+  AGE_LIMIT: 18
 };
