@@ -35,7 +35,7 @@ module.exports = {
           }
           return req.sessionModel.get('confirm-your-email') === 'yes' ?
             `${req.sessionModel.get('user-email')}` :
-            `${req.sessionModel.get('referral-email')}`;
+            `${req.sessionModel.get('your-email-address')}`;
         }
       },
       {
