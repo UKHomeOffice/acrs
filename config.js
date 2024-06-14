@@ -12,7 +12,8 @@ module.exports = {
     caseworkerEmail: process.env.CASEWORKER_EMAIL,
     saveAndExitTemplateId: process.env.SAVE_AND_EXIT_TEMPLATE_ID,
     customerReceiptTemplateId: process.env.CUSTOMER_RECEIPT_TEMPLATE_ID,
-    submissionTemplateId: process.env.CASEWORKER_SUBMISSION_TEMPLATE_ID
+    submissionTemplateId: process.env.CASEWORKER_SUBMISSION_TEMPLATE_ID,
+    submissionFailedTemplateId: process.env.SUBMISSION_FAILED_TEMPLATE_ID
   },
   keycloak: {
     token: process.env.KEYCLOAK_TOKEN_URL,
