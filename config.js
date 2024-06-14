@@ -12,7 +12,8 @@ module.exports = {
     caseworkerEmail: process.env.CASEWORKER_EMAIL,
     saveAndExitTemplateId: process.env.SAVE_AND_EXIT_TEMPLATE_ID,
     customerReceiptTemplateId: process.env.CUSTOMER_RECEIPT_TEMPLATE_ID,
-    submissionTemplateId: process.env.CASEWORKER_SUBMISSION_TEMPLATE_ID
+    submissionTemplateId: process.env.CASEWORKER_SUBMISSION_TEMPLATE_ID,
+    submissionFailedTemplateId: process.env.SUBMISSION_FAILED_TEMPLATE_ID
   },
   keycloak: {
     token: process.env.KEYCLOAK_TOKEN_URL,
@@ -72,6 +73,7 @@ module.exports = {
   dobFormat: 'YYYY-MM-DD',
   // dobCutoff is the earliest date of birth that qualifies as under 18, therefore 27 August 2003 is considered over 18
   dobCutoff: '2003-08-28',
+  AGE_LIMIT: 18,
   uniqueReferralReferences: {
     length: 6,
     allowedCharacters: 'ABCDEFGHJKMNPRTUVWXY0123456789'
