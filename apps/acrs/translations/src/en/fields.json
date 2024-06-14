@@ -110,6 +110,7 @@
     "label": "Postcode"
   },
   "partner": {
+    "legend": "Are you referring a partner to come to the UK?",
     "options": {
         "yes": {
           "label": "Yes"
