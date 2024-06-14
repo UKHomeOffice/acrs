@@ -1,4 +1,6 @@
 /* eslint-disable node/no-deprecated-api */
+/* eslint-disable no-console */
+
 'use strict';
 
 const url = require('url');
@@ -18,6 +20,9 @@ module.exports = class UploadModel extends Model {
       const attributes = {
         url: config.upload.hostname
       };
+      console.log('-----------');
+      console.log('file-vault URL:', attributes.url);
+      console.log('-----------');
       const reqConf = url.parse(this.url(attributes));
       reqConf.formData = {
         document: {
@@ -29,6 +34,9 @@ module.exports = class UploadModel extends Model {
         }
       };
       reqConf.method = 'POST';
+      console.log('-----------');
+      console.log('Request config:', reqConf);
+      console.log('-----------');
       return this.request(reqConf, (err, data) => {
         if (err) {
           return reject(err);
@@ -37,6 +45,12 @@ module.exports = class UploadModel extends Model {
       });
     })
       .then(result => {
+        console.log('-----------');
+        console.log('Original FV URL:', result.url);
+        console.log('-----------');
+        console.log('-----------');
+        console.log('FV URL for generate:', result.url.replace('/file/', '/file/generate-link/').split('?')[0]);
+        console.log('-----------');
         return this.set({
           url: result.url.replace('/file/', '/file/generate-link/').split('?')[0]
         });
@@ -67,6 +81,9 @@ module.exports = class UploadModel extends Model {
         if (err) {
           return reject(err);
         }
+        console.log('-----------');
+        console.log('No error with Keycloak token auth');
+        console.log('-----------');
         return resolve({
           bearer: JSON.parse(response.body).access_token
         });

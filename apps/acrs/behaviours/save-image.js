@@ -1,3 +1,5 @@
+/* eslint-disable no-console */
+
 'use strict';
 
 const _ = require('lodash');
@@ -57,6 +59,9 @@ module.exports = name => superclass => class extends superclass {
         return model.save()
           .then(() => {
             req.sessionModel.set('images', [...images, model.toJSON()]);
+            console.log('-----------');
+            console.log('Session/images after file upload:', req.sessionModel.get('images'));
+            console.log('-----------');
             if (req.form.options.route === '/upload-evidence') {
               return res.redirect('/acrs/upload-evidence');
             }
