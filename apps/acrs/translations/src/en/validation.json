@@ -262,7 +262,8 @@
       "required": "You must select an option"
     },
     "is-decision-post-address-1": {
-      "required": "Address line 1 must be between 1 and 250 characters"
+      "required": "Address line 1 must be between 1 and 250 characters",
+      "notUrl": "Please do not enter a link/url"
     },
     "is-decision-post-address-2": {
       "notUrl": "Please do not enter a link/url"
