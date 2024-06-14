@@ -24,13 +24,13 @@
     "header": "Complete this form as if you are the referrer",
     "paragraph": "Answer all remaining questions as if you are the person referring family to come the UK."
   },
-  "confirm-referrer-email": {
-    "header": "Is this {{values.full-name}}’s email address?",
-    "paragraph": "We may use this email address to contact them for more information about the referral."
+  "confirm-your-email": {
+    "header": "Is this your email address?",
+    "paragraph": "We may use this email address to contact you for more information about the referral."
   },
-  "referrer-email": {
-    "header": "Does {{values.full-name}} have an email address?",
-    "paragraph": "We may use this email address to contact them for more information about the referral."
+  "your-email": {
+    "header": "Do you have an email address?",
+    "paragraph": "We may use this email address to contact you for more information about the referral."
   },
   "provide-telephone-number": {
     "header": "Can you provide a telephone number?",
@@ -41,16 +41,12 @@
     "paragraph": "If you have no fixed address, enter an address we can use to contact you."
   },
   "parent-details": {
-    "header": "Parent {{values.parentCount}} details",
     "paragraph": "Add your parents one at a time."
   },
   "parent-summary": {
     "header": "Parents you are referring",
     "parent-limit-message": "You can refer a maximum of 2 parents to come to the UK.",
     "parent-limit-exceeded": "You can not refer any more parents."
-  },
-  "brother-or-sister": {
-    "header": "SKELETON: /brother-or-sister"
   },
   "brother-or-sister-details": {
     "paragraph": "Add your brothers or sisters one at a time."
@@ -128,7 +124,8 @@
     "hint": "Enter the details of a family member that lives in the UK."
   },
   "family-in-uk-summary": {
-    "header": "Family members that live in the UK"
+    "header": "Family members that live in the UK",
+    "family-in-uk-limit-exceeded": "You can not add any more family members in the UK."
   },
   "upload-evidence": {
     "header": "Upload evidence"
@@ -150,17 +147,9 @@
     "hint": "If you have no fixed address, enter an address we can use to contact you",
     "title": "Postal address for the decision - Refer family to come to the UK"
   },
-  "your-postal-address": {
-    "header": "SKELETON: /your-postal-address"
-  },
   "declaration": {
-    "header": "SKELETON: /declaration"
-  },
-  "referral-submitted": {
-    "header": "SKELETON: /referral-submitted"
-  },
-  "confirmation": {
-    "header": "SKELETON: /confirmation"
+    "header": "Declaration",
+    "title": "Declaration - Refer family to come to the UK"
   },
   "link-expired": {
     "header": "Your link has expired",
@@ -202,7 +191,7 @@
       "full-name": {
         "label": "Full name"
       },
-      "confirm-referrer-email": {
+      "confirm-your-email": {
         "label": "Email"
       },
       "legal-representative-fullname": {

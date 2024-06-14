@@ -8,13 +8,14 @@ module.exports = superclass => class extends superclass {
       const familyMemberCount = familyMembers.length + 1;
 
       if (familyMembers && familyMemberLimit) {
-        locals.noMoreParents = true;
+        locals.noMoreFamilyMembers = true;
       }
-
-
       locals.familyMemberCount = familyMemberCount.toString();
     }
-
+    if (req.sessionModel.get('aggregator-edit-id')) {
+      locals.familyMemberCount = parseInt(req.sessionModel.get('aggregator-edit-id'), 10) + 1;
+      req.sessionModel.unset('aggregator-edit-id');
+    }
     return locals;
   }
 };

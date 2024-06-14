@@ -5,6 +5,7 @@ const dateComponent = require('hof').components.date;
 const after1900Validator = { type: 'after', arguments: ['1900'] };
 const countries = require('hof').utils.countries().concat([{ value: 'Unknown', label: 'Unknown' }]);
 const isInCountriesList = value => countries.some(country => country.value === value);
+const isUnder18 = value => ! require('../../../lib/utilities').isOver18(value);
 
 module.exports = {
   isInCountriesList,
@@ -29,9 +30,9 @@ module.exports = {
   'full-name': {
     isPageHeading: true,
     mixin: 'input-text',
-    validate: ['required', { type: 'maxlength', arguments: 250 }]
+    validate: ['required', 'notUrl', { type: 'maxlength', arguments: 250 }]
   },
-  'confirm-referrer-email': {
+  'confirm-your-email': {
     mixin: 'radio-group',
     options: ['yes', 'no'],
     validate: 'required',
@@ -39,12 +40,12 @@ module.exports = {
       className: 'visuallyhidden'
     }
   },
-  'referrer-email-options': {
+  'your-email-options': {
     mixin: 'radio-group',
     options: [
       {
         value: 'yes',
-        toggle: 'referrer-email-address',
+        toggle: 'your-email-address',
         child: 'input-text'
       },
       {
@@ -56,9 +57,9 @@ module.exports = {
       className: 'visuallyhidden'
     }
   },
-  'referrer-email-address': {
+  'your-email-address': {
     dependent: {
-      field: 'referrer-email-options',
+      field: 'your-email-options',
       value: 'yes'
     },
     validate: ['required', 'email', { type: 'maxlength', arguments: 254 }]
@@ -175,7 +176,11 @@ module.exports = {
   },
   'child-date-of-birth': dateComponent('child-date-of-birth', {
     legend: { className: 'bold' },
-    validate: ['required', 'before', after1900Validator]
+    validate: [
+      'required',
+      'before',
+      isUnder18
+    ]
   }),
   'child-country': {
     labelClassName: 'bold',
@@ -555,5 +560,9 @@ module.exports = {
       field: 'is-legal-representative-email',
       value: 'no'
     }
+  },
+  'children-declaration': {
+    mixin: 'checkbox',
+    validate: 'required'
   }
 };
