@@ -32,6 +32,7 @@ module.exports = class Reports {
     this.type = opts.type;
     this.tableName = opts.tableName;
     this.tableUrl = `${baseUrl}/${opts.tableName}`;
+    console.log("tableUrl: " + tableUrl);
     this.from = opts.from;
     this.to = opts.to || moment().format(postgresDateFormat);
   }
@@ -65,7 +66,7 @@ module.exports = class Reports {
   async getRecordsWithProps(opts) {
     const props = opts || {};
     let url = `${this.tableUrl}/history`;
-
+    console.log("url: " + url);
     props.from = this.from;
     props.to = this.to;
 
