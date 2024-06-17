@@ -177,7 +177,7 @@
     },
     "fields": {
       "brp": {
-       "label": "BRP"
+       "label": "Biometric residence permit number"
       },
       "uan": {
         "label": "UAN"
@@ -186,13 +186,16 @@
         "label": "Date of birth"
       },
       "who-completing-form": {
-        "label": "Person completing form"
+        "label": "Who is completing this form?"
       },
       "full-name": {
-        "label": "Full name"
+        "label": "What is your full name?"
       },
       "confirm-your-email": {
-        "label": "Email"
+        "label": "Is this your email address?"
+      },
+      "provide-telephone-number": {
+        "label": "Can you provide a telephone number?"
       },
       "your-address-line-1": {
         "label": "What is your address?"

@@ -67,6 +67,18 @@ module.exports = {
         }
       },
       {
+        step: '/provide-telephone-number',
+        field: 'provide-telephone-number',
+        parse: (list, req) => {
+          if (!req.sessionModel.get('steps').includes('/provide-telephone-number')) {
+            return null;
+          }
+          return req.sessionModel.get('provide-telephone-number-options') === 'yes' ?
+            `${req.sessionModel.get('provide-telephone-number-number')}` :
+            'No';
+        }
+      },
+      {
         steps: '/your-address',
         field: 'your-address-line-1',
         parse: (list, req) => {
