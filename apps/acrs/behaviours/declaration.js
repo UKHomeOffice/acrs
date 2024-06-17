@@ -1,6 +1,6 @@
 const { IsAgeUnderLimit, generateUniqueReference } = require('../../../lib/utilities');
-const { dobFormat, AGE_LIMIT } = require('../../../config');
-const { refLength, refAllowedChars } = require('../../../config').uniqueReferralRefs;
+const { dobFormat, AGE_LIMIT, uniqueReferralRefs } = require('../../../config');
+const { refLength, refAllowedChars } = uniqueReferralRefs;
 
 const CheckUnder18InAggregatedValue = (aggregateArray, fieldLabel, format, ageLimit) => {
   const aggregatedLength = aggregateArray.length;
