@@ -300,6 +300,21 @@ module.exports = {
       }
     ]
   },
+  'family-in-uk': {
+    steps: [
+      {
+        step: '/family-in-uk-summary',
+        field: 'family-member-in-uk',
+        addElementSeparators: true,
+        dependsOn: 'has-family-in-uk',
+        parse: obj => {
+          if (!obj?.aggregatedValues) { return null; }
+          aggregateParser(obj.aggregatedValues, 'family-member-fullname', 'family-member-date-of-birth');
+          return obj;
+        }
+      }
+    ]
+  },
   'evidence-documents': [
     {
       step: '/upload-evidence',

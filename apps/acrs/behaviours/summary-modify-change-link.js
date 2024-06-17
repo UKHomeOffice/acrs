@@ -26,7 +26,7 @@ module.exports = superclass => class extends superclass {
                   field.changeLink = '/acrs/additional-family-summary';
                 }
                 if (field.field === 'family-member-fullname') {
-                  field.changeLink = '/acrs/family-member-summary';
+                  field.changeLink = '/acrs/family-in-uk-summary';
                 }
                 if (field.field === 'partner-full-name') {
                   field.changeLink = '/acrs/partner-summary';

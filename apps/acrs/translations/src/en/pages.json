@@ -290,6 +290,9 @@
       "partner-why-without-partner": {
         "label": "Not evacuated together because"
       },
+      "children": {
+        "label": "Are you referring your children to come to the UK?"
+      },
       "child-full-name": {
         "label": "Child's name"
       },
@@ -304,6 +307,21 @@
       },
       "child-why-without-child": {
         "label": "Not evacuated together because"
+      },
+      "family-in-uk": {
+        "header": "Family members that live in the UK"
+      },
+      "family-member-fullname": {
+        "label": "Full name"
+      },
+      "family-member-date-of-birth": {
+        "label": "Date of birth"
+      },
+      "family-member-relationship": {
+        "label": "Relationship to you"
+      },
+      "has-family-member-been-evacuated": {
+        "label": "Were they evacuated with you?"
       },
       "your-address-postcode": {
         "label": "Contact postcode"
