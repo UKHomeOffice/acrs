@@ -163,7 +163,7 @@
         "header": "Referral details"
       },
       "immigration-adviser-details": {
-        "header": "Immigration adviser details"
+        "header": "Immigration adviser's details"
       },
       "family-in-your-referral": {
         "header": "Family in your referral"
@@ -204,13 +204,13 @@
         "label": "Full name"
       },
       "legal-representative-email": {
-        "label": "Email"
+        "label": "Email Address"
       },
       "legal-representative-phone-number": {
-        "label": "Phone number"
+        "label": "Telephone number"
       },
-      "legal-representative-address": {
-        "label": "Address"
+      "legal-representative-house-number": {
+        "label": "Postal Address"
       },
       "current-email": {
         "label": "Email"
