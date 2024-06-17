@@ -418,5 +418,8 @@
   },
   "children-declaration": {
     "label": "I understand and agree with this declaration."
+  },
+  "submission-reference": {
+    "label": "Unique submission reference"
   }
 }
