@@ -282,7 +282,7 @@
         "label": "Date of birth"
       },
       "partner-country": {
-        "label": "Country"
+        "label": "Country they live in"
       },
       "partner-living-situation": {
         "label": "Partner’s living situation"

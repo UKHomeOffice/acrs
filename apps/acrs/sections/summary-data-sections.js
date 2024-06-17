@@ -233,28 +233,7 @@ module.exports = {
         }
       },
       {
-        steps: '/additional-family',
-        field: 'additional-family',
-        parse: (list, req) => {
-          if (!req.sessionModel.get('steps').includes('/additional-family')) {
-            return null;
-          }
-          return req.sessionModel.get('additional-family') === 'yes' ?
-            'Yes' : 'No';
-        }
-      },
-      {
-        step: '/additional-family-summary',
-        field: 'referred-additional-family',
-        addElementSeparators: true,
-        dependsOn: 'additional-family',
-        parse: obj => {
-          if (!obj?.aggregatedValues) { return null; }
-          aggregateParser(obj.aggregatedValues, 'additional-family-full-name');
-          return obj;
-        }
-      },
-      {
+        // "Are you referring a partner to come to the UK?"
         steps: '/partner',
         field: 'partner',
         parse: (list, req) => {
@@ -293,6 +272,28 @@ module.exports = {
         parse: obj => {
           if (!obj?.aggregatedValues) { return null; }
           aggregateParser(obj.aggregatedValues, 'child-full-name');
+          return obj;
+        }
+      },
+      {
+        steps: '/additional-family',
+        field: 'additional-family',
+        parse: (list, req) => {
+          if (!req.sessionModel.get('steps').includes('/additional-family')) {
+            return null;
+          }
+          return req.sessionModel.get('additional-family') === 'yes' ?
+            'Yes' : 'No';
+        }
+      },
+      {
+        step: '/additional-family-summary',
+        field: 'referred-additional-family',
+        addElementSeparators: true,
+        dependsOn: 'additional-family',
+        parse: obj => {
+          if (!obj?.aggregatedValues) { return null; }
+          aggregateParser(obj.aggregatedValues, 'additional-family-full-name');
           return obj;
         }
       }
