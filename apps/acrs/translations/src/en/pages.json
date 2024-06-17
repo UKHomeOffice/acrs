@@ -290,6 +290,21 @@
       "partner-why-without-partner": {
         "label": "Not evacuated together because"
       },
+      "child-full-name": {
+        "label": "Child's name"
+      },
+      "child-date-of-birth": {
+        "label": "Date of birth"
+      },
+      "child-country": {
+        "label": "What country do they live in?"
+      },
+      "child-living-situation": {
+        "label": "Their living situation"
+      },
+      "child-why-without-child": {
+        "label": "Not evacuated together because"
+      },
       "your-address-postcode": {
         "label": "Contact postcode"
       },
