@@ -31,12 +31,14 @@ describe('isOver18 function', () => {
 
 describe('generateUniqueReference function', () => {
   it('should return a string of the length supplied', async () => {
-    const generatedId = await generateUniqueReference(6, 'ABC');
-    expect(generatedId).to.have.lengthOf(6);
+    const generatedRef = await generateUniqueReference(6, 'ABC');
+    expect(generatedRef).to.have.lengthOf(6);
   });
 
   it('should return a string containing only the supplied characters', async () => {
-    const generatedId = await generateUniqueReference(3, 'A');
-    expect(generatedId).to.equal('AAA');
+    let generatedRef = await generateUniqueReference(3, 'A');
+    expect(generatedRef).to.equal('AAA');
+    generatedRef = await generateUniqueReference(12, 'B');
+    expect(generatedRef).to.equal('BBBBBBBBBBBB');
   });
 });
