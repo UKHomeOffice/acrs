@@ -14,20 +14,21 @@ const addressFormatter = (model, fieldNames) => {
  * @param {string} titleField - The field used as the title for aggregation.
  * @param {string} [dobField='date-of-birth'] - The field representing the date of birth.
  * @return {void} It's all side-effects
- */const aggregateParser = (aggregate, titleField, dobField = 'date-of-birth') => {
-    for (const item of aggregate) {
-      item.fields.map(field => {
-        field.omitChangeLink = true;
-        if (field.field === titleField) {
-          field.isAggregatorTitle = true;
-        }
-        if (field.field.includes(dobField) && field.value !== undefined) {
-            field.parsed = moment(field.value, 'YYYY-MMMM-DD').format(PRETTY_DATE_FORMAT);
-        }
-        return field;
-      });
-    }
-}
+ */
+const aggregateParser = (aggregate, titleField, dobField = 'date-of-birth') => {
+  for (const item of aggregate) {
+    item.fields.map(field => {
+      field.omitChangeLink = true;
+      if (field.field === titleField) {
+        field.isAggregatorTitle = true;
+      }
+      if (field.field.includes(dobField) && field.value !== undefined) {
+        field.parsed = moment(field.value, 'YYYY-MMMM-DD').format(PRETTY_DATE_FORMAT);
+      }
+      return field;
+    });
+  }
+};
 
 
 module.exports = {
@@ -175,6 +176,41 @@ module.exports = {
         }
       },
       {
+        // Are you referring a brother or sister to come to the UK?
+        steps: '/brother-or-sister',
+        field: 'brother-or-sister',
+        parse: (list, req) => {
+          if (!req.sessionModel.get('steps').includes('/brother-or-sister')) {
+            return null;
+          }
+          return req.sessionModel.get('brother-or-sister') === 'yes' ?
+            'Yes' : 'No';
+        }
+      },
+      {
+        // "Are you referring additional family members to come to the UK?"
+        steps: '/additional-family',
+        field: 'additional-family',
+        parse: (list, req) => {
+          if (!req.sessionModel.get('steps').includes('/additional-family')) {
+            return null;
+          }
+          return req.sessionModel.get('additional-family') === 'yes' ?
+            'Yes' : 'No';
+        }
+      },
+      {
+        // "Are you referring a partner to come to the UK?"
+        steps: '/partner',
+        field: 'partner',
+        parse: (list, req) => {
+          if ( !req.sessionModel.get('steps').includes('/partner') ) {
+            return null;
+          }
+          return req.sessionModel.get('partner') === 'yes' ? 'Yes' : 'No';
+        }
+      },
+      {
         step: '/parent-summary',
         field: 'referred-parents',
         addElementSeparators: true,
@@ -199,18 +235,6 @@ module.exports = {
         }
       },
       {
-        // Are you referring a brother or sister to come to the UK?
-        steps: '/brother-or-sister',
-        field: 'brother-or-sister',
-        parse: (list, req) => {
-          if (!req.sessionModel.get('steps').includes('/brother-or-sister')) {
-            return null;
-          }
-          return req.sessionModel.get('brother-or-sister') === 'yes' ?
-            'Yes' : 'No';
-        }
-      },
-      {
         step: '/brother-or-sister-summary',
         field: 'referred-siblings',
         addElementSeparators: true,
@@ -232,17 +256,6 @@ module.exports = {
             });
           }
           return obj;
-        }
-      },
-      {
-        // "Are you referring a partner to come to the UK?"
-        steps: '/partner',
-        field: 'partner',
-        parse: (list, req) => {
-          if ( !req.sessionModel.get('steps').includes('/partner') ) {
-            return null;
-          }
-          return req.sessionModel.get('partner') === 'yes' ? 'Yes' : 'No';
         }
       },
       {
@@ -275,18 +288,6 @@ module.exports = {
           if (!obj?.aggregatedValues) { return null; }
           aggregateParser(obj.aggregatedValues, 'child-full-name');
           return obj;
-        }
-      },
-      {
-        // "Are you referring additional family members to come to the UK?"
-        steps: '/additional-family',
-        field: 'additional-family',
-        parse: (list, req) => {
-          if (!req.sessionModel.get('steps').includes('/additional-family')) {
-            return null;
-          }
-          return req.sessionModel.get('additional-family') === 'yes' ?
-            'Yes' : 'No';
         }
       },
       {
