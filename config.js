@@ -64,7 +64,17 @@ module.exports = {
   },
   sessionDefaults: {
     steps: ['/start', '/select-form', '/information-you-have-given-us', '/who-completing-form'],
-    fields: ['user-email', 'id-type', 'brp', 'uan', 'date-of-birth', 'csrf-secret', 'errorValues', 'errors']
+    fields: [
+      'user-email',
+      'id-type',
+      'sign-in-method',
+      'brp',
+      'uan',
+      'date-of-birth',
+      'csrf-secret',
+      'errorValues',
+      'errors'
+    ]
   },
   hosts: {
     acceptanceTests: process.env.ACCEPTANCE_HOST_NAME || `http://localhost:${process.env.PORT || 8080}`
