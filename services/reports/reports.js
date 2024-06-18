@@ -20,7 +20,7 @@ const logger = createLogger({
   transports: [new transports.Console({level: 'info', handleExceptions: true})]
 });
 
-const baseUrl = `${config.saveService.host}:${config.saveService.port}`;
+const baseUrl = 'https://dataservice-acrs-67-branch-test:5432';
 
 const notifyClient = new NotifyClient(notifyKey);
 
