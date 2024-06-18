@@ -26,6 +26,7 @@ app.use((req, res, next) => {
   const protocol = host.includes('localhost') ? 'http' : 'https';
   res.locals.formUrl = `${protocol}://${host}`;
   res.locals.htmlLang = 'en';
+
   next();
 });
 

@@ -66,7 +66,7 @@ describe('Server.js app file', () => {
           appsVerifyStub
         ],
         session: { name: 'acrs.hof.sid' },
-        getAccessibility: true,
+        getAccessibility: false,
         emailerFallback: true
       });
     });

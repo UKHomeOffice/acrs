@@ -45,6 +45,9 @@ module.exports = {
     },
     '/check-email': {
       behaviours: SendVerificationEmail
+    },
+    '/accessibility': {
+      backLink: 'sign-in'
     }
   }
 };
