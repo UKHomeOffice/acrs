@@ -20,6 +20,7 @@ module.exports = superclass => class extends superclass {
       req.sessionModel.set('brp', brpId);
       req.sessionModel.set('uan', uanId);
       req.sessionModel.set('id-type', getIdType(brpId));
+      req.sessionModel.set('sign-in-method', _.get(req.session['hof-wizard-verify'], 'sign-in-method'))
       req.sessionModel.set('date-of-birth', _.get(req.session['hof-wizard-verify'], 'date-of-birth'));
 
       return super.saveValues(req, res, next);
@@ -39,6 +40,7 @@ module.exports = superclass => class extends superclass {
           req.sessionModel.set('uan', user.uan);
           req.sessionModel.set('brp', user.brp);
           req.sessionModel.set('id-type', getIdType(user.brp));
+          req.sessionModel.set('sign-in-method', user['sign-in-method']);
           req.sessionModel.set('date-of-birth', user['date-of-birth']);
           return super.saveValues(req, res, next);
         }
