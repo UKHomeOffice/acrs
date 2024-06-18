@@ -64,7 +64,17 @@ module.exports = {
   },
   sessionDefaults: {
     steps: ['/start', '/select-form', '/information-you-have-given-us', '/who-completing-form'],
-    fields: ['user-email', 'id-type', 'brp', 'uan', 'date-of-birth', 'csrf-secret', 'errorValues', 'errors']
+    fields: [
+      'user-email',
+      'id-type',
+      'sign-in-method',
+      'brp',
+      'uan',
+      'date-of-birth',
+      'csrf-secret',
+      'errorValues',
+      'errors'
+    ]
   },
   hosts: {
     acceptanceTests: process.env.ACCEPTANCE_HOST_NAME || `http://localhost:${process.env.PORT || 8080}`
@@ -75,4 +85,8 @@ module.exports = {
   // dobCutoff is the earliest date of birth that qualifies as under 18, therefore 27 August 2003 is considered over 18
   dobCutoff: '2003-08-28',
   ageLimit: 18
+  uniqueReferralRefs: {
+    refLength: 6,
+    refAllowedChars: 'ABCDEFGHJKMNPRTUVWXY0123456789'
+  }
 };
