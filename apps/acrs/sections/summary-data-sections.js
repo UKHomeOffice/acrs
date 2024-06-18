@@ -163,6 +163,7 @@ module.exports = {
   'family-in-your-referral': {
     steps: [
       {
+        // Are you referring a parent to come to the UK?
         steps: '/parent',
         field: 'parent',
         parse: (list, req) => {
@@ -198,6 +199,7 @@ module.exports = {
         }
       },
       {
+        // Are you referring a brother or sister to come to the UK?
         steps: '/brother-or-sister',
         field: 'brother-or-sister',
         parse: (list, req) => {
@@ -302,6 +304,18 @@ module.exports = {
   },
   'family-in-uk': {
     steps: [
+      {
+        // "Do you have family that live in the UK?"
+        steps: '/family-in-uk',
+        field: 'family-in-uk',
+        parse: (list, req) => {
+          if (!req.sessionModel.get('steps').includes('/family-in-uk')) {
+            return null;
+          }
+          return req.sessionModel.get('has-family-in-uk') === 'yes' ?
+            'Yes' : 'No';
+        }
+      },
       {
         step: '/family-in-uk-summary',
         field: 'family-member-in-uk',

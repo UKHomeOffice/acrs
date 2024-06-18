@@ -309,7 +309,8 @@
         "label": "Not evacuated together because"
       },
       "family-in-uk": {
-        "header": "Family members that live in the UK"
+        "header": "Family members that live in the UK",
+        "label": "Do you have family that live in the UK?"
       },
       "family-member-fullname": {
         "label": "Full name"
