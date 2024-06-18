@@ -1,5 +1,6 @@
-const Utilities = require('../../../lib/utilities');
-const {dobFormat, AGE_LIMIT} = require('../../../config');
+const { IsAgeUnderLimit, generateUniqueReference } = require('../../../lib/utilities');
+const { dobFormat, AGE_LIMIT, uniqueReferralRefs } = require('../../../config');
+const { refLength, refAllowedChars } = uniqueReferralRefs;
 
 const CheckUnder18InAggregatedValue = (aggregateArray, fieldLabel, format, ageLimit) => {
   const aggregatedLength = aggregateArray.length;
@@ -14,7 +15,7 @@ const CheckUnder18InAggregatedValue = (aggregateArray, fieldLabel, format, ageLi
         .map(v => v)
         .filter(field => field.field === fieldLabel);
 
-      if (Utilities.IsAgeUnderLimit(responseObject[0].value, format, ageLimit)) {return true;}
+      if (IsAgeUnderLimit(responseObject[0].value, format, ageLimit)) {return true;}
     }
   }
   return false;
@@ -62,5 +63,11 @@ module.exports = superclass => class extends superclass {
     }
 
     return locals;
+  }
+
+  async saveValues(req, res, next) {
+    const referralUniqueRef = await generateUniqueReference(refLength, refAllowedChars);
+    req.sessionModel.set('submission-reference', referralUniqueRef);
+    return super.saveValues(req, res, next);
   }
 };

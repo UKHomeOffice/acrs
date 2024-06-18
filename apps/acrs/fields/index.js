@@ -564,5 +564,6 @@ module.exports = {
   'children-declaration': {
     mixin: 'checkbox',
     validate: 'required'
-  }
+  },
+  'submission-reference': {}
 };
