@@ -294,5 +294,9 @@
         "label": "Evidence notes"
       }
     }
+  },
+  "accessibility": {
+    "header": "Accessibility statement"
   }
+
 }

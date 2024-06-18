@@ -335,3 +335,18 @@ pre.looped-records {
 .email-decision {
   margin-top: -20px;
 }
+
+.access > p{
+  @extend .govuk-body; 
+}
+
+.access > h2{
+  @extend .govuk-heading-m;
+}
+
+.access > ul{
+  @extend .list-bullet;
+  @extend .list;
+  margin-left: 20px;
+  margin-bottom: 30px;
+}

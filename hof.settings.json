@@ -19,6 +19,6 @@
   "session": {
     "name": "acrs.hof.sid"
   },
-  "getAccessibility": true,
+  "getAccessibility": false,
   "emailerFallback": true
 }
