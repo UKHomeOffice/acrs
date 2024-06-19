@@ -164,6 +164,28 @@ module.exports = {
   'family-in-your-referral': {
     steps: [
       {
+        // "Are you referring a partner to come to the UK?"
+        steps: '/partner',
+        field: 'partner',
+        parse: (list, req) => {
+          if ( !req.sessionModel.get('steps').includes('/partner') ) {
+            return null;
+          }
+          return req.sessionModel.get('partner') === 'yes' ? 'Yes' : 'No';
+        }
+      },
+      {
+        // "Are you referring your children to come to the UK?"
+        step: '/children',
+        field: 'children',
+        parse: (list, req) => {
+          if ( !req.sessionModel.get('steps').includes('/children') ) {
+            return null;
+          }
+          return req.sessionModel.get('children') === 'yes' ? 'Yes' : 'No';
+        }
+      },
+      {
         // Are you referring a parent to come to the UK?
         steps: '/parent',
         field: 'parent',
@@ -197,17 +219,6 @@ module.exports = {
           }
           return req.sessionModel.get('additional-family') === 'yes' ?
             'Yes' : 'No';
-        }
-      },
-      {
-        // "Are you referring a partner to come to the UK?"
-        steps: '/partner',
-        field: 'partner',
-        parse: (list, req) => {
-          if ( !req.sessionModel.get('steps').includes('/partner') ) {
-            return null;
-          }
-          return req.sessionModel.get('partner') === 'yes' ? 'Yes' : 'No';
         }
       },
       {
@@ -267,16 +278,6 @@ module.exports = {
           if (!obj?.aggregatedValues) { return null; }
           aggregateParser(obj.aggregatedValues, 'partner-full-name');
           return obj;
-        }
-      },
-      {
-        step: '/children',
-        field: 'children',
-        parse: (list, req) => {
-          if ( !req.sessionModel.get('steps').includes('/children') ) {
-            return null;
-          }
-          return req.sessionModel.get('children') === 'yes' ? 'Yes' : 'No';
         }
       },
       {
