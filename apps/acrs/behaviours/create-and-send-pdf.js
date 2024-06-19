@@ -97,16 +97,12 @@ module.exports = class CreateAndSendPDF {
     if (!this.behaviourConfig.sendReceipt) {
       return Promise.resolve();
     }
-    const allUniqueEmails = req.sessionModel.get('all-unique-emails');
+    const userEmail = req.sessionModel.get('user-email');
 
     try {
-      const sendAllEmails = allUniqueEmails.map(email => this.sendEmail(req, email, pdfData));
-
-      return Promise.all(sendAllEmails)
-        .then(() => req.log('info', 'acrs.send_receipt.create_email_notify.successful'))
-        .catch(e => {
-          throw e;
-        });
+      const receiptResponse = await this.sendEmail(req, userEmail, pdfData);
+      req.log('info', 'acrs.send_receipt.create_email_notify.successful');
+      return receiptResponse;
     } catch (err) {
       req.log('error', 'acrs.send_receipt.create_email_notify.error', err.message || err);
       throw err;
