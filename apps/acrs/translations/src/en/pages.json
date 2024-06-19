@@ -163,7 +163,7 @@
         "header": "Referral details"
       },
       "immigration-adviser-details": {
-        "header": "Immigration adviser details"
+        "header": "Immigration adviser's details"
       },
       "family-in-your-referral": {
         "header": "Family in your referral"
@@ -177,7 +177,7 @@
     },
     "fields": {
       "brp": {
-       "label": "BRP"
+       "label": "Biometric residence permit number"
       },
       "uan": {
         "label": "UAN"
@@ -186,25 +186,31 @@
         "label": "Date of birth"
       },
       "who-completing-form": {
-        "label": "Person completing form"
+        "label": "Who is completing this form?"
       },
       "full-name": {
-        "label": "Full name"
+        "label": "What is your full name?"
       },
       "confirm-your-email": {
-        "label": "Email"
+        "label": "Is this your email address?"
+      },
+      "provide-telephone-number": {
+        "label": "Can you provide a telephone number?"
+      },
+      "your-address-line-1": {
+        "label": "What is your address?"
       },
       "legal-representative-fullname": {
         "label": "Full name"
       },
       "legal-representative-email": {
-        "label": "Email"
+        "label": "Email Address"
       },
       "legal-representative-phone-number": {
-        "label": "Phone number"
+        "label": "Telephone number"
       },
-      "legal-representative-address": {
-        "label": "Address"
+      "legal-representative-house-number": {
+        "label": "Postal Address"
       },
       "current-email": {
         "label": "Email"
@@ -258,7 +264,7 @@
         "label": "Need you for support?"
       },
       "additional-family-why-evac-without": {
-        "label": "Why were you evacuated without them?"
+        "label": "Why you were evacuated without them"
       },
       "additional-family-why-referring": {
         "label": "Why are you referring them?"
@@ -276,13 +282,47 @@
         "label": "Date of birth"
       },
       "partner-country": {
-        "label": "Country"
+        "label": "Country they live in"
       },
       "partner-living-situation": {
         "label": "Partner’s living situation"
       },
       "partner-why-without-partner": {
         "label": "Not evacuated together because"
+      },
+      "children": {
+        "label": "Are you referring your children to come to the UK?"
+      },
+      "child-full-name": {
+        "label": "Child's name"
+      },
+      "child-date-of-birth": {
+        "label": "Date of birth"
+      },
+      "child-country": {
+        "label": "What country do they live in?"
+      },
+      "child-living-situation": {
+        "label": "Their living situation"
+      },
+      "child-why-without-child": {
+        "label": "Not evacuated together because"
+      },
+      "family-in-uk": {
+        "header": "Family members that live in the UK",
+        "label": "Do you have family that live in the UK?"
+      },
+      "family-member-fullname": {
+        "label": "Full name"
+      },
+      "family-member-date-of-birth": {
+        "label": "Date of birth"
+      },
+      "family-member-relationship": {
+        "label": "Relationship to you"
+      },
+      "has-family-member-been-evacuated": {
+        "label": "Were they evacuated with you?"
       },
       "your-address-postcode": {
         "label": "Contact postcode"

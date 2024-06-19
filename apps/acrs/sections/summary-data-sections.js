@@ -2,6 +2,35 @@
 const moment = require('moment');
 const PRETTY_DATE_FORMAT = 'DD MMMM YYYY';
 
+const addressFormatter = (model, fieldNames) => {
+  const fields = fieldNames.map(fieldName => model.get(fieldName));
+  return fields.map(field => field.trim()).filter(field => field).join('\n');
+};
+
+/**
+ * Parses an Aggregator array to promote the Title field, reformat the DOB and remove the Change link
+ *
+ * @param {Array} aggregate - The Aggregator
+ * @param {string} titleField - The field used as the title for aggregation.
+ * @param {string} [dobField='date-of-birth'] - The field representing the date of birth.
+ * @return {void} It's all side-effects
+ */
+const aggregateParser = (aggregate, titleField, dobField = 'date-of-birth') => {
+  for (const item of aggregate) {
+    item.fields.map(field => {
+      field.omitChangeLink = true;
+      if (field.field === titleField) {
+        field.isAggregatorTitle = true;
+      }
+      if (field.field.includes(dobField) && field.value !== undefined) {
+        field.parsed = moment(field.value, 'YYYY-MMMM-DD').format(PRETTY_DATE_FORMAT);
+      }
+      return field;
+    });
+  }
+};
+
+
 module.exports = {
   'referral-details': {
     steps: [
@@ -35,24 +64,35 @@ module.exports = {
           }
           return req.sessionModel.get('confirm-your-email') === 'yes' ?
             `${req.sessionModel.get('user-email')}` :
-            `${req.sessionModel.get('referral-email')}`;
+            `${req.sessionModel.get('your-email-address')}`;
+        }
+      },
+      {
+        step: '/provide-telephone-number',
+        field: 'provide-telephone-number',
+        parse: (list, req) => {
+          if (!req.sessionModel.get('steps').includes('/provide-telephone-number')) {
+            return null;
+          }
+          return req.sessionModel.get('provide-telephone-number-options') === 'yes' ?
+            `${req.sessionModel.get('provide-telephone-number-number')}` :
+            'No';
         }
       },
       {
         steps: '/your-address',
-        field: 'your-address-line-1'
-      },
-      {
-        steps: '/your-address',
-        field: 'your-address-line-2'
-      },
-      {
-        steps: '/your-address',
-        field: 'your-address-town-or-city'
-      },
-      {
-        steps: '/your-address',
-        field: 'your-address-postcode'
+        field: 'your-address-line-1',
+        parse: (list, req) => {
+          if (!req.sessionModel.get('steps').includes('/your-address')) {
+            return null;
+          }
+          return addressFormatter(req.sessionModel, [
+            'your-address-line-1',
+            'your-address-line-2',
+            'your-address-town-or-city',
+            'your-address-postcode'
+          ]);
+        }
       }
     ]
   },
@@ -69,14 +109,22 @@ module.exports = {
       },
       {
         step: '/immigration-adviser-details',
-        field: 'legal-representative-email',
+        field: 'legal-representative-organisation'
+      },
+      {
+        step: '/immigration-adviser-details',
+        field: 'legal-representative-house-number',
         parse: (list, req) => {
           if (!req.sessionModel.get('steps').includes('/immigration-adviser-details')) {
             return null;
           }
-          return req.sessionModel.get('is-legal-representative-email') === 'yes' ?
-            `${req.sessionModel.get('user-email')}` :
-            `${req.sessionModel.get('legal-representative-email')}`;
+          return addressFormatter(req.sessionModel, [
+            'legal-representative-house-number',
+            'legal-representative-street',
+            'legal-representative-townOrCity',
+            'legal-representative-county',
+            'legal-representative-postcode'
+          ]);
         }
       },
       {
@@ -85,16 +133,14 @@ module.exports = {
       },
       {
         step: '/immigration-adviser-details',
-        field: 'legal-representative-address',
+        field: 'legal-representative-email',
         parse: (list, req) => {
           if (!req.sessionModel.get('steps').includes('/immigration-adviser-details')) {
             return null;
           }
-          return `${req.sessionModel.get('legal-representative-house-number')} \n` +
-            `${req.sessionModel.get('legal-representative-street')} \n` +
-            `${req.sessionModel.get('legal-representative-townOrCity')}\n` +
-            `${req.sessionModel.get('legal-representative-county')}\n` +
-            `${req.sessionModel.get('legal-representative-postcode')}`;
+          return req.sessionModel.get('is-legal-representative-email') === 'yes' ?
+            `${req.sessionModel.get('user-email')}` :
+            `${req.sessionModel.get('legal-representative-email')}`;
         }
       }
     ]
@@ -118,6 +164,7 @@ module.exports = {
   'family-in-your-referral': {
     steps: [
       {
+        // Are you referring a parent to come to the UK?
         steps: '/parent',
         field: 'parent',
         parse: (list, req) => {
@@ -126,6 +173,41 @@ module.exports = {
           }
           return req.sessionModel.get('parent') === 'yes' ?
             'Yes' : 'No';
+        }
+      },
+      {
+        // Are you referring a brother or sister to come to the UK?
+        steps: '/brother-or-sister',
+        field: 'brother-or-sister',
+        parse: (list, req) => {
+          if (!req.sessionModel.get('steps').includes('/brother-or-sister')) {
+            return null;
+          }
+          return req.sessionModel.get('brother-or-sister') === 'yes' ?
+            'Yes' : 'No';
+        }
+      },
+      {
+        // "Are you referring additional family members to come to the UK?"
+        steps: '/additional-family',
+        field: 'additional-family',
+        parse: (list, req) => {
+          if (!req.sessionModel.get('steps').includes('/additional-family')) {
+            return null;
+          }
+          return req.sessionModel.get('additional-family') === 'yes' ?
+            'Yes' : 'No';
+        }
+      },
+      {
+        // "Are you referring a partner to come to the UK?"
+        steps: '/partner',
+        field: 'partner',
+        parse: (list, req) => {
+          if ( !req.sessionModel.get('steps').includes('/partner') ) {
+            return null;
+          }
+          return req.sessionModel.get('partner') === 'yes' ? 'Yes' : 'No';
         }
       },
       {
@@ -153,17 +235,6 @@ module.exports = {
         }
       },
       {
-        steps: '/brother-or-sister',
-        field: 'brother-or-sister',
-        parse: (list, req) => {
-          if (!req.sessionModel.get('steps').includes('/brother-or-sister')) {
-            return null;
-          }
-          return req.sessionModel.get('brother-or-sister') === 'yes' ?
-            'Yes' : 'No';
-        }
-      },
-      {
         step: '/brother-or-sister-summary',
         field: 'referred-siblings',
         addElementSeparators: true,
@@ -188,70 +259,13 @@ module.exports = {
         }
       },
       {
-        steps: '/additional-family',
-        field: 'additional-family',
-        parse: (list, req) => {
-          if (!req.sessionModel.get('steps').includes('/additional-family')) {
-            return null;
-          }
-          return req.sessionModel.get('additional-family') === 'yes' ?
-            'Yes' : 'No';
-        }
-      },
-      {
-        step: '/additional-family-summary',
-        field: 'referred-additional-family',
-        addElementSeparators: true,
-        dependsOn: 'additional-family',
-        parse: obj => {
-          if (!obj?.aggregatedValues) { return null; }
-          for (const item of obj.aggregatedValues) {
-            item.fields.map(field => {
-              if (field.field === 'additional-family-full-name') {
-                field.isAggregatorTitle = true;
-              }
-              field.omitChangeLink = true;
-              if (field.field.includes('date-of-birth')) {
-                if (field.value !== undefined) {
-                  field.parsed = moment(field.value, 'YYYY-MMMM-DD').format('DD MMMM YYYY');
-                }
-              }
-              return field;
-            });
-          }
-          return obj;
-        }
-      },
-      {
-        steps: '/partner',
-        field: 'partner',
-        parse: (list, req) => {
-          if ( !req.sessionModel.get('steps').includes('/partner') ) {
-            return null;
-          }
-          return req.sessionModel.get('partner') === 'yes' ? 'Yes' : 'No';
-        }
-      },
-      {
         step: '/partner-summary',
         field: 'referred-partners',
         addElementSeparators: true,
         dependsOn: 'partner',
         parse: obj => {
-          if ( !obj?.aggregatedValues ) { return null; }
-
-          for (const item of obj.aggregatedValues) {
-            item.fields.map(field => {
-              field.isAggregatorTitle = field.field === 'partner-full-name';
-              field.omitChangeLink = true;
-              if (field.field.includes('date-of-birth')) {
-                if (field.value !== undefined) {
-                  field.parsed = moment(field.value, 'YYYY-MMMM-DD').format('DD MMMM YYYY');
-                }
-              }
-              return field;
-            });
-          }
+          if (!obj?.aggregatedValues) { return null; }
+          aggregateParser(obj.aggregatedValues, 'partner-full-name');
           return obj;
         }
       },
@@ -271,20 +285,46 @@ module.exports = {
         addElementSeparators: true,
         dependsOn: 'children',
         parse: obj => {
-          if ( !obj?.aggregatedValues ) { return null; }
-
-          for (const item of obj.aggregatedValues) {
-            item.fields.map(field => {
-              field.isAggregatorTitle = field.field === 'child-full-name';
-              field.omitChangeLink = true;
-              if (field.field.includes('date-of-birth')) {
-                if (field.value !== undefined) {
-                  field.parsed = moment(field.value, 'YYYY-MMMM-DD').format('DD MMMM YYYY');
-                }
-              }
-              return field;
-            });
+          if (!obj?.aggregatedValues) { return null; }
+          aggregateParser(obj.aggregatedValues, 'child-full-name');
+          return obj;
+        }
+      },
+      {
+        step: '/additional-family-summary',
+        field: 'referred-additional-family',
+        addElementSeparators: true,
+        dependsOn: 'additional-family',
+        parse: obj => {
+          if (!obj?.aggregatedValues) { return null; }
+          aggregateParser(obj.aggregatedValues, 'additional-family-full-name');
+          return obj;
+        }
+      }
+    ]
+  },
+  'family-in-uk': {
+    steps: [
+      {
+        // "Do you have family that live in the UK?"
+        steps: '/family-in-uk',
+        field: 'family-in-uk',
+        parse: (list, req) => {
+          if (!req.sessionModel.get('steps').includes('/family-in-uk')) {
+            return null;
           }
+          return req.sessionModel.get('has-family-in-uk') === 'yes' ?
+            'Yes' : 'No';
+        }
+      },
+      {
+        step: '/family-in-uk-summary',
+        field: 'family-member-in-uk',
+        addElementSeparators: true,
+        dependsOn: 'has-family-in-uk',
+        parse: obj => {
+          if (!obj?.aggregatedValues) { return null; }
+          aggregateParser(obj.aggregatedValues, 'family-member-fullname', 'family-member-date-of-birth');
           return obj;
         }
       }
