@@ -173,6 +173,9 @@
       },
       "evidence-notes": {
         "header": "Notes"
+      },
+      "how-send-decision": {
+        "header": "Where to send your decision"
       }
     },
     "fields": {
@@ -332,6 +335,15 @@
       },
       "evidence-notes-details": {
         "label": "Evidence notes"
+      },
+      "how-to-send-decision": {
+        "label": "How to send decision"
+      },
+      "is-decision-by-email-detail": {
+        "label": "Where to send decision"
+      },
+      "is-decision-post-address-1": {
+        "label": "Where to send decision"
       }
     }
   },
