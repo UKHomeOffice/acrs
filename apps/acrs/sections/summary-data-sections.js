@@ -357,5 +357,39 @@ module.exports = {
         return req.sessionModel.get('evidence-notes-details');
       }
     }
+  ],
+  'how-send-decision': [
+    {
+      step: '/how-send-decision',
+      field: 'how-to-send-decision'
+    },
+    {
+      step: '/email-decision',
+      field: 'is-decision-by-email-detail',
+      parse: (list, req) => {
+        if ( !req.sessionModel.get('steps').includes('/email-decision')) {
+          return null;
+        }
+
+        return req.sessionModel.get('is-decision-by-email-detail') ||
+          req.sessionModel.get('user-email') ||
+          'None provided';
+      }
+    },
+    {
+      step: '/decision-postal-address',
+      field: 'is-decision-post-address-1',
+      parse: (list, req) => {
+        if (!req.sessionModel.get('steps').includes('/decision-postal-address')) {
+          return null;
+        }
+        return addressFormatter(req.sessionModel, [
+          'is-decision-post-address-1',
+          'is-decision-post-address-2',
+          'is-decision-post-town-or-city',
+          'is-decision-post-postcode'
+        ]);
+      }
+    }
   ]
 };
