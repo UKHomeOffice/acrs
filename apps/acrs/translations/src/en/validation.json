@@ -77,8 +77,9 @@
     },
     "parent-evacuated-without-reason": {
       "required": "Enter the reason you were evacuated without this parent",
-      "regex": "Explanation must be 15,000 characters or less and must not include [ ] < > / |",
-      "notUrl": "Please do not enter a link/url into your answers"
+      "maxlength": "Details about why you were evacuated without your parent must be less than 15,000 characters",
+      "notUrl": "Please do not enter a link/url into your answers",
+      "regex": "Details must not include these characters: [ ] < > / |"
     },
     "provide-telephone-number-options": {
       "required": "Tell us if you can provide a telephone number"
@@ -138,13 +139,15 @@
     },
     "partner-living-situation": {
       "required": "Explain your partner's living situation",
-      "regex": "Living situation details must be less than 15,000 characters",
-      "notUrl": "Please do not enter a link/url into your answers"
+      "maxlength": "Living situation details must be less than 15,000 characters",
+      "notUrl": "Please do not enter a link/url into your answers",
+      "regex": "Details must not include these characters: [ ] < > / |"
     },
     "partner-why-without-partner": {
       "required": "Explain why you were evacuated without your partner",
-      "regex": "Details about why you were evacuated without your partner must be less than 15,000 characters",
-      "notUrl": "Please do not enter a link/url into your answers"
+      "maxlength": "Details about why you were evacuated without your partner must be less than 15,000 characters",
+      "notUrl": "Please do not enter a link/url into your answers",
+      "regex": "Details must not include these characters: [ ] < > / |"
     },
     "children": {
       "required": "You must select an option"
@@ -165,13 +168,15 @@
     },
     "child-living-situation": {
       "required": "Explain your child's living situation",
-      "regex": "Living situation details must be less than 15,000 characters",
-      "notUrl": "Please do not enter a link/url into your answers"
+      "maxlength": "Living situation details must be less than 15,000 characters",
+      "notUrl": "Please do not enter a link/url into your answers",
+      "regex": "Details must not include these characters: [ ] < > / |"
     },
     "child-why-without-child": {
       "required": "Explain why you were evacuated without your child",
-      "regex": "Details about why you were evacuated without your child must be less than 15,000 characters",
-      "notUrl": "Please do not enter a link/url into your answers"
+      "maxlength": "Details about why you were evacuated without your child must be less than 15,000 characters",
+      "notUrl": "Please do not enter a link/url into your answers",
+      "regex": "Details must not include these characters: [ ] < > / |"
     },
     "additional-family": {
       "required": "You must select an option"
