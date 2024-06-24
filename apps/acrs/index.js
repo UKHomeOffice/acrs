@@ -630,7 +630,8 @@ module.exports = {
           }
         }
       ],
-      next: ''
+      next: '',
+      locals: { showSaveAndExit: true }
     },
     '/email-decision': {
       behaviours: [SaveFormSession],
