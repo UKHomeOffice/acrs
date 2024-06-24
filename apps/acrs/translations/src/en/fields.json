@@ -408,7 +408,7 @@
     "label": "Address line 1"
   },
   "is-decision-post-address-2": {
-    "label": "Address line 2(optional)"
+    "label": "Address line 2 (optional)"
   },
   "is-decision-post-town-or-city": {
     "label": "Town or city"
