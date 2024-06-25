@@ -57,15 +57,31 @@ module.exports = {
       },
       {
         steps: '/confirm-your-email',
+        // The sessionModel field for the email address associated with /confirm-your-email is 'user-email'
         field: 'confirm-your-email',
         parse: (list, req) => {
-          if (!req.sessionModel.get('steps').includes('/confirm-your-email')) {
+          if ( !req.sessionModel.get('steps').includes('/confirm-your-email')) {
             return null;
           }
-          return req.sessionModel.get('confirm-your-email') === 'yes' ?
-            `${req.sessionModel.get('user-email')}` :
-            `${req.sessionModel.get('your-email-address')}`;
+          return req.sessionModel.get('confirm-your-email') === 'yes' ? 'Yes' : 'No';
         }
+      },
+      {
+        steps: '/your-email',
+        field: 'your-email-options',
+        parse: (list, req) => {
+          if ( !req.sessionModel.get('steps').includes('/your-email')) {
+            return null;
+          }
+          return req.sessionModel.get('your-email-options') === 'yes' ? 'Yes' : 'No';
+        }
+      },
+      {
+        steps: '/your-email',
+        field: 'your-email-address',
+        parse: (list, req) => req.sessionModel.get('steps').includes('/your-email') ?
+          req.sessionModel.get('your-email-address') :
+          null
       },
       {
         step: '/provide-telephone-number',
