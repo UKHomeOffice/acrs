@@ -197,6 +197,12 @@
       "confirm-your-email": {
         "label": "Is this your email address?"
       },
+      "your-email-options": {
+        "label": "Do you have an email address?"
+      },
+      "your-email-address": {
+        "label": "Your email address"
+      },
       "provide-telephone-number": {
         "label": "Can you provide a telephone number?"
       },
