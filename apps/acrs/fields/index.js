@@ -538,7 +538,6 @@ module.exports = {
     }
   },
   'is-legal-representative-email': {
-    isPageHeading: true,
     mixin: 'radio-group',
     validate: ['required'],
     legend: {
