@@ -6,7 +6,7 @@ module.exports = superclass => class extends superclass {
   successHandler(req, res, next) {
     const uploadPdfShared = new CreateAndSendPDF({
       sendReceipt: true,
-      sortSections: true
+      sortSections: false
     });
     // don't await async process, allow user to move on
     uploadPdfShared.send(req, res, super.locals(req, res));
