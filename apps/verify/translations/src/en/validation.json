@@ -21,6 +21,7 @@
   "user-email": {
     "required": "Enter your email address",
     "noRecordMatch": "Your email does not match the other details given. Please enter the correct email",
-    "email": "Enter a valid email address"
+    "email": "Enter a valid email address",
+    "errorMessage": "There is a problem with this service. Try again later"
   }
 }
