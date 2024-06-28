@@ -4,8 +4,8 @@ const axios = require('axios');
 const config = require('../../../config');
 const _ = require('lodash');
 
-
 const applicationsUrl = `${config.saveService.host}:${config.saveService.port}/saved_applications`;
+
 
 module.exports = superclass => class extends superclass {
   saveValues(req, res, next) {
@@ -63,9 +63,14 @@ module.exports = superclass => class extends superclass {
           return res.redirect('/sign-in');
         }
 
-        const isContinueOnEdit = req.form.options.continueOnEdit &&
-          _.get(req.form.options.forks, '[0].continueOnEdit');
+        // continueOnEdit can be set on the form or on individual forks
+        const isContinueOnEdit = this.isChoiceContinueOnEdit(req.form.options, req.form.values);
 
+        // const isContinueOnEdit = req.form.options.continueOnEdit &&
+        // _.get(req.form.options.forks, '[0].continueOnEdit');
+
+        // The assumption here is when there is a fork in the form
+        // then its first entry is the only route into a looped section
         const loopedForkCondition = _.get(req.form.options.forks, '[0].condition.value');
         const loopedForkField = _.get(req.form.options.forks, '[0].condition.field');
         const loopedFieldMatchesForkCondition = loopedForkField &&
@@ -81,5 +86,23 @@ module.exports = superclass => class extends superclass {
         return next(e);
       }
     });
+  }
+
+  /**
+   * Checks if continueOnEdit is set on the form or on the selected fork
+   *
+   * @param {Object} formOptions - The form configuration (options), typically matching index.js/steps
+   * @param {Object} formValues - The form input values, typically from the request as { field: 'value', ... }
+   * @return {boolean} true if the form should continue on edit
+   */
+  isChoiceContinueOnEdit(formOptions, formValues) {
+    if (formOptions.continueOnEdit) {
+      return true;
+    }
+
+    const chosenOption = formOptions.forks?.find(fork => {
+      return formValues[fork.condition.field] === fork.condition.value;
+    });
+    return Boolean(chosenOption && chosenOption.continueOnEdit);
   }
 };

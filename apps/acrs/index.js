@@ -66,6 +66,7 @@ module.exports = {
       forks: [
         {
           target: '/full-name',
+          continueOnEdit: false,
           condition: {
             field: 'who-completing-form',
             value: 'the-referrer'
@@ -74,6 +75,7 @@ module.exports = {
         },
         {
           target: '/helper-details',
+          continueOnEdit: true,
           condition: {
             field: 'who-completing-form',
             value: 'someone-helping'
@@ -81,6 +83,7 @@ module.exports = {
         },
         {
           target: '/immigration-adviser-details',
+          continueOnEdit: true,
           condition: {
             field: 'who-completing-form',
             value: 'immigration-advisor'
@@ -88,9 +91,7 @@ module.exports = {
         }
       ],
       fields: ['who-completing-form'],
-      locals: { showSaveAndExit: true },
-      continueOnEdit: true,
-      next: '/helper-details'
+      locals: { showSaveAndExit: true }
     },
     '/helper-details': {
       behaviours: SaveFormSession,
@@ -112,7 +113,6 @@ module.exports = {
         'is-legal-representative-email',
         'legal-representative-email'
       ],
-      continueOnEdit: true,
       locals: { showSaveAndExit: true },
       next: '/complete-as-referrer'
     },
