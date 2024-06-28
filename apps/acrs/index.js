@@ -69,7 +69,8 @@ module.exports = {
           condition: {
             field: 'who-completing-form',
             value: 'the-referrer'
-          }
+          },
+          continueOnEdit: true
         },
         {
           target: '/helper-details',
@@ -88,6 +89,7 @@ module.exports = {
       ],
       fields: ['who-completing-form'],
       locals: { showSaveAndExit: true },
+      continueOnEdit: true,
       next: '/helper-details'
     },
     '/helper-details': {
