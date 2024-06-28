@@ -20,6 +20,7 @@ module.exports = {
     labelClassName: 'bold'
   },
   'date-of-birth': dateComponent('date-of-birth', {
+    mixin: 'input-date',
     legend: {
       className: 'bold'
     },
