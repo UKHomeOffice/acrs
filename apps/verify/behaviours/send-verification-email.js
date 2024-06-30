@@ -73,13 +73,15 @@ module.exports = superclass => class extends superclass {
     const unSubmittedCase = _.filter(response.data, record => !record.submitted_at);
     const unSubmittedCaseEmail = unSubmittedCase.map(record => { return record.email; });
 
+
     // if form has not been submitted, throws an error if a second form is opened with same UAN but different email
+
     if (recordEmail.length && req.form.values['user-email'] !== unSubmittedCaseEmail.toString() && unSubmittedCase.length > 0) {
       return next({
         'user-email': new this.ValidationError(
           'user-email',
           {
-            type: 'noRecordMatch'
+            type: 'emailNotExist'
           }
         )
       });
@@ -91,8 +93,15 @@ module.exports = superclass => class extends superclass {
       await notifyClient.sendEmail(templateId, email, {
         personalisation: getPersonalisation(host, token, idType)
       });
-    } catch (e) {
-      return next(e);
+    } catch {
+      return next({
+        'user-email': new this.ValidationError(
+          'user-email',
+          {
+            type: 'emailNotExist'
+          }
+        )
+      });
     }
 
     return super.saveValues(req, res, next);
