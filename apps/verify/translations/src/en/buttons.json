@@ -5,5 +5,6 @@
   "generate": "Generate",
   "resend-email": "Resend email",
   "delete": "Delete",
-  "start-home": "Start now"
+  "start-home": "Start now",
+  "start-again": "Sign in again"
 }

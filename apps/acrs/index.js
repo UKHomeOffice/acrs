@@ -669,10 +669,6 @@ module.exports = {
       clearSession: true,
       backLink: false
     },
-    '/session-expired': {
-      fields: [],
-      next: '/confirm'
-    },
     '/link-expired': {
       fields: [],
       next: '/confirm'
