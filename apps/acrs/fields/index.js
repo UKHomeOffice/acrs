@@ -127,6 +127,7 @@ module.exports = {
     validate: ['email']
   },
   'partner-date-of-birth': dateComponent('partner-date-of-birth', {
+    mixin: 'input-date',
     legend: { className: 'bold' },
     validate: ['required', 'before', after1900Validator, 'over18']
   }),
@@ -175,6 +176,7 @@ module.exports = {
     labelClassName: 'bold'
   },
   'child-date-of-birth': dateComponent('child-date-of-birth', {
+    mixin: 'input-date',
     legend: { className: 'bold' },
     validate: [
       'required',
@@ -236,6 +238,7 @@ module.exports = {
     validate: ['email']
   },
   'parent-date-of-birth': dateComponent('parent-date-of-birth', {
+    mixin: 'input-date',
     legend: { className: 'bold' },
     validate: ['required', 'before', after1900Validator, 'over18']
   }),
@@ -273,6 +276,7 @@ module.exports = {
     labelClassName: 'bold'
   },
   'brother-or-sister-date-of-birth': dateComponent('brother-or-sister-date-of-birth', {
+    mixin: 'input-date',
     legend: { className: 'bold' },
     validate: [
       'required',
@@ -313,6 +317,7 @@ module.exports = {
     labelClassName: 'bold'
   },
   'additional-family-date-of-birth': dateComponent('additional-family-date-of-birth', {
+    mixin: 'input-date',
     legend: { className: 'bold' },
     validate: ['required', 'before', after1900Validator]
   }),
@@ -385,6 +390,7 @@ module.exports = {
     className: ['govuk-input', 'govuk-!-width-two-thirds']
   },
   'family-member-date-of-birth': dateComponent('family-member-date-of-birth', {
+    mixin: 'input-date',
     legend: {
       className: 'bold'
     },
