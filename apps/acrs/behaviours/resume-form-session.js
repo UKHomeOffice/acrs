@@ -128,8 +128,11 @@ module.exports = superclass => class extends superclass {
   // POST lifecycle
   saveValues(req, res, next) {
     const cases = req.sessionModel.get('user-cases') || [];
-    const idType = req.sessionModel.get('id-type');
-    const caseObj = cases.find(obj => obj.session[idType] === req.form.values.referral);
+    const selectedReferral = req.form.values.referral;
+    // Check the selected referral's value against the cases for this user
+    const caseObj = cases.find(obj => {
+      return obj.session.brp === selectedReferral || obj.session.uan === selectedReferral;
+    });
 
     if (caseObj) {
       req.sessionModel.set('id', caseObj.id);
@@ -178,7 +181,14 @@ module.exports = superclass => class extends superclass {
 
   setupSession(req, caseObj) {
     const session = caseObj;
-    const cases = req.sessionModel.get('user-cases');
+
+    const signInMethod = req.sessionModel.get('sign-in-method');
+
+    // Don't persist BRP/UAN used to verify if it was not the one originally used for the selected referral
+    if (session['id-type'] && session['id-type'] !== signInMethod) {
+      delete session[signInMethod];
+      req.sessionModel.unset(signInMethod);
+    }
     // ensure no /edit steps are add to the steps property when session resumed
     session.steps = session.steps.filter(step => !step.match(/\/change|edit$/));
 
@@ -186,6 +196,5 @@ module.exports = superclass => class extends superclass {
     delete session.errors;
 
     req.sessionModel.set(session);
-    req.sessionModel.set('user-cases', cases);
   }
 };
