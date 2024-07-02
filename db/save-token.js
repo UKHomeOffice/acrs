@@ -17,6 +17,7 @@ module.exports = {
     redis.expire(`${token}:email`, tokenExpiry);
     redis.expire(`${token}:brp`, tokenExpiry);
     redis.expire(`${token}:uan`, tokenExpiry);
+    redis.expire(`${token}:sign-in-method`, tokenExpiry);
     redis.expire(`${token}:date-of-birth`, tokenExpiry);
 
     return token;
