@@ -37,10 +37,8 @@ module.exports = superclass => class extends superclass {
 
     return axios.get(baseUrl + encodeEmail(email))
       .then(response => {
-        const sessionCases = req.sessionModel.get('user-cases') || [];
-        const unsubmittedCases = _.filter(response.data, record => !record.submitted_at );
-        const parsedBody = this.parseCasesSessions(unsubmittedCases);
-        const cases = _.unionBy(parsedBody, sessionCases, 'id');
+        const unsubmittedCases = _.filter(response.data, record => !record.submitted_at);
+        const cases = this.parseCasesSessions(unsubmittedCases);
         const uan = req.sessionModel.get('uan');
         const brp = req.sessionModel.get('brp');
         let isSameCase = '';
@@ -58,9 +56,9 @@ module.exports = superclass => class extends superclass {
         const singleCase = cases.length < 2;
 
         const noCaseOrSameCase = !cases[0] || isSameCase;
-        const multipleCasesInSession = _.get(req.sessionModel.get('user-cases'), 'length') > 1;
+        const multipleCases = cases.length > 1;
 
-        if (singleCase && noCaseOrSameCase && !multipleCasesInSession) {
+        if (singleCase && noCaseOrSameCase && !multipleCases) {
           if (cases[0]) {
             this.setupSession(req, cases[0].session);
           }
@@ -129,7 +127,7 @@ module.exports = superclass => class extends superclass {
   saveValues(req, res, next) {
     const cases = req.sessionModel.get('user-cases') || [];
     const selectedReferral = req.form.values.referral;
-    // Check the selected referral's value against the cases for this user
+    // Find the selected referral data from those stored against this user's email
     const caseObj = cases.find(obj => {
       return obj.session.brp === selectedReferral || obj.session.uan === selectedReferral;
     });
@@ -182,13 +180,13 @@ module.exports = superclass => class extends superclass {
   setupSession(req, caseObj) {
     const session = caseObj;
 
-    const signInMethod = req.sessionModel.get('sign-in-method');
+    // Ensure session login values are those relevant to the selected referral
+    req.sessionModel.set('brp', session.brp);
+    req.sessionModel.set('uan', session.uan);
+    req.sessionModel.set('id-type', session['id-type']);
+    req.sessionModel.set('sign-in-method', session['sign-in-method']);
+    req.sessionModel.set('date-of-birth', session['date-of-birth']);
 
-    // Don't persist BRP/UAN used to verify if it was not the one originally used for the selected referral
-    if (session['id-type'] && session['id-type'] !== signInMethod) {
-      delete session[signInMethod];
-      req.sessionModel.unset(signInMethod);
-    }
     // ensure no /edit steps are add to the steps property when session resumed
     session.steps = session.steps.filter(step => !step.match(/\/change|edit$/));
 
