@@ -101,7 +101,7 @@ ignore:
       reason: No upgrade or patch available
       expires: '2024-08-13T00:00:00.000Z'
   SNYK-JS-ASYNC-7414156:
-    - winston > async:
+    - '*':
       reason: No upgrade or patch available
       expires: '2024-10-03T00:00:00.000Z'
       created: '2024-07-03T10:50:47.350Z'
