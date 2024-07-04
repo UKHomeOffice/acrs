@@ -9,6 +9,7 @@ output/
 anchore-reports
 .nyc_output
 .vscode
+*.code-workspace
 dump.rdb
 yarn-error.log
 apps/**/translations/**/*
