@@ -37,8 +37,11 @@ module.exports = superclass => class extends superclass {
 
     return axios.get(baseUrl + encodeEmail(email))
       .then(response => {
-        const unsubmittedCases = _.filter(response.data, record => !record.submitted_at);
-        const cases = this.parseCasesSessions(unsubmittedCases);
+        const sessionCases = req.sessionModel.get('user-cases') || [];
+        const unsubmittedCases = _.filter(response.data, record => !record.submitted_at );
+        const parsedBody = this.parseCasesSessions(unsubmittedCases);
+        const cases = _.unionBy(parsedBody, sessionCases, 'id');
+
         const uan = req.sessionModel.get('uan');
         const brp = req.sessionModel.get('brp');
         let isSameCase = '';
