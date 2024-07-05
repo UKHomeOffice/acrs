@@ -63,6 +63,14 @@ module.exports = superclass => class extends superclass {
           return res.redirect('/sign-in');
         }
 
+        // Manage routing for aggregate: Additional family
+        if (req.form.options.route === '/additional-family' && req.form.values['additional-family'] === 'yes') {
+          const referredAddFamily = req.sessionModel.get('referred-additional-family');
+          if (referredAddFamily && referredAddFamily.aggregatedValues.length) {
+            return res.redirect('/acrs/additional-family-summary');
+          }
+        }
+
         const isContinueOnEdit = req.form.options.continueOnEdit &&
           _.get(req.form.options.forks, '[0].continueOnEdit');
 
