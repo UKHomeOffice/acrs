@@ -41,6 +41,7 @@ module.exports = superclass => class extends superclass {
         const unsubmittedCases = _.filter(response.data, record => !record.submitted_at );
         const parsedBody = this.parseCasesSessions(unsubmittedCases);
         const cases = _.unionBy(parsedBody, sessionCases, 'id');
+
         const uan = req.sessionModel.get('uan');
         const brp = req.sessionModel.get('brp');
         let isSameCase = '';
@@ -58,9 +59,9 @@ module.exports = superclass => class extends superclass {
         const singleCase = cases.length < 2;
 
         const noCaseOrSameCase = !cases[0] || isSameCase;
-        const multipleCasesInSession = _.get(req.sessionModel.get('user-cases'), 'length') > 1;
+        const multipleCases = cases.length > 1;
 
-        if (singleCase && noCaseOrSameCase && !multipleCasesInSession) {
+        if (singleCase && noCaseOrSameCase && !multipleCases) {
           if (cases[0]) {
             this.setupSession(req, cases[0].session);
           }
@@ -128,8 +129,11 @@ module.exports = superclass => class extends superclass {
   // POST lifecycle
   saveValues(req, res, next) {
     const cases = req.sessionModel.get('user-cases') || [];
-    const idType = req.sessionModel.get('id-type');
-    const caseObj = cases.find(obj => obj.session[idType] === req.form.values.referral);
+    const selectedReferral = req.form.values.referral;
+    // Find the selected referral data from those stored against this user's email
+    const caseObj = cases.find(obj => {
+      return obj.session.brp === selectedReferral || obj.session.uan === selectedReferral;
+    });
 
     if (caseObj) {
       req.sessionModel.set('id', caseObj.id);
@@ -178,7 +182,14 @@ module.exports = superclass => class extends superclass {
 
   setupSession(req, caseObj) {
     const session = caseObj;
-    const cases = req.sessionModel.get('user-cases');
+
+    // Ensure session login values are those relevant to the selected referral
+    req.sessionModel.set('brp', session.brp);
+    req.sessionModel.set('uan', session.uan);
+    req.sessionModel.set('id-type', session['id-type']);
+    req.sessionModel.set('sign-in-method', session['sign-in-method']);
+    req.sessionModel.set('date-of-birth', session['date-of-birth']);
+
     // ensure no /edit steps are add to the steps property when session resumed
     session.steps = session.steps.filter(step => !step.match(/\/change|edit$/));
 
@@ -186,6 +197,5 @@ module.exports = superclass => class extends superclass {
     delete session.errors;
 
     req.sessionModel.set(session);
-    req.sessionModel.set('user-cases', cases);
   }
 };
