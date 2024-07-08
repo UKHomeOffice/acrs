@@ -73,7 +73,9 @@ module.exports = superclass => class extends superclass {
     const unSubmittedCase = _.filter(response.data, record => !record.submitted_at);
     const unSubmittedCaseEmail = unSubmittedCase.map(record => { return record.email; });
 
+
     // if form has not been submitted, throws an error if a second form is opened with same UAN but different email
+
     if (recordEmail.length && req.form.values['user-email'] !== unSubmittedCaseEmail.toString() && unSubmittedCase.length > 0) {
       return next({
         'user-email': new this.ValidationError(
@@ -88,11 +90,30 @@ module.exports = superclass => class extends superclass {
     const token = tokenGenerator.save(req, email);
 
     try {
-      await notifyClient.sendEmail(templateId, email, {
+      const govNotifyResponse = await notifyClient.sendEmail(templateId, email, {
         personalisation: getPersonalisation(host, token, idType)
       });
-    } catch (e) {
-      return next(e);
+
+
+      if (govNotifyResponse.status !== 201 || govNotifyResponse.status !== 200) {
+        return next({
+          'user-email': new this.ValidationError(
+            'user-email',
+            {
+              type: 'errorMessage'
+            }
+          )
+        });
+      }
+    } catch{
+      return next({
+        'user-email': new this.ValidationError(
+          'user-email',
+          {
+            type: 'errorMessage'
+          }
+        )
+      });
     }
 
     return super.saveValues(req, res, next);
