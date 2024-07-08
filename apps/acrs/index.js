@@ -189,8 +189,8 @@ module.exports = {
 
     '/parent': {
       behaviours: [
-        ResetSummary('referred-parents', 'parent'), 
-        SaveFormSession, 
+        ResetSummary('referred-parents', 'parent'),
+        SaveFormSession,
         EditRouteReturn
       ],
       fields: ['parent'],
@@ -221,11 +221,11 @@ module.exports = {
               return true;
             }
             return false;
-          }
+          },
+          continueOnEdit: true
         }
       ],
-      locals: { showSaveAndExit: true },
-      continueOnEdit: true
+      locals: { showSaveAndExit: true }
     },
     '/parent-details': {
       behaviours: [LimitParents, SaveFormSession],
@@ -238,11 +238,16 @@ module.exports = {
         'parent-evacuated-without-reason'
       ],
       next: '/parent-summary',
-      locals: { showSaveAndExit: true },
-      continueOnEdit: true
+      locals: { showSaveAndExit: true }
     },
     '/parent-summary': {
-      behaviours: [AggregateSaveUpdate, ParentSummary, LimitParents, SaveFormSession],
+      behaviours: [
+        AggregateSaveUpdate,
+        ParentSummary,
+        LimitParents,
+        SaveFormSession,
+        EditRouteReturn
+      ],
       aggregateTo: 'referred-parents',
       aggregateFrom: [
         'parent-full-name',
@@ -264,7 +269,11 @@ module.exports = {
     },
 
     '/brother-or-sister': {
-      behaviours: [ResetSummary('referred-siblings', 'brother-or-sister'), SaveFormSession],
+      behaviours: [
+        ResetSummary('referred-siblings', 'brother-or-sister'),
+        SaveFormSession,
+        EditRouteReturn
+      ],
       fields: ['brother-or-sister'],
       forks: [
         {
@@ -272,7 +281,8 @@ module.exports = {
           condition: {
             field: 'brother-or-sister',
             value: 'yes'
-          }
+          },
+          continueOnEdit: true
         },
         {
           target: '/additional-family',
@@ -292,11 +302,11 @@ module.exports = {
               return true;
             }
             return false;
-          }
+          },
+          continueOnEdit: true
         }
       ],
-      locals: { showSaveAndExit: true },
-      continueOnEdit: true
+      locals: { showSaveAndExit: true }
     },
 
     '/brother-or-sister-details': {
@@ -308,11 +318,16 @@ module.exports = {
         'brother-or-sister-evacuated-without-reason'
       ],
       next: '/brother-or-sister-summary',
-      locals: { showSaveAndExit: true },
-      continueOnEdit: true
+      locals: { showSaveAndExit: true }
     },
     '/brother-or-sister-summary': {
-      behaviours: [AggregateSaveUpdate, BrotherSisterSummary, LimitBrothersOrSisters, SaveFormSession],
+      behaviours: [
+        AggregateSaveUpdate,
+        BrotherSisterSummary,
+        LimitBrothersOrSisters,
+        SaveFormSession,
+        EditRouteReturn
+      ],
       aggregateTo: 'referred-siblings',
       aggregateFrom: [
         'brother-or-sister-full-name',
