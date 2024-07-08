@@ -28,6 +28,7 @@ const DeclarationBehaviour = require('./behaviours/declaration');
 const PartnerSummary = require('./behaviours/partner-summary');
 const LimitPartners = require('./behaviours/limit-partners');
 const ExitToSignIn = require('./behaviours/exit-to-sign-in');
+const EditRouteStart = require('./behaviours/edit-route-start');
 
 // Aggregator section limits
 const PARENT_LIMIT = 2;
@@ -56,7 +57,13 @@ module.exports = {
       backLink: false
     },
     '/information-you-have-given-us': {
-      behaviours: [ExitToSignIn, SummaryPageBehaviour, CheckInformationGivenBehaviour, ModifySummaryChangeLinks],
+      behaviours: [
+        ExitToSignIn,
+        SummaryPageBehaviour,
+        CheckInformationGivenBehaviour,
+        ModifySummaryChangeLinks,
+        EditRouteStart
+      ],
       sections: require('./sections/summary-data-sections'),
       backLink: false,
       journeyStart: '/who-completing-form'
@@ -66,7 +73,6 @@ module.exports = {
       forks: [
         {
           target: '/full-name',
-          continueOnEdit: false,
           condition: {
             field: 'who-completing-form',
             value: 'the-referrer'
@@ -653,7 +659,12 @@ module.exports = {
       next: '/confirm'
     },
     '/confirm': {
-      behaviours: [SummaryPageBehaviour, SaveFormSession, ModifySummaryChangeLinks],
+      behaviours: [
+        SummaryPageBehaviour,
+        SaveFormSession,
+        ModifySummaryChangeLinks,
+        EditRouteStart
+      ],
       sections: require('./sections/summary-data-sections'),
       locals: { showSaveAndExit: true },
       next: '/declaration'
