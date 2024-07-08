@@ -29,6 +29,7 @@ const PartnerSummary = require('./behaviours/partner-summary');
 const LimitPartners = require('./behaviours/limit-partners');
 const ExitToSignIn = require('./behaviours/exit-to-sign-in');
 const EditRouteStart = require('./behaviours/edit-route-start');
+const EditRouteReturn = require('./behaviours/edit-route-return');
 
 // Aggregator section limits
 const PARENT_LIMIT = 2;
@@ -69,7 +70,7 @@ module.exports = {
       journeyStart: '/who-completing-form'
     },
     '/who-completing-form': {
-      behaviours: SaveFormSession,
+      behaviours: [SaveFormSession, EditRouteReturn],
       forks: [
         {
           target: '/full-name',
@@ -77,7 +78,7 @@ module.exports = {
             field: 'who-completing-form',
             value: 'the-referrer'
           },
-          continueOnEdit: true
+          continueOnEdit: false
         },
         {
           target: '/helper-details',
@@ -100,13 +101,13 @@ module.exports = {
       locals: { showSaveAndExit: true }
     },
     '/helper-details': {
-      behaviours: SaveFormSession,
+      behaviours: [SaveFormSession, EditRouteReturn],
       fields: ['helper-full-name', 'helper-relationship', 'helper-organisation'],
       locals: { showSaveAndExit: true },
       next: '/complete-as-referrer'
     },
     '/immigration-adviser-details': {
-      behaviours: SaveFormSession,
+      behaviours: [SaveFormSession, EditRouteReturn],
       fields: [
         'legal-representative-fullname',
         'legal-representative-organisation',
@@ -123,7 +124,7 @@ module.exports = {
       next: '/complete-as-referrer'
     },
     '/complete-as-referrer': {
-      behaviours: SaveFormSession,
+      behaviours: [SaveFormSession, EditRouteReturn],
       next: '/full-name',
       locals: { showSaveAndExit: true }
     },
@@ -146,10 +147,11 @@ module.exports = {
         condition: {
           field: 'confirm-your-email',
           value: 'no'
-        }
+        },
+        continueOnEdit: true
       }],
       next: '/provide-telephone-number',
-      behaviours: SaveFormSession,
+      behaviours: [SaveFormSession, EditRouteReturn],
       locals: { showSaveAndExit: true }
     },
 
@@ -158,7 +160,7 @@ module.exports = {
         'your-email-options',
         'your-email-address'
       ],
-      behaviours: SaveFormSession,
+      behaviours: [SaveFormSession, EditRouteReturn],
       locals: { showSaveAndExit: true },
       next: '/provide-telephone-number'
     },
@@ -167,12 +169,12 @@ module.exports = {
         'provide-telephone-number-options',
         'provide-telephone-number-number'
       ],
-      behaviours: SaveFormSession,
+      behaviours: [SaveFormSession, EditRouteReturn],
       locals: { showSaveAndExit: true },
       next: '/your-address'
     },
     '/your-address': {
-      behaviours: SaveFormSession,
+      behaviours: [SaveFormSession, EditRouteReturn],
       fields: [
         'your-address-line-1',
         'your-address-line-2',
@@ -186,7 +188,11 @@ module.exports = {
     // Figma Section: "Who are you applying to bring to the UK? Sponsor under 18" (who-bringing-parent)
 
     '/parent': {
-      behaviours: [ResetSummary('referred-parents', 'parent'), SaveFormSession],
+      behaviours: [
+        ResetSummary('referred-parents', 'parent'), 
+        SaveFormSession, 
+        EditRouteReturn
+      ],
       fields: ['parent'],
       forks: [
         {
@@ -194,7 +200,8 @@ module.exports = {
           condition: {
             field: 'parent',
             value: 'yes'
-          }
+          },
+          continueOnEdit: true
         },
         {
           target: '/brother-or-sister',

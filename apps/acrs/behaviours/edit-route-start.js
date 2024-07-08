@@ -4,7 +4,7 @@
 // the summary page.
 module.exports = superclass => class extends superclass {
   getValues(req, res, next) {
-    req.sessionModel.set('edit-return-path', req.path);
+    req.sessionModel.set('edit-return-path', req.originalUrl);
     return super.getValues(req, res, next);
   }
 

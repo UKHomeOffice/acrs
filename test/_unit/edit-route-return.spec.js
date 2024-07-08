@@ -1,18 +1,18 @@
-const SaveFormSession = require('../../apps/acrs/behaviours/save-form-session');
+const EditRouteReturn = require('../../apps/acrs/behaviours/edit-route-return');
 
 class SuperClass {}
-const isChoiceContinueOnEdit = (new (SaveFormSession(SuperClass))).isChoiceContinueOnEdit;
+const isContinueOnEdit = (new (EditRouteReturn(SuperClass))).isContinueOnEdit;
 
-describe('isChoiceContinueOnEdit', () => {
+describe('isContinueOnEdit', () => {
   it('should return false if options.continueOnEdit is falsy', () => {
     const values = { 'hof-field-A': 'some-input' };
 
     let options = {};
-    let result = isChoiceContinueOnEdit(options, values);
+    let result = isContinueOnEdit(options, values);
     expect(result).to.be.false;
 
     options = { continueOnEdit: false };
-    result = isChoiceContinueOnEdit(options, values);
+    result = isContinueOnEdit(options, values);
     expect(result).to.be.false;
   });
 
@@ -20,7 +20,7 @@ describe('isChoiceContinueOnEdit', () => {
     const values = { 'hof-field-A': 'some-input' };
 
     options = { continueOnEdit: true };
-    result = isChoiceContinueOnEdit(options, values);
+    result = isContinueOnEdit(options, values);
     expect(result).to.be.true;
   });
 
@@ -37,7 +37,7 @@ describe('isChoiceContinueOnEdit', () => {
       ]
     };
     const values = { 'hof-field-B': 'other-stuff', 'hof-field-A': 'some-input'};
-    const result = isChoiceContinueOnEdit(options, values);
+    const result = isContinueOnEdit(options, values);
 
     expect(result).to.be.true;
   });
@@ -55,7 +55,7 @@ describe('isChoiceContinueOnEdit', () => {
       ]
     };
     const values = { 'hof-field-A': 'different-input' };
-    const result = isChoiceContinueOnEdit(options, values);
+    const result = isContinueOnEdit(options, values);
 
     expect(result).to.be.false;
   });
@@ -72,7 +72,7 @@ describe('isChoiceContinueOnEdit', () => {
       ]
     };
     const values = { 'hof-field-A': 'some-input'};
-    const result = isChoiceContinueOnEdit(options, values);
+    const result = isContinueOnEdit(options, values);
 
     expect(result).to.be.false;
   });
