@@ -4,7 +4,7 @@ module.exports = superclass => class extends superclass {
       throw new Error('options.aggregateTo is required for loops');
     }
     if (!options.aggregateFrom) {
-      throw new Error('options.aggregateField is required for loops');
+      throw new Error('options.aggregateFrom is required for loops');
     }
     super(options);
   }
