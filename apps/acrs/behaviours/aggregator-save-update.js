@@ -27,6 +27,9 @@ module.exports = superclass => class extends superclass {
 
     if (items[id]) {
       req.sessionModel.set('aggregator-edit-id', id);
+      req.sessionModel.set('isUpdate', true);
+      req.sessionModel.set('updatingIndex', id);
+
       items[id].fields.forEach(obj => {
         req.sessionModel.set(obj.field, obj.value);
       });
@@ -76,15 +79,23 @@ module.exports = superclass => class extends superclass {
 
 
     const newItem = { itemTitle, fields };
+    const isUpdate = req.sessionModel.get('isUpdate');
+    const updatingIndex = req.sessionModel.get('updatingIndex');
 
-    if (aggregateLimit) {
-      if (items.length < aggregateLimit) {
+    if(isUpdate) {
+      items.splice(updatingIndex, 0, newItem);
+    }else{
+      if (aggregateLimit) {
+        if (items.length < aggregateLimit) {
+          items.push(newItem);
+        }
+      } else {
         items.push(newItem);
       }
-    } else {
-      items.push(newItem);
     }
 
+    req.sessionModel.unset('isUpdate');
+    req.sessionModel.unset('updatingIndex');
     this.setAggregateArray(req, items);
     res.redirect(`${req.baseUrl}${req.form.options.route}`);
   }

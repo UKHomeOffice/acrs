@@ -95,7 +95,7 @@ module.exports = superclass => class extends superclass {
       });
 
 
-      if (govNotifyResponse.status !== 201 || govNotifyResponse.status !== 200) {
+      if (govNotifyResponse.status !== 201 && govNotifyResponse.status !== 200) {
         return next({
           'user-email': new this.ValidationError(
             'user-email',
@@ -105,7 +105,8 @@ module.exports = superclass => class extends superclass {
           )
         });
       }
-    } catch{
+    } catch(e) {
+      console.log('Gov notify error : ', e );
       return next({
         'user-email': new this.ValidationError(
           'user-email',
