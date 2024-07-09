@@ -4,8 +4,57 @@ const axios = require('axios');
 const config = require('../../../config');
 const _ = require('lodash');
 
-
 const applicationsUrl = `${config.saveService.host}:${config.saveService.port}/saved_applications`;
+const { isOver18 } = require('../../../lib/utilities');
+
+/**
+* Checks session for a situation where all referrals have been removed
+* User must refer at least one person from their age group's aggregator sections
+*
+* @param {Object} req - The request object
+* @return {bool} Is there a state where no people are being referred?
+*/
+const noReferral = req => {
+  if (isOver18(req.sessionModel.get('date-of-birth'))) {
+    return req.sessionModel.get('partner') === 'no' &&
+    req.sessionModel.get('children') === 'no' &&
+    req.sessionModel.get('additional-family') === 'no';
+  }
+  return req.sessionModel.get('parent') === 'no' &&
+  req.sessionModel.get('brother-or-sister') === 'no' &&
+  req.sessionModel.get('additional-family') === 'no';
+};
+
+/**
+* Conditional route navigation for aggregator yes/no intro questions
+* Routing from these pages depends on form progress and aggregator store content
+* Navigate the user to the correct route when HOF routing is not sufficient
+*
+* @param {Object} req - The request object.
+* @param {Object} res - The response object.
+* @param {string} formFieldName - The name of the aggregator field with the yes/no question.
+* @param {string} aggregatorStoreName - The name of the session array storing this aggregator's values.
+* @param {string} summaryPath - The path name of the summary for this aggregator.
+* @return res.redirect to the correct target path.
+*/
+const navigateFromYesNoQuestion = (req, res, formFieldName, aggregatorStoreName, summaryPath) => {
+  const hasSeenFinalSummary = req.sessionModel.get('steps').includes('/email-decision') ||
+    req.sessionModel.get('steps').includes('/decision-postal-address');
+  const comesFromInitialSummary = req.sessionModel.get('redirect-to-information-you-have-given-us');
+  const formFieldValue = req.form.values[formFieldName];
+  const aggregatorStore = req.sessionModel.get(aggregatorStoreName);
+
+  // Redirect if there is no referral in session
+  if (noReferral(req)) {
+    return res.redirect('/acrs/no-family-referred');
+  } else if (formFieldValue === 'yes' && aggregatorStore?.aggregatedValues?.length) {
+    return res.redirect(summaryPath);
+  } else if (formFieldValue === 'no' && hasSeenFinalSummary && !comesFromInitialSummary) {
+    return res.redirect('/acrs/confirm');
+  }
+
+  return null;
+};
 
 module.exports = superclass => class extends superclass {
   saveValues(req, res, next) {
@@ -63,12 +112,30 @@ module.exports = superclass => class extends superclass {
           return res.redirect('/sign-in');
         }
 
+        const currentRoute = req.form.options.route;
+        // Manage routing for aggregate: Parent
+        if (currentRoute === '/parent') {
+          navigateFromYesNoQuestion(req, res, 'parent', 'referred-parents', '/acrs/parent-summary');
+        }
+        // Manage routing for aggregate: Siblings
+        if (currentRoute === '/brother-or-sister') {
+          navigateFromYesNoQuestion(req, res, 'brother-or-sister', 'referred-siblings', '/acrs/brother-or-sister-summary');
+        }
+        // Manage routing for aggregate: Partner
+        if (currentRoute === '/partner') {
+          navigateFromYesNoQuestion(req, res, 'partner', 'referred-partners', '/acrs/partner-summary');
+        }
+        // Manage routing for aggregate: Children
+        if (currentRoute === '/children') {
+          navigateFromYesNoQuestion(req, res, 'children', 'referred-children', '/acrs/children-summary');
+        }
         // Manage routing for aggregate: Additional family
-        if (req.form.options.route === '/additional-family' && req.form.values['additional-family'] === 'yes') {
-          const referredAddFamily = req.sessionModel.get('referred-additional-family');
-          if (referredAddFamily && referredAddFamily.aggregatedValues.length) {
-            return res.redirect('/acrs/additional-family-summary');
-          }
+        if (currentRoute === '/additional-family') {
+          navigateFromYesNoQuestion(req, res, 'additional-family', 'referred-additional-family', '/acrs/additional-family-summary');
+        }
+        // Manage routing for aggregate: Family in the UK
+        if (currentRoute === '/family-in-uk') {
+          navigateFromYesNoQuestion(req, res, 'has-family-in-uk', 'family-member-in-uk', '/acrs/family-in-uk-summary');
         }
 
         const isContinueOnEdit = req.form.options.continueOnEdit &&
