@@ -31,7 +31,6 @@ const noReferral = req => {
 * Navigate the user to the correct route when HOF routing is not sufficient
 *
 * @param {Object} req - The request object.
-* @param {Object} res - The response object.
 * @param {string} formFieldName - The name of the aggregator field with the yes/no question.
 * @param {string} aggregatorStoreName - The name of the session array storing this aggregator's values.
 * @param {string} summaryPath - The path name of the summary for this aggregator.
