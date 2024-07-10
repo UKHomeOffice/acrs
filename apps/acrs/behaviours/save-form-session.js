@@ -1,4 +1,4 @@
-/* eslint-disable camelcase */
+/* eslint-disable camelcase, max-len */
 
 const axios = require('axios');
 const config = require('../../../config');
@@ -35,7 +35,7 @@ const noReferral = req => {
 * @param {string} formFieldName - The name of the aggregator field with the yes/no question.
 * @param {string} aggregatorStoreName - The name of the session array storing this aggregator's values.
 * @param {string} summaryPath - The path name of the summary for this aggregator.
-* @return {string} - The path to navigate to.
+* @return {string} - The path to navigate to if conditional is satisfied, else null.
 */
 const aggIntroNavCheck = (req, formFieldName, aggregatorStoreName, summaryPath) => {
   const hasSeenFinalSummary = req.sessionModel.get('steps').includes('/email-decision') ||
@@ -49,6 +49,7 @@ const aggIntroNavCheck = (req, formFieldName, aggregatorStoreName, summaryPath) 
   } else if (formFieldValue === 'no' && hasSeenFinalSummary && !comesFromInitialSummary) {
     return '/acrs/confirm';
   }
+  return null;
 };
 
 module.exports = superclass => class extends superclass {
