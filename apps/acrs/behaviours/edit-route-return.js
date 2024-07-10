@@ -8,7 +8,7 @@ module.exports = superclass => class extends superclass {
 
       const shouldContinueOnEdit = this.isContinueOnEdit(req);
       const editReturnPath = req.sessionModel.get('edit-return-path');
-      if (!shouldContinueOnEdit && editReturnPath) {
+      if ( !shouldContinueOnEdit && editReturnPath) {
         return res.redirect(editReturnPath);
       }
       return next();
