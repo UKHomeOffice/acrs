@@ -11,6 +11,14 @@ const remapChangeLinks = (fields, mappings) => {
   });
   return fields;
 }
+const remapQuestionLinks = (fields, mappings) => {
+  _.forEach(fields, field => {
+    if (mappings.includes(field.field)) {
+      field.changeLink = field.changeLink.replace('/edit', '');
+    }
+  });
+  return fields;
+}
 
 module.exports = superclass => class extends superclass {
   locals(req, res) {
@@ -19,18 +27,24 @@ module.exports = superclass => class extends superclass {
     if (locals.route === 'information-you-have-given-us' || locals.route === 'confirm') {
       _.forEach(locals.rows, section => {
 
-        // Fixup the "Change" link urls for the aggregate Title fields 
-        // so that the link jumps to the aggregate's summary page
         if (section.section === 'Family in your referral') {
-          const mappings = [
+          // Fixup the "Change" link urls for the aggregate Title fields 
+          // so that the link jumps to the aggregate's summary page
+          const summaryMappings = [
             { 'field': 'parent-full-name', 'changeLink': '/acrs/parent-summary' },
             { 'field': 'brother-or-sister-full-name', 'changeLink': '/acrs/brother-or-sister-summary' },
             { 'field': 'child-full-name', 'changeLink': '/acrs/children-summary' },
             { 'field': 'additional-family-full-name', 'changeLink': '/acrs/additional-family-summary' },
             { 'field': 'partner-full-name', 'changeLink': '/acrs/partner-summary' },
           ];
-          section.fields = remapChangeLinks(section.fields, mappings);
+          section.fields = remapChangeLinks(section.fields, summaryMappings);
+
+          // Fixup the "Change" link urls for the aggregate Question fields 
+          // so that the link jumps to the aggregate's Question page without /edit
+          const questionMappings = ['partner', 'children', 'additional-family'];
+          section.fields = remapQuestionLinks(section.fields, questionMappings);
         }
+
         if (section.section === 'Family that live in the UK') {
           const mappings = [
             { 'field': 'family-in-uk', 'changeLink': '/acrs/family-in-uk' },
