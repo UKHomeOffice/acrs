@@ -349,18 +349,45 @@ module.exports = {
     // Figma Section: "Who are you applying to bring to the UK? Sponsor over 18" (who-bringing-partner)
 
     '/partner': {
+      behaviours: [
+        ResetSummary('referred-partners', 'partner'),
+        SaveFormSession, 
+        EditRouteReturn
+      ],
       fields: ['partner'],
-      forks: [{
-        target: '/children',
-        condition: {
-          field: 'partner',
-          value: 'no'
-        }
-      }],
-      behaviours: SaveFormSession,
+      forks: [
+        // partner -> yes -> partner summary (skipping details if already exist)        
+        {
+          target: '/partner-summary',
+          condition: req => {
+            if (
+              req.form.values['partner'] === 'yes' &&
+              req.sessionModel.get('referred-partners') &&
+              req.sessionModel.get('referred-partners').aggregatedValues.length > 0
+            ) {
+              return true;
+            }
+            return false;
+          },
+          continueOnEdit: true
+        },
+        {
+          target: '/partner-details',
+          condition: req => {
+            if (
+              req.form.values['partner'] === 'yes' &&
+              ( !req.sessionModel.get('referred-partners') ||
+                req.sessionModel.get('referred-partners').aggregatedValues.length === 0)
+            ) {
+              return true;
+            }
+            return false;
+          },
+          continueOnEdit: true
+        }, 
+      ],
       locals: { showSaveAndExit: true },
-      next: '/partner-details',
-      continueOnEdit: true
+      next: '/children',
     },
     '/partner-details': {
       fields: [
@@ -372,7 +399,8 @@ module.exports = {
         'partner-living-situation',
         'partner-why-without-partner'
       ],
-      behaviours: SaveFormSession,
+      behaviours: [SaveFormSession, EditRouteReturn],
+      continueOnEdit: true,
       locals: { showSaveAndExit: true },
       next: '/partner-summary'
     },
@@ -381,7 +409,8 @@ module.exports = {
         AggregateSaveUpdate,
         PartnerSummary,
         LimitPartners,
-        SaveFormSession
+        SaveFormSession,
+        EditRouteReturn
       ],
       aggregateTo: 'referred-partners',
       aggregateFrom: [
