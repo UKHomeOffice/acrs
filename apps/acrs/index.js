@@ -38,6 +38,44 @@ const CHILDREN_LIMIT = process.env.NODE_ENV === 'development' ? 2 : 100;
 const ADDITIONAL_FAMILY_LIMIT = process.env.NODE_ENV === 'development' ? 5 : 100;
 const PARTNER_LIMIT = 1;
 
+/**
+ * Is the form value 'yes' and aggregation populated?
+ *
+ * @param {Object} req - The request god object.
+ * @param {string} formValue - The name of the req.form.values field to check is 'yes.
+ * @param {string} sessionModel - The name of the req.sessionModel to check has a populated array
+ * @return {boolean} Returns true if the form value is 'yes' and  has aggregated values, otherwise false.
+ */
+const yesPlusAggregation = (req, formValue, sessionModel) => {
+  if (
+    req.form.values[formValue] === 'yes' &&
+    req.sessionModel.get(sessionModel) &&
+    req.sessionModel.get(sessionModel).aggregatedValues.length > 0
+  ) {
+    return true;
+  }
+  return false;  
+}
+
+/**
+ * Is the form value 'yes' and the aggregation empty?
+ *
+ * @param {Object} req - The request god object.
+ * @param {string} formValue - The name of the form value to check.
+ * @param {string} sessionModel - The name of the session model to check.
+ * @return {boolean} Returns true if the form value is 'yes' and the aggregation is empty, otherwise false.
+ */
+const yesEmptyAggregation = (req, formValue, sessionModel) => {
+  if (
+    req.form.values[formValue] === 'yes' &&
+    ( !req.sessionModel.get(sessionModel) ||
+      req.sessionModel.get(sessionModel).aggregatedValues.length === 0)
+  ) {
+    return true;
+  }
+  return false;  
+}
+
 
 module.exports = {
   name: 'acrs',
@@ -212,16 +250,7 @@ module.exports = {
         },
         {
           target: '/parent-details',
-          condition: req => {
-            if (
-              req.form.values.parent === 'yes' &&
-                req.sessionModel.get('referred-parents') &&
-                req.sessionModel.get('referred-parents').aggregatedValues.length === 0
-            ) {
-              return true;
-            }
-            return false;
-          },
+          condition: req => yesEmptyAggregation(req, 'parent', 'referred-parents'),
           continueOnEdit: true
         }
       ],
@@ -293,16 +322,7 @@ module.exports = {
         },
         {
           target: '/brother-or-sister-details',
-          condition: req => {
-            if (
-              req.form.values['brother-or-sister'] === 'yes' &&
-                req.sessionModel.get('referred-siblings') &&
-                req.sessionModel.get('referred-siblings').aggregatedValues.length === 0
-            ) {
-              return true;
-            }
-            return false;
-          },
+          condition: req => yesEmptyAggregation(req, 'brother-or-sister', 'referred-siblings'),
           continueOnEdit: true
         }
       ],
@@ -359,30 +379,12 @@ module.exports = {
         // partner -> yes -> partner summary (skipping details if already exist)        
         {
           target: '/partner-summary',
-          condition: req => {
-            if (
-              req.form.values['partner'] === 'yes' &&
-              req.sessionModel.get('referred-partners') &&
-              req.sessionModel.get('referred-partners').aggregatedValues.length > 0
-            ) {
-              return true;
-            }
-            return false;
-          },
+          condition: req => yesPlusAggregation(req, 'partner', 'referred-partners'),
           continueOnEdit: true
         },
         {
           target: '/partner-details',
-          condition: req => {
-            if (
-              req.form.values['partner'] === 'yes' &&
-              ( !req.sessionModel.get('referred-partners') ||
-                req.sessionModel.get('referred-partners').aggregatedValues.length === 0)
-            ) {
-              return true;
-            }
-            return false;
-          },
+          condition: req => yesEmptyAggregation(req, 'partner', 'referred-partners'),
           continueOnEdit: true
         }, 
       ],
@@ -446,30 +448,12 @@ module.exports = {
       forks: [
         {
           target: '/children-summary',
-          condition: req => {
-            if (
-              req.form.values.children === 'yes' &&
-              req.sessionModel.get('referred-children') &&
-              req.sessionModel.get('referred-children').aggregatedValues.length > 0
-            ) {
-              return true;
-            }
-            return false;
-          },
+          condition: req => yesPlusAggregation(req, 'children', 'referred-children'),
           continueOnEdit: true
         },
         {
           target: '/child-details',
-          condition: req => {
-            if (
-              req.form.values.children === 'yes' &&
-              ( !req.sessionModel.get('referred-children') ||
-                req.sessionModel.get('referred-children').aggregatedValues.length === 0)
-            ) {
-              return true;
-            }
-            return false;
-          },
+          condition: req => yesEmptyAggregation(req, 'children', 'referred-children'),
           continueOnEdit: true
         }
       ],
@@ -522,38 +506,29 @@ module.exports = {
     // Figma Section: "Additional family members" (additional-family)
 
     '/additional-family': {
-      behaviours: [ResetSummary('referred-additional-family', 'additional-family'), SaveFormSession, Locals18Flag],
+      behaviours: [
+        ResetSummary('referred-additional-family', 'additional-family'), 
+        SaveFormSession, 
+        Locals18Flag,
+        EditRouteReturn
+      ],
       fields: ['additional-family'],
       forks: [
         {
           target: '/additional-family-summary',
-          condition: {
-            field: 'additional-family',
-            value: 'yes'
-          }
-        },
-        {
-          target: '/family-in-uk',
-          condition: {
-            field: 'additional-family',
-            value: 'no'
-          }
+          condition: req => yesPlusAggregation(req, 'additional-family', 'referred-additional-family'),
+          continueOnEdit: true
         },
         {
           target: '/additional-family-details',
-          condition: req => {
-            if (
-              req.form.values['additional-family'] === 'yes' &&
-                req.sessionModel.get('referred-additional-family') &&
-                req.sessionModel.get('referred-additional-family').aggregatedValues.length === 0
-            ) {
-              return true;
-            }
-            return false;
-          }
+          condition: req => yesEmptyAggregation(req, 'additional-family', 'referred-additional-family'),
+          continueOnEdit: true
         },
         {
           target: '/no-family-referred',
+          // 'no-family-referred' occurs when:
+          //  - an >18 has not referred any Partner, Children or Additional Family
+          //  - an <18 has not referred any Parent, Brother or Sister or Additional Family
           condition: req => {
             if (Utilities.isOver18(req.sessionModel.get('date-of-birth'))) {
               return (req.sessionModel.get('partner') === 'no' &&
@@ -567,7 +542,7 @@ module.exports = {
         }
       ],
       locals: { showSaveAndExit: true },
-      continueOnEdit: true
+      next: '/family-in-uk'
     },
 
     '/additional-family-details': {
@@ -581,13 +556,23 @@ module.exports = {
         'additional-family-why-evac-without',
         'additional-family-why-referring'
       ],
-      behaviours: [LimitAdditionalFamily, SaveFormSession],
+      behaviours: [
+        LimitAdditionalFamily, 
+        SaveFormSession,
+        EditRouteReturn
+      ],
+      continueOnEdit: true,
       locals: { showSaveAndExit: true },
-      next: '/additional-family-summary',
-      continueOnEdit: true
+      next: '/additional-family-summary'
     },
     '/additional-family-summary': {
-      behaviours: [AggregateSaveUpdate, AdditionalFamilySummary, LimitAdditionalFamily, SaveFormSession],
+      behaviours: [
+        AggregateSaveUpdate, 
+        AdditionalFamilySummary, 
+        LimitAdditionalFamily, 
+        SaveFormSession,
+        EditRouteReturn
+      ],
       aggregateTo: 'referred-additional-family',
       aggregateFrom: [
         'additional-family-full-name',
@@ -609,9 +594,12 @@ module.exports = {
       aggregateLimit: ADDITIONAL_FAMILY_LIMIT,
       next: '/family-in-uk'
     },
+
+    // 'no-family-referred' occurs when the referrer has answered "no" to all the referees questions
     '/no-family-referred': {
       behaviours: Locals18Flag
     },
+
     '/family-in-uk': {
       behaviours: [ResetSummary('family-member-in-uk', 'family-in-uk'), SaveFormSession],
       forks: [
