@@ -338,7 +338,7 @@ module.exports = {
       },
       {
         step: '/family-in-uk-summary',
-        field: 'family-member-in-uk',
+        field: 'uk-family-aggregate',
         addElementSeparators: true,
         dependsOn: 'has-family-in-uk',
         parse: obj => {

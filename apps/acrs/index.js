@@ -602,7 +602,7 @@ module.exports = {
 
     '/family-in-uk': {
       behaviours: [
-        ResetSummary('family-member-in-uk', 'family-in-uk'),
+        ResetSummary('uk-family-aggregate', 'family-in-uk'),
         SaveFormSession
       ],
       forks: [
@@ -640,7 +640,7 @@ module.exports = {
     },
     '/family-in-uk-summary': {
       behaviours: [AggregateSaveUpdate, limitFamilyInUk, familyInUkSummary, SaveFormSession],
-      aggregateTo: 'family-member-in-uk',
+      aggregateTo: 'uk-family-aggregate',
       aggregateFrom: [
         'family-member-fullname',
         'family-member-relationship',
