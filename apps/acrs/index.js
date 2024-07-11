@@ -437,39 +437,44 @@ module.exports = {
     },
 
     '/children': {
-      behaviours: [ResetSummary('referred-children', 'children'), SaveFormSession],
+      behaviours: [
+        ResetSummary('referred-children', 'children'), 
+        SaveFormSession,
+        EditRouteReturn
+      ],
       fields: ['children'],
       forks: [
         {
           target: '/children-summary',
-          condition: {
-            field: 'children',
-            value: 'yes'
-          }
-        },
-        {
-          target: '/additional-family',
-          condition: {
-            field: 'children',
-            value: 'no'
-          }
+          condition: req => {
+            if (
+              req.form.values.children === 'yes' &&
+              req.sessionModel.get('referred-children') &&
+              req.sessionModel.get('referred-children').aggregatedValues.length > 0
+            ) {
+              return true;
+            }
+            return false;
+          },
+          continueOnEdit: true
         },
         {
           target: '/child-details',
           condition: req => {
             if (
               req.form.values.children === 'yes' &&
-              req.sessionModel.get('referred-children') &&
-              req.sessionModel.get('referred-children').aggregatedValues.length === 0
+              ( !req.sessionModel.get('referred-children') ||
+                req.sessionModel.get('referred-children').aggregatedValues.length === 0)
             ) {
               return true;
             }
             return false;
-          }
+          },
+          continueOnEdit: true
         }
       ],
       locals: { showSaveAndExit: true },
-      continueOnEdit: true
+      next: '/additional-family'
     },
     '/child-details': {
       fields: [
@@ -479,7 +484,8 @@ module.exports = {
         'child-living-situation',
         'child-why-without-child'
       ],
-      behaviours: SaveFormSession,
+      behaviours: [SaveFormSession, EditRouteReturn],
+      continueOnEdit: true,
       locals: { showSaveAndExit: true },
       next: '/children-summary'
     },
@@ -488,7 +494,8 @@ module.exports = {
         AggregateSaveUpdate,
         ChildrenSummary,
         LimitChildren,
-        SaveFormSession
+        SaveFormSession,
+        EditRouteReturn
       ],
       aggregateTo: 'referred-children',
       aggregateFrom: [
