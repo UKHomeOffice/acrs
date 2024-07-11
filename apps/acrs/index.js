@@ -54,8 +54,8 @@ const yesPlusAggregation = (req, formValue, sessionModel) => {
   ) {
     return true;
   }
-  return false;  
-}
+  return false;
+};
 
 /**
  * Is the form value 'yes' and the aggregation empty?
@@ -73,8 +73,8 @@ const yesEmptyAggregation = (req, formValue, sessionModel) => {
   ) {
     return true;
   }
-  return false;  
-}
+  return false;
+};
 
 
 module.exports = {
@@ -371,12 +371,12 @@ module.exports = {
     '/partner': {
       behaviours: [
         ResetSummary('referred-partners', 'partner'),
-        SaveFormSession, 
+        SaveFormSession,
         EditRouteReturn
       ],
       fields: ['partner'],
       forks: [
-        // partner -> yes -> partner summary (skipping details if already exist)        
+        // partner -> yes -> partner summary (skipping details if already exist)
         {
           target: '/partner-summary',
           condition: req => yesPlusAggregation(req, 'partner', 'referred-partners'),
@@ -386,10 +386,10 @@ module.exports = {
           target: '/partner-details',
           condition: req => yesEmptyAggregation(req, 'partner', 'referred-partners'),
           continueOnEdit: true
-        }, 
+        }
       ],
       locals: { showSaveAndExit: true },
-      next: '/children',
+      next: '/children'
     },
     '/partner-details': {
       fields: [
@@ -440,7 +440,7 @@ module.exports = {
 
     '/children': {
       behaviours: [
-        ResetSummary('referred-children', 'children'), 
+        ResetSummary('referred-children', 'children'),
         SaveFormSession,
         EditRouteReturn
       ],
@@ -507,8 +507,8 @@ module.exports = {
 
     '/additional-family': {
       behaviours: [
-        ResetSummary('referred-additional-family', 'additional-family'), 
-        SaveFormSession, 
+        ResetSummary('referred-additional-family', 'additional-family'),
+        SaveFormSession,
         Locals18Flag,
         EditRouteReturn
       ],
@@ -557,7 +557,7 @@ module.exports = {
         'additional-family-why-referring'
       ],
       behaviours: [
-        LimitAdditionalFamily, 
+        LimitAdditionalFamily,
         SaveFormSession,
         EditRouteReturn
       ],
@@ -567,9 +567,9 @@ module.exports = {
     },
     '/additional-family-summary': {
       behaviours: [
-        AggregateSaveUpdate, 
-        AdditionalFamilySummary, 
-        LimitAdditionalFamily, 
+        AggregateSaveUpdate,
+        AdditionalFamilySummary,
+        LimitAdditionalFamily,
         SaveFormSession,
         EditRouteReturn
       ],
@@ -601,7 +601,10 @@ module.exports = {
     },
 
     '/family-in-uk': {
-      behaviours: [ResetSummary('family-member-in-uk', 'family-in-uk'), SaveFormSession],
+      behaviours: [
+        ResetSummary('family-member-in-uk', 'family-in-uk'),
+        SaveFormSession
+      ],
       forks: [
         {
           target: '/family-in-uk-details',
@@ -653,6 +656,7 @@ module.exports = {
       continueOnEdit: true,
       next: '/upload-evidence'
     },
+
     '/upload-evidence': {
       behaviours: [SaveFormSession, SaveImage('image'), RemoveImage, LimitDocument],
       fields: ['image'],

@@ -2,7 +2,6 @@
 
 const axios = require('axios');
 const config = require('../../../config');
-const _ = require('lodash');
 
 const applicationsUrl = `${config.saveService.host}:${config.saveService.port}/saved_applications`;
 

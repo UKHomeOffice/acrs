@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 const EditRouteReturn = require('../../apps/acrs/behaviours/edit-route-return');
 
 class SuperClass {}
@@ -54,20 +55,20 @@ describe('isContinueOnEdit', () => {
   });
 
   it('should return true if a matching choice with continueOnEdit is found whose condition is function', () => {
-    const req = {
+    const request = {
       form: {
         values: { 'hof-field-B': 'other-stuff', 'hof-field-A': 'some-input'},
         options: {
           forks: [
             {
-              condition: (req) => true,
+              condition: req => true,
               continueOnEdit: true
             }
           ]
         }
       }
     };
-    const result = objEditRouteReturn.isContinueOnEdit(req);
+    const result = objEditRouteReturn.isContinueOnEdit(request);
 
     expect(result).to.be.true;
   });
@@ -119,14 +120,14 @@ describe('isContinueOnEdit', () => {
 
 describe('isForkSelected', () => {
   it('should return the true when condition is a function that is fulfilled', () => {
-    const condition = (req) => {
-      return req.form.values.parent === 'yes' && 
+    const condition = req => {
+      return req.form.values.parent === 'yes' &&
         req.session.aggregatedValues.length === 0;
     };
     const req = {
       form: {
         values: {
-          'parent': 'yes'
+          parent: 'yes'
         }
       },
       session: {
@@ -138,14 +139,14 @@ describe('isForkSelected', () => {
   });
 
   it('should return false when condition is a function that is not fulfilled', () => {
-    const condition = (req) => {
-      return req.form.values.parent === 'yes' && 
+    const condition = req => {
+      return req.form.values.parent === 'yes' &&
         req.session.aggregatedValues.length === 0;
     };
     const req = {
       form: {
         values: {
-          'parent': 'yes'
+          parent: 'yes'
         }
       },
       session: {
@@ -186,5 +187,5 @@ describe('isForkSelected', () => {
     };
     const result = objEditRouteReturn.isForkSelected(condition, req);
     expect(result).to.be.false;
-  });  
+  });
 });
