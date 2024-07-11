@@ -602,44 +602,48 @@ module.exports = {
 
     '/family-in-uk': {
       behaviours: [
-        ResetSummary('uk-family-aggregate', 'family-in-uk'),
-        SaveFormSession
-      ],
-      forks: [
-        {
-          target: '/family-in-uk-details',
-          condition: {
-            field: 'has-family-in-uk',
-            value: 'yes'
-          }
-        },
-        {
-          target: '/upload-evidence',
-          condition: {
-            field: 'has-family-in-uk',
-            value: 'no'
-          }
-        }
+        ResetSummary('uk-family-aggregate', 'has-family-in-uk'),
+        SaveFormSession,
+        EditRouteReturn
       ],
       fields: ['has-family-in-uk'],
+      forks: [
+        {
+          target: '/family-in-uk-summary',
+          condition: req => yesPlusAggregation(req, 'has-family-in-uk', 'family-member-in-uk'),
+          continueOnEdit: true
+        },
+        {
+          target: '/family-in-uk-details',
+          condition: req => yesEmptyAggregation(req, 'has-family-in-uk', 'family-member-in-uk'),
+          continueOnEdit: true
+        }
+      ],
       locals: { showSaveAndExit: true },
-      next: '/family-in-uk-details'
+      next: '/upload-evidence'
     },
     '/family-in-uk-details': {
-      behaviours: [SaveFormSession, limitFamilyInUk],
+      behaviours: [SaveFormSession, limitFamilyInUk, EditRouteReturn],
       fields: [
         'family-member-fullname',
         'family-member-date-of-birth',
         'family-member-relationship',
         'has-family-member-been-evacuated'
       ],
+      continueOnEdit: true,
       backLink: 'family-in-uk',
       next: '/family-in-uk-summary',
       locals: { showSaveAndExit: true },
       titleField: 'countryAddNumber'
     },
     '/family-in-uk-summary': {
-      behaviours: [AggregateSaveUpdate, limitFamilyInUk, familyInUkSummary, SaveFormSession],
+      behaviours: [
+        AggregateSaveUpdate,
+        limitFamilyInUk,
+        familyInUkSummary,
+        SaveFormSession,
+        EditRouteReturn
+      ],
       aggregateTo: 'uk-family-aggregate',
       aggregateFrom: [
         'family-member-fullname',
@@ -653,7 +657,7 @@ module.exports = {
       template: 'family-in-uk-summary',
       locals: { showSaveAndExit: true },
       aggregateLimit: Utilities.DEFAULT_AGGREGATOR_LIMIT,
-      continueOnEdit: true,
+      continueOnEdit: false,
       next: '/upload-evidence'
     },
 
