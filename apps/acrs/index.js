@@ -80,10 +80,10 @@ const yesEmptyAggregation = (req, formValue, aggregateName) => {
  * 'no-family-referred' occurs when:
  * - an >18 has not referred any Partner, Children or Additional Family
  * - an <18 has not referred any Parent, Brother or Sister or Additional Family
- * 
+ *
  * @return {boolean} True if no family members are referred
  */
-const noFamilyReferred = (req) => {
+const noFamilyReferred = req => {
   if (Utilities.isOver18(req.sessionModel.get('date-of-birth'))) {
     return (req.sessionModel.get('partner') === 'no' &&
       req.sessionModel.get('children') === 'no' &&
@@ -92,7 +92,7 @@ const noFamilyReferred = (req) => {
   return (req.sessionModel.get('parent') === 'no' &&
     req.sessionModel.get('brother-or-sister') === 'no' &&
     req.sessionModel.get('additional-family') === 'no');
-}
+};
 
 
 module.exports = {
@@ -544,7 +544,7 @@ module.exports = {
         },
         {
           target: '/no-family-referred',
-          condition: req => noFamilyReferred(req),
+          condition: req => noFamilyReferred(req)
         }
       ],
       locals: { showSaveAndExit: true },
@@ -728,7 +728,7 @@ module.exports = {
       forks: [
         {
           target: '/no-family-referred',
-          condition: req => noFamilyReferred(req),
+          condition: req => noFamilyReferred(req)
         }
       ],
       sections: require('./sections/summary-data-sections'),
