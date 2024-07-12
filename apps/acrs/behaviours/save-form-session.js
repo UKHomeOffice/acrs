@@ -5,7 +5,6 @@ const config = require('../../../config');
 
 const applicationsUrl = `${config.saveService.host}:${config.saveService.port}/saved_applications`;
 
-
 module.exports = superclass => class extends superclass {
   saveValues(req, res, next) {
     return super.saveValues(req, res, async err => {
