@@ -43,14 +43,14 @@ const PARTNER_LIMIT = 1;
  *
  * @param {Object} req - The request god object.
  * @param {string} formValue - The name of the req.form.values field to check is 'yes.
- * @param {string} sessionModel - The name of the req.sessionModel to check has a populated array
+ * @param {string} aggregateName - The name of the req.sessionModel to check has a populated array (== aggregateTo)
  * @return {boolean} Returns true if the form value is 'yes' and  has aggregated values, otherwise false.
  */
-const yesPlusAggregation = (req, formValue, sessionModel) => {
+const yesPlusAggregation = (req, formValue, aggregateName) => {
   if (
     req.form.values[formValue] === 'yes' &&
-    req.sessionModel.get(sessionModel) &&
-    req.sessionModel.get(sessionModel).aggregatedValues.length > 0
+    req.sessionModel.get(aggregateName) &&
+    req.sessionModel.get(aggregateName).aggregatedValues.length > 0
   ) {
     return true;
   }
@@ -62,14 +62,14 @@ const yesPlusAggregation = (req, formValue, sessionModel) => {
  *
  * @param {Object} req - The request god object.
  * @param {string} formValue - The name of the form value to check.
- * @param {string} sessionModel - The name of the session model to check.
+ * @param {string} aggregateName - The name of the session model to check. (== aggregateTo)
  * @return {boolean} Returns true if the form value is 'yes' and the aggregation is empty, otherwise false.
  */
-const yesEmptyAggregation = (req, formValue, sessionModel) => {
+const yesEmptyAggregation = (req, formValue, aggregateName) => {
   if (
     req.form.values[formValue] === 'yes' &&
-    ( !req.sessionModel.get(sessionModel) ||
-      req.sessionModel.get(sessionModel).aggregatedValues.length === 0)
+    ( !req.sessionModel.get(aggregateName) ||
+      req.sessionModel.get(aggregateName).aggregatedValues.length === 0)
   ) {
     return true;
   }
@@ -610,12 +610,12 @@ module.exports = {
       forks: [
         {
           target: '/family-in-uk-summary',
-          condition: req => yesPlusAggregation(req, 'has-family-in-uk', 'family-member-in-uk'),
+          condition: req => yesPlusAggregation(req, 'has-family-in-uk', 'uk-family-aggregate'),
           continueOnEdit: true
         },
         {
           target: '/family-in-uk-details',
-          condition: req => yesEmptyAggregation(req, 'has-family-in-uk', 'family-member-in-uk'),
+          condition: req => yesEmptyAggregation(req, 'has-family-in-uk', 'uk-family-aggregate'),
           continueOnEdit: true
         }
       ],
