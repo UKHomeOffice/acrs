@@ -329,7 +329,7 @@ module.exports = {
           value: 'no'
         }
       }],
-      behaviours: SaveFormSession,
+      behaviours: [ResetSummary('referred-partners', 'partner'), SaveFormSession],
       locals: { showSaveAndExit: true },
       next: '/partner-details',
       continueOnEdit: true
@@ -549,7 +549,7 @@ module.exports = {
       behaviours: Locals18Flag
     },
     '/family-in-uk': {
-      behaviours: [ResetSummary('family-member-in-uk', 'family-in-uk'), SaveFormSession],
+      behaviours: [ResetSummary('family-member-in-uk', 'has-family-in-uk'), SaveFormSession],
       forks: [
         {
           target: '/family-in-uk-details',

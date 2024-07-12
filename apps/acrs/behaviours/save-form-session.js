@@ -1,11 +1,55 @@
-/* eslint-disable camelcase */
+/* eslint-disable camelcase, max-len */
 
 const axios = require('axios');
 const config = require('../../../config');
 const _ = require('lodash');
 
-
 const applicationsUrl = `${config.saveService.host}:${config.saveService.port}/saved_applications`;
+const { isOver18 } = require('../../../lib/utilities');
+
+/**
+* Checks session for a situation where all referrals have been removed
+* User must refer at least one person from their age group's aggregator sections
+*
+* @param {Object} req - The request object
+* @return {bool} Is there a state where no people are being referred?
+*/
+const noReferral = req => {
+  if (isOver18(req.sessionModel.get('date-of-birth'))) {
+    return req.sessionModel.get('partner') === 'no' &&
+    req.sessionModel.get('children') === 'no' &&
+    req.sessionModel.get('additional-family') === 'no';
+  }
+  return req.sessionModel.get('parent') === 'no' &&
+  req.sessionModel.get('brother-or-sister') === 'no' &&
+  req.sessionModel.get('additional-family') === 'no';
+};
+
+/**
+* Conditional route navigation for aggregator yes/no intro questions
+* Routing from these pages depends on form progress and aggregator store content
+* Navigate the user to the correct route when HOF routing is not sufficient
+*
+* @param {Object} req - The request object.
+* @param {string} formFieldName - The name of the aggregator field with the yes/no question.
+* @param {string} aggregatorStoreName - The name of the session array storing this aggregator's values.
+* @param {string} summaryPath - The path name of the summary for this aggregator.
+* @return {string} - The path to navigate to if conditional is satisfied, else null.
+*/
+const aggIntroNavCheck = (req, formFieldName, aggregatorStoreName, summaryPath) => {
+  const hasSeenFinalSummary = req.sessionModel.get('steps').includes('/email-decision') ||
+    req.sessionModel.get('steps').includes('/decision-postal-address');
+  const comesFromInitialSummary = req.sessionModel.get('redirect-to-information-you-have-given-us');
+  const formFieldValue = req.form.values[formFieldName];
+  const aggregatorStore = req.sessionModel.get(aggregatorStoreName);
+
+  if (formFieldValue === 'yes' && aggregatorStore?.aggregatedValues?.length) {
+    return summaryPath;
+  } else if (formFieldValue === 'no' && hasSeenFinalSummary && !comesFromInitialSummary) {
+    return '/acrs/confirm';
+  }
+  return null;
+};
 
 module.exports = superclass => class extends superclass {
   saveValues(req, res, next) {
@@ -61,6 +105,40 @@ module.exports = superclass => class extends superclass {
 
         if(req.body.exit) {
           return res.redirect('/sign-in');
+        }
+
+        // Handle conditional routing cases
+        const currentRoute = req.form.options.route;
+        let nextRoute;
+
+        switch(currentRoute) {
+          case '/parent':
+            nextRoute = aggIntroNavCheck(req, 'parent', 'referred-parents', '/acrs/parent-summary');
+            break;
+          case '/brother-or-sister':
+            nextRoute = aggIntroNavCheck(req, 'brother-or-sister', 'referred-siblings', '/acrs/brother-or-sister-summary');
+            break;
+          case '/partner':
+            nextRoute = aggIntroNavCheck(req, 'partner', 'referred-partners', '/acrs/partner-summary');
+            break;
+          case '/children':
+            nextRoute = aggIntroNavCheck(req, 'children', 'referred-children', '/acrs/children-summary');
+            break;
+          case '/additional-family':
+            nextRoute = aggIntroNavCheck(req, 'additional-family', 'referred-additional-family', '/acrs/additional-family-summary');
+            break;
+          case '/family-in-uk':
+            nextRoute = aggIntroNavCheck(req, 'has-family-in-uk', 'family-member-in-uk', '/acrs/family-in-uk-summary');
+            break;
+          case '/confirm':
+            nextRoute = noReferral(req) ? '/acrs/no-family-referred' : null;
+            break;
+          default:
+            nextRoute = null;
+        }
+
+        if (nextRoute) {
+          return res.redirect(nextRoute);
         }
 
         const isContinueOnEdit = req.form.options.continueOnEdit &&
