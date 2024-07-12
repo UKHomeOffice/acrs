@@ -76,6 +76,24 @@ const yesEmptyAggregation = (req, formValue, aggregateName) => {
   return false;
 };
 
+/**
+ * 'no-family-referred' occurs when:
+ * - an >18 has not referred any Partner, Children or Additional Family
+ * - an <18 has not referred any Parent, Brother or Sister or Additional Family
+ * 
+ * @return {boolean} True if no family members are referred
+ */
+const noFamilyReferred = (req) => {
+  if (Utilities.isOver18(req.sessionModel.get('date-of-birth'))) {
+    return (req.sessionModel.get('partner') === 'no' &&
+      req.sessionModel.get('children') === 'no' &&
+      req.sessionModel.get('additional-family') === 'no');
+  }
+  return (req.sessionModel.get('parent') === 'no' &&
+    req.sessionModel.get('brother-or-sister') === 'no' &&
+    req.sessionModel.get('additional-family') === 'no');
+}
+
 
 module.exports = {
   name: 'acrs',
@@ -526,19 +544,7 @@ module.exports = {
         },
         {
           target: '/no-family-referred',
-          // 'no-family-referred' occurs when:
-          //  - an >18 has not referred any Partner, Children or Additional Family
-          //  - an <18 has not referred any Parent, Brother or Sister or Additional Family
-          condition: req => {
-            if (Utilities.isOver18(req.sessionModel.get('date-of-birth'))) {
-              return (req.sessionModel.get('partner') === 'no' &&
-                req.sessionModel.get('children') === 'no' &&
-                req.sessionModel.get('additional-family') === 'no');
-            }
-            return (req.sessionModel.get('parent') === 'no' &&
-              req.sessionModel.get('brother-or-sister') === 'no' &&
-              req.sessionModel.get('additional-family') === 'no');
-          }
+          condition: req => noFamilyReferred(req),
         }
       ],
       locals: { showSaveAndExit: true },
@@ -718,6 +724,12 @@ module.exports = {
         SaveFormSession,
         ModifySummaryChangeLinks,
         EditRouteStart
+      ],
+      forks: [
+        {
+          target: '/no-family-referred',
+          condition: req => noFamilyReferred(req),
+        }
       ],
       sections: require('./sections/summary-data-sections'),
       locals: { showSaveAndExit: true },
