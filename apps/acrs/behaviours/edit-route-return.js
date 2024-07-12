@@ -1,4 +1,4 @@
-// This behaviour will redirect the route back to a summary page the set the Edit-mode url.
+// This behaviour will redirect the route back to the Summary page that set the edit-return-path url.
 module.exports = superclass => class extends superclass {
   saveValues(req, res, next) {
     super.saveValues(req, res, err => {
