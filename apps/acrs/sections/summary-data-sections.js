@@ -18,8 +18,10 @@ const addressFormatter = (model, fieldNames) => {
 const aggregateParser = (aggregate, titleField, dobField = 'date-of-birth') => {
   for (const item of aggregate) {
     item.fields.map(field => {
+      // All the fields in the aggregated values have their Change link removed.
       field.omitChangeLink = true;
       if (field.field === titleField) {
+        // One field is promoted to Title so that it receives the "Change" link
         field.isAggregatorTitle = true;
       }
       if (field.field.includes(dobField) && field.value !== undefined) {
@@ -336,7 +338,7 @@ module.exports = {
       },
       {
         step: '/family-in-uk-summary',
-        field: 'family-member-in-uk',
+        field: 'uk-family-aggregate',
         addElementSeparators: true,
         dependsOn: 'has-family-in-uk',
         parse: obj => {

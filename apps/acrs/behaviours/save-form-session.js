@@ -2,8 +2,6 @@
 
 const axios = require('axios');
 const config = require('../../../config');
-const _ = require('lodash');
-
 
 const applicationsUrl = `${config.saveService.host}:${config.saveService.port}/saved_applications`;
 
@@ -61,19 +59,6 @@ module.exports = superclass => class extends superclass {
 
         if(req.body.exit) {
           return res.redirect('/sign-in');
-        }
-
-        const isContinueOnEdit = req.form.options.continueOnEdit &&
-          _.get(req.form.options.forks, '[0].continueOnEdit');
-
-        const loopedForkCondition = _.get(req.form.options.forks, '[0].condition.value');
-        const loopedForkField = _.get(req.form.options.forks, '[0].condition.field');
-        const loopedFieldMatchesForkCondition = loopedForkField &&
-          req.form.values[loopedForkField] === loopedForkCondition;
-
-        if (req.sessionModel.get('redirect-to-information-you-have-given-us') &&
-          !isContinueOnEdit && !loopedFieldMatchesForkCondition) {
-          return res.redirect('/acrs/information-you-have-given-us');
         }
 
         return next();

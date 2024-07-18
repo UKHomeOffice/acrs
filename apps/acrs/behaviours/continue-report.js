@@ -64,7 +64,7 @@ module.exports = superclass => class extends superclass {
       if (err) {
         next(err);
       }
-      req.sessionModel.set('redirect-to-information-you-have-given-us', false);
+      req.sessionModel.unset('redirect-to-information-you-have-given-us');
 
       return res.redirect(`/acrs${req.sessionModel.get('save-return-next-step')}`);
     });

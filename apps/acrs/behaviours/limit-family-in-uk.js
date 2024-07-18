@@ -2,8 +2,8 @@ module.exports = superclass => class extends superclass {
   locals(req, res) {
     const locals = super.locals(req, res);
     locals.familyMemberCount = '1';
-    if(req.sessionModel.get('family-member-in-uk') !== undefined) {
-      const familyMembers = req.sessionModel.get('family-member-in-uk').aggregatedValues;
+    if(req.sessionModel.get('uk-family-aggregate') !== undefined) {
+      const familyMembers = req.sessionModel.get('uk-family-aggregate').aggregatedValues;
       const familyMemberLimit = familyMembers.length >= req.form.options.aggregateLimit;
       const familyMemberCount = familyMembers.length + 1;
 

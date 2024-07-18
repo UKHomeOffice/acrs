@@ -6,7 +6,7 @@ module.exports = superclass => class extends superclass {
 
     // When all family member in uk  are removed redirect to the loop section intro
     if(aggregate && !aggregate.aggregatedValues.length) {
-      req.form.options.addStep = 'family-in-uk-details';
+      req.form.options.addStep = 'family-in-uk';
     }
     super.configure(req, res, next);
   }
