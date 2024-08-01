@@ -26,7 +26,7 @@ module.exports = superclass => class extends superclass {
         // Process a value to parse and reformat it before render
         if (field.field.includes('date-of-birth')) {
           if (field.value !== undefined) {
-            field.parsed = moment(field.value, 'YYYY-MMMM-DD').format('DD MMMM YYYY');
+            field.parsed = moment(field.value).format('DD MMMM YYYY');
           }
         }
         // Appending a value to the field name here allows us to render text from fields.json instead of the fieldname

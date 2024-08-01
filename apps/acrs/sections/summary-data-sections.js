@@ -25,7 +25,7 @@ const aggregateParser = (aggregate, titleField, dobField = 'date-of-birth') => {
         field.isAggregatorTitle = true;
       }
       if (field.field.includes(dobField) && field.value !== undefined) {
-        field.parsed = moment(field.value, 'YYYY-MMMM-DD').format(PRETTY_DATE_FORMAT);
+        field.parsed = moment(field.value).format(PRETTY_DATE_FORMAT);
       }
       return field;
     });
@@ -254,7 +254,7 @@ module.exports = {
               field.omitChangeLink = true;
               if (field.field.includes('date-of-birth')) {
                 if (field.value !== undefined) {
-                  field.parsed = moment(field.value, 'YYYY-MMMM-DD').format('DD MMMM YYYY');
+                  field.parsed = moment(field.value).format('DD MMMM YYYY');
                 }
               }
               return field;
@@ -278,7 +278,7 @@ module.exports = {
               field.omitChangeLink = true;
               if (field.field.includes('date-of-birth')) {
                 if (field.value !== undefined) {
-                  field.parsed = moment(field.value, 'YYYY-MMMM-DD').format('DD MMMM YYYY');
+                  field.parsed = moment(field.value).format('DD MMMM YYYY');
                 }
               }
               return field;

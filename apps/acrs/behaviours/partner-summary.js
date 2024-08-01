@@ -27,7 +27,7 @@ module.exports = superclass => class extends superclass {
       item.fields = item.fields.map(field => {
         if (field.field.includes('date-of-birth')) {
           if (field.value !== undefined) {
-            field.parsed = moment(field.value, 'YYYY-MMMM-DD').format('DD MMMM YYYY');
+            field.parsed = moment(field.value).format('DD MMMM YYYY');
           }
         }
         field.field += '.summary-heading';
