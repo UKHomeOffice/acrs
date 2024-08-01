@@ -88,5 +88,7 @@ module.exports = {
   uniqueReferralRefs: {
     refLength: 6,
     refAllowedChars: 'ABCDEFGHJKMNPRTUVWXY0123456789'
-  }
+  },
+  urlEncodedLimitSize: process.env.URL_ENCODED_LIMIT_SIZE || '2mb',
+  jsonLimitSize: process.env.JSON_LIMIT_SIZE || '2mb'
 };

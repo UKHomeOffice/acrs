@@ -15,6 +15,7 @@ settings = Object.assign({}, settings, {
   behaviours: settings.behaviours.map(require)
 });
 
+
 if (!fs.existsSync(config.dataDirectory)) {
   fs.mkdirSync(config.dataDirectory);
 }
