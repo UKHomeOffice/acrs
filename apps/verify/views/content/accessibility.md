@@ -1,7 +1,7 @@
 # Accessibility statement for Refer family to come to the UK (Afghan Citizens Resettlement Scheme)
 
 
-This accessibility statement applies to the [www.refer-afghan-family-to-come-to-the-uk.homeoffice.gov.uk](www.refer-afghan-family-to-come-to-the-uk.homeoffice.gov.uk) website. It does not cover related pages on the [www.gov.uk](www.gov.uk) website, which has its own accessibility statement.
+This accessibility statement applies to the [www.refer-afghan-family-to-come-to-the-uk.homeoffice.gov.uk](https://www.refer-afghan-family-to-come-to-the-uk.homeoffice.gov.uk) website. It does not cover related pages on the [www.gov.uk](https://www.gov.uk) website, which has its own accessibility statement.
 
 This website is run by the Home Office. We want as many people as possible to be able to use this website. For example, that means you should be able to:
 
