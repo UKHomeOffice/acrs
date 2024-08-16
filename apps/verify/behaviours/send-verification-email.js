@@ -66,17 +66,13 @@ module.exports = superclass => class extends superclass {
       idType = 'brp';
       idRoute = '/brp/';
     }
-
+    
     const response = await axios.get(baseUrl + idRoute + id);
-    const claimantRecords = response.data;
-    const recordEmail = claimantRecords.map(f => { return f.email; });
-    const unSubmittedCase = _.filter(response.data, record => !record.submitted_at);
-    const unSubmittedCaseEmail = unSubmittedCase.map(record => { return record.email; });
-
-
-    // if form has not been submitted, throws an error if a second form is opened with same UAN but different email
-
-    if (recordEmail.length && req.form.values['user-email'] !== unSubmittedCaseEmail.toString() && unSubmittedCase.length > 0) {
+    const unSubmittedCases = _.filter(response.data, record => !record.submitted_at);
+    const firstUnsubmittedCase = unSubmittedCases.find(()=> true);
+    
+   // If user has unsubmitted application with different email throw error
+    if (unSubmittedCases?.length > 0 && firstUnsubmittedCase.email !== email) {   
       return next({
         'user-email': new this.ValidationError(
           'user-email',
@@ -86,15 +82,17 @@ module.exports = superclass => class extends superclass {
         )
       });
     }
-
+    
     const token = tokenGenerator.save(req, email);
-
+    
     try {
       const govNotifyResponse = await notifyClient.sendEmail(templateId, email, {
         personalisation: getPersonalisation(host, token, idType)
+      
+      
       });
-
-
+      
+      
       if (govNotifyResponse.status !== 201 && govNotifyResponse.status !== 200) {
         return next({
           'user-email': new this.ValidationError(
@@ -105,8 +103,14 @@ module.exports = superclass => class extends superclass {
           )
         });
       }
-    } catch(e) {
-      console.log('Gov notify error : ', e );
+    } catch(error) {
+      
+      const errorDetails = error.response?.data ? `Cause: ${JSON.stringify(error.response.data)}` : '';
+      const errorCode = error.code ? `${error.code} -` : '';
+      const errorMessage = `${errorCode} ${error.message}; ${errorDetails}`;
+      
+      req.log('error',`Failed to send feedback email: ${errorMessage}`);
+      
       return next({
         'user-email': new this.ValidationError(
           'user-email',

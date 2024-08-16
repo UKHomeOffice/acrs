@@ -40,13 +40,12 @@ module.exports = superclass => class extends superclass {
         const sessionCases = req.sessionModel.get('user-cases') || [];
         const unsubmittedCases = _.filter(response.data, record => !record.submitted_at );
         const parsedBody = this.parseCasesSessions(unsubmittedCases);
-        const cases = _.unionBy(parsedBody, sessionCases, 'id');
-
+        let cases = _.unionBy(parsedBody, sessionCases, 'id');
         const uan = req.sessionModel.get('uan');
         const brp = req.sessionModel.get('brp');
         let isSameCase = '';
         let idNumber = '';
-
+        
         if (idType === 'brp') {
           isSameCase = _.get(cases, "[0].session['brp']") === brp;
           idNumber = brp;

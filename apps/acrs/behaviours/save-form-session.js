@@ -53,22 +53,9 @@ module.exports = superclass => class extends superclass {
       if (err) {
         return next(err);
       }
-
-      // remove csrf secret and errors from session data to prevent CSRF Secret issues in the session
-      // const session = req.sessionModel.toJSON();
-      // delete session['csrf-secret'];
-      // delete session.errors;
-      // delete session['valid-token'];
-      // delete session['user-cases'];
-
+      
       let session = getSession(req);
-
-      // if (session.steps.indexOf(req.path) === -1) {
-      //   session.steps.push(req.path);
-      // }
-      // // ensure no /edit steps are add to the steps property when we save to the store
-      // session.steps = session.steps.filter(step => !step.match(/\/change|edit$/));
-
+      
       // skip requesting data service api when running in local and test mode
       if (config.env === 'local' || config.env === 'test') {
         return next();
@@ -83,24 +70,22 @@ module.exports = superclass => class extends superclass {
       let requestConfig = requestBody(id, { session }, { session, email, brp, uan, date_of_birth });
 
       req.log('info', `Saving Form Session: ${id}`);
-
+      req.log('info', `Request ${JSON.stringify(requestConfig)}`)
       
       try {
-        const response = await requestData(requestConfig);
-        req.log('info', `Case Id: ${id} , Method : ${requestConfig.method},
-        Response message: ${response.status} : ${response.statusText}`);
-
+       const response = await axios(requestConfig);
+       req.log('info', `Response ${JSON.stringify(response.data)}`);
         const resBody = response.data;
-        // req.log('info', `Response body: ${id}`);
+        
         if (resBody && resBody.length && resBody[0].id) {
           req.sessionModel.set('id', resBody[0].id);
-          session = getSession(req);
-          requestConfig = requestBody(resBody[0].id, { session }, null);
-          const patchresponse = await requestData(requestConfig);
         } else {
-          req.sessionModel.unset('id');
+         // req.sessionModel.unset('id');
+         const errorMessage = `Id hasn't been recieved in response ${JSON.stringify(response.data)}`;
+         req.log('error', errorMessage);
+         return next(new Error(errorMessage));
         }
-
+        
         if (req.body['save-and-exit']) {
           return res.redirect('/acrs/information-saved');
         }

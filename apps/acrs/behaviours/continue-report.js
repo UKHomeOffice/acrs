@@ -15,10 +15,10 @@ module.exports = superclass => class extends superclass {
   getValues(req, res, next) {
     const uanId = req.sessionModel.get('uan');
     const brpId = req.sessionModel.get('brp');
-
+    
     if (uanId || brpId) {
       req.sessionModel.set('redirect-to-information-you-have-given-us', true);
-
+      
       // steps in the session fall out of sync when changed from the current progress report page
       // this reorders them to ensure the user jumps to the last step they filled out
       const sessionSteps = req.sessionModel.get('steps');
@@ -31,24 +31,24 @@ module.exports = superclass => class extends superclass {
       const sessionStepsContainMandatorySteps = mandatoryStepsToLatestStep.every(v => {
         return orderedSessionSteps.includes(v);
       });
-
+      
       if (!sessionStepsContainMandatorySteps) {
         const missingSteps = mandatoryStepsToLatestStep.filter(v => !sessionSteps.includes(v));
         const firstMissingStep = missingSteps[0];
         const indexOfMissingStep = mandatoryStepsToLatestStep.indexOf(firstMissingStep);
         const correctedSteps = mandatoryStepsToLatestStep.slice(0, indexOfMissingStep + 1);
-
+        
         req.sessionModel.set('steps', correctedSteps);
         lastestStepInJourney = correctedSteps[correctedSteps.length - 1];
       }
-
+      
       if (orderedSessionSteps.length < DEFAULTS.steps.length) {
         req.sessionModel.set('steps', DEFAULTS.steps);
         lastestStepInJourney = DEFAULTS.steps[DEFAULTS.steps.length - 1];
       }
-
+      
       req.sessionModel.set('save-return-next-step', lastestStepInJourney);
-
+      
       return super.getValues(req, res, next);
     }
     return res.redirect('/acrs/information-you-have-given-us');
@@ -58,7 +58,7 @@ module.exports = superclass => class extends superclass {
       visitedImagesPage: req.sessionModel.get('steps').includes('/upload-evidence')
     });
   }
-
+  
   saveValues(req, res, next) {
     super.saveValues(req, res, err => {
       if (err) {
