@@ -109,7 +109,7 @@ module.exports = {
       next: '/select-form'
     },
     '/select-form': {
-      behaviours: [ExitToSignIn, ResumeSession, SaveFormSession],
+      behaviours: [ExitToSignIn, ResumeSession],
       next: '/information-you-have-given-us',
       backLink: false
     },

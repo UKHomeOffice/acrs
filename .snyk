@@ -95,6 +95,22 @@ ignore:
     - '*':
       reason: No update available.
       expires: '2024-07-03T00:00:00.000Z'
+  SNYK-JS-AXIOS-7361793:
+    - '*':
+      reason: Upgrade to axios version 1.7.4 will fix.
+      expires: '2024-11-03T00:00:00.000Z'
+  SNYK-JS-ELLIPTIC-7577916:
+    - '*':
+      reason: Issues with no direct upgrade or patch.
+      expires: '2024-11-03T00:00:00.000Z'
+  SNYK-JS-ELLIPTIC-7577917:
+    - '*':
+      reason: Issues with no direct upgrade or patch.
+      expires: '2024-11-03T00:00:00.000Z'
+  SNYK-JS-ELLIPTIC-7577918:
+    - '*':
+      reason: Issues with no direct upgrade or patch.
+      expires: '2024-11-03T00:00:00.000Z'
   SNYK-JS-PHIN-6598077:
     - '*':
       reason: Issues with no direct upgrade or patch.
