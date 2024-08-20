@@ -41,7 +41,6 @@ module.exports = superclass => class extends superclass {
         const unsubmittedCases = _.filter(response.data, record => !record.submitted_at );
         const parsedBody = this.parseCasesSessions(unsubmittedCases);
         const cases = _.unionBy(parsedBody, sessionCases, 'id');
-
         const uan = req.sessionModel.get('uan');
         const brp = req.sessionModel.get('brp');
         let isSameCase = '';
