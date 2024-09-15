@@ -17,7 +17,7 @@ ignore:
   SNYK-JS-AXIOS-6032459:
     - '*':
         reason: Cross-site Request Forgery (CSRF) needs to be upgraded in HOF to latest version
-        expires: '2024-09-15T00:00:00.000Z'
+        expires: '2024-11-15T00:00:00.000Z'
   SNYK-JS-SEMVER-3247795:
     - '*':
         reason: notifications-node-client needs to be upgraded in HOF to latest version
@@ -115,6 +115,26 @@ ignore:
     - '*':
       reason: Issues with no direct upgrade or patch.
       expires: '2024-07-03T00:00:00.000Z'
+  SNYK-JS-BODYPARSER-7926860:
+    - '*':
+      reason: Issues with no direct upgrade or patch.
+      expires: '2024-11-03T00:00:00.000Z'
+  SNYK-JS-EXPRESS-7926867:
+    - '*':
+      reason: Issues with no direct upgrade or patch.
+      expires: '2024-11-03T00:00:00.000Z'
+  SNYK-JS-PATHTOREGEXP-7925106:
+    - '*':
+      reason: Issues with no direct upgrade or patch.
+      expires: '2024-11-03T00:00:00.000Z'
+  SNYK-JS-SEND-7926862:
+    - '*':
+      reason: Issues with no direct upgrade or patch.
+      expires: '2024-11-03T00:00:00.000Z'
+  SNYK-JS-SERVESTATIC-7926865:
+    - '*':
+      reason: Issues with no direct upgrade or patch.
+      expires: '2024-11-03T00:00:00.000Z'
   SNYK-JS-BRACES-6838727:
     - '*':
       reason: No upgrade or patch available

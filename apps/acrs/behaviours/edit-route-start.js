@@ -10,6 +10,24 @@ module.exports = superclass => class extends superclass {
 
   saveValues(req, res, next) {
     req.sessionModel.unset('edit-return-path');
+
+
+    if(req.sessionModel.get('who-completing-form') === 'the-referrer') {
+      req.sessionModel.unset('helper-full-name');
+      req.sessionModel.unset('helper-relationship');
+      req.sessionModel.unset('helper-organisation');
+      req.sessionModel.unset('legal-representative-fullname');
+      req.sessionModel.unset('legal-representative-organisation');
+      req.sessionModel.unset('legal-representative-house-number');
+      req.sessionModel.unset('legal-representative-street');
+      req.sessionModel.unset('legal-representative-townOrCity');
+      req.sessionModel.unset('legal-representative-county');
+      req.sessionModel.unset('legal-representative-postcode');
+      req.sessionModel.unset('legal-representative-phone-number');
+      req.sessionModel.unset('is-legal-representative-email');
+      req.sessionModel.unset('legal-representative-email');
+    }
+
     return super.saveValues(req, res, next);
   }
 };
