@@ -8,6 +8,22 @@ module.exports = superclass => class extends superclass {
 
       const shouldContinueOnEdit = this.isContinueOnEdit(req);
       const editReturnPath = req.sessionModel.get('edit-return-path');
+
+      if(req.sessionModel.get('who-completing-form') === 'the-referrer') {
+        req.sessionModel.unset('helper-full-name');
+        req.sessionModel.unset('helper-relationship');
+        req.sessionModel.unset('helper-organisation');
+        req.sessionModel.unset('legal-representative-fullname');
+        req.sessionModel.unset('legal-representative-organisation');
+        req.sessionModel.unset('legal-representative-house-number');
+        req.sessionModel.unset('legal-representative-street');
+        req.sessionModel.unset('legal-representative-townOrCity');
+        req.sessionModel.unset('legal-representative-county');
+        req.sessionModel.unset('legal-representative-postcode');
+        req.sessionModel.unset('legal-representative-phone-number');
+        req.sessionModel.unset('is-legal-representative-email');
+        req.sessionModel.unset('legal-representative-email');
+      }
       if ( !shouldContinueOnEdit && editReturnPath) {
         return res.redirect(editReturnPath);
       }
