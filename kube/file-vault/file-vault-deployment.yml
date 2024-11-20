@@ -36,8 +36,10 @@ spec:
     spec:
       containers:
         - name: file-vault
-          # v1.1.0
-          image: quay.io/ukhomeofficedigital/file-vault:f4cd1ece1caddc3bfbc8f5db761c593fda79ef12
+        # This is in relation to PR HOFF-403: Fix security vulnerabilities in file-vault
+        # https://github.com/UKHomeOffice/file-vault/pull/90/commits/8e8c7813936dc9a2d778e30dd8270c841308876e
+        # This is only for testing purposes in the branch
+          image: quay.io/ukhomeofficedigital/file-vault:8e8c7813936dc9a2d778e30dd8270c841308876e
           imagePullPolicy: Always
           resources:
             limits:
