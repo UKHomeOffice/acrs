@@ -69,7 +69,7 @@ module.exports = class UploadModel extends Model {
         if (err) {
           return reject(err);
         }
-        console.log('Successfully retrieved access token');
+         console.log('Successfully retrieved access token', response.body);
         return resolve({
           bearer: JSON.parse(response.body).access_token
         });
