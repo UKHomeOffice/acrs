@@ -31,7 +31,7 @@ module.exports = class UploadModel extends Model {
       reqConf.method = 'POST';
       return this.request(reqConf, (err, data) => {
         if (err) {
-          console.log('ERROR');
+          console.log('ERROR in saving method');
           return reject(err);
         }
         console.log('Successfully SAVED!');
@@ -67,6 +67,7 @@ module.exports = class UploadModel extends Model {
     return new Promise((resolve, reject) => {
       return this._request(tokenReq, (err, response) => {
         if (err) {
+          console.log('ERROR in auth method');
           return reject(err);
         }
          console.log('Successfully retrieved access token', response.body);
