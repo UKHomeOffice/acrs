@@ -31,8 +31,10 @@ module.exports = class UploadModel extends Model {
       reqConf.method = 'POST';
       return this.request(reqConf, (err, data) => {
         if (err) {
+          console.log('ERROR');
           return reject(err);
         }
+        console.log('Successfully SAVED!');
         return resolve(data);
       });
     })
@@ -67,6 +69,7 @@ module.exports = class UploadModel extends Model {
         if (err) {
           return reject(err);
         }
+        console.log('Successfully retrieved access token');
         return resolve({
           bearer: JSON.parse(response.body).access_token
         });
