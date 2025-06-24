@@ -36,8 +36,8 @@ spec:
     spec:
       containers:
         - name: file-vault
-          # v1.1.0
-          image: quay.io/ukhomeofficedigital/file-vault:f4cd1ece1caddc3bfbc8f5db761c593fda79ef12
+          # v2.2.0
+          image: quay.io/ukhomeofficedigital/file-vault:bac08e3925b02aad739b3b56900665b04be00210
           imagePullPolicy: Always
           resources:
             limits:
