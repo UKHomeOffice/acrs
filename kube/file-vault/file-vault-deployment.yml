@@ -127,8 +127,7 @@ spec:
             runAsNonRoot: true
 
         - name: keycloak-proxy
-          image: quay.io/ukhomeofficedigital/gogatekeeper@sha256:0bd0ca7d8c284d91f58ea613441220242ce86edcdfd9aa4ef1eb0b376442b5db
-          resources:
+          image: quay.io/ukhomeofficedigital/gogatekeeper:3.5.0
             limits:
               memory: 1024Mi
               cpu: 200m
