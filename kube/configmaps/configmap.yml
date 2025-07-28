@@ -8,4 +8,4 @@ metadata:
   name: configmap
   {{ end }}
 data:
-{{ file .CONFIGMAP_VALUES | indent 2 }}
+{{ file .CONFIGMAP_VALUES }}

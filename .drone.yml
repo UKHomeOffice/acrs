@@ -20,20 +20,30 @@ environment:
   READY_FOR_TEST_DELAY: 20s
   NOTIFY_STUB: stub
 
-trigger:
-  branch:
-    - feature/*
+include_default_branch: &include_default_branch
+  include:
     - master
 
-linting: &linting
+include_default_and_feature_branches: &include_default_and_feature_branches
+  include:
+    - master
+    - feature/*
+
+trigger:
+  branch:
+    <<: *include_default_and_feature_branches
+
+node_image: &node_image
   pull: if-not-exists
-  image: node:18
+  image: quay.io/ukhomeofficedigital/hof-nodejs:20.19.0-alpine3.21@sha256:aad584fa26cb2838739527166c8965d95d0d2d9b88cfd5e3e2d3b8647ae03101
+
+linting: &linting
+  <<: *node_image
   commands:
     - yarn run test:lint
 
 unit_tests: &unit_tests
-  pull: if-not-exists
-  image: node:18
+  <<: *node_image
   environment:
     NOTIFY_STUB: true
   commands:
@@ -86,9 +96,28 @@ steps:
         - feature/*
       event: [push, pull_request]
 
-  - name: setup_deploy
-    pull: if-not-exists
-    image: node:18
+  # Trivy Security Scannner for scanning OS related vulnerabilities in Base image of Dockerfile
+  - name: scan_base_image_os
+    pull: always
+    image: 340268328991.dkr.ecr.eu-west-2.amazonaws.com/acp/trivy/client:latest
+    resources:
+      limits:
+        cpu: 1000
+        memory: 1024Mi
+    environment:
+      IMAGE_NAME: quay.io/ukhomeofficedigital/hof-nodejs:20.19.0-alpine3.21@sha256:aad584fa26cb2838739527166c8965d95d0d2d9b88cfd5e3e2d3b8647ae03101
+      SERVICE_URL: https://acp-trivy-helm.acp-trivy.svc.cluster.local:443
+      SEVERITY: MEDIUM,HIGH,CRITICAL  --dependency-tree
+      FAIL_ON_DETECTION: false
+      IGNORE_UNFIXED: false
+    volumes:
+      - name: dockersock
+        path: /root/.dockersock
+    when:
+      event: [push, pull_request]
+
+  - name: setup
+    <<: *node_image
     environment:
       NOTIFY_STUB: true
     commands:
@@ -96,33 +125,35 @@ steps:
       - yarn run postinstall
     when:
       branch:
-        include:
-        - master
+        <<: *include_default_and_feature_branches
       event: [push, pull_request]
 
-  - name: linting_deploy
+
+  - name: linting
     <<: *linting
     when:
       branch:
-        include:
-          - master
-      event: push
+        <<: *include_default_and_feature_branches
+      event: [push, pull_request]
+    depends_on:
+      - setup
 
-  - name: unit_tests_deploy
+  - name: unit_tests
     <<: *unit_tests
     when:
       branch:
-        include:
-          - master
-      event: push
+        <<: *include_default_and_feature_branches
+      event: [push, pull_request]
+    depends_on:
+      - setup
 
-  - name: sonar_scanner_deploy
+  - name: sonar_scanner
     <<: *sonar_scanner
     when:
       branch:
-        include:
-          - master
-      event: push
+        <<: *include_default_and_feature_branches
+      event: [push, pull_request]
+
   #
   # - name: ui_integration_tests_deploy
   #   <<: *ui_integration_tests
@@ -187,6 +218,9 @@ steps:
     when:
       branch: master
       event: [push, pull_request]
+    depends_on:
+      - linting
+      - unit_tests
 
   - name: image_to_ecr
     image: plugins/ecr
@@ -207,7 +241,7 @@ steps:
       event: [push, pull_request]
 
   ## Trivy Security Scannner
-  - name: scan-image
+  - name: scan-node-packages
     pull: always
     image: 340268328991.dkr.ecr.eu-west-2.amazonaws.com/acp/trivy/client:latest
     resources:
@@ -217,14 +251,14 @@ steps:
     environment:
       IMAGE_NAME: sas/acrs:${DRONE_COMMIT_SHA}
       SEVERITY: MEDIUM,HIGH,CRITICAL
-      FAIL_ON_DETECTION: false
+      FAIL_ON_DETECTION: true
       IGNORE_UNFIXED: true
-      ALLOW_CVE_LIST_FILE: hof-services-config/Afghan_Citizens_Resettlement_Scheme/trivy-cve-exceptions.txt
     when:
       event:
       - pull_request
       - push
-      - tag
+    depends_on:
+      - build_image
 
   ## Deploy to pull request Branch environment
   - name: deploy_to_branch
@@ -239,97 +273,10 @@ steps:
       - bin/deploy.sh $${BRANCH_ENV}
     when:
       branch:
-        include:
-          - master
-          - feature/*
+        <<: *include_default_and_feature_branches
       event: pull_request
-
-  - name: setup_branch
-    pull: if-not-exists
-    image: node:18
-    environment:
-      NOTIFY_STUB: true
-    commands:
-      - yarn install --frozen-lockfile
-      - yarn run postinstall
-    when:
-      branch:
-        include:
-          - master
-          - feature/*
-      event: pull_request
-
-  - name: linting_branch
-    <<: *linting
-    when:
-      branch:
-        include:
-          - master
-          - feature/*
-      event: pull_request
-
-  - name: unit_tests_branch
-    <<: *unit_tests
-    when:
-      branch:
-        include:
-          - master
-          - feature/*
-      event: pull_request
-
-  - name: sonar_scanner_branch
-    <<: *sonar_scanner
-    when:
-      branch:
-        include:
-          - master
-          - feature/*
-      event: pull_request
-  ###
-  ## - name: ui_integration_tests_branch
-  #   <<: *ui_integration_tests
-  #   when:
-  #     branch:
-  #       include:
-  #         - master
-  #         - feature/*
-  #     event: pull_request
-  #
-  # - name: accessibility_tests_branch
-  #   <<: *accessibility_tests
-  #   when:
-  #     branch:
-  #       include:
-  #         - master
-  #         - feature/*
-  #     event: pull_request
-  #
-  # - name: acceptance_tests_branch
-  #   <<: *acceptance_tests
-  #   commands:
-  #     - export ACCEPTANCE_HOST_NAME=https://acrs-$${DRONE_SOURCE_BRANCH}.internal.sas-acrs-notprod.sas-notprod.homeoffice.gov.uk
-  #     - npx playwright install
-  #     - npm run test:acceptance
-  #   when:
-  #     branch: master
-  #     event: pull_request
-
-  # Snyk security scans which run after branch deployment to prevent blocking of PR UAT tests
-  - name: snyk_scan
-    pull: if-not-exists
-    image: node:18
-    environment:
-      NOTIFY_STUB: true
-      SNYK_TOKEN:
-        from_secret: snyk_token
-    commands:
-      - yarn run test:snyk
-    when:
-      branch:
-        include:
-          - master
-          - feature/*
-      event: pull_request
+    depends_on:
+      - image_to_ecr
 
   ## Deploy to Master UAT environment.
   - name: deploy_to_uat
@@ -345,16 +292,26 @@ steps:
     when:
       branch: master
       event: push
-  
-  # - name: acceptance_tests_uat
-  #   <<: *acceptance_tests
-  #   commands:
-  #     - export ACCEPTANCE_HOST_NAME=https://acrs.internal.uat.sas-notprod.homeoffice.gov.uk
-  #     - npx playwright install
-  #     - npm run test:acceptance
-  #   when:
-  #     branch: master
-  #     event: push
+    depends_on:
+      - image_to_ecr
+
+   # Deploy to Staging environment
+  - name: deploy_to_stg
+    pull: if-not-exists
+    image: quay.io/ukhomeofficedigital/kd:v1.14.0
+    environment:
+      KUBE_SERVER:
+        from_secret: kube_server_prod
+      KUBE_TOKEN:
+        from_secret: kube_token_prod
+    commands:
+      - bin/deploy.sh $${STG_ENV}
+    when:
+      branch: master
+      event: push
+    depends_on:
+      - image_to_ecr
+      - deploy_to_uat
 
   # Get pull request branch so correct PR UAT environment is torn down in the tear_down_branch step that follows
   - name: get_pr_branch
@@ -371,8 +328,10 @@ steps:
     commands:
       - drone build info $GIT_REPO $DRONE_BUILD_NUMBER --format {{.Message}} | grep -o " '.*' " | tr -d "[ ']" | tr '[:upper:]' '[:lower:]' | tr '/' '-' > /root/.dockersock/branch_name.txt
     when:
-      branch: master
+      branch:
+        <<: *include_default_branch
       event: push
+
 
   # Tear down pull request UAT environment
   - name: tear_down_branch
@@ -391,21 +350,9 @@ steps:
     when:
       branch: master
       event: push
-      
-   # Deploy to Staging environment
-  - name: deploy_to_stg
-    pull: if-not-exists
-    image: quay.io/ukhomeofficedigital/kd:v1.14.0
-    environment:
-      KUBE_SERVER:
-        from_secret: kube_server_prod
-      KUBE_TOKEN:
-        from_secret: kube_token_prod
-    commands:
-      - bin/deploy.sh $${STG_ENV}
-    when:
-      branch: master
-      event: push
+    depends_on:
+      - get_pr_branch
+      - deploy_to_uat
 
   ## Checks a build being promoted has passed, is on master which effectively means a healthy build on Staging
   - name: sanity_check_build_prod
@@ -465,7 +412,7 @@ steps:
       cron: tear_down_pr_envs
       event: cron
 
-  # CRON job steps that runs security scans using Snyk & Trivy
+  # CRON job steps that runs security scans using Trivy
   - name: cron_clone_repos
     image: alpine/git
     environment:
@@ -486,21 +433,6 @@ steps:
     volumes:
       - name: dockersock
         path: /var/run
-    when:
-      cron: security_scans
-      event: cron
-
-  - name: cron_snyk_scan
-    pull: if-not-exists
-    image: node:18
-    environment:
-      NOTIFY_STUB: true
-      SNYK_TOKEN:
-        from_secret: snyk_token
-    commands:
-      - yarn install --frozen-lockfile
-      - yarn run postinstall
-      - yarn run test:snyk
     when:
       cron: security_scans
       event: cron
