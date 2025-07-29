@@ -204,25 +204,25 @@ steps:
   #     event: [push, pull_request]
 
       
-  - name: build_image
+  - name: build_image_for_trivy
     image: 340268328991.dkr.ecr.eu-west-2.amazonaws.com/acp/dind
-    environment:
-      DOCKER_PASSWORD:
-        from_secret: DOCKER_PASSWORD
     commands:
-      - n=0; while [ "$n" -lt 60 ] && [ ! docker stats --no-stream ]; do n=$(( n + 1 )); sleep 1; done
+      # wait for docker service to be up before running docker build
+      - /usr/local/bin/wait
       - docker build --no-cache -t $${IMAGE_REPO}:$${DRONE_COMMIT_SHA} .
     volumes:
       - name: dockersock
         path: /var/run
     when:
-      branch: master
+      branch:
+        <<: *include_default_and_feature_branches
       event: [push, pull_request]
     depends_on:
       - linting
       - unit_tests
 
-  - name: image_to_ecr
+  - name: build_image_and_push_to_ecr
+    pull: if-not-exists
     image: plugins/ecr
     settings:
       access_key:
@@ -230,15 +230,18 @@ steps:
       secret_key:
         from_secret: aws_secret_access_key
       region: eu-west-2
-      #repo: ${IMAGE_REPO}
       repo: sas/acrs 
       registry: 340268328991.dkr.ecr.eu-west-2.amazonaws.com
       tags:
-        - latest_${DRONE_BRANCH}
         - ${DRONE_COMMIT_SHA}
     when:
-      branch: master
+      branch: 
+        <<: *include_default_and_feature_branches
       event: [push, pull_request]
+    depends_on:
+      - linting
+      - unit_tests
+      - build_image_for_trivy
 
   ## Trivy Security Scannner
   - name: scan-node-packages
