@@ -204,7 +204,7 @@ steps:
   #     event: [push, pull_request]
 
       
-  - name: build_image_for_trivy
+  - name: build_image
     image: 340268328991.dkr.ecr.eu-west-2.amazonaws.com/acp/dind
     commands:
       # wait for docker service to be up before running docker build
@@ -241,7 +241,7 @@ steps:
     depends_on:
       - linting
       - unit_tests
-      - build_image_for_trivy
+      - build_image
 
   ## Trivy Security Scannner
   - name: scan-node-packages
