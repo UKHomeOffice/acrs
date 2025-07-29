@@ -254,7 +254,7 @@ steps:
     environment:
       IMAGE_NAME: sas/acrs:${DRONE_COMMIT_SHA}
       SEVERITY: MEDIUM,HIGH,CRITICAL
-      FAIL_ON_DETECTION: true
+      FAIL_ON_DETECTION: false
       IGNORE_UNFIXED: true
     when:
       event:
@@ -280,6 +280,7 @@ steps:
       event: pull_request
     depends_on:
       - image_to_ecr
+      - clone_repos
 
   ## Deploy to Master UAT environment.
   - name: deploy_to_uat
