@@ -2,7 +2,8 @@
   "appName": "Afghan Citizens Resettlement Scheme",
   "theme": "govUK",
   "behaviours": [
-    "hof/components/clear-session"
+    "hof/components/clear-session",
+    "hof/components/session-timeout-warning"
   ],
   "build": {
     "watch": {
