@@ -746,6 +746,8 @@ module.exports = {
       clearSession: true,
       backLink: false
     },
+    '/session-timeout': {},
+    '/exit': {},
     '/link-expired': {
       fields: [],
       next: '/confirm'
