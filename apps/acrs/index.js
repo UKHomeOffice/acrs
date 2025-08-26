@@ -746,8 +746,6 @@ module.exports = {
       clearSession: true,
       backLink: false
     },
-    '/session-timeout': {},
-    '/exit': {},
     '/link-expired': {
       fields: [],
       next: '/confirm'
@@ -755,6 +753,8 @@ module.exports = {
     '/information-saved': {
       behaviours: SaveAndExit,
       backLink: false
-    }
+    },
+    '/session-timeout': {},
+    '/exit': {}
   }
 };

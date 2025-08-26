@@ -48,6 +48,8 @@ module.exports = {
     },
     '/accessibility': {
       backLink: 'sign-in'
-    }
+    },
+    '/session-timeout': {},
+    '/exit': {}
   }
 };
