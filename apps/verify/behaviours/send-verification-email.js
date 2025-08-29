@@ -14,8 +14,6 @@ const _ = require('lodash');
 const getPersonalisation = (host, token, idType) => {
   const protocol = host.includes('localhost') ? 'http' : 'https';
   return {
-    // removed `&` from the url
-    // hof-cookie-check appending to the base url from hof framework correctly
     link: `${protocol}://${host + config.login.appPath}?token=${token}`,
     host: `${protocol}://${host}`,
     idType: idType === 'brp' ? 'BRP number' : 'UAN'
