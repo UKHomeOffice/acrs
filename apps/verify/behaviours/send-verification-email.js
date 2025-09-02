@@ -14,9 +14,7 @@ const _ = require('lodash');
 const getPersonalisation = (host, token, idType) => {
   const protocol = host.includes('localhost') ? 'http' : 'https';
   return {
-    // pass in `&` at the end in case there is another
-    // query e.g. ?hof-cookie-check
-    link: `${protocol}://${host + config.login.appPath}?token=${token}&`,
+    link: `${protocol}://${host + config.login.appPath}?token=${token}`,
     host: `${protocol}://${host}`,
     idType: idType === 'brp' ? 'BRP number' : 'UAN'
   };
