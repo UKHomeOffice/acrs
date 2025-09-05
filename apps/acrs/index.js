@@ -753,6 +753,8 @@ module.exports = {
     '/information-saved': {
       behaviours: SaveAndExit,
       backLink: false
-    }
+    },
+    '/session-timeout': {},
+    '/exit': {}
   }
 };

@@ -5,6 +5,7 @@ describe('Server.js app file', () => {
   let appsVerifyStub;
   let appsAcrsStub;
   let behavioursClearSessionStub;
+  let behavioursSessionTimeoutStub;
   let req;
   let res;
   let next;
@@ -29,6 +30,7 @@ describe('Server.js app file', () => {
     appsVerifyStub = sinon.stub();
     appsAcrsStub = sinon.stub();
     behavioursClearSessionStub = sinon.stub();
+    behavioursSessionTimeoutStub = sinon.stub();
     req.get.withArgs('host').returns('localhost');
 
     useStub.onCall(0).yields(req, res, next);
@@ -41,6 +43,7 @@ describe('Server.js app file', () => {
       './apps/acrs': appsAcrsStub,
       './apps/verify': appsVerifyStub,
       'hof/components/clear-session': behavioursClearSessionStub,
+      'hof/components/session-timeout-warning': behavioursSessionTimeoutStub,
       './config': { env: 'test' }
     });
   });
@@ -51,7 +54,8 @@ describe('Server.js app file', () => {
         appName: 'Afghan Citizens Resettlement Scheme',
         theme: 'govUK',
         behaviours: [
-          behavioursClearSessionStub
+          behavioursClearSessionStub,
+          behavioursSessionTimeoutStub
         ],
         build: {
           watch: {
