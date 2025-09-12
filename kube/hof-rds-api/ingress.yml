@@ -19,8 +19,8 @@ spec:
       {{ else if eq .KUBE_NAMESPACE .UAT_ENV }}
         - acrs-data-service.internal.uat.sas-notprod.homeoffice.gov.uk
       {{ else if eq .KUBE_NAMESPACE .BRANCH_ENV }}
-        - data-service-{{ .DRONE_BUILD_NUMBER }}.branch.sas-notprod.homeoffice.gov.uk
-        - data-service-{{ .DRONE_SOURCE_BRANCH }}.branch.sas-notprod.homeoffice.gov.uk
+        - data-service-{{ .DRONE_BUILD_NUMBER }}.internal.branch.sas-notprod.homeoffice.gov.uk
+        - data-service-{{ .DRONE_SOURCE_BRANCH }}.internal.branch.sas-notprod.homeoffice.gov.uk
       {{ end }}
       {{ if eq .KUBE_NAMESPACE .BRANCH_ENV }}
       secretName: branch-tls-internal
@@ -35,7 +35,7 @@ spec:
     {{ else if eq .KUBE_NAMESPACE .UAT_ENV }}
     - host: acrs-data-service.internal.uat.sas-notprod.homeoffice.gov.uk
     {{ else if eq .KUBE_NAMESPACE .BRANCH_ENV }}
-    - host: data-service-{{ .DRONE_SOURCE_BRANCH }}.branch.sas-notprod.homeoffice.gov.uk
+    - host: data-service-{{ .DRONE_SOURCE_BRANCH }}.internal.branch.sas-notprod.homeoffice.gov.uk
     {{ end }}
       http:
         paths:

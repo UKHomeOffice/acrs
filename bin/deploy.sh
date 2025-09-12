@@ -55,5 +55,5 @@ sleep $READY_FOR_TEST_DELAY
 
 if [[ ${KUBE_NAMESPACE} == ${BRANCH_ENV} ]]; then
   echo "App Branch - acrs-$DRONE_SOURCE_BRANCH.internal.branch.sas-notprod.homeoffice.gov.uk"
-  echo "Data Service Branch - data-service-$DRONE_SOURCE_BRANCH.branch.sas-notprod.homeoffice.gov.uk"
+  echo "Data Service Branch - data-service-$DRONE_SOURCE_BRANCH.internal.branch.sas-notprod.homeoffice.gov.uk"
 fi
